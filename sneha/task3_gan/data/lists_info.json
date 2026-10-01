@@ -1,0 +1,21 @@
+{
+  "seed": 42,
+  "sizes": {
+    "ref_photos": 300,
+    "eval_photos": 300,
+    "val_photos": 300,
+    "photo_subset": 2000,
+    "photo_train_all": 6138
+  },
+  "ref_photos": "first photos in sorted filename order = the provided script's REAL_PHOTO set at N_EVAL",
+  "others": "one numpy default_rng(seed) permutation of the remaining photos, then sorted",
+  "files": {
+    "ref_photos_300.txt": "ab71be815e374d30673ce63db15f857cf3c7fc60455bdbc476e68a642197e1e3",
+    "eval_photos_300.txt": "ef1fa0d1527f4bc70be204d4ec95a31dd429fac9d51ad1c124bf64d403d517a6",
+    "val_photos_300.txt": "94a060f60749ba20b129d253f1ecdac017f212d8fa5e10ea6193b0ddcb76336c",
+    "photo_subset_2000.txt": "e664d56d4d3255e25b6f3b5904ef3044e2b51e657eba3405d697faf9de487609",
+    "photo_train_all_6138.txt": "18f4142b5a555719eb66433d6d0d8eafb9f3915bbc2654aade19520c4f34dd39"
+  },
+  "made_by": "task3_gan/sneha/src/task3_gan_sneha.ipynb, section 4",
+  "photo_train_all": "every photo not in ref/eval/val, sorted (no randomness); the training photos when train_photos: all"
+}

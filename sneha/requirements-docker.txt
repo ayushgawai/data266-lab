@@ -1,0 +1,15 @@
+# Packages for the GPU lab's PyTorch Docker container (see README, "On the lab machine").
+# The image already provides torch, torchvision, numpy and Jupyter: do NOT reinstall those,
+# so the image's GPU build stays intact. Install inside the container with:
+#     pip install -r requirements-docker.txt
+# The manifests record every installed version, so a run stays traceable either way.
+scipy==1.13.1
+scikit-learn==1.5.2
+statsmodels==0.14.2
+pandas==2.2.2
+matplotlib==3.9.2
+Pillow==10.4.0
+lpips==0.1.4
+pyyaml==6.0.2
+tqdm==4.66.5
+nltk==3.9.1

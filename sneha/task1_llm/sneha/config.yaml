@@ -1,0 +1,82 @@
+# Task 1 settings (Sneha). The notebook src/task1_llm_sneha.ipynb reads this file; nothing in
+# it hard-codes a value. Paths are relative to the repo root. The SHA-256 of the resolved
+# settings is the first line of every raw log.
+
+config:
+  member: sneha
+  run_name: main
+  seed: 42
+  device: cuda                     # cuda = GPU or stop with an error | auto = GPU if present | cpu
+
+  # data: 100K / 10K count fixed-length SEQUENCES. Chunk first, then split; the same sizes for both members.
+  data_dir: task1_llm/data
+  source_file: TinyStoriesV2-GPT4-train.txt
+  train_sequences: 100000
+  val_sequences: 10000
+  split_seed: 4242                 # where in the corpus my stretch starts
+  story_separator: "\x03"          # every <|endoftext|> becomes this one reserved character
+
+  # model
+  block_size: 128                  # context length; each sequence is block_size + 1 characters
+  n_layer: 6
+  n_head: 8
+  d_model: 256
+  d_ff: 1024
+  dropout: 0.2
+  norm_position: post              # post | pre
+  activation: ReLU
+  tie_weights: false
+  final_ln: true                   # [YOUR CALL] post-norm blocks already end in a LayerNorm
+
+  # optimisation
+  batch_size: 64
+  epochs: 30                       # one epoch = one pass over the 100K training sequences
+  lr: 3.0e-4
+  betas: [0.9, 0.95]
+  weight_decay: 0.1                # decay on nn.Linear weight matrices only
+  warmup_steps: 400
+  max_warmup_fraction: 0.1
+  schedule: inverse_sqrt           # inverse_sqrt | constant
+  grad_clip: 1.0
+  log_every: 50                    # print every 50 steps; the raw log gets every step
+  grad_spike_factor: 5.0
+  loss_spike_factor: 1.5
+  spike_window: 100
+
+  # generation
+  gen_samples: 20
+  gen_max_new_tokens: 500
+  gen_temperature: 0.8
+  gen_greedy_also: true            # one extra greedy sample per prompt, for comparison
+  gen_prompts:
+    - Once upon a time
+    - One day, a little girl named
+    - Tom and his dog
+    - The sun was shining and
+    - Lily wanted to
+
+  # outputs
+  out_dir: task1_llm/sneha
+  logs_dir: reproducibility/raw_logs/sneha
+  manifests_dir: reproducibility/manifests
+
+# SMOKE = True: a tiny run on the 22 MB validation file that only proves the notebook works.
+smoke:
+  run_name: smoke
+  device: auto
+  source_file: TinyStoriesV2-GPT4-valid.txt
+  train_sequences: 160
+  val_sequences: 16
+  batch_size: 16
+  epochs: 2
+  n_layer: 2
+  n_head: 2
+  d_model: 64
+  d_ff: 256
+  warmup_steps: 2
+  log_every: 5
+  gen_samples: 4
+  gen_max_new_tokens: 200          # > block_size, so context cropping is exercised
+  out_dir: task1_llm/sneha/_smoke
+  logs_dir: task1_llm/sneha/_smoke/logs
+  manifests_dir: task1_llm/sneha/_smoke

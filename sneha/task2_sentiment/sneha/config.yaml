@@ -1,0 +1,75 @@
+# Task 2 settings (Sneha). The notebook src/task2_sentiment_sneha.ipynb reads this file;
+# nothing in it hard-codes a value. Paths are relative to the repo root. Values marked SHARED
+# must match Ayush's settings.
+
+config:
+  member: sneha
+  run_name: main
+  seed: 42
+  device: cuda                     # cuda = GPU or stop with an error | auto = GPU if present | cpu
+
+  # data (SHARED with Ayush: same split files, same test rows)
+  data_url: https://s3.amazonaws.com/fast-ai-nlp/yelp_review_polarity_csv.tgz
+  raw_dir: task2_sentiment/data/raw
+  splits_dir: task2_sentiment/data/splits
+  n_train: 100000                  # stratified, drawn from the official 560K training split
+  n_val: 20000
+  split_seed: 42                   # the test split is the full official 38,000 rows
+
+  # preprocessing (mine)
+  remove_stopwords: true           # scikit-learn's English list, minus keep_words
+  stem: true                       # NLTK Snowball (Porter2); the brief allows stemming or lemmatisation
+  keep_words:                      # [YOUR CALL] words that carry sentiment, kept out of the stopword list
+    ["no", "not", "nor", "never", "cannot", "none", "nobody", "nothing", "neither", "nowhere",   # negation
+     "but", "however", "although", "though",                                                   # contrast
+     "very", "too", "few", "less", "least", "more", "most", "against"]                         # intensity
+                                   # quoted: unquoted YAML reads no as false
+  max_vocab: 30000                 # word types from the training split; + <pad> and <unk>
+  max_len: 256                     # word tokens per review (truncate / pad)
+  char_len: 1014                   # characters per review for the CharCNN (Zhang et al.)
+
+  # training (SHARED)
+  batch_size: 64
+  max_epochs: 5
+  lr: 1.0e-3                       # Adam
+  early_stop_patience: 2           # early stop on val macro-F1
+  log_every: 200
+
+  # models (mine)
+  models: [meanpool, bigru, charcnn]
+  baseline: meanpool
+  emb_dim: 128
+  mlp_hidden: 256
+  dropout: 0.3
+  gru_hidden: 128
+  charcnn_input: embedding         # learned 16-d character embedding (brief 2.1.5); onehot = the paper, Zhang et al. 2015
+  charcnn_emb_dim: 16
+  charcnn_filters: 256
+  charcnn_fc: 512
+  charcnn_dropout: 0.5
+  ablation: true                   # meanpool again with stopword removal and stemming OFF, compared on val macro-F1
+
+  # evaluation (definitions SHARED)
+  ece_bins: 15
+  bootstrap_n: 1000
+  bootstrap_seed: 42
+  near_band: [0.45, 0.55]
+  short_max_tokens: 50
+  long_min_tokens: 200
+
+  # outputs
+  out_dir: task2_sentiment/sneha
+  logs_dir: reproducibility/raw_logs/sneha
+  manifests_dir: reproducibility/manifests
+
+# SMOKE = True: a few thousand reviews and 1 epoch; proves the notebook runs.
+smoke:
+  run_name: smoke
+  device: auto
+  smoke_rows: {train: 3000, val: 1000, test: 2000}
+  max_epochs: 1
+  max_vocab: 5000
+  log_every: 20
+  out_dir: task2_sentiment/sneha/_smoke
+  logs_dir: task2_sentiment/sneha/_smoke/logs
+  manifests_dir: task2_sentiment/sneha/_smoke

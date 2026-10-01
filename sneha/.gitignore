@@ -1,0 +1,30 @@
+# environments and caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# OS / archive junk
+.DS_Store
+__MACOSX/
+*.zip
+
+# raw data: downloaded by the task notebooks / scripts, never committed
+task1_llm/data/*.txt
+task1_llm/data/*.part
+task2_sentiment/data/raw/
+
+# resume checkpoints carry optimizer state; the best checkpoints are committed
+*_last.pt
+
+# smoke-test outputs
+**/_smoke/
+
+# Task 3: images come from dataset.zip (course-provided); generator checkpoints are ~435 MB each,
+# over GitHub's 100 MB limit: upload them to a shared drive and record the link in the manifest
+task3_gan/data/dataset.zip
+task3_gan/data/monet_jpg/
+task3_gan/data/photo_jpg/
+task3_gan/*/checkpoints/*.pt
+task3_gan/*/outputs/val_*/
