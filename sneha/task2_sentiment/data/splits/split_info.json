@@ -1,0 +1,19 @@
+{
+  "method": "sklearn train_test_split, stratified on the label, then sorted",
+  "seed": 42,
+  "source": "official yelp_review_polarity_csv",
+  "sizes": {
+    "train": 100000,
+    "val": 20000,
+    "test": 38000
+  },
+  "train_rows_without_valid_label_excluded": 0,
+  "train_csv_sha256": "d9eec04a8dd4bdbf1e66c02e6faaee580a5c3c37ce14f1b67d48f397dfcc88bc",
+  "test_csv_sha256": "a88e001a30bfa4c996cab473e9c9afd0fcfb01e94bef3c52002a167c2bff0b51",
+  "files": {
+    "train_idx.npy": "6f6e08459afc94f4a2a8b79eced9670d75596fe396d0b1d2f1473e6187f97782",
+    "val_idx.npy": "3f2a754e753ff15ca6433ddd7d138b375e638f02d5d25dd5241d58c04f475cec",
+    "test_idx.npy": "3b4c854291d867c8a4d2c8ebba087bcaf8979fc282c17ee945f4847e25592b34"
+  },
+  "made_by": "task2_sentiment/sneha/src/task2_sentiment_sneha.ipynb, section 5"
+}

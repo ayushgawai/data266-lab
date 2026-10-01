@@ -1,0 +1,58 @@
+{
+  "model": "bigru",
+  "pipeline": "main",
+  "param_count": 4038657,
+  "vocab_size": 30002,
+  "best_epoch": 3,
+  "epochs_run": 5,
+  "val_f1_macro": 0.9377462498022127,
+  "val_accuracy": 0.9377468873443672,
+  "train_seconds": 194.91403579799953,
+  "examples_per_sec": 2565.130817557734,
+  "compute_examples_per_sec": 2712.802398152651,
+  "peak_mem_gb": 0.40880128,
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "cpu_name": "x86_64",
+  "n_train": 99996,
+  "n_val": 19999,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.2645353059589093,
+      "val_f1_macro": 0.9280859616778034,
+      "val_accuracy": 0.928096404820241,
+      "elapsed_seconds": 38.70829396800036
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.15563564503332145,
+      "val_f1_macro": 0.9328267678157052,
+      "val_accuracy": 0.9328466423321166,
+      "elapsed_seconds": 77.77436755899998
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.11587922977058357,
+      "val_f1_macro": 0.9377462498022127,
+      "val_accuracy": 0.9377468873443672,
+      "elapsed_seconds": 116.87513978100014
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.08377445672221354,
+      "val_f1_macro": 0.9347467314634854,
+      "val_accuracy": 0.9347467373368669,
+      "elapsed_seconds": 155.8677057369996
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.05682098585326193,
+      "val_f1_macro": 0.9314727371211375,
+      "val_accuracy": 0.9314965748287415,
+      "elapsed_seconds": 194.91186549600025
+    }
+  ],
+  "train_log": "reproducibility/raw_logs/sneha/task2_bigru_train_main_20261001T223622Z.log",
+  "checkpoint": "task2_sentiment/sneha/checkpoints/bigru_best.pt",
+  "config_sha256": "012ed6da3e8ac84897ae07194271ef4d37fb3627a6cbbf4add77da2f0d2300cd"
+}
