@@ -28,9 +28,9 @@ config:
   ndf: 64
 
   # run length (mine): fitted to the lab session. Tell Ayush, since his run length may differ.
-  epochs: auto                     # auto = as many epochs as fit before train_until | or a number, e.g. 80
-  decay_start_epoch: auto          # auto = half the epochs at constant lr, then linear decay to 0 (the paper)
-  train_until: "2026-10-02T09:00:00-07:00"   # when training must end, lab time WITH its -07:00 offset
+  epochs: 400                      # fixed: all 400 epochs (800K iterations) | auto = as many as fit before train_until
+  decay_start_epoch: 200           # 200 at constant lr, then linear decay to 0 over 200 (the paper's shape)
+  train_until: "2026-10-02T09:30:00-07:00"   # safety stop only (lab time WITH its -07:00 offset)
                                    # (the Docker clock is UTC). Set it before starting Task 3. Training
                                    # stops there whatever `epochs` says; submission and metrics follow.
   max_epochs: 400                  # cap for auto (800K iterations)
@@ -53,7 +53,7 @@ config:
                                    # because colour is most of what makes a Monet a Monet
 
   # validation, logging, outputs
-  val_every: 10
+  val_every: 10                    # validation FID every 10 epochs (40 checks over 400 epochs)
   select_per_direction: true       # each generator from the epoch with its best validation FID (each FID
                                    # depends on one generator only) | false = both from the best-mean epoch
   ckpt_every: 5                    # resume checkpoint (~2 GB) every 5 epochs, after every validation and at the end
