@@ -1,0 +1,18 @@
+{
+  "member": "ayush",
+  "task": 1,
+  "config_sha256": "c57d284fd184ab1dd42b2dabda0fafc1e811cee8b4d8c2c349dc7e48d30ada44",
+  "git_sha": "unknown",
+  "seed": 42,
+  "python": "3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]",
+  "torch": "2.11.0+cu128",
+  "device": "cuda",
+  "gpu_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "duration_sec": 184.1991307735443,
+  "checkpoint": "task1_llm/ayush/checkpoints/chargpt_best.pt",
+  "metric_rows": {
+    "metrics_report.csv": 1
+  },
+  "created_utc": "2026-09-30T06:41:38.931522+00:00",
+  "curve": "task1_llm/ayush/outputs/loss_curves.png"
+}

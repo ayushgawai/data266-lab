@@ -1,0 +1,11 @@
+.DS_Store
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+resources/
+dataset.zip
+*.zip
+*.pt
+*.pth
+*.ckpt
+*.npz

@@ -1,0 +1,2161 @@
+
+
+Sneha | DATA 266 Lab 1 build plan
+
+  
+
+    
+
+      
+Contents
+
+      
+
+How to use this
+
+Ground rules
+
+Repo and your paths
+
+Environment contract
+
+Task 1: GPT
+
+Task 2: Sentiment
+
+Task 3: CycleGAN
+
+Timeline
+
+Team work items
+
+Viva preparation
+
+Final checklist
+
+      
+member: sneha
+config: configs/sneha/base.yaml
+seed: 42
+tasks: 3, marks: 100 +10
+
+    
+
+  
+
+  
+
+  
+
+    
+Sneha: build plan
+
+    
+DATA 266 Lab 1, Fall 2026
+
+  
+
+  
+Three models to build, measure, and defend. This document holds the whole specification: architectures, hyperparameters, every metric with its formula, the file each result lands in, and the prompts to hand a coding agent. Nothing in it needs a decision from you before you can start.
+
+  
+
+Task 1
+
+Post-norm GPT decoder
+
+6 layers, 8 heads, d_model 256
+
+Task 2
+
+Averaged embeddings, BiGRU, max pooled, Character CNN
+
+one baseline, two experimental
+
+Task 3
+
+CycleGAN, U-Net generator, 256
+
+70x70 PatchGAN, LSGAN loss
+
+00
+How to use this document
+
+Read once, then work top to bottom.
+
+This document is the complete build specification for Sneha's half of DATA 266 Lab 1. It is written so that a coding agent can execute it end to end without asking a follow up question: every path, every hyperparameter, every metric formula, and every output file is stated explicitly.
+
+Order of operations
+
+Read section 1 and section 3 once. Those two sections constrain everything else.
+
+Run the repo bootstrap prompt below. It creates your folder tree and the config file.
+
+Work tasks in the order 1, 2, 3. Task 3 needs the most GPU time, so its data download and code should be ready before your first lab slot.
+
+After each task, run its acceptance check. Do not move on until it passes.
+
+Paste this into Cursor first
+
+bootstrap prompt, run once at the repo root
+
+You are setting up my half of a graduate ML lab. Read the whole of this specification document before writing code.
+
+Create this structure, and only this structure:
+  common/                      shared evaluation code (see section 8)
+  task1_llm/sneha/{src,checkpoints,outputs}
+  task2_sentiment/sneha/{src,data_processed,checkpoints,outputs}
+  task3_gan/sneha/{src,checkpoints,outputs/pred_A2B,outputs/pred_B2A}
+  reproducibility/{manifests,raw_logs}
+  configs/sneha/
+
+Then write configs/sneha/base.yaml exactly as given in section 3, and
+requirements.txt exactly as given in section 3.
+
+Rules that apply to every file you write from now on:
+- No absolute paths. Every path is resolved from a repo root discovered at runtime,
+  or read from the config file. No /Users/, no /home/, no C:\.
+- No credentials, tokens, or API keys in any file, including notebooks.
+- Every script takes --config as its only required argument.
+- Every script writes an unedited log to reproducibility/raw_logs/ and never
+  rewrites an existing log file.
+- Set all seeds from config.seed at the top of every entry point.
+Do not create folders for anyone other than sneha.
+
+What this document deliberately leaves to you
+
+The tables tell you what to build and how to measure it. They do not tell you what the numbers mean. Interpretation, the failure analysis write ups, and the answers you give at the viva have to be yours, because that is what the 5 viva marks test and a coding agent cannot sit the viva for you. Sections 4, 5, and 6 each end with the questions you should be able to answer before you consider the task done.
+
+01
+Ground rules
+
+The constraints that decide whether the work counts at all.
+
+marks, 100 total plus 10 bonus
+
+Task 1  LLM from scratch
+
+15
+
+15
+
+Task 2  Sentiment
+
+15
+
+15
+
+Task 3  CycleGAN
+
+15
+
+15
+
+Reproducibility
+
+5
+
+Demo / Viva
+
+5
+
+10 bonus
+
+Kaggle leaderboard rank
+
+scored on your own work
+
+scored on the shared repo and report
+
+Where the marks sit. Half of every task is scored on your own model and your own analysis. Reproducibility is scored only once, on the shared repo. The viva is scored only on you.
+
+Hard constraints, breaking any of these costs marks outright
+
+#
+
+Rule
+
+Applies to
+
+1
+
+No prebuilt Transformer or attention modules. You write multi head attention, the causal mask, the feed forward block, and the residual wiring yourself. 
+nn.Linear
+, 
+nn.Embedding
+, 
+nn.LayerNorm
+, 
+nn.Dropout
+ are fine. 
+nn.Transformer
+, 
+nn.MultiheadAttention
+, 
+F.scaled_dot_product_attention
+ are not.
+
+Task 1
+
+2
+
+No pretrained embeddings and no pretrained language models. Embeddings are learned from scratch inside each model. No GloVe, no word2vec, no fastText vectors, no BERT.
+
+Task 2
+
+3
+
+Everything submitted to Kaggle must be the direct output of your own trained CycleGAN inference. No hand picking, no editing, no external image models touching the outputs.
+
+Task 3
+
+4
+
+Your models must not match your partner's on architecture and hyperparameters. This document already guarantees that. Do not change an architecture choice without telling your partner.
+
+All
+
+5
+
+Raw training logs are committed unedited. Do not tidy, truncate, or regenerate a log after a run.
+
+All
+
+6
+
+No hard coded personal paths and no secrets anywhere in the repo.
+
+All
+
+Clarification worth writing down
+
+Pretrained networks used purely as 
+metrics
+ are fine and are not covered by rule 3. FID and KID need InceptionV3, LPIPS needs AlexNet. Neither one touches a submitted image. State this explicitly in one line of the report so nobody misreads it at grading time.
+
+Confirm before you start
+
+Two ambiguities in the brief need a one line answer from the professor before you start. Ask early, and record the answer in 
+configs/sneha/base.yaml
+ so the run is reproducible either way.
+
+1.
+ Task 1 says train on 100K and validate on 10K, without units. This plan assumes 
+characters
+, which is the literal reading and which trains comfortably in a lab setting. The config exposes 
+task1.train_chars
+ so a different answer is a one line change.
+
+2.
+ The task 2 brief says Yelp polarity but the repo tree in the brief mentions IMDB. This plan uses 
+Yelp polarity
+, since that is what the task text and the resource link say.
+
+02
+Repo and your paths
+
+Where every file you produce has to land.
+
+One repository for the team. You commit only under 
+sneha/
+ inside each task folder, plus the shared folders listed in section 8. Raw data at the task level is shared. Your 
+data_processed/
+ is yours alone and is never shared, because preprocessing choices are part of what you are graded on.
+
+team-repo/
+├── README.md                        
+team owned, section 8
+
+├── requirements.txt                 
+team owned, pinned
+
+├── common/                          
+team owned, shared metric code
+
+│   ├── metrics_lm.py
+│   ├── metrics_clf.py
+│   ├── metrics_gan.py
+│   └── eval_cyclegan_fid.py         
+the script the professor supplied
+
+├── configs/
+│   └── 
+sneha
+/base.yaml               
+yours
+
+├── task1_llm/
+│   ├── data/                        
+shared raw TinyStories
+
+│   ├── 
+sneha
+/                        
+yours, everything below
+
+│   │   ├── src/                     
+train_gpt.py, model.py, generate.py, run.ipynb
+
+│   │   ├── checkpoints/
+│   │   ├── outputs/                 
+loss curves, samples, generation dumps
+
+│   │   ├── metrics_report.csv
+│   │   ├── failure_analysis.md
+│   │   └── results.md
+│   └── <partner_folder>/            
+not yours, never write here
+
+├── task2_sentiment/
+│   ├── data/splits/                 
+shared split index files, section 8
+
+│   ├── 
+sneha
+/
+│   │   ├── src/  data_processed/  checkpoints/  outputs/
+│   │   ├── metrics_report.csv       
+one row per model, 3 rows
+
+│   │   ├── failure_analysis.md      
+the 20 error review
+
+│   │   └── results.md
+│   └── <partner_folder>/
+├── task3_gan/
+│   ├── data/                        
+monet_jpg/, photo_jpg/, photo_subset_2000.txt
+
+│   ├── 
+sneha
+/
+│   │   ├── src/  checkpoints/
+│   │   ├── outputs/pred_A2B/  outputs/pred_B2A/
+│   │   ├── evaluate_local.py
+│   │   ├── submission.csv           
+Kaggle: FID and MiFID only
+
+│   │   ├── full_metrics_report.csv  
+everything else
+
+│   │   ├── failure_analysis.md
+│   │   └── results.md
+│   └── <partner_folder>/
+├── reproducibility/
+│   ├── manifests/sneha_task1.json  ... _task2.json  ... _task3.json
+│   └── raw_logs/sneha/            
+every run, unedited
+
+└── report/
+    └── DATA266_Lab1_Report_Team_[N].pdf   
+team owned
+
+Nine files you personally have to produce
+
+Task
+
+File
+
+What has to be in it
+
+1
+
+task1_llm/sneha/metrics_report.csv
+
+One row, every Task 1 metric from section 4 as a named column
+
+1
+
+task1_llm/sneha/failure_analysis.md
+
+Three generated snippets, each labelled with a failure type and your observation
+
+1
+
+task1_llm/sneha/results.md
+
+Architecture and hyperparameter justification, tied to your numbers
+
+2
+
+task2_sentiment/sneha/metrics_report.csv
+
+Three rows, one per model, every Task 2 metric as a named column
+
+2
+
+task2_sentiment/sneha/failure_analysis.md
+
+The 20 error review, 5 per category, error type and one testable fix each
+
+2
+
+task2_sentiment/sneha/results.md
+
+Per model justification plus your comparative analysis
+
+3
+
+task3_gan/sneha/submission.csv
+
+Generated by the supplied script, FID and MiFID only
+
+3
+
+task3_gan/sneha/full_metrics_report.csv
+
+KID, density, coverage, LPIPS, cycle L1, content cosine, stability, cost
+
+3
+
+task3_gan/sneha/results.md
+
+Architecture justification, training behaviour, shortcomings
+
+03
+Environment contract
+
+One config file, one log per run, one manifest per task.
+
+Every number that could change a result lives in one YAML file. Nothing is hard coded in a script. This is what the 5 reproducibility marks are actually checking, and it is scored on the repo as a whole, so a sloppy config from either member costs both of you.
+
+requirements.txt, pinned, team shared
+
+torch==2.4.1
+torchvision==0.19.1
+numpy==1.26.4
+scipy==1.13.1
+scikit-learn==1.5.2
+statsmodels==0.14.2
+pandas==2.2.2
+matplotlib==3.9.2
+Pillow==10.4.0
+datasets==2.21.0
+lpips==0.1.4
+pyyaml==6.0.2
+tqdm==4.66.5
+
+configs/sneha/base.yaml
+
+seed: 42
+member: sneha
+device: cuda            # falls back to cpu automatically
+
+paths:
+  # every path below is relative to the repo root, resolved at runtime
+  task1_data: task1_llm/data
+  task2_splits: task2_sentiment/data/splits
+  task3_data: task3_gan/data
+  logs: reproducibility/raw_logs/sneha
+  manifests: reproducibility/manifests
+
+task1:
+  source_file: TinyStoriesV2-GPT4-train.txt
+  train_chars: 100000        # confirm units with the professor, section 1
+  val_chars: 10000
+  split_seed: 4242          # your own slice of the corpus
+  block_size: 128
+  batch_size: 64
+  epochs: 30
+  n_layer: 6
+  n_head: 8
+  d_model: 256
+  d_ff: 1024
+  dropout: 0.2
+  norm_position: post
+  activation: ReLU
+  tie_weights: false
+  lr: 3.0e-4
+  warmup_steps: 400
+  schedule: inverse_sqrt
+  weight_decay: 0.1
+  grad_clip: 1.0
+  gen:
+    n_samples: 20
+    max_new_tokens: 500
+    temperature: 0.8
+
+task2:
+  # SHARED across the team, do not change without telling your partner
+  n_train: 100000
+  n_val: 20000
+  split_seed: 42
+  max_vocab: 30000
+  max_len: 256
+  batch_size: 64
+  epochs: 5
+  lr: 1.0e-3
+  early_stop_patience: 2
+  models: [meanpool, bigru, charcnn]
+
+task3:
+  # SHARED across the team, do not change without telling your partner
+  image_size: 256
+  photo_subset: 2000
+  photo_subset_seed: 42
+  batch_size: 1
+  epochs: 40
+  decay_start_epoch: 25
+  lr: 2.0e-4
+  beta1: 0.5
+  lambda_cycle: 10.0
+  lambda_identity: 0.5
+  pool_size: 50
+  n_eval: 300
+  # YOURS
+  generator: unet256
+
+The logging contract
+
+Every training entry point does the following, in this order, before it touches a model:
+
+Resolve the repo root by walking up from the script until it finds 
+requirements.txt
+. Never use an absolute path.
+
+Load the config, hash it with SHA256, and print the hash as the first line of the log.
+
+Open 
+reproducibility/raw_logs/sneha/<task>_<model>_<UTC timestamp>.log
+ in append mode. If the file exists, abort rather than overwrite.
+
+Log the git commit SHA, the resolved device, the full config, and 
+pip freeze
+ output.
+
+Seed 
+random
+, 
+numpy
+, 
+torch
+, and 
+torch.cuda
+ from 
+config.seed
+, and set 
+torch.backends.cudnn.deterministic = True
+.
+
+From then on, log one line per N steps with step, epoch, loss, learning rate, gradient norm, elapsed seconds, and peak memory. Never rewrite the file afterwards.
+
+Manifest, one per task
+
+At the end of every run, write 
+reproducibility/manifests/sneha_task<n>.json
+ containing: config hash, git SHA, seed, python and library versions, GPU name from 
+torch.cuda.get_device_name()
+, wall clock duration, the checkpoint filename, and a 
+metric_rows
+ field that maps each checkpoint to the exact rows it produced in your metrics CSV. That mapping is what makes a number traceable at grading time.
+
+Backup rule
+
+GPU lab machines are wiped after your session. Copy checkpoints and logs off the machine at the end of every single session, not at the end of the project. A lost run cannot be recreated before the deadline.
+
+environment and logging prompt
+
+Implement common/runtime.py with:
+  find_repo_root()      walks up until it finds requirements.txt, returns Path
+  load_config(path)     loads YAML, returns a dotted-access object, returns (cfg, sha256_hash)
+  set_seeds(seed)       random, numpy, torch, torch.cuda, cudnn deterministic
+  open_run_log(cfg, task, model)  returns a logger writing to
+                        reproducibility/raw_logs/<member>/<task>_<model>_<UTC>.log,
+                        aborts if the file already exists, writes the header block
+                        described in section 3 as its first lines
+  write_manifest(...)   writes the JSON manifest described in section 3
+  peak_mem_gb()         torch.cuda.max_memory_allocated()/1e9, returns 0.0 on cpu
+
+Every later script imports from this module. No script may call print() for
+anything that belongs in a log.
+
+04
+Task 1: GPT from scratch
+
+TinyStories, character level, no prebuilt attention. 30 marks.
+
+Build a decoder only GPT from scratch on TinyStories at the character level, and report on how it fails. Fifteen individual marks and fifteen team marks.
+
+Masked multi head self attention
+
+residual add
+
+LayerNorm
+
+Feed forward, ReLU, 4x
+
+residual add
+
+LayerNorm
+
+skip
+
+skip
+
+input: (B, T, d_model)
+
+output: (B, T, d_model)
+
+your block: post-norm ordering
+
+one block,
+
+stacked N times
+
+LayerNorm is applied after each residual addition, which is the ordering printed in Attention Is All You Need. It needs a longer warmup than the alternative, which is exactly the behaviour you will measure and report.
+
+Architecture, exactly as specified
+
+Component
+
+Specification
+
+Why, and where it comes from
+
+Tokenisation
+
+Character level, built from your own training slice
+
+Brief 1.1.1 and 1.1.3. Vocabulary is every unique character in your slice, mapped with your own 
+char_to_idx
+ and 
+idx_to_char
+.
+
+Token embedding
+
+nn.Embedding(vocab, 256)
+, learned
+
+Brief 1.2.3
+
+Positional embedding
+
+nn.Embedding(128, 256)
+, learned absolute
+
+Brief 1.2.3 requires a 
+learnable
+ positional embedding, so fixed sinusoidal is not an option here
+
+Blocks
+
+6 identical blocks, Post-norm
+
+This is the ordering in the original 2017 paper: sublayer first, then add the residual, then normalise. It is the historically faithful arrangement and it makes warmup a load bearing part of your recipe rather than a formality.
+
+Attention
+
+8 heads, head dim 32, scaled dot product written by hand
+
+Scores are 
+Q @ K.transpose(-2,-1) / sqrt(head_dim)
+, masked with a registered lower triangular buffer, then softmax, then dropout, then 
+@ V
+
+Causal mask
+
+Registered buffer 
+torch.tril(torch.ones(T, T))
+, masked fill with 
+-inf
+ before softmax
+
+Brief 1.2.2. Sliced to the current sequence length so shorter batches still work.
+
+Feed forward
+
+Linear 256 to 1024, ReLU, Linear back to 256, dropout
+
+Expansion factor 4, as in the original paper. ReLU chosen to pair with post-norm.
+
+Output head
+
+LayerNorm, then Linear 256 to vocab
+
+Brief 1.2.4
+
+Weight tying
+
+no weight tying, separate output projection
+
+The original Transformer used a separate output projection. Untied costs you one extra matrix, which you should report in your parameter count and comment on.
+
+The one line defense of this lane
+
+This is the decoder exactly as printed in Attention Is All You Need, six layers and eight heads, scaled down to fit a character level corpus. Nothing is invented. The payoff is that every question at the viva can be answered by pointing at the paper, and your warmup and schedule choices are not arbitrary defaults but load bearing parts of the original recipe that you can explain.
+
+Hyperparameters
+
+Setting
+
+Value
+
+Note
+
+Context length
+
+128
+
+Characters per training sequence
+
+Layers / heads / d_model
+
+6 / 8 / 256
+
+Head dimension works out to 32
+
+Feed forward width
+
+1024
+
+4x expansion
+
+Dropout
+
+0.2
+
+Higher, because six layers on a small character slice overfits quickly and you want the model to still be learning at epoch 30
+
+Batch size
+
+64
+
+Sequences per step
+
+Optimiser
+
+AdamW, betas 0.9 and 0.95, weight decay 0.1
+
+Decay applied to matrices only, not to biases, LayerNorm parameters, or embeddings
+
+Learning rate
+
+3e-4 peak
+
+Standard for a model this size
+
+Schedule
+
+400 step linear warmup, then inverse square root decay
+
+The schedule from the original paper, and post-norm genuinely depends on it. This gives you something concrete to say about training stability that is specific to your model.
+
+Gradient clipping
+
+1.0 global norm
+
+Also gives you the gradient norm metric for free, since 
+clip_grad_norm_
+ returns the pre-clip norm
+
+Epochs
+
+30
+
+The brief requires a minimum of 10. Thirty is cheap at this scale and gives a clean overfitting curve for the generalization gap metric.
+
+Estimated parameters
+
+about 4.8 million
+
+Report the exact count from 
+sum(p.numel() for p in model.parameters())
+, not this estimate
+
+Known risk in this lane, and the fix
+
+Post-norm needs its warmup. If your loss goes flat or diverges inside the first 300 steps, do not debug the architecture: raise 
+warmup_steps
+ to 800 and drop the peak learning rate to 1e-4, rerun, and keep both logs. Two logs showing the same model diverging then converging is genuinely good evidence for the stability metric the brief asks for, so treat a first failed run as data, not as lost time.
+
+Data preparation
+
+Download the TinyStories corpus into 
+task1_llm/data/
+. This folder is shared, download it once.
+
+Read the raw text, take a contiguous slice starting at an offset drawn from 
+split_seed = 4242
+, and cut it into 
+train_chars
+ for training and the following 
+val_chars
+ for validation. The two slices must not overlap. The brief says each member creates their own split, which is why the seed is yours.
+
+Build the vocabulary from the training slice only. Any character seen only in validation maps to a single reserved unknown index.
+
+Encode to a single 
+torch.long
+ tensor. Sample training sequences as sliding windows of length 
+block_size
+ with the target being the input shifted one position left.
+
+Save 
+char_to_idx
+ and 
+idx_to_char
+ to 
+outputs/vocab.json
+ so generation is reproducible from the checkpoint alone.
+
+Metrics, all fifteen columns
+
+Metric
+
+How it is computed
+
+CSV column
+
+Training cross entropy
+
+Mean CE in nats over the last training epoch
+
+train_ce
+
+Validation cross entropy
+
+Mean CE in nats over the full validation slice, evaluated every epoch
+
+val_ce
+
+Perplexity
+
+exp(val_ce)
+
+perplexity
+
+Bits per character
+
+val_ce / ln(2)
+
+bpc
+
+Generalization gap
+
+val_ce - train_ce
+ at the final epoch
+
+gen_gap
+
+Top-1 next character accuracy
+
+Fraction of validation positions where the argmax logit equals the target
+
+top1_acc
+
+Distinct-1 / 2 / 3
+
+Unique n-grams divided by total n-grams, over the 20 generated samples
+
+distinct_1
+, 
+distinct_2
+, 
+distinct_3
+
+Repeated 4-gram rate
+
+Fraction of 4-grams in the generations that occur more than once
+
+rep_4gram
+
+Gradient norm and stability
+
+Max, median, count of spikes above 5x the running median, and NaN count, all from the per step log
+
+grad_norm_max
+, 
+grad_norm_median
+, 
+loss_spikes
+, 
+nan_count
+
+Parameter count
+
+sum(p.numel() for p in model.parameters())
+
+param_count
+
+Training throughput
+
+Total characters processed divided by wall clock training seconds
+
+train_tokens_per_sec
+
+Generation throughput
+
+Characters generated divided by generation seconds, at batch size 1
+
+gen_tokens_per_sec
+
+Peak memory
+
+torch.cuda.max_memory_allocated() / 1e9
+
+peak_mem_gb
+
+Total training time
+
+Wall clock seconds from first step to last
+
+train_seconds
+
+Hardware
+
+torch.cuda.get_device_name()
+, recorded at runtime
+
+device_name
+
+Failure analysis, 2 marks
+
+Generate 20 samples of 500 characters at temperature 0.8 from a fixed prompt list, dump them to 
+outputs/generations.txt
+, then pick three that fail in 
+different
+ ways. For each one: paste the actual snippet, name the failure type (repetition, broken grammar, loss of coherence, hallucination), and write two or three sentences on what in the model or the data you think produced it. Three examples of the same failure type will not score well, so read all twenty before choosing.
+
+Build prompt
+
+task 1, paste into Cursor
+
+Implement Task 1 under task1_llm/sneha/src/ using configs/sneha/base.yaml.
+Import runtime helpers from common/runtime.py and metric functions from common/metrics_lm.py.
+
+Files to write:
+  data.py      corpus loading, own-slice split, vocab build, Dataset returning
+               (x, y) windows of length block_size, y = x shifted left by one
+  model.py     the GPT described below, written from scratch
+  train.py     training loop, --config is the only argument
+  generate.py  sampling, --config --checkpoint --n_samples --temperature
+  evaluate.py  computes every metric column listed in section 4 and writes
+               task1_llm/sneha/metrics_report.csv as a single row
+  run.ipynb    a notebook that calls the above in order and keeps its outputs
+
+model.py must contain, written by hand and with no prebuilt attention:
+  class CausalSelfAttention  qkv projections, 8 heads, scaling by
+      sqrt(head_dim), a registered tril buffer used as the causal mask with
+      masked_fill(-inf) before softmax, attention dropout, output projection
+  class FeedForward          Linear(256, 1024), ReLU, Linear back, dropout
+  class Block                attention, residual add, LayerNorm, feed forward, residual add, LayerNorm (post-norm)
+  class GPT                  learned token embedding + learned positional embedding,
+      6 blocks, final LayerNorm, LM head to vocab size.
+      Weight tying: no weight tying, separate output projection.
+      Init: normal(0, 0.02) on Linear and Embedding weights, zeros on bias.
+
+train.py must:
+  - build AdamW with two parameter groups, weight decay 0.1 on 2D parameters only
+  - use a 400 step linear warmup then inverse square root decay
+  - clip gradients at global norm 1.0 and log the returned pre-clip norm every step
+  - evaluate validation CE every epoch and checkpoint on best validation CE to
+    checkpoints/gpt_best.pt, saving config, vocab, and model state together
+  - save outputs/loss_curve.png with train and validation CE against epoch
+  - train for 30 epochs
+
+Write four unit tests in src/test_model.py and make them pass before training:
+  1. output shape is (B, T, vocab_size)
+  2. causal mask holds: changing token at position t leaves logits at positions
+     < t bitwise identical
+  3. a single batch can be overfitted to near zero loss in 200 steps
+  4. parameter count matches a hand computed formula you write in the test
+
+Do not import nn.Transformer, nn.MultiheadAttention, or
+F.scaled_dot_product_attention anywhere.
+
+Acceptance check
+
+ 
+All four unit tests pass, including the causal mask test
+
+ 
+
+metrics_report.csv
+ has every column from the metrics table, no blanks
+
+ 
+
+outputs/loss_curve.png
+ shows both curves and the validation curve is not flat
+
+ 
+
+outputs/generations.txt
+ contains 20 samples, and three are analysed in 
+failure_analysis.md
+
+ 
+The raw log contains one line per step with the gradient norm, unedited
+
+ 
+
+results.md
+ explains every row of the hyperparameter table in your own words
+
+Be ready to answer
+
+Point at the line in your code that enforces causality, and explain what breaks without it.
+
+Why post-norm? What would move if you switched it?
+
+Your perplexity is X. Say what that means for a character level model, and why it is not comparable to a word level perplexity.
+
+Why is your generalization gap the size it is, given how much data you trained on?
+
+What would you change first if you were given ten times the compute?
+
+05
+Task 2: Sentiment classification
+
+Yelp polarity, three models, nothing pretrained. 30 marks.
+
+A three model bake off on Yelp polarity with no pretrained anything. The dataset is 560,000 training reviews and 38,000 test reviews, balanced two class, where 1 and 2 stars are negative and 3 and 4 stars are positive. Fifteen individual marks and fifteen team marks.
+
+Your three models
+
+M1 baseline
+
+Averaged embeddings
+
+Embedding 128
+
+Mean over time
+
+Linear 256, ReLU
+
+Linear 256, ReLU
+
+Linear 256 to 1
+
+M2 experimental
+
+BiGRU, max pooled
+
+Embedding 128
+
+BiGRU hidden 128
+
+Max pool over time
+
+Dropout 0.3
+
+Linear 256 to 1
+
+M3 experimental
+
+Character CNN
+
+One hot, 70 chars
+
+6 x Conv1d 256
+
+3 max pools k=3
+
+Flatten, FC 512
+
+Dropout 0.5 to 1
+
+Three models that form a ladder: a baseline, then two changes that each test one idea. Every embedding layer is initialised randomly and learned during training.
+
+Model
+
+Configuration
+
+What this model is testing
+
+Averaged embeddings
+
+meanpool
+
+Embedding 128, masked mean over non padding positions, two hidden layers of 256 with ReLU, dropout 0.3, single linear output. Adam 1e-3, batch 64.
+
+The floor. A deep averaging network with no word order at all. Iyyer et al. 2015. If a sequence model cannot beat this, that is the headline finding of the whole task.
+
+BiGRU, max pooled
+
+bigru
+
+Embedding 128, one bidirectional GRU layer with hidden 128 per direction, max pooling over time, dropout 0.3. Packed sequences so padding is not fed through the recurrence.
+
+Whether word order buys anything over averaging. GRU rather than LSTM: fewer gates, fewer parameters, faster to train, and a cleaner comparison against the averaging baseline.
+
+Character CNN
+
+charcnn
+
+Fixed 70 character alphabet, input length 1014, six 1D convolutions with 256 filters at kernel sizes 7, 7, 3, 3, 3, 3 with max pooling after layers 1, 2 and 6, then two fully connected layers of 512 with dropout 0.5.
+
+Whether a model that never sees a word can match one that does. This is the architecture from the paper that introduced this exact dataset, Zhang, Zhao and LeCun 2015, which makes it the single most citable model in the lab.
+
+Why these three, as a set
+
+A deliberately minimal baseline, then a recurrent model, then a model that throws away words entirely and reads characters. The spread is wide on purpose: if the word order model and the character model both land near the bag of words baseline, that is a real result about how easy this dataset is, and it is the most interesting thing anyone will write in the team analysis.
+
+Data, shared with your partner
+
+The split files are team owned and must exist before you train. Load the index arrays from 
+task2_sentiment/data/splits/
+: 100,000 stratified training rows and 20,000 stratified validation rows drawn from the official training split with seed 42, and the full 38,000 row official test split. Do not resample them, do not reshuffle them, do not draw your own. Every accuracy number in the team comparison table and the paired McNemar test depends on both members scoring the identical test rows.
+
+Preprocessing, yours alone, writes to your 
+data_processed/
+
+Report the review length distribution, the class distribution, and the class balance, as three plots into 
+outputs/
+. This is 10 marks of the task, do not skip the analysis.
+
+Drop or repair malformed rows: empty strings after cleaning, rows with a missing label, duplicated text. Log how many of each you removed.
+
+Lowercase, strip punctuation and special characters, unescape the doubled quotes and the literal backslash-n newlines that this dataset uses.
+
+Remove stopwords and apply lemmatisation, then state in 
+results.md
+ whether that helped or hurt, measured on the validation split. Both answers are acceptable, an unexamined choice is not.
+
+Tokenise and build a vocabulary capped at 30,000 types from the training split only, with reserved 
+<pad>
+ and 
+<unk>
+ indices. Pad or truncate to 
+max_len = 256
+.
+
+Preprocessing note for this lane
+
+The character level model in this lane bypasses the word vocabulary entirely and uses its own fixed alphabet. Keep its preprocessing in a separate function so the two pipelines never contaminate each other.
+
+Metrics, per model, so three rows
+
+Metric
+
+How it is computed
+
+CSV column
+
+Accuracy
+
+sklearn.metrics.accuracy_score
+
+accuracy
+
+Precision, recall, F1
+
+precision_recall_fscore_support
+ with average in macro, micro, weighted, so nine columns
+
+precision_macro
+ ... 
+f1_weighted
+
+Confusion matrix
+
+confusion_matrix
+, saved as PNG per model and flattened into four CSV columns
+
+cm_tn
+, 
+cm_fp
+, 
+cm_fn
+, 
+cm_tp
+
+ROC-AUC
+
+roc_auc_score
+ on the positive class probability
+
+roc_auc
+
+PR-AUC
+
+average_precision_score
+
+pr_auc
+
+MCC
+
+matthews_corrcoef
+
+mcc
+
+Brier score
+
+brier_score_loss
+ on the positive class probability
+
+brier
+
+Expected calibration error
+
+15 equal width confidence bins, weighted mean of the absolute gap between bin accuracy and bin confidence. Plot the reliability diagram too.
+
+ece
+
+95% bootstrap CIs
+
+1000 resamples with replacement of the test set, seed 42, percentile interval, for accuracy, macro F1, and MCC
+
+acc_ci_lo
+, 
+acc_ci_hi
+, 
+f1_macro_ci_lo
+, ...
+
+Paired McNemar
+
+Baseline against each experimental model, on identical test rows, 
+statsmodels
+ with continuity correction. Report the statistic and the p value.
+
+mcnemar_stat_vs_baseline
+, 
+mcnemar_p_vs_baseline
+
+Per slice macro F1 and error rate
+
+The four slices defined below, computed on the shared test split
+
+slice_<name>_f1
+, 
+slice_<name>_err
+
+Parameter count
+
+sum(p.numel() ...)
+
+param_count
+
+Training time and throughput
+
+Wall clock seconds, and training examples divided by those seconds
+
+train_seconds
+, 
+examples_per_sec
+
+Peak memory
+
+torch.cuda.max_memory_allocated() / 1e9
+
+peak_mem_gb
+
+Hardware
+
+Exact device string, recorded per model at runtime
+
+device_name
+
+What to expect
+
+On Yelp polarity every reasonable model lands within a couple of points of every other one. Expect at least one of your experimental models to show no statistically significant gain over the baseline once the bootstrap interval and the McNemar p value are in. That is a finding, not a failure. Write it up as one, and say what it implies about the task rather than hiding it.
+
+The twenty error review, required
+
+Pick your best model. Pull exactly twenty test errors from it, five in each category, and put them in 
+failure_analysis.md
+ with the review text, the true label, the predicted probability, an error type you assign, and one testable fix per error.
+
+Category
+
+How to select them
+
+5 confident false positives
+
+Predicted positive, true negative, sorted by predicted probability descending, take the top 5
+
+5 confident false negatives
+
+Predicted negative, true positive, sorted by predicted probability ascending, take the top 5
+
+5 near threshold errors
+
+Any error with predicted probability between 0.45 and 0.55
+
+5 slice specific failures
+
+Errors drawn from your worst performing slice by macro F1
+
+The four slices, fixed so both members compute the same thing
+
+Slice name
+
+Definition on the raw review text
+
+short
+
+Fewer than 50 whitespace tokens
+
+long
+
+More than 200 whitespace tokens
+
+negation
+
+Contains any of: not, no, never, n't, cannot
+
+contrast
+
+Contains any of: but, however, although, though
+
+Build prompt
+
+task 2, paste into Cursor
+
+Implement Task 2 under task2_sentiment/sneha/src/ using configs/sneha/base.yaml.
+Import from common/runtime.py and common/metrics_clf.py.
+
+Files to write:
+  preprocess.py  loads the shared split index files from
+                 task2_sentiment/data/splits/, applies the cleaning steps in
+                 section 5, builds the vocabulary from the training split only,
+                 caches tensors and vocab.json to data_processed/, and saves the
+                 three required distribution plots to outputs/
+  models.py      the three architectures below, one class each
+  train.py       --config --model {meanpool | bigru | charcnn}
+                 Adam lr 1e-3, batch 64, up to 5 epochs, early stopping on
+                 validation macro F1 with patience 2, checkpoint the best epoch
+  evaluate.py    scores all three checkpoints on the shared test split, computes
+                 every metric column in section 5, runs the paired McNemar test of
+                 each experimental model against the baseline on identical rows,
+                 computes the four slice metrics, and writes three rows to
+                 task2_sentiment/sneha/metrics_report.csv
+  errors.py      selects the twenty errors by the rules in section 5 and writes a
+                 markdown table into failure_analysis.md for you to annotate
+  run.ipynb      calls everything in order, keeps outputs
+
+Architectures in models.py:
+  meanpool     Embedding(vocab, 128) -> masked mean over non-pad positions ->
+               Linear(128, 256) -> ReLU -> Dropout(0.3) -> Linear(256, 256) ->
+               ReLU -> Linear(256, 1)
+  bigru        Embedding(vocab, 128) -> nn.GRU(128, 128, bidirectional=True,
+               batch_first=True) with packed sequences -> max pool over time ->
+               Dropout(0.3) -> Linear(256, 1)
+  charcnn      a SEPARATE preprocessing path: lowercase, map to the fixed 70
+               character alphabet "abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:'\"/\\|_@#$%^&*~`+-=<>()[]{}",
+               one-hot encode, fixed length 1014, pad or truncate.
+               Conv1d(70, 256, 7) -> ReLU -> MaxPool1d(3)
+               Conv1d(256, 256, 7) -> ReLU -> MaxPool1d(3)
+               Conv1d(256, 256, 3) -> ReLU   (repeat x3: layers 3, 4 and 5, no pooling)
+               Conv1d(256, 256, 3) -> ReLU -> MaxPool1d(3)   (layer 6)
+               Flatten -> Linear(-1, 512) -> ReLU -> Dropout(0.5)
+               -> Linear(512, 512) -> ReLU -> Dropout(0.5) -> Linear(512, 1)
+               Keep this preprocessing in its own function. It must not touch the
+               word level vocabulary used by the other two models.
+
+For every model, save to outputs/: the confusion matrix PNG, the reliability
+diagram PNG, and the per epoch training curve. Record device_name, train_seconds,
+examples_per_sec, peak_mem_gb per model at runtime, never by hand.
+
+Do not load any pretrained embedding or pretrained language model. Every embedding
+layer is nn.Embedding initialised randomly and trained.
+
+Acceptance check
+
+ 
+
+metrics_report.csv
+ has exactly three rows and every column from the metrics table
+
+ 
+The three distribution plots from the preprocessing analysis exist in 
+outputs/
+
+ 
+Confusion matrix and reliability diagram exist per model
+
+ 
+McNemar statistic and p value present for each experimental model against your baseline
+
+ 
+Four slice columns present per model
+
+ 
+
+failure_analysis.md
+ has all twenty errors with an error type and a testable fix each
+
+ 
+
+results.md
+ justifies each architecture and states whether stopword removal and lemmatisation helped
+
+Be ready to answer
+
+Your baseline is within a point of your best model. Argue for and against shipping the simpler one.
+
+What does your expected calibration error tell you that accuracy does not?
+
+McNemar returned p = X. Say precisely what that test compared and what the p value licenses you to claim.
+
+Which slice performed worst, and what property of your architecture explains it?
+
+You removed stopwords. Name a sentiment case where that is actively harmful.
+
+06
+Task 3: CycleGAN
+
+Unpaired Monet and photo translation, plus the Kaggle leaderboard. 30 marks plus 10 bonus.
+
+An unpaired image to image translation between 300 Monet paintings and a photo set, using a CycleGAN you implement yourself. Fifteen individual marks, fifteen team marks, and up to ten bonus marks from the leaderboard.
+
+Domain A
+
+monet_jpg
+
+Domain B
+
+photo_jpg
+
+G_A2B
+
+G_B2A
+
+U-Net generator, 256
+
+D_A  70x70 patch
+
+D_B  70x70 patch
+
+cycle L1: a vs G_B2A(G_A2B(a))
+
+Loss = LSGAN adversarial + 10 x cycle L1 + 0.5 x identity L1
+
+Two generators, two discriminators, and the cycle constraint that makes unpaired translation possible. Both generators in your model use the same architecture; only the direction differs.
+
+Your generator
+
+Stage
+
+Layers
+
+Output shape from 3 x 256 x 256
+
+Encoder 1
+
+Conv 4x4 stride 2 to 64, no normalisation, LeakyReLU 0.2
+
+64 x 128 x 128
+
+Encoder 2 to 3
+
+Conv 4x4 stride 2 to 128 then 256, InstanceNorm, LeakyReLU 0.2
+
+256 x 32 x 32
+
+Encoder 4 to 8
+
+Conv 4x4 stride 2 to 512 each time, InstanceNorm, LeakyReLU 0.2
+
+512 x 1 x 1
+
+Decoder 1 to 3
+
+ConvTranspose 4x4 stride 2 to 512, InstanceNorm, ReLU, dropout 0.5, then concatenate the matching encoder feature
+
+1024 x 8 x 8 after the skip
+
+Decoder 4 to 7
+
+ConvTranspose 4x4 stride 2, InstanceNorm, ReLU, then concatenate the matching encoder feature
+
+128 x 128 x 128 after the skip
+
+Head
+
+ConvTranspose 4x4 stride 2 to 3, Tanh
+
+3 x 256 x 256
+
+Why this generator, and where it comes from
+
+The U-Net generator ships in the official CycleGAN and pix2pix codebase as a first class option alongside the residual one, so it is fully paper backed and no part of it is improvised. Its skip connections carry high resolution detail straight from encoder to decoder, which tends to preserve the layout of the source image strongly. Watch for that in your own results and say so plainly in your analysis: strong content preservation and weaker stylisation is the expected signature of this generator, and noticing it in your own numbers, particularly in the content cosine and LPIPS columns, is exactly the kind of observation the analysis marks reward.
+
+Discriminator, both of them
+
+A 70 x 70 PatchGAN, identical for 
+D_A
+ and 
+D_B
+, exactly as in the CycleGAN paper: C64 without normalisation, then C128, C256, C512, each being a 4 x 4 stride 2 convolution followed by InstanceNorm and LeakyReLU with slope 0.2, then a final 4 x 4 stride 1 convolution to a single channel. It outputs a 30 x 30 map of real or fake scores rather than one number, which is what makes it a patch discriminator. Do not apply a sigmoid, because the least squares loss expects raw scores.
+
+Losses and schedule, shared with your partner
+
+Setting
+
+Value
+
+Note
+
+Adversarial loss
+
+Least squares (LSGAN), 
+MSELoss
+ against target maps of ones and zeros
+
+The CycleGAN paper uses least squares for stability. Do not use BCE.
+
+Cycle consistency
+
+L1, weight 10.0
+
+Both directions, summed
+
+Identity loss
+
+L1, weight 0.5 times the cycle weight
+
+Feed a Monet through the Monet generator and require it to come back unchanged. Helps colour stability.
+
+Normalisation
+
+InstanceNorm2d, affine, no running statistics
+
+Batch size is 1, so BatchNorm is not an option
+
+Optimiser
+
+Adam, lr 2e-4, betas 0.5 and 0.999
+
+One optimiser for both generators, one for both discriminators
+
+Schedule
+
+Constant for 25 epochs, then linear decay to zero over the last 15
+
+Standard CycleGAN schedule, compressed to fit lab time
+
+Image buffer
+
+50 previously generated images per discriminator
+
+Reduces oscillation. Sample from history with probability 0.5.
+
+Batch size
+
+1
+
+As in the paper
+
+Augmentation
+
+Resize to 286, random crop to 256, random horizontal flip
+
+Applied at load time, training only, never at inference
+
+Data, shared with your partner
+
+All 300 Monet paintings, and the 2,000 photo subset listed in 
+task3_gan/data/photo_subset_2000.txt
+. Do not sample your own photo subset. FID is sensitive to the reference set, so a different subset makes your number incomparable to your partner's and breaks the team comparison table.
+
+Inference and file naming, this decides your metric
+
+Do not improvise here
+
+The supplied evaluation script sorts both folders and pairs real with generated images 
+by index
+ for its MiFID term. So the filenames you write directly change the number you report. Write 
+outputs/pred_B2A/<photo_stem>.jpg
+ and 
+outputs/pred_A2B/<monet_stem>.jpg
+, keeping the original stem, JPEG quality 95, 256 x 256. Generate exactly 300 images per direction so the 
+n_eval
+ cap and the subsample matching behave identically for both of you.
+
+Metrics
+
+Metric
+
+How it is computed
+
+Column in 
+full_metrics_report.csv
+
+FID, both directions
+
+The supplied evaluation script, InceptionV3 pool3 features. Report A2B, B2A, and the mean.
+
+fid_a2b
+, 
+fid_b2a
+
+KID, both directions
+
+Polynomial kernel 
+(x.y/d + 1)^3
+, unbiased MMD squared, 100 subsets of 100 samples, report mean and standard deviation
+
+kid_a2b_mean
+, 
+kid_a2b_std
+, 
+kid_b2a_mean
+, 
+kid_b2a_std
+
+Density and coverage
+
+k nearest neighbour manifold estimate on Inception features with k = 5, following Naeem et al. Report both directions.
+
+density_a2b
+, 
+coverage_a2b
+, 
+density_b2a
+, 
+coverage_b2a
+
+Cycle reconstruction L1
+
+Mean absolute error between 
+G_B2A(G_A2B(a))
+ and 
+a
+ over 300 images, both directions
+
+cycle_l1_a
+, 
+cycle_l1_b
+
+LPIPS
+
+lpips.LPIPS(net='alex')
+ between each input and its translation, mean over 300 pairs, both directions
+
+lpips_a2b
+, 
+lpips_b2a
+
+Content preservation cosine
+
+Cosine similarity between the Inception feature of the input and of its translation, paired, mean over 300
+
+content_cos_a2b
+, 
+content_cos_b2a
+
+Generator and discriminator loss curves
+
+Logged every iteration, plotted per epoch, saved as PNG
+
+outputs/loss_curves.png
+
+Cycle and identity loss values
+
+Mean over the final epoch, reported as numbers not just curves
+
+final_cycle_loss
+, 
+final_identity_loss
+
+Gradient norms and NaN count
+
+Generator and discriminator total norms logged every 100 iterations, plus a NaN counter that never resets
+
+grad_norm_g_max
+, 
+grad_norm_d_max
+, 
+nan_count
+
+Human audit and agreement
+
+30 fixed samples, two raters, Cohen's kappa. Team level, section 8.
+
+human_score_mean
+, 
+cohens_kappa
+
+Cost
+
+Parameter count of all four networks, wall clock training seconds, images per second, peak memory
+
+param_count_total
+, 
+train_seconds
+, 
+images_per_sec
+, 
+peak_mem_gb
+
+Kaggle scores
+
+Public and private leaderboard scores and your rank, copied from the leaderboard after submission
+
+kaggle_public
+, 
+kaggle_private
+, 
+kaggle_rank
+
+Leaderboard, in proportion
+
+The leaderboard is worth 4 marks between a top ten finish and a fortieth place finish, out of 110. The required metrics list is worth far more. Submit once you have a working model, record the rank, and then spend remaining time on the metrics and the analysis rather than on rank chasing.
+
+Your submission must be the direct output of your own trained model's inference. No hand picking, no external models, no editing. A high rank obtained any other way is scored as zero for the whole task.
+
+Build prompt
+
+task 3, paste into Cursor
+
+Implement Task 3 under task3_gan/sneha/src/ using configs/sneha/base.yaml.
+Import from common/runtime.py and common/metrics_gan.py.
+
+Files to write:
+  datasets.py    unpaired dataset returning one Monet and one photo per index,
+                 photos restricted to task3_gan/data/photo_subset_2000.txt,
+                 train transform resize 286, random crop 256, random horizontal
+                 flip, normalise to [-1, 1]; test transform resize 256 only
+  networks.py    Generator: U-Net 256, the unet_256 variant from the official
+                 CycleGAN and pix2pix codebase. Eight downsampling blocks and
+                 eight upsampling blocks built recursively as nested
+                 UnetSkipConnectionBlocks, with skip connections concatenating
+                 encoder features onto the matching decoder features. Tanh output.
+                 Discriminator: 70x70 PatchGAN, C64 (no norm), C128, C256, C512,
+                 all 4x4 stride 2 with InstanceNorm and LeakyReLU(0.2), then a
+                 4x4 stride 1 conv to 1 channel, no sigmoid
+                 ImagePool: buffer of 50, returns a history image with p=0.5
+                 init_weights: normal(0, 0.02) on all conv and norm weights
+  train.py       --config only. Two Adam optimisers, lr 2e-4, betas (0.5, 0.999).
+                 Total loss for the generators:
+                   LSGAN(D_B(G_A2B(a)), 1) + LSGAN(D_A(G_B2A(b)), 1)
+                   + 10.0 * (L1(G_B2A(G_A2B(a)), a) + L1(G_A2B(G_B2A(b)), b))
+                   + 5.0 * (L1(G_A2B(b), b) + L1(G_B2A(a), a))
+                 Discriminators: 0.5 * (LSGAN(D(real), 1) + LSGAN(D(pooled_fake), 0))
+                 Constant lr for 25 epochs then linear decay to zero over 15.
+                 Log per iteration: loss_G, loss_D_A, loss_D_B, loss_cycle,
+                 loss_identity. Log generator and discriminator gradient norms
+                 every 100 iterations. Count and log any NaN, never reset it.
+                 Save a 4 image sample grid every epoch to outputs/samples/.
+                 Checkpoint every 5 epochs and at the end.
+  inference.py   loads a checkpoint, generates exactly 300 images per direction
+                 to outputs/pred_A2B/ and outputs/pred_B2A/ using the naming rule
+                 in section 6, JPEG quality 95
+  evaluate_local.py  runs the supplied FID and MiFID script to produce
+                 submission.csv, then computes every remaining metric in section 6
+                 into full_metrics_report.csv
+  run.ipynb      calls everything in order
+
+Sanity gates, run before the full training job:
+  1. one forward and backward pass on a batch of 1 completes without NaN
+  2. cycle reconstruction of an untrained generator is visibly wrong but finite
+  3. a 20 image, 2 epoch smoke run completes end to end and writes all outputs
+Only start the full run once all three pass.
+
+Acceptance check
+
+ 
+300 images in each of 
+pred_A2B/
+ and 
+pred_B2A/
+, named by the shared convention
+
+ 
+
+submission.csv
+ generated by the supplied script, not written by hand
+
+ 
+
+full_metrics_report.csv
+ has every column from the metrics table
+
+ 
+
+outputs/loss_curves.png
+ shows generator, discriminator, cycle and identity losses
+
+ 
+Sample grids exist for every epoch so training progress is visible
+
+ 
+Kaggle submitted, public and private scores and rank recorded
+
+ 
+
+results.md
+ covers convergence, stability, and at least two honest shortcomings
+
+Be ready to answer
+
+Why does cycle consistency make unpaired translation possible at all? What stops the generator from ignoring its input?
+
+Why least squares loss rather than the original GAN loss?
+
+Your discriminator outputs a 30 x 30 map. Why is that better than a single number here?
+
+Show your loss curves and say whether they indicate convergence, and how you would tell the difference between convergence and collapse.
+
+What does the identity loss buy you, and what would you expect to see if you set its weight to zero?
+
+07
+Timeline
+
+Anchor W5 to the Canvas deadline and work backwards.
+
+W0 setup
+
+W1
+
+W2
+
+W3
+
+W4
+
+W5 report
+
+Repo, env, config, data pull
+
+GPU lab slots booked
+
+Task 1 build and train
+
+Task 2 three models
+
+Task 3 build and train
+
+Task 3 metrics and Kaggle
+
+Human audit, both raters
+
+Comparison tables and report
+
+W5 ends on the Canvas deadline.
+
+Five working weeks plus a setup week. The two amber rows need your partner in the room, so they are the ones that slip if you leave them late.
+
+Week
+
+What is done by the end of it
+
+Blocking dependency
+
+W0
+
+Repo skeleton, config, requirements pinned, all three datasets downloaded, GPU lab slots booked for W3 and W4
+
+Booking form. Slots are shared across the whole class and run out.
+
+W1
+
+Task 1 model implemented and passing the shape and mask unit tests, first short training run finished
+
+Nothing
+
+W2
+
+Task 1 fully trained, all metrics written, failure analysis done. Task 2 preprocessing and model 1 trained
+
+Task 2 split files must exist first, section 8
+
+W3
+
+Task 2 all three models trained and evaluated. Task 3 code written and smoke tested on 20 images
+
+First GPU slot
+
+W4
+
+Task 3 trained to 40 epochs, translations generated for both directions
+
+Second GPU slot. This is the long pole.
+
+W5
+
+Task 3 metrics, Kaggle submission, human audit with your partner, comparison tables, report
+
+Partner availability for the audit
+
+What to do if you fall behind
+
+Cut scale, never cut a metric. A missing metric is a direct mark deduction, a smaller training run is a line in your limitations section. In order, the safe things to shrink are: Task 3 photo subset from 2000 to 1000, Task 3 epochs from 40 to 25, Task 2 training set from 100k to 50k, Task 1 epochs from 30 to the required minimum of 10. Anything you shrink must be shrunk in the config, logged, and reported. If you change a shared number, tell your partner the same day, because the comparison table breaks otherwise.
+
+08
+Team work items
+
+Half the marks. Lock the first table before anyone trains.
+
+These items are scored once, on the team, and they are worth 50 marks. Both of you are graded on all of them regardless of who did the typing. Split the typing however you like, but agree in writing who owns each row.
+
+Lock these before either of you trains anything
+
+Item
+
+Why it has to be first
+
+Artifact
+
+Task 2 split files
+
+If your training and test rows differ from your partner's, accuracy numbers are not comparable and the paired McNemar test in the report is invalid.
+
+task2_sentiment/data/splits/{train,val,test}_idx.npy
+ plus the script that generated them, seed 42
+
+Task 3 photo subset
+
+FID is sensitive to the reference set. Different training subsets make the two members' FIDs incomparable.
+
+task3_gan/data/photo_subset_2000.txt
+, seed 42, sorted
+
+Output filename convention
+
+The supplied evaluation script pairs real and generated images by sorted filename index for its MiFID term. Different naming gives a different number for the same model.
+
+Both members write 
+pred_B2A/<photo_stem>.jpg
+ and 
+pred_A2B/<monet_stem>.jpg
+
+Shared metric modules
+
+The brief requires one agreed evaluation script per task, agreed before anyone trains.
+
+common/metrics_lm.py
+, 
+common/metrics_clf.py
+, 
+common/metrics_gan.py
+
+Kaggle team registration
+
+You need the team registered before a submission can count for the team rank.
+
+Team name recorded in the README
+
+Produced at the end
+
+Deliverable
+
+Detail
+
+README.md
+
+Setup, how to reproduce any member's run, where each result lives, and a single documented command that runs a smoke test of one member's run. A grader will actually try this.
+
+Three comparison tables
+
+One per task, both members' models side by side: architecture summary, hyperparameters, and every metric from that task's list.
+
+Three joint analyses
+
+Per task: strengths, weaknesses, limitations, what the team would try next. Written together, not stapled together.
+
+Team ownership paragraph
+
+One paragraph at the top of the report saying who built what.
+
+Evidence links
+
+Every number in the report links to its loss curve image, its log file, and its checkpoint ID.
+
+Human audit
+
+30 fixed samples, both of you rate independently and blind on style, content, and artifacts, then compute Cohen's kappa. With a two person team you are the two raters. Fix the sample list first, do not discuss until both sheets are complete.
+
+Citations
+
+Attention Is All You Need, TinyStories, and CycleGAN, in IEEE numbered style.
+
+Final PDF
+
+report/DATA266_Lab1_Report_Team_[N].pdf
+, pushed before the deadline, with the repo link inside it.
+
+shared metric modules, build these once as a team
+
+Implement common/metrics_lm.py, common/metrics_clf.py, common/metrics_gan.py.
+They are imported by both members, so they must be pure functions with no member
+specific paths and no global state.
+
+metrics_lm.py
+  cross_entropy_eval(model, loader)      -> mean CE in nats
+  perplexity(ce)                         -> exp(ce)
+  bits_per_char(ce)                      -> ce / ln(2)
+  top1_accuracy(model, loader)           -> float
+  distinct_n(texts, n)                   -> unique n-grams / total n-grams
+  repeated_4gram_rate(texts)             -> fraction of 4-grams occurring more than once
+  grad_norm_stats(list_of_norms)         -> dict(max, median, spikes, nan_count)
+                                            spike = norm > 5x running median
+
+metrics_clf.py
+  full_report(y_true, y_prob, y_pred)    -> dict with accuracy, precision/recall/F1
+                                            in macro, micro and weighted, confusion
+                                            matrix, ROC-AUC, PR-AUC, MCC, Brier score
+  expected_calibration_error(y_true, y_prob, n_bins=15)
+  bootstrap_ci(y_true, y_pred, metric_fn, n=1000, seed=42) -> (lo, hi) at 95%
+  mcnemar_test(y_true, pred_a, pred_b)   -> statsmodels mcnemar, correction=True
+  slice_report(y_true, y_pred, texts)    -> per slice macro-F1 and error rate for
+                                            the four slices defined in section 5
+
+metrics_gan.py
+  inception_features(paths)              -> (N, 2048) pool3 features, InceptionV3
+                                            IMAGENET1K_V1, resize 299, center crop
+  fid(real_feats, gen_feats)
+  kid(real_feats, gen_feats, n_subsets=100, subset_size=100)
+                                            polynomial kernel (x.y/d + 1)^3,
+                                            unbiased MMD^2, return mean and std
+  density_coverage(real_feats, gen_feats, k=5)
+  lpips_mean(paths_a, paths_b)           -> lpips.LPIPS(net='alex')
+  content_cosine(real_feats, gen_feats)  -> mean cosine similarity, paired by index
+
+Write a unit test per function using small random arrays. FID of a set against
+itself must be near zero: assert it.
+
+09
+Viva preparation
+
+Five marks that no amount of code can earn for you.
+
+Five marks, scored on you alone, in a session the team attends together. Your leaderboard rank and your metric values are not what is being judged. Depth of understanding of your own implementation is.
+
+What to have open on screen
+
+Your three 
+results.md
+ files, one per task.
+
+Your three metrics CSVs, and the loss curve images.
+
+Your checkpoints, loadable, with a generation or inference cell already run once so it does not fail live.
+
+Your 
+failure_analysis.md
+ files, since the examiners ask about failures more than about successes.
+
+The five questions that come up in every one of these
+
+Question
+
+What a good answer contains
+
+Why this architecture?
+
+A constraint from the brief, a property of the data, and a number from your own run. Not a citation on its own.
+
+How was this metric computed?
+
+The formula, the exact function you called, and what would change the value. If you cannot say what would move it, you do not understand it.
+
+What went wrong?
+
+A specific failure you found, why you think it happened, and the one experiment that would test your explanation.
+
+How does this differ from your teammate's model?
+
+One structural difference and one measured consequence of it. Look at the comparison table before the session.
+
+What if you had changed X?
+
+A directional prediction with a reason. Being wrong with a reason scores better than refusing to guess.
+
+How this is scored
+
+The brief says it directly: a confident teammate cannot carry you, and the score reflects only on you. The corollary is that the last hour before the viva is better spent rereading your own logs than polishing a slide.
+
+The forty minute rehearsal, worth doing once
+
+Open your Task 1 code and explain the causal mask out loud to an empty room. If you hesitate, reread that function.
+
+Pick one number from each metrics CSV and say what would make it go up.
+
+Pick your worst result across all three tasks and prepare the honest explanation. Examiners reward this and punish evasion.
+
+Read your partner's 
+results.md
+ files once so the comparison question does not surprise you.
+
+10
+Final checklist
+
+The day before submission.
+
+Run this the day before the deadline. Every line maps to a graded criterion in the brief.
+
+Your own folders
+
+ 
+
+sneha/
+ exists under all three task folders with code, config, logs and 
+results.md
+
+ 
+Task 1: no prebuilt Transformer or attention module anywhere in your code, confirmed by grep
+
+ 
+Task 2: no pretrained embeddings or pretrained LM, all three models trained and evaluated
+
+ 
+Task 3: both directions generated, both output folders populated, filenames follow the shared convention
+
+ 
+All required metrics present for every model in every task, as named columns in your CSVs
+
+ 
+Failure analysis written for Task 1 (three cases), Task 2 (twenty errors), Task 3 (shortcomings)
+
+ 
+Hardware disclosed per model: exact GPU or CPU, from 
+torch.cuda.get_device_name()
+, not from memory
+
+ 
+Checkpoints runnable from a clean clone, and your 
+results.md
+ open and ready for the viva
+
+Shared, confirm with your partner
+
+ 
+No two models across the team share the same architecture and hyperparameters
+
+ 
+Kaggle submission made under the team, leaderboard rank recorded in the report
+
+ 
+Comparison tables for all three tasks present in the report, both members side by side
+
+ 
+Raw logs and manifests committed and untouched since the run
+
+ 
+README allows one command reproduction of at least one member's run, tested from a fresh clone
+
+ 
+No hard coded personal paths or secrets anywhere, confirmed by grep across the whole repo
+
+ 
+Human audit complete with Cohen's kappa reported
+
+ 
+Papers cited in IEEE numbered style
+
+ 
+Final combined PDF pushed to 
+report/
+
+final audit prompt
+
+Run a compliance sweep over the whole repo and print a report:
+1. grep for absolute paths: /Users/, /home/, C:\\, /content/drive, /mnt/
+2. grep for secrets: api_key, token, password, secret, kaggle.json
+3. grep for banned modules in task1: nn.Transformer, nn.MultiheadAttention,
+   scaled_dot_product_attention, TransformerEncoder, TransformerDecoder
+4. grep for banned pretrained use in task2: glove, word2vec, fasttext,
+   from_pretrained, AutoModel, AutoTokenizer
+5. verify every metrics CSV has the exact column set required by the brief,
+   listing any missing column by name
+6. verify every checkpoint referenced in a manifest exists on disk
+7. verify every log file's modification time is older than the manifest that
+   references it, which proves the log was not edited after the run
+Print a pass or fail line per check. Do not fix anything automatically, just report.
+
+  
+

@@ -1,0 +1,67 @@
+seed: 42
+member: ayush
+device: cuda
+
+paths:
+  task1_data: task1_llm/data
+  task2_splits: task2_sentiment/data/splits
+  task3_data: task3_gan/data
+  logs: reproducibility/raw_logs/ayush
+  manifests: reproducibility/manifests
+
+task1:
+  # Brief: fixed-length sequences, then 100K train / 10K val. Stories below are only the source text.
+  hf_dataset: roneneldan/TinyStories
+  train_stories: 100000
+  val_stories: 10000
+  train_sequences: 100000
+  val_sequences: 10000
+  split_seed: 42
+  block_size: 256
+  batch_size: 64
+  samples_per_epoch: 20000
+  epochs: 30
+  n_layer: 4
+  n_head: 4
+  d_model: 256
+  d_ff: 1024
+  dropout: 0.1
+  norm_position: pre
+  activation: GELU
+  tie_weights: true
+  lr: 3.0e-4
+  warmup_steps: 200
+  schedule: cosine
+  weight_decay: 0.1
+  grad_clip: 1.0
+  gen:
+    n_samples: 20
+    max_new_tokens: 500
+    temperature: 0.8
+
+task2:
+  n_train: 100000
+  n_val: 20000
+  split_seed: 42
+  max_vocab: 30000
+  max_len: 256
+  batch_size: 64
+  epochs: 5
+  lr: 1.0e-3
+  early_stop_patience: 2
+  models: [textcnn, bilstm, bilstm_attn]
+
+task3:
+  image_size: 256
+  photo_subset: 2000
+  photo_subset_seed: 42
+  batch_size: 1
+  epochs: 40
+  decay_start_epoch: 25
+  lr: 2.0e-4
+  beta1: 0.5
+  lambda_cycle: 10.0
+  lambda_identity: 0.5
+  pool_size: 50
+  n_eval: 300
+  generator: resnet9

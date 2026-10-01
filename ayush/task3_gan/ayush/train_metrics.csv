@@ -1,0 +1,2 @@
+final_cycle_loss,final_identity_loss,grad_norm_g_max,grad_norm_d_max,nan_count,param_count_total,train_seconds,images_per_sec,peak_mem_gb,epochs,smoke
+0.1518869959563017,0.1253150721490383,396.6966247558594,267.0302734375,0,28298120,3582.9697029590607,44.65569437214641,2.800118272,40,0
