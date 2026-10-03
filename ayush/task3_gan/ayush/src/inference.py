@@ -25,13 +25,25 @@ def save_jpg(tensor, path: Path) -> None:
 
 
 def main() -> None:
+    import argparse
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--checkpoint", default="")
+    ap.add_argument("--batch-size", type=int, default=8)
+    args = ap.parse_args()
     cfg, _ = load_config("configs/ayush/base.yaml")
     device = resolve_device(cfg.device)
     member = REPO / "task3_gan" / cfg.member
-    ckpts = list((member / "checkpoints").glob("cyclegan_epoch*.pt"))
-    if not ckpts:
-        raise SystemExit(f"no checkpoint under {member / 'checkpoints'}")
-    best = max(ckpts, key=lambda p: int(p.stem.split("epoch")[-1]))
+    if args.checkpoint:
+        best = Path(args.checkpoint)
+        if not best.is_absolute():
+            best = (REPO / best).resolve()
+    else:
+        ckpts = list((member / "checkpoints").glob("cyclegan_epoch*.pt"))
+        if not ckpts:
+            raise SystemExit(f"no checkpoint under {member / 'checkpoints'}")
+        best = max(ckpts, key=lambda p: int(p.stem.split("epoch")[-1]))
+    print("checkpoint", best)
     ckpt = torch.load(best, map_location=device, weights_only=False)
     g_ab, g_ba = ResnetGenerator().to(device), ResnetGenerator().to(device)
     g_ab.load_state_dict(ckpt.get("ema_g_ab", ckpt["g_ab"]))
@@ -53,12 +65,17 @@ def main() -> None:
     b_dir.mkdir(parents=True, exist_ok=True)
     for old in list(a_dir.glob("*.jpg")) + list(b_dir.glob("*.jpg")):
         old.unlink()
+    bs = max(1, args.batch_size)
     with torch.no_grad():
-        for batch, stems in DataLoader(ImageFolderList(monets, train=False), batch_size=1):
-            save_jpg(g_ab(batch.to(device)), a_dir / f"{stems[0]}.jpg")
-        for batch, stems in DataLoader(ImageFolderList(photos, train=False), batch_size=1):
-            save_jpg(g_ba(batch.to(device)), b_dir / f"{stems[0]}.jpg")
-    print("wrote", len(list(a_dir.glob('*.jpg'))), "photos and", len(list(b_dir.glob('*.jpg'))), "monets")
+        for batch, stems in DataLoader(ImageFolderList(monets, train=False), batch_size=bs):
+            out = g_ab(batch.to(device))
+            for i, stem in enumerate(stems):
+                save_jpg(out[i : i + 1], a_dir / f"{stem}.jpg")
+        for batch, stems in DataLoader(ImageFolderList(photos, train=False), batch_size=bs):
+            out = g_ba(batch.to(device))
+            for i, stem in enumerate(stems):
+                save_jpg(out[i : i + 1], b_dir / f"{stem}.jpg")
+    print("wrote", len(list(a_dir.glob("*.jpg"))), "photos and", len(list(b_dir.glob("*.jpg"))), "monets")
 
 
 if __name__ == "__main__":

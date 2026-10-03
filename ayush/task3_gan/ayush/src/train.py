@@ -31,19 +31,42 @@ def lr_factor(epoch: int, n_const: int = 25, n_decay: int = 15) -> float:
 
 
 def diffaug(x: torch.Tensor) -> torch.Tensor:
-    """Translation and cutout on discriminator inputs."""
-    b, _, h, w = x.shape
-    sy, sx = max(1, int(h * 0.125)), max(1, int(w * 0.125))
-    dx = torch.randint(-sx, sx + 1, (b,), device=x.device)
-    dy = torch.randint(-sy, sy + 1, (b,), device=x.device)
-    x = torch.stack([torch.roll(x[i], shifts=(int(dy[i]), int(dx[i])), dims=(1, 2)) for i in range(b)])
-    cut = torch.ones_like(x)
-    ch, cw = max(1, h // 2), max(1, w // 2)
-    for i in range(b):
-        y0 = int(torch.randint(0, h, ()))
-        x0 = int(torch.randint(0, w, ()))
-        cut[i, :, max(0, y0 - ch // 2) : min(h, y0 + ch // 2), max(0, x0 - cw // 2) : min(w, x0 + cw // 2)] = 0
-    return x * cut
+    """DiffAugment color, translation, cutout (Zhao et al., 2020). Discriminator inputs only."""
+    x = x + (torch.rand(x.size(0), 1, 1, 1, dtype=x.dtype, device=x.device) - 0.5)
+    mean_c = x.mean(dim=1, keepdim=True)
+    sat = torch.rand(x.size(0), 1, 1, 1, dtype=x.dtype, device=x.device) * 2
+    x = (x - mean_c) * sat + mean_c
+    mean = x.mean(dim=(1, 2, 3), keepdim=True)
+    con = torch.rand(x.size(0), 1, 1, 1, dtype=x.dtype, device=x.device) + 0.5
+    x = (x - mean) * con + mean
+    _, _, h, w = x.shape
+    sx, sy = max(1, int(w * 0.125 + 0.5)), max(1, int(h * 0.125 + 0.5))
+    tx = torch.randint(-sx, sx + 1, (x.size(0), 1, 1), device=x.device)
+    ty = torch.randint(-sy, sy + 1, (x.size(0), 1, 1), device=x.device)
+    gb, gy, gx = torch.meshgrid(
+        torch.arange(x.size(0), device=x.device),
+        torch.arange(h, device=x.device),
+        torch.arange(w, device=x.device),
+        indexing="ij",
+    )
+    gx = (gx + tx + 1).clamp(0, w + 1)
+    gy = (gy + ty + 1).clamp(0, h + 1)
+    padded = F.pad(x, (1, 1, 1, 1))
+    x = padded.permute(0, 2, 3, 1)[gb, gy, gx].permute(0, 3, 1, 2).contiguous()
+    ch, cw = max(1, int(h * 0.5 + 0.5)), max(1, int(w * 0.5 + 0.5))
+    ox = torch.randint(0, h + (1 - ch % 2), (x.size(0), 1, 1), device=x.device)
+    oy = torch.randint(0, w + (1 - cw % 2), (x.size(0), 1, 1), device=x.device)
+    cb, cy, cx = torch.meshgrid(
+        torch.arange(x.size(0), device=x.device),
+        torch.arange(ch, device=x.device),
+        torch.arange(cw, device=x.device),
+        indexing="ij",
+    )
+    cy = (cy + ox - ch // 2).clamp(0, h - 1)
+    cx = (cx + oy - cw // 2).clamp(0, w - 1)
+    mask = torch.ones(x.size(0), h, w, dtype=x.dtype, device=x.device)
+    mask[cb, cy, cx] = 0
+    return x * mask.unsqueeze(1)
 
 
 @torch.no_grad()
@@ -138,15 +161,17 @@ def main() -> None:
     d_b = PatchDiscriminator().to(device)
     for net in (g_ab, g_ba, d_a, d_b):
         init_weights(net)
-    carried = 0
+    ckpt = {}
+    start_epoch = 0
     if args.resume and not args.smoke:
         ckpt = torch.load(args.resume, map_location=device, weights_only=False)
         g_ab.load_state_dict(ckpt["g_ab"])
         g_ba.load_state_dict(ckpt["g_ba"])
         d_a.load_state_dict(ckpt["d_a"])
         d_b.load_state_dict(ckpt["d_b"])
-        carried = int(ckpt["epoch"])
-        log.info("resumed epoch=%s from %s", carried, args.resume)
+        # Prefer epoch_in_run (true schedule index). Old resumes mis-labeled "epoch".
+        start_epoch = int(ckpt.get("epoch_in_run", ckpt.get("epoch", 0)))
+        log.info("resumed after epoch=%s from %s", start_epoch, args.resume)
     ema_ab = ResnetGenerator().to(device).eval()
     ema_ba = ResnetGenerator().to(device).eval()
     ema_src_ab = ckpt["ema_g_ab"] if args.resume and not args.smoke and "ema_g_ab" in ckpt else g_ab.state_dict()
@@ -160,12 +185,17 @@ def main() -> None:
 
     opt_g = torch.optim.Adam(itertools.chain(g_ab.parameters(), g_ba.parameters()), lr=float(t3.lr), betas=(float(t3.beta1), 0.999))
     opt_d = torch.optim.Adam(itertools.chain(d_a.parameters(), d_b.parameters()), lr=float(t3.lr), betas=(float(t3.beta1), 0.999))
+    if args.resume and not args.smoke and "opt_g" in ckpt:
+        opt_g.load_state_dict(ckpt["opt_g"])
+        opt_d.load_state_dict(ckpt["opt_d"])
+        log.info("restored Adam state")
     pool_a, pool_b = ImagePool(int(t3.pool_size)), ImagePool(int(t3.pool_size))
-    history = []
+    history = list(ckpt.get("history", [])) if args.resume and not args.smoke else []
     nan_count = 0
     gmax = dmax = 0.0
     t0 = time.time()
     images_seen = 0
+    torch.backends.cudnn.deterministic = False
     torch.backends.cudnn.benchmark = True
     torch.backends.cuda.matmul.allow_tf32 = True
     torch.backends.cudnn.allow_tf32 = True
@@ -174,7 +204,19 @@ def main() -> None:
     for net in (g_ab, g_ba, d_a, d_b, ema_ab, ema_ba):
         net.to(memory_format=torch.channels_last)
 
-    for epoch in range(epochs):
+    last_save = time.time()
+
+    def save_state(done: int, name: str) -> None:
+        torch.save({
+            "g_ab": g_ab.state_dict(), "g_ba": g_ba.state_dict(),
+            "ema_g_ab": ema_ab.state_dict(), "ema_g_ba": ema_ba.state_dict(),
+            "d_a": d_a.state_dict(), "d_b": d_b.state_dict(),
+            "opt_g": opt_g.state_dict(), "opt_d": opt_d.state_dict(),
+            "epoch": done, "epoch_in_run": done,
+            "history": history,
+        }, ckpt_dir / name)
+
+    for epoch in range(start_epoch, epochs):
         factor = lr_factor(epoch, n_const, n_decay)
         for opt in (opt_g, opt_d):
             for group in opt.param_groups:
@@ -233,6 +275,10 @@ def main() -> None:
             images_seen += b * 2
             gmax = max(gmax, float(gnorm))
             dmax = max(dmax, float(dnorm))
+            if not args.smoke and time.time() - last_save >= 30 * 60:
+                save_state(epoch, "cyclegan_latest.pt")
+                last_save = time.time()
+                log.info("autosave epoch_in_run=%s step=%s", epoch, steps)
             if steps % 100 == 0 or steps == 1:
                 log.info(
                     "epoch=%s step=%s loss_G=%.4f loss_D_A=%.4f loss_D_B=%.4f cycle=%.4f idt=%.4f gnorm=%.3f dnorm=%.3f nan=%s",
@@ -249,14 +295,13 @@ def main() -> None:
             ra, rb = ra.to(device), rb.to(device)
             save_grid(out_dir / "samples" / f"epoch_{epoch+1:03d}.png", [ra, ema_ab(ra), rb, ema_ba(rb)])
         g_ab.train()
-        if (epoch + 1) % 5 == 0 or epoch + 1 == epochs:
-            seen = carried + epoch + 1
-            torch.save({
-                "g_ab": g_ab.state_dict(), "g_ba": g_ba.state_dict(),
-                "ema_g_ab": ema_ab.state_dict(), "ema_g_ba": ema_ba.state_dict(),
-                "d_a": d_a.state_dict(), "d_b": d_b.state_dict(),
-                "epoch": seen, "history": history,
-            }, ckpt_dir / f"cyclegan_epoch{seen}.pt")
+        if not args.smoke:
+            done = epoch + 1
+            save_state(done, "cyclegan_latest.pt")
+            last_save = time.time()
+            # Keep a numbered file every 10 epochs (and the final epoch).
+            if done % 10 == 0 or done == epochs:
+                save_state(done, f"cyclegan_epoch{done}.pt")
 
     fig, ax = plt.subplots(figsize=(6, 4))
     for key in ("g", "d_a", "cycle", "identity"):
@@ -277,10 +322,10 @@ def main() -> None:
         "train_seconds": seconds,
         "images_per_sec": images_seen / max(1e-6, seconds),
         "peak_mem_gb": peak_mem_gb(),
-        "epochs": carried + epochs,
+        "epochs": epochs,
         "smoke": int(args.smoke),
         "photos": len(photos),
-        "resumed_from": carried,
+        "resumed_from": start_epoch,
         "batch_size": batch,
     }
     path = member / ("train_metrics_full.csv" if args.all_photos else "train_metrics.csv")
@@ -290,7 +335,7 @@ def main() -> None:
         w.writerow(metrics)
     write_manifest(
         cfg, 3, cfg_hash,
-        checkpoint=str((ckpt_dir / f"cyclegan_epoch{carried + epochs}.pt").relative_to(repo)),
+        checkpoint=str((ckpt_dir / f"cyclegan_epoch{epochs}.pt").relative_to(repo)),
         duration_sec=seconds,
         metric_rows={"train_metrics.csv": 1},
         extra={"smoke": int(args.smoke)},

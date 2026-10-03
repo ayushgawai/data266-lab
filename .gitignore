@@ -9,3 +9,6 @@ dataset.zip
 *.pth
 *.ckpt
 *.npz
+**/epoch*_ready.txt
+**/checkpoints/from_gpu/
+._*
