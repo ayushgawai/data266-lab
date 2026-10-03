@@ -114,6 +114,8 @@ def main() -> None:
     ap.add_argument("--epochs", type=int, default=0)
     ap.add_argument("--decay-start", type=int, default=0)
     ap.add_argument("--batch-size", type=int, default=0)
+    ap.add_argument("--lr", type=float, default=0.0, help="override task3.lr; 0 keeps config")
+    ap.add_argument("--reset-optim", action="store_true", help="do not restore Adam state on resume")
     args = ap.parse_args()
     cfg, cfg_hash = load_config(args.config)
     set_seeds(cfg.seed)
@@ -122,6 +124,7 @@ def main() -> None:
         raise SystemExit(f"refusing to train task 3 on {device}")
     log = open_run_log(cfg, "task3", "cyclegan", cfg_hash)
     t3 = cfg.task3
+    base_lr = float(args.lr) if args.lr > 0 else float(t3.lr)
     repo = REPO
     member = repo / "task3_gan" / cfg.member
     ckpt_dir = member / "checkpoints"
@@ -183,12 +186,15 @@ def main() -> None:
     n_params = sum(p.numel() for net in (g_ab, g_ba, d_a, d_b) for p in net.parameters())
     log.info("params_total=%s", n_params)
 
-    opt_g = torch.optim.Adam(itertools.chain(g_ab.parameters(), g_ba.parameters()), lr=float(t3.lr), betas=(float(t3.beta1), 0.999))
-    opt_d = torch.optim.Adam(itertools.chain(d_a.parameters(), d_b.parameters()), lr=float(t3.lr), betas=(float(t3.beta1), 0.999))
-    if args.resume and not args.smoke and "opt_g" in ckpt:
+    opt_g = torch.optim.Adam(itertools.chain(g_ab.parameters(), g_ba.parameters()), lr=base_lr, betas=(float(t3.beta1), 0.999))
+    opt_d = torch.optim.Adam(itertools.chain(d_a.parameters(), d_b.parameters()), lr=base_lr, betas=(float(t3.beta1), 0.999))
+    if args.resume and not args.smoke and "opt_g" in ckpt and not args.reset_optim:
         opt_g.load_state_dict(ckpt["opt_g"])
         opt_d.load_state_dict(ckpt["opt_d"])
         log.info("restored Adam state")
+    elif args.reset_optim:
+        log.info("Adam reset (fresh moments) lr=%s", base_lr)
+    log.info("base_lr=%s batch_override=%s", base_lr, args.batch_size)
     pool_a, pool_b = ImagePool(int(t3.pool_size)), ImagePool(int(t3.pool_size))
     history = list(ckpt.get("history", [])) if args.resume and not args.smoke else []
     nan_count = 0
@@ -220,7 +226,7 @@ def main() -> None:
         factor = lr_factor(epoch, n_const, n_decay)
         for opt in (opt_g, opt_d):
             for group in opt.param_groups:
-                group["lr"] = float(t3.lr) * factor
+                group["lr"] = base_lr * factor
         sums = {k: torch.zeros((), device=device) for k in ("g", "d_a", "d_b", "cycle", "identity")}
         steps = 0
         monet_iter = iter(monet_loader)
