@@ -1,0 +1,85 @@
+# Task 3 on Google Colab, step B (Sneha): config.yaml with only the run length changed.
+# The lab run (config.yaml, 400 epochs) stopped after epoch 73; checkpoints/cyclegan_last.pt holds epoch 70,
+# all of it at the constant lr. This resumes there and spends the time left on the linear decay to 0.
+
+config:
+  member: sneha
+  run_name: main
+  seed: 42
+  device: cuda                     # cuda = GPU or stop with an error | auto = GPU if present | cpu
+  cudnn_benchmark: true            # faster convolutions; seeds stay fixed, but bitwise determinism is off
+
+  # data and the shared image lists (SHARED with Ayush)
+  data_dir: task3_gan/data
+  dataset_zip: task3_gan/data/dataset.zip
+  eval_script: task3_gan/eval/Part3_Evaluation_Script.ipynb
+  n_ref_photos: 300                # the script's photo reference: the first 300 sorted photos. Never trained on.
+  n_eval_photos: 300               # photo -> Monet submission inputs
+  n_val_photos: 300                # checkpoint selection only
+  photo_subset: 2000               # the earlier 2,000-photo training list (train_photos: subset)
+  list_seed: 42
+  train_photos: all                # all = every photo outside the ref/eval/val lists (6,138), from
+                                   # photo_train_all_6138.txt | subset = photo_subset_2000.txt
+
+  # model (mine)
+  generator: unet256               # unet256 (mine) | resnet9 (the paper's; Ayush's)
+  unet_dropout: 0.0                # [YOUR CALL] 0.0 (official CycleGAN, no_dropout) or 0.5 (pix2pix)
+  ngf: 64
+  ndf: 64
+
+  # run length (mine): step B on Colab. Tell Ayush, since his run length may differ.
+  epochs: auto                     # resumed at epoch 70: after epoch 71 the plan is fixed to as many epochs as fit
+  decay_start_epoch: auto          # before train_until (at most max_epochs), and the lr decays linearly from
+                                   # epoch 72 to the end (plan_schedule never starts the decay before the resume)
+  train_until: "2026-10-06T08:00:00-07:00"   # [YOUR CALL] when training must end (Pacific time, keep -07:00;
+                                   # the Colab clock is UTC). Must be in the future when step B starts.
+  max_epochs: 120                  # [YOUR CALL] 70 + up to 50 decay epochs = 100K decay iterations, the paper's
+                                   # decay length (100 epochs of ~1,000 images)
+  iters_per_epoch: 2000
+
+  # losses (SHARED)
+  batch_size: 1
+  load_size: 286
+  image_size: 256
+  lr: 2.0e-4
+  beta1: 0.5
+  lambda_cycle: 10.0
+  lambda_identity_ratio: 0.5       # identity weight = lambda_cycle * ratio = 5.0 (CycleGAN paper)
+  pool_size: 50
+
+  # training techniques that lower FID (mine; set ema: false / diffaugment: "" to switch off)
+  ema: true                        # inference uses an exponential moving average of the generator weights
+  ema_decay: 0.999
+  diffaugment: translation,cutout  # Zhao et al. 2020, on every discriminator input; no colour jitter,
+                                   # because colour is most of what makes a Monet a Monet
+
+  # validation, logging, outputs
+  val_every: 10                    # validation FID every 10 epochs (40 checks over 400 epochs)
+  select_per_direction: true       # each generator from the epoch with its best validation FID (each FID
+                                   # depends on one generator only) | false = both from the best-mean epoch
+  ckpt_every: 10                   # resume checkpoint (~2 GB) every 10 epochs (= val_every) and at the end
+  sample_every: 10
+  grad_norm_every: 100
+  log_every: 100
+  jpeg_quality: 95
+  n_limit: null                    # caps the images generated per set (smoke only)
+  out_dir: task3_gan/sneha
+  logs_dir: reproducibility/raw_logs/sneha
+  manifests_dir: reproducibility/manifests
+
+# SMOKE = True: 2 tiny epochs on 16 images; proves the notebook runs. Never submit its CSV.
+smoke:
+  run_name: smoke
+  device: auto
+  epochs: 2
+  decay_start_epoch: 1
+  train_until: null
+  iters_per_epoch: 10
+  val_every: 1
+  sample_every: 1
+  grad_norm_every: 5
+  log_every: 5
+  n_limit: 16
+  out_dir: task3_gan/sneha/_smoke
+  logs_dir: task3_gan/sneha/_smoke/logs
+  manifests_dir: task3_gan/sneha/_smoke

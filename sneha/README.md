@@ -207,6 +207,17 @@ follow finish well before noon. The final schedule is logged and saved; setting 
 and `decay_start_epoch` to those numbers reproduces the run. Leave the machine locked
 (Windows + L), not signed out, overnight: signing out stops Docker and the run.
 
+**What happened, and Google Colab:** the lab run of 1 October (`config.yaml`, 400 epochs) stopped
+after epoch 73 with no error message: the process was ended on the lab machine.
+`checkpoints/cyclegan_last.pt` holds epoch 70, so the run continues on Colab. Section 0 of the
+notebook does the setup: it unpacks the project from Drive and backs up to Drive every 20 minutes.
+1. **Step A:** `config_colab_submit.yaml`. No training: the submission and metrics from the
+   generators saved in the lab.
+2. **Step B:** `config_colab_resume.yaml`. It resumes at epoch 70 and decays the learning rate
+   linearly to 0 over as many epochs as fit before `train_until` (at most `max_epochs`).
+
+The logs record the GPU of every run (hardware disclosure).
+
 **Shared with Ayush:** `task3_gan/data/{ref_photos_300,eval_photos_300,val_photos_300,photo_subset_2000,photo_train_all_6138}.txt`
 and `lists_info.json`. Made once, then only loaded. `ref_photos_300` is exactly the set the
 provided script scores Monet → photo against (the first 300 photos by filename), so it is
