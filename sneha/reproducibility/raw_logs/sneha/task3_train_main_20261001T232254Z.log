@@ -1,0 +1,105 @@
+2026-10-01 23:22:54,182 | INFO | config_sha256 ffb60e0279eecfdb7c3d6f797bb9138d9677dddee400b2a700dbbc3b907b3a81
+2026-10-01 23:22:54,225 | INFO | git_sha unknown | notebook task3_gan/sneha/src/task3_gan_sneha.ipynb
+2026-10-01 23:22:54,226 | INFO | device cuda | NVIDIA GeForce RTX 4090 | cpu x86_64
+2026-10-01 23:22:54,227 | INFO | torch 2.1.2 | cuda 12.1 | python 3.10.13 | platform Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.31
+2026-10-01 23:22:54,228 | DEBUG | config {"batch_size": 1, "beta1": 0.5, "ckpt_every": 5, "cudnn_benchmark": true, "data_dir": "task3_gan/data", "dataset_zip": "task3_gan/data/dataset.zip", "decay_start_epoch": "auto", "device": "cuda", "diffaugment": "translation,cutout", "ema": true, "ema_decay": 0.999, "epochs": "auto", "eval_script": "task3_gan/eval/Part3_Evaluation_Script.ipynb", "generator": "unet256", "grad_norm_every": 100, "image_size": 256, "iters_per_epoch": 2000, "jpeg_quality": 95, "lambda_cycle": 10.0, "lambda_identity_ratio": 0.5, "list_seed": 42, "load_size": 286, "log_every": 100, "logs_dir": "reproducibility/raw_logs/sneha", "lr": 0.0002, "manifests_dir": "reproducibility/manifests", "max_epochs": 500, "member": "sneha", "n_eval_photos": 300, "n_limit": null, "n_ref_photos": 300, "n_val_photos": 300, "ndf": 64, "ngf": 64, "out_dir": "task3_gan/sneha", "photo_subset": 2000, "pool_size": 50, "run_name": "main", "sample_every": 10, "seed": 42, "select_per_direction": true, "train_photos": "all", "train_until": "2026-10-02T10:30:00-07:00", "unet_dropout": 0.0, "val_every": 10}
+2026-10-01 23:22:54,316 | DEBUG | packages ["Babel==2.14.0", "Brotli==1.0.9", "Jinja2==3.1.2", "MarkupSafe==2.1.1", "PySocks==1.7.1", "PyYAML==6.0.2", "Pygments==2.15.1", "Send2Trash==1.8.2", "anyio==4.1.0", "archspec==0.2.1", "argon2-cffi-bindings==21.2.0", "argon2-cffi==23.1.0", "arrow==1.3.0", "asttokens==2.0.5", "astunparse==1.6.3", "async-lru==2.0.4", "attrs==23.1.0", "backcall==0.2.0", "beautifulsoup4==4.12.2", "bleach==6.1.0", "boltons==23.0.0", "certifi==2023.11.17", "cffi==1.16.0", "chardet==4.0.0", "charset-normalizer==2.0.4", "click==8.1.7", "cloudpickle==3.1.2", "comm==0.2.0", "conda-build==3.28.1", "conda-content-trust==0.2.0", "conda-libmamba-solver==23.7.0", "conda-package-handling==2.2.0", "conda==23.9.0", "conda_index==0.3.0", "conda_package_streaming==0.9.0", "contourpy==1.3.2", "cryptography==41.0.7", "cycler==0.12.1", "debugpy==1.8.0", "decorator==5.1.1", "defusedxml==0.7.1", "distro==1.8.0", "dnspython==2.4.2", "exceptiongroup==1.0.4", "executing==0.8.3", "expecttest==0.1.6", "fastjsonschema==2.19.0", "filelock==3.13.1", "fonttools==4.65.0", "fqdn==1.5.1", "fsspec==2023.12.2", "gmpy2==2.1.2", "hypothesis==6.92.0", "idna==3.4", "ipykernel==6.27.1", "ipython==8.15.0", "isoduration==20.11.0", "jedi==0.18.1", "joblib==1.6.0", "json5==0.9.14", "jsonpatch==1.32", "jsonpointer==2.1", "jsonschema-specifications==2023.7.1", "jsonschema==4.19.2", "jupyter-events==0.9.0", "jupyter-lsp==2.2.1", "jupyter_client==8.6.0", "jupyter_core==5.5.0", "jupyter_server==2.12.1", "jupyter_server_terminals==0.5.0", "jupyterlab==4.0.9", "jupyterlab_pygments==0.3.0", "jupyterlab_server==2.25.2", "kiwisolver==1.5.1", "libarchive-c==2.9", "libmambapy==1.5.3", "lpips==0.1.4", "matplotlib-inline==0.1.6", "matplotlib==3.9.2", "menuinst==2.0.1", "mistune==3.0.2", "mkl-fft==1.3.8", "mkl-random==1.2.4", "mkl-service==2.4.0", "more-itertools==10.1.0", "mpmath==1.3.0", "nbclient==0.9.0", "nbconvert==7.12.0", "nbformat==5.9.2", "nest-asyncio==1.5.8", "networkx==3.1", "networkx==3.2.1", "nltk==3.9.1", "notebook==7.0.6", "notebook_shim==0.2.3", "numpy==1.26.2", "overrides==7.4.0", "packaging==23.1", "pandas==2.2.2", "pandocfilters==1.5.0", "parso==0.8.3", "patsy==1.0.3", "pexpect==4.8.0", "pickleshare==0.7.5", "pillow==10.4.0", "pip==23.3.1", "pkginfo==1.9.6", "platformdirs==3.10.0", "pluggy==1.0.0", "prometheus-client==0.19.0", "prompt-toolkit==3.0.36", "psutil==5.9.0", "ptyprocess==0.7.0", "pure-eval==0.2.2", "pyOpenSSL==23.2.0", "pycosat==0.6.6", "pycparser==2.21", "pyparsing==3.3.3", "python-dateutil==2.8.2", "python-etcd==0.4.5", "python-json-logger==2.0.7", "pytz==2023.3.post1", "pyzmq==25.1.2", "referencing==0.30.2", "regex==2026.9.29", "requests==2.31.0", "rfc3339-validator==0.1.4", "rfc3986-validator==0.1.1", "rpds-py==0.10.6", "ruamel.yaml.clib==0.2.6", "ruamel.yaml==0.17.21", "scikit-learn==1.5.2", "scipy==1.13.1", "setuptools==68.2.2", "six==1.16.0", "sniffio==1.3.0", "sortedcontainers==2.4.0", "soupsieve==2.5", "stack-data==0.2.0", "statsmodels==0.14.2", "sympy==1.12", "terminado==0.18.0", "threadpoolctl==3.7.0", "tinycss2==1.2.1", "tomli==2.0.1", "toolz==0.12.0", "torch==2.1.2", "torchaudio==2.1.2", "torchelastic==0.2.2", "torchvision==0.16.2", "tornado==6.4", "tqdm==4.66.5", "traitlets==5.7.1", "triton==2.1.0", "truststore==0.8.0", "types-dataclasses==0.6.6", "types-python-dateutil==2.8.19.14", "typing_extensions==4.7.1", "typing_extensions==4.9.0", "tzdata==2026.4", "uri-template==1.3.0", "urllib3==1.26.18", "wcwidth==0.2.5", "webcolors==1.13", "webencodings==0.5.1", "websocket-client==1.7.0", "wheel==0.41.2", "zstandard==0.19.0"]
+2026-10-01 23:22:54,318 | INFO | log_path reproducibility/raw_logs/sneha/task3_train_main_20261001T232254Z.log
+2026-10-01 23:22:54,330 | INFO | lists sha256 {"ref_photos_300.txt": "ab71be815e374d30673ce63db15f857cf3c7fc60455bdbc476e68a642197e1e3", "eval_photos_300.txt": "ef1fa0d1527f4bc70be204d4ec95a31dd429fac9d51ad1c124bf64d403d517a6", "val_photos_300.txt": "94a060f60749ba20b129d253f1ecdac017f212d8fa5e10ea6193b0ddcb76336c", "photo_subset_2000.txt": "e664d56d4d3255e25b6f3b5904ef3044e2b51e657eba3405d697faf9de487609", "photo_train_all_6138.txt": "18f4142b5a555719eb66433d6d0d8eafb9f3915bbc2654aade19520c4f34dd39"}
+2026-10-01 23:22:54,331 | INFO | schedule 500 epochs x 2000 iterations, constant lr for 250, then linear decay | auto True | train_until 2026-10-02T10:30:00-07:00 (applies: True, 18.1 h left)
+2026-10-01 23:23:35,103 | INFO | training data: 300 Monet, 6138 photos | 2000 iterations/epoch | 500 epochs | generator unet256 | ema True | diffaugment 'translation,cutout' | identity weight 5.0
+2026-10-01 23:23:36,057 | INFO | params {"G_A2B": 54419459, "G_B2A": 54419459, "D_A": 2766529, "D_B": 2766529} | total 114371976
+2026-10-01 23:23:42,846 | INFO | iter 1 epoch 1 G 17.243 (adv 4.936 cyc 8.200 idt 4.107) D_A 2.242 D_B 1.372 gnG nan gnD nan lr 2.00e-04 124 ms nan 0
+2026-10-01 23:23:48,544 | INFO | iter 100 epoch 1 G 7.553 (adv 0.811 cyc 4.622 idt 2.121) D_A 0.501 D_B 0.315 gnG 17.72 gnD 14.81 lr 2.00e-04 97 ms nan 0
+2026-10-01 23:23:54,271 | INFO | iter 200 epoch 1 G 6.073 (adv 0.793 cyc 3.683 idt 1.597) D_A 0.234 D_B 0.269 gnG 21.57 gnD 27.03 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:23:59,829 | INFO | iter 300 epoch 1 G 4.248 (adv 0.611 cyc 2.514 idt 1.123) D_A 0.300 D_B 0.319 gnG 17.25 gnD 28.15 lr 2.00e-04 57 ms nan 0
+2026-10-01 23:24:05,323 | INFO | iter 400 epoch 1 G 4.124 (adv 0.710 cyc 2.432 idt 0.982) D_A 0.208 D_B 0.174 gnG 22.77 gnD 12.87 lr 2.00e-04 58 ms nan 0
+2026-10-01 23:24:10,887 | INFO | iter 500 epoch 1 G 4.018 (adv 0.717 cyc 2.342 idt 0.960) D_A 0.216 D_B 0.227 gnG 21.90 gnD 18.14 lr 2.00e-04 60 ms nan 0
+2026-10-01 23:24:16,430 | INFO | iter 600 epoch 1 G 2.710 (adv 0.680 cyc 1.421 idt 0.609) D_A 0.260 D_B 0.231 gnG 15.94 gnD 18.90 lr 2.00e-04 59 ms nan 0
+2026-10-01 23:24:22,072 | INFO | iter 700 epoch 1 G 4.368 (adv 1.060 cyc 2.323 idt 0.985) D_A 0.371 D_B 0.384 gnG 9.36 gnD 38.24 lr 2.00e-04 60 ms nan 0
+2026-10-01 23:24:27,632 | INFO | iter 800 epoch 1 G 3.222 (adv 0.738 cyc 1.756 idt 0.728) D_A 0.243 D_B 0.256 gnG 14.01 gnD 16.85 lr 2.00e-04 56 ms nan 0
+2026-10-01 23:24:33,334 | INFO | iter 900 epoch 1 G 3.014 (adv 0.735 cyc 1.603 idt 0.676) D_A 0.273 D_B 0.247 gnG 13.16 gnD 15.46 lr 2.00e-04 62 ms nan 0
+2026-10-01 23:24:39,412 | INFO | iter 1000 epoch 1 G 3.039 (adv 1.012 cyc 1.419 idt 0.609) D_A 0.229 D_B 0.208 gnG 10.24 gnD 19.18 lr 2.00e-04 58 ms nan 0
+2026-10-01 23:24:45,118 | INFO | iter 1100 epoch 1 G 2.998 (adv 0.728 cyc 1.572 idt 0.698) D_A 0.197 D_B 0.246 gnG 8.73 gnD 9.51 lr 2.00e-04 58 ms nan 0
+2026-10-01 23:24:50,785 | INFO | iter 1200 epoch 1 G 3.432 (adv 0.254 cyc 2.253 idt 0.925) D_A 0.261 D_B 0.214 gnG 17.74 gnD 15.90 lr 2.00e-04 56 ms nan 0
+2026-10-01 23:24:56,253 | INFO | iter 1300 epoch 1 G 2.769 (adv 0.866 cyc 1.326 idt 0.578) D_A 0.139 D_B 0.390 gnG 18.69 gnD 20.04 lr 2.00e-04 53 ms nan 0
+2026-10-01 23:25:01,790 | INFO | iter 1400 epoch 1 G 2.934 (adv 0.931 cyc 1.429 idt 0.574) D_A 0.231 D_B 0.231 gnG 12.13 gnD 17.51 lr 2.00e-04 57 ms nan 0
+2026-10-01 23:25:07,330 | INFO | iter 1500 epoch 1 G 3.134 (adv 0.769 cyc 1.638 idt 0.727) D_A 0.349 D_B 0.259 gnG 14.35 gnD 9.81 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:25:12,903 | INFO | iter 1600 epoch 1 G 3.148 (adv 0.618 cyc 1.807 idt 0.723) D_A 0.269 D_B 0.193 gnG 13.95 gnD 9.26 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:25:18,513 | INFO | iter 1700 epoch 1 G 3.658 (adv 1.380 cyc 1.641 idt 0.637) D_A 0.283 D_B 0.210 gnG 17.58 gnD 17.03 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:25:24,033 | INFO | iter 1800 epoch 1 G 3.024 (adv 1.236 cyc 1.290 idt 0.499) D_A 0.121 D_B 0.146 gnG 17.03 gnD 10.44 lr 2.00e-04 60 ms nan 0
+2026-10-01 23:25:29,687 | INFO | iter 1900 epoch 1 G 2.768 (adv 0.386 cyc 1.649 idt 0.733) D_A 0.309 D_B 0.280 gnG 9.82 gnD 10.89 lr 2.00e-04 55 ms nan 0
+2026-10-01 23:25:35,247 | INFO | iter 2000 epoch 1 G 2.297 (adv 0.587 cyc 1.202 idt 0.508) D_A 0.236 D_B 0.254 gnG 15.00 gnD 24.15 lr 2.00e-04 55 ms nan 0
+2026-10-01 23:25:35,248 | INFO | epoch 1/500 {"loss_g": 4.0043, "loss_g_adv": 0.7629, "loss_cycle": 2.2715, "loss_identity": 0.9698, "loss_d_a": 0.3006, "loss_d_b": 0.2915}
+2026-10-01 23:25:40,958 | INFO | iter 2100 epoch 2 G 3.761 (adv 1.335 cyc 1.704 idt 0.722) D_A 0.114 D_B 0.199 gnG 10.33 gnD 11.71 lr 2.00e-04 55 ms nan 0
+2026-10-01 23:25:46,577 | INFO | iter 2200 epoch 2 G 3.204 (adv 0.998 cyc 1.632 idt 0.574) D_A 0.403 D_B 0.127 gnG 15.48 gnD 23.49 lr 2.00e-04 56 ms nan 0
+2026-10-01 23:25:52,257 | INFO | iter 2300 epoch 2 G 2.773 (adv 0.794 cyc 1.408 idt 0.570) D_A 0.191 D_B 0.132 gnG 10.99 gnD 12.79 lr 2.00e-04 56 ms nan 0
+2026-10-01 23:25:57,961 | INFO | iter 2400 epoch 2 G 2.101 (adv 0.556 cyc 1.103 idt 0.442) D_A 0.297 D_B 0.295 gnG 14.95 gnD 10.55 lr 2.00e-04 63 ms nan 0
+2026-10-01 23:26:03,838 | INFO | iter 2500 epoch 2 G 2.131 (adv 0.672 cyc 1.057 idt 0.402) D_A 0.571 D_B 0.271 gnG 14.29 gnD 14.53 lr 2.00e-04 58 ms nan 0
+2026-10-01 23:26:09,518 | INFO | iter 2600 epoch 2 G 2.230 (adv 0.535 cyc 1.216 idt 0.479) D_A 0.331 D_B 0.365 gnG 18.19 gnD 13.16 lr 2.00e-04 55 ms nan 0
+2026-10-01 23:26:15,095 | INFO | iter 2700 epoch 2 G 2.323 (adv 0.785 cyc 1.088 idt 0.450) D_A 0.280 D_B 0.389 gnG 22.01 gnD 20.93 lr 2.00e-04 62 ms nan 0
+2026-10-01 23:26:20,917 | INFO | iter 2800 epoch 2 G 3.473 (adv 1.698 cyc 1.294 idt 0.480) D_A 0.058 D_B 0.237 gnG 13.56 gnD 18.46 lr 2.00e-04 57 ms nan 0
+2026-10-01 23:26:26,792 | INFO | iter 2900 epoch 2 G 2.895 (adv 0.771 cyc 1.540 idt 0.584) D_A 0.159 D_B 0.246 gnG 11.56 gnD 21.27 lr 2.00e-04 60 ms nan 0
+2026-10-01 23:26:32,575 | INFO | iter 3000 epoch 2 G 2.653 (adv 0.682 cyc 1.414 idt 0.557) D_A 0.242 D_B 0.429 gnG 14.55 gnD 21.39 lr 2.00e-04 56 ms nan 0
+2026-10-01 23:26:38,265 | INFO | iter 3100 epoch 2 G 2.712 (adv 0.907 cyc 1.303 idt 0.502) D_A 0.220 D_B 0.163 gnG 7.84 gnD 19.34 lr 2.00e-04 63 ms nan 0
+2026-10-01 23:26:43,872 | INFO | iter 3200 epoch 2 G 2.496 (adv 0.347 cyc 1.552 idt 0.597) D_A 0.289 D_B 0.118 gnG 13.97 gnD 10.13 lr 2.00e-04 53 ms nan 0
+2026-10-01 23:26:49,364 | INFO | iter 3300 epoch 2 G 3.603 (adv 1.176 cyc 1.786 idt 0.640) D_A 0.362 D_B 0.259 gnG 21.39 gnD 27.75 lr 2.00e-04 56 ms nan 0
+2026-10-01 23:26:54,791 | INFO | iter 3400 epoch 2 G 1.720 (adv 0.473 cyc 0.859 idt 0.389) D_A 0.079 D_B 0.386 gnG 11.10 gnD 12.08 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:27:00,352 | INFO | iter 3500 epoch 2 G 2.535 (adv 1.000 cyc 1.085 idt 0.450) D_A 0.310 D_B 0.217 gnG 13.52 gnD 19.75 lr 2.00e-04 55 ms nan 0
+2026-10-01 23:27:05,942 | INFO | iter 3600 epoch 2 G 2.258 (adv 1.107 cyc 0.827 idt 0.323) D_A 0.059 D_B 0.190 gnG 11.92 gnD 12.93 lr 2.00e-04 56 ms nan 0
+2026-10-01 23:27:11,515 | INFO | iter 3700 epoch 2 G 2.399 (adv 1.033 cyc 1.032 idt 0.334) D_A 0.144 D_B 0.210 gnG 10.81 gnD 17.39 lr 2.00e-04 60 ms nan 0
+2026-10-01 23:27:17,004 | INFO | iter 3800 epoch 2 G 2.883 (adv 1.335 cyc 1.077 idt 0.471) D_A 0.166 D_B 0.252 gnG 8.55 gnD 30.43 lr 2.00e-04 60 ms nan 0
+2026-10-01 23:27:22,654 | INFO | iter 3900 epoch 2 G 2.162 (adv 0.685 cyc 1.057 idt 0.421) D_A 0.174 D_B 0.286 gnG 11.01 gnD 28.95 lr 2.00e-04 55 ms nan 0
+2026-10-01 23:27:28,222 | INFO | iter 4000 epoch 2 G 2.223 (adv 0.607 cyc 1.130 idt 0.487) D_A 0.093 D_B 0.137 gnG 8.98 gnD 7.82 lr 2.00e-04 66 ms nan 0
+2026-10-01 23:27:28,224 | INFO | epoch 2/500 {"loss_g": 2.4918, "loss_g_adv": 0.7934, "loss_cycle": 1.219, "loss_identity": 0.4795, "loss_d_a": 0.2446, "loss_d_b": 0.2515}
+2026-10-01 23:27:33,816 | INFO | iter 4100 epoch 3 G 2.859 (adv 0.955 cyc 1.382 idt 0.522) D_A 0.335 D_B 0.200 gnG 13.11 gnD 21.11 lr 2.00e-04 64 ms nan 0
+2026-10-01 23:27:39,449 | INFO | iter 4200 epoch 3 G 2.453 (adv 0.752 cyc 1.246 idt 0.455) D_A 0.135 D_B 0.103 gnG 15.11 gnD 10.82 lr 2.00e-04 55 ms nan 0
+2026-10-01 23:27:44,988 | INFO | iter 4300 epoch 3 G 2.147 (adv 0.824 cyc 0.953 idt 0.370) D_A 0.132 D_B 0.043 gnG 10.71 gnD 7.14 lr 2.00e-04 57 ms nan 0
+2026-10-01 23:27:50,682 | INFO | iter 4400 epoch 3 G 1.594 (adv 0.372 cyc 0.910 idt 0.311) D_A 0.340 D_B 0.175 gnG 16.67 gnD 19.23 lr 2.00e-04 56 ms nan 0
+2026-10-01 23:27:56,162 | INFO | iter 4500 epoch 3 G 2.930 (adv 1.053 cyc 1.308 idt 0.569) D_A 0.081 D_B 0.243 gnG 10.10 gnD 19.80 lr 2.00e-04 61 ms nan 0
+2026-10-01 23:28:01,779 | INFO | iter 4600 epoch 3 G 2.229 (adv 0.725 cyc 1.093 idt 0.410) D_A 0.200 D_B 0.117 gnG 15.71 gnD 16.21 lr 2.00e-04 55 ms nan 0
+2026-10-01 23:28:07,238 | INFO | iter 4700 epoch 3 G 2.183 (adv 0.674 cyc 1.055 idt 0.454) D_A 0.176 D_B 0.175 gnG 14.13 gnD 9.06 lr 2.00e-04 74 ms nan 0
+2026-10-01 23:28:12,838 | INFO | iter 4800 epoch 3 G 3.084 (adv 1.854 cyc 0.887 idt 0.343) D_A 0.227 D_B 0.184 gnG 17.31 gnD 17.86 lr 2.00e-04 55 ms nan 0
+2026-10-01 23:28:18,383 | INFO | iter 4900 epoch 3 G 2.085 (adv 0.875 cyc 0.888 idt 0.322) D_A 0.227 D_B 0.157 gnG 22.04 gnD 8.95 lr 2.00e-04 70 ms nan 0
+2026-10-01 23:28:23,990 | INFO | iter 5000 epoch 3 G 2.438 (adv 1.341 cyc 0.785 idt 0.311) D_A 0.163 D_B 0.352 gnG 11.00 gnD 15.00 lr 2.00e-04 58 ms nan 0
+2026-10-01 23:28:29,662 | INFO | iter 5100 epoch 3 G 3.218 (adv 1.690 cyc 1.178 idt 0.349) D_A 0.064 D_B 0.040 gnG 17.38 gnD 8.67 lr 2.00e-04 60 ms nan 0
+2026-10-01 23:28:35,220 | INFO | iter 5200 epoch 3 G 1.639 (adv 0.356 cyc 0.887 idt 0.396) D_A 0.164 D_B 0.373 gnG 10.15 gnD 20.62 lr 2.00e-04 64 ms nan 0
+2026-10-01 23:28:40,830 | INFO | iter 5300 epoch 3 G 2.320 (adv 1.310 cyc 0.682 idt 0.327) D_A 0.193 D_B 0.321 gnG 10.05 gnD 25.41 lr 2.00e-04 57 ms nan 0
+2026-10-01 23:28:46,277 | INFO | iter 5400 epoch 3 G 2.662 (adv 0.682 cyc 1.449 idt 0.532) D_A 0.691 D_B 0.624 gnG 17.15 gnD 25.69 lr 2.00e-04 55 ms nan 0
+2026-10-01 23:28:51,928 | INFO | iter 5500 epoch 3 G 2.166 (adv 0.933 cyc 0.896 idt 0.337) D_A 0.209 D_B 0.131 gnG 16.81 gnD 14.90 lr 2.00e-04 59 ms nan 0
+2026-10-01 23:28:57,462 | INFO | iter 5600 epoch 3 G 2.040 (adv 0.599 cyc 1.004 idt 0.438) D_A 0.167 D_B 0.244 gnG 8.09 gnD 11.52 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:29:03,317 | INFO | iter 5700 epoch 3 G 2.127 (adv 0.671 cyc 1.049 idt 0.406) D_A 0.072 D_B 0.599 gnG 17.58 gnD 13.36 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:29:08,849 | INFO | iter 5800 epoch 3 G 1.898 (adv 0.762 cyc 0.795 idt 0.341) D_A 0.114 D_B 0.402 gnG 8.35 gnD 25.94 lr 2.00e-04 61 ms nan 0
+2026-10-01 23:29:14,352 | INFO | iter 5900 epoch 3 G 1.660 (adv 0.771 cyc 0.625 idt 0.263) D_A 0.206 D_B 0.067 gnG 9.27 gnD 8.31 lr 2.00e-04 58 ms nan 0
+2026-10-01 23:29:19,928 | INFO | iter 6000 epoch 3 G 1.796 (adv 0.539 cyc 0.852 idt 0.405) D_A 0.243 D_B 0.254 gnG 8.70 gnD 12.64 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:29:19,929 | INFO | epoch 3/500 {"loss_g": 2.2216, "loss_g_adv": 0.8624, "loss_cycle": 0.969, "loss_identity": 0.3902, "loss_d_a": 0.2285, "loss_d_b": 0.234}
+2026-10-01 23:29:25,526 | INFO | iter 6100 epoch 4 G 1.967 (adv 0.761 cyc 0.835 idt 0.370) D_A 0.191 D_B 0.102 gnG 9.49 gnD 17.58 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:29:31,115 | INFO | iter 6200 epoch 4 G 3.104 (adv 0.918 cyc 1.539 idt 0.646) D_A 0.118 D_B 0.215 gnG 11.05 gnD 16.02 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:29:36,558 | INFO | iter 6300 epoch 4 G 1.796 (adv 0.400 cyc 0.971 idt 0.425) D_A 0.220 D_B 0.310 gnG 9.43 gnD 17.72 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:29:42,252 | INFO | iter 6400 epoch 4 G 2.254 (adv 0.707 cyc 1.067 idt 0.479) D_A 0.173 D_B 0.208 gnG 9.23 gnD 14.08 lr 2.00e-04 57 ms nan 0
+2026-10-01 23:29:47,971 | INFO | iter 6500 epoch 4 G 2.060 (adv 1.078 cyc 0.707 idt 0.276) D_A 0.086 D_B 0.365 gnG 17.53 gnD 15.67 lr 2.00e-04 56 ms nan 0
+2026-10-01 23:29:53,972 | INFO | iter 6600 epoch 4 G 1.922 (adv 0.317 cyc 1.141 idt 0.463) D_A 0.209 D_B 0.327 gnG 12.01 gnD 18.33 lr 2.00e-04 61 ms nan 0
+2026-10-01 23:29:59,547 | INFO | iter 6700 epoch 4 G 1.712 (adv 0.557 cyc 0.795 idt 0.360) D_A 0.362 D_B 0.518 gnG 11.73 gnD 26.53 lr 2.00e-04 61 ms nan 0
+2026-10-01 23:30:05,025 | INFO | iter 6800 epoch 4 G 3.128 (adv 2.090 cyc 0.735 idt 0.303) D_A 0.160 D_B 0.195 gnG 20.22 gnD 15.54 lr 2.00e-04 53 ms nan 0
+2026-10-01 23:30:10,615 | INFO | iter 6900 epoch 4 G 1.790 (adv 0.657 cyc 0.810 idt 0.324) D_A 0.274 D_B 0.254 gnG 17.48 gnD 8.85 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:30:16,090 | INFO | iter 7000 epoch 4 G 1.843 (adv 1.001 cyc 0.619 idt 0.223) D_A 0.086 D_B 0.111 gnG 8.48 gnD 12.88 lr 2.00e-04 54 ms nan 0
+2026-10-01 23:30:21,731 | INFO | iter 7100 epoch 4 G 1.956 (adv 0.553 cyc 0.991 idt 0.412) D_A 0.436 D_B 0.239 gnG 14.25 gnD 9.53 lr 2.00e-04 59 ms nan 0
+2026-10-01 23:30:27,295 | INFO | iter 7200 epoch 4 G 1.802 (adv 0.867 cyc 0.652 idt 0.282) D_A 0.080 D_B 0.104 gnG 14.57 gnD 10.24 lr 2.00e-04 60 ms nan 0
+2026-10-01 23:30:32,904 | INFO | iter 7300 epoch 4 G 1.940 (adv 0.686 cyc 0.871 idt 0.383) D_A 0.167 D_B 0.306 gnG 16.58 gnD 19.30 lr 2.00e-04 55 ms nan 0
+2026-10-01 23:30:38,477 | INFO | iter 7400 epoch 4 G 1.626 (adv 0.560 cyc 0.763 idt 0.303) D_A 0.233 D_B 0.137 gnG 15.25 gnD 16.12 lr 2.00e-04 64 ms nan 0
+2026-10-01 23:30:44,198 | INFO | iter 7500 epoch 4 G 1.954 (adv 0.489 cyc 1.030 idt 0.436) D_A 0.251 D_B 0.312 gnG 12.43 gnD 7.76 lr 2.00e-04 64 ms nan 0
+2026-10-01 23:30:49,832 | INFO | iter 7600 epoch 4 G 2.059 (adv 0.705 cyc 0.961 idt 0.394) D_A 0.259 D_B 0.265 gnG 17.36 gnD 18.02 lr 2.00e-04 56 ms nan 0
+2026-10-01 23:30:55,391 | INFO | iter 7700 epoch 4 G 1.395 (adv 0.562 cyc 0.566 idt 0.267) D_A 0.317 D_B 0.156 gnG 13.94 gnD 9.30 lr 2.00e-04 59 ms nan 0
+2026-10-01 23:31:00,975 | INFO | iter 7800 epoch 4 G 1.687 (adv 0.580 cyc 0.705 idt 0.402) D_A 0.425 D_B 0.564 gnG 10.12 gnD 26.04 lr 2.00e-04 62 ms nan 0
+2026-10-01 23:31:06,593 | INFO | iter 7900 epoch 4 G 2.543 (adv 1.281 cyc 0.889 idt 0.374) D_A 0.121 D_B 0.140 gnG 9.18 gnD 10.88 lr 2.00e-04 57 ms nan 0
+2026-10-01 23:31:11,184 | ERROR | training stopped with an error
+Traceback (most recent call last):
+  File "/tmp/ipykernel_2898/3337981380.py", line 174, in train
+    vals = train_step(nets, opts, pools, real_a, real_b, st["iter"]).tolist()
+  File "/tmp/ipykernel_2898/2561486291.py", line 17, in train_step
+    loss_g.backward()
+  File "/opt/conda/lib/python3.10/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/opt/conda/lib/python3.10/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

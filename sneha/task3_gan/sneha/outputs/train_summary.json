@@ -1,0 +1,80 @@
+{
+  "generator": "unet256",
+  "params": {
+    "G_A2B": 54419459,
+    "G_B2A": 54419459,
+    "D_A": 2766529,
+    "D_B": 2766529
+  },
+  "param_count_total": 114371976,
+  "epochs_run": 70,
+  "iterations": 140000,
+  "schedule": {
+    "epochs": 70,
+    "decay_start_epoch": 70
+  },
+  "auto_schedule": false,
+  "stopped_at_deadline": false,
+  "train_photos": 6138,
+  "best_epoch_a2b": 30,
+  "best_epoch_b2a": 50,
+  "best_val_fid_a2b": 106.78721592857485,
+  "best_val_fid_b2a": 123.09417606752268,
+  "best_val_fid_mean": 114.94069599804877,
+  "validation": [
+    {
+      "epoch": 10,
+      "val_fid_a2b": 114.90560355833011,
+      "val_fid_b2a": 132.35120725831445,
+      "val_fid_mean": 123.62840540832228
+    },
+    {
+      "epoch": 20,
+      "val_fid_a2b": 108.01139216186033,
+      "val_fid_b2a": 126.86383043366249,
+      "val_fid_mean": 117.4376112977614
+    },
+    {
+      "epoch": 30,
+      "val_fid_a2b": 106.78721592857485,
+      "val_fid_b2a": 130.13272096435378,
+      "val_fid_mean": 118.45996844646432
+    },
+    {
+      "epoch": 40,
+      "val_fid_a2b": 108.50192451769311,
+      "val_fid_b2a": 140.76534524326297,
+      "val_fid_mean": 124.63363488047804
+    },
+    {
+      "epoch": 50,
+      "val_fid_a2b": 121.48830573872081,
+      "val_fid_b2a": 123.09417606752268,
+      "val_fid_mean": 122.29124090312175
+    },
+    {
+      "epoch": 60,
+      "val_fid_a2b": 117.82606343043395,
+      "val_fid_b2a": 125.7252071100647,
+      "val_fid_mean": 121.77563527024932
+    },
+    {
+      "epoch": 70,
+      "val_fid_a2b": 120.01369176219046,
+      "val_fid_b2a": 124.03783787219797,
+      "val_fid_mean": 122.02576481719422
+    }
+  ],
+  "nan_count": 0,
+  "grad_norm_g_max": 277.97247314453125,
+  "grad_norm_d_max": 165.4467315673828,
+  "final_cycle_loss": 0.37378028470277785,
+  "final_identity_loss": 0.15361655678600072,
+  "train_seconds": 8215.777490608001,
+  "images_per_sec": 35.35635281014528,
+  "peak_mem_gb": 2.88128,
+  "device_name": "Tesla T4",
+  "cpu_name": "x86_64",
+  "train_log": "reproducibility/raw_logs/sneha/task3_train_main_20261005T200623Z.log",
+  "config_sha256": "64c1f62b841a719283d1923f5a4207c1fd8338b3e54c6244b50fe512565bc6e5"
+}
