@@ -28,7 +28,19 @@ For Sneha / TAs. Canonical writeups stay `task*/ayush/results.md` and the commit
 
 Original auto-written epoch-100 manifest was overwritten on disk when phase-2 finished at epoch 200. No untouched copy found. Current `reproducibility/manifests/ayush_task3.json` was corrected by hand on Oct 6 to point at the **submitted** `cyclegan_epoch100.pt` (see its `notes` field).
 
-## Checkpoints Drive
+## Task 3 — KID / density / LPIPS / content cosine / cycle L1
+
+Previously marked “not computed” in the report. **Now computed** (Oct 6) with the same definitions as Sneha’s notebook; see `task3_gan/ayush/full_metrics_report.csv` and `epoch100_report_metrics.md`.
+
+| | A2B | B2A |
+|---|---|---|
+| KID mean ± std | 0.0158 ± 0.0022 | 0.0056 ± 0.0014 |
+| Density / coverage | 1.140 / 0.920 | 0.529 / 0.770 |
+| Content cosine | 0.791 | 0.778 |
+| LPIPS | 0.340 | 0.353 |
+| Cycle L1 | 0.047 | 0.073 |
+
+## Checkpoints + dataset Drive
 
 Anyone-with-link folder: https://drive.google.com/drive/folders/1Ks5qQSWtfKzqk8HL5nCBkAjM9iBW3Jha?usp=sharing  
-(`ayush_lab1_checkpoints.zip` — Tasks 1–3 weights + logs)
+(`ayush_lab1_checkpoints.zip` + Task 3 `dataset.zip`)

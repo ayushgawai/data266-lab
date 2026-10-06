@@ -8,42 +8,34 @@
 |---|---|
 | Local avg FID | **85.6997** |
 | Local MiFID | **0.4101** |
-| FID A2B (Monet→photo) | 84.9805 |
-| FID B2A (photo→Monet) | 86.4188 |
+| FID A2B / B2A | 84.9805 / 86.4188 |
 | Kaggle board (Team 21) | **≈ −43.05** (~top 5) |
-| CSV | `outputs/submission.csv` (= `outputs/submission_epoch100/`) |
 | Checkpoint | `task3_gan/ayush/checkpoints/cyclegan_epoch100.pt` |
+
+## Extra metrics (computed Oct 6 on RTX 5080; same defs as Sneha notebook)
+
+Source: `full_metrics_report.csv` from `compute_extra_metrics.py` (Inception features; polynomial KID 100×100; density/coverage k=5; LPIPS AlexNet; EMA generators for cycle/LPIPS).
+
+| Metric | A2B (Monet→photo) | B2A (photo→Monet) |
+|---|---|---|
+| KID mean ± std | **0.0158 ± 0.0022** | **0.0056 ± 0.0014** |
+| Density / coverage | **1.140 / 0.920** | **0.529 / 0.770** |
+| Content cosine | **0.791** | **0.778** |
+| LPIPS | **0.340** | **0.353** |
+| Cycle-recon L1 | **0.047** (A) | **0.073** (B) |
 
 ## Training cost (RTX 5080 Laptop 16 GB)
 
 | | value |
 |---|---|
-| Cycle L1 (epoch-100 mean) | **0.0761** |
-| Identity L1 (epoch-100 mean) | 0.0523 |
-| Peak GPU memory | **9.88 GB** |
-| Approx. total epochs 1→100 | **~51 200 s (~14.2 h)** |
-| Final segment 50→100 | 26 381 s |
-| NaNs | 0 |
+| Final-epoch cycle / identity L1 (train log) | 0.0761 / 0.0523 |
+| Peak GPU memory | 9.88 GB |
+| Approx. total epochs 1→100 | ~51 200 s (~14.2 h) |
 
-## Not computed (leave blank — do not invent)
+## Raw logs
 
-KID, density, coverage, LPIPS, content cosine.
+`reproducibility/raw_logs/ayush/` — see `README.md` there.
 
-## Raw logs (in git)
+## Checkpoints + dataset Drive
 
-`reproducibility/raw_logs/ayush/`
-
-| log | what |
-|---|---|
-| `task3_cyclegan_20261001T234814Z.log` | epochs ~1–45 |
-| `task3_cyclegan_20261002T230821Z.log` | ~45→50 |
-| `task3_cyclegan_20261003T003637Z.log` | **50→100 submission** (`done metrics`) |
-| `task1_chargpt_*.log` / `task2_yelp_*.log` | Tasks 1–2 |
-
-## Human audit
-
-`sneha/task3_gan/audit/ratings_ayush.csv` + `agreement.csv` / `scores.csv`.
-
-## Checkpoints zip (for Drive)
-
-Ayush uploads `~/Documents/ayush_lab1_checkpoints.zip` (tasks 1–3 weights + logs). Drive (anyone with the link): https://drive.google.com/drive/folders/1Ks5qQSWtfKzqk8HL5nCBkAjM9iBW3Jha?usp=sharing
+https://drive.google.com/drive/folders/1Ks5qQSWtfKzqk8HL5nCBkAjM9iBW3Jha?usp=sharing
