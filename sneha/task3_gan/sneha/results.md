@@ -111,7 +111,7 @@ rubric scores low on style. The audit ranks my model above Ayush's only through 
 
 Team `PairProgramming_Team_21` · submitted `submission.csv` from step A (sha256 in the manifest) on 5 Oct 2026 ·
 score **−57.7823** (public = private: the leaderboard "is calculated with all of the test data") ·
-team rank **5**, from the team's best submission (Ayush, −43.0548).
+team rank **4** (as of 6 October 2026, 4:28 pm), from the team's best submission (Ayush, −43.0548).
 Kaggle's score is −(FID + MiFID) / 2 of the CSV: −(115.137 + 0.428) / 2 = −57.782.
 Not resubmitted after step B: the final `submission.csv` (FID 115.136) comes from the same generators.
 
