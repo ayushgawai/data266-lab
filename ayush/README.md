@@ -23,6 +23,6 @@ python task3_gan/ayush/src/inference.py
 
 Score with `team/Part3_Evaluation_Script.ipynb`. Upload the script's positive FID and MiFID.
 
-Dataset zip (Google Drive, read access): PASTE_LINK
+Dataset zip (Google Drive, read access — Task 3 Monet/photo `dataset.zip` in this folder): [lab](https://drive.google.com/drive/folders/1Ks5qQSWtfKzqk8HL5nCBkAjM9iBW3Jha?usp=sharing)
 
 No absolute personal paths. Device falls back to CPU if CUDA is missing. Task 3 refuses to train without CUDA.
