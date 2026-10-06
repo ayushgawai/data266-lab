@@ -1,0 +1,1015 @@
+2026-10-02 17:36:37,607 config_sha256=d7edee1d922850af02ee6fe9689313dd9bd166b6f41772f29e38171b4b1c6bdd
+2026-10-02 17:36:37,650 git_sha=unknown
+2026-10-02 17:36:37,650 python=3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+2026-10-02 17:36:37,679 platform=Windows-11-10.0.26200-SP0
+2026-10-02 17:36:37,679 device=cuda gpu=NVIDIA GeForce RTX 5080 Laptop GPU
+2026-10-02 17:36:37,679 cwd=C:\Users\ADS-Admin\data266-lab\ayush repo=C:\Users\ADS-Admin\data266-lab\ayush
+2026-10-02 17:36:37,679 config={
+  "seed": 42,
+  "member": "ayush",
+  "device": "cuda",
+  "paths": {
+    "task1_data": "task1_llm/data",
+    "task2_splits": "task2_sentiment/data/splits",
+    "task3_data": "task3_gan/data",
+    "logs": "reproducibility/raw_logs/ayush",
+    "manifests": "reproducibility/manifests"
+  },
+  "task1": {
+    "hf_dataset": "roneneldan/TinyStories",
+    "train_stories": 100000,
+    "val_stories": 10000,
+    "train_sequences": 100000,
+    "val_sequences": 10000,
+    "split_seed": 42,
+    "block_size": 256,
+    "batch_size": 64,
+    "samples_per_epoch": 20000,
+    "epochs": 30,
+    "n_layer": 4,
+    "n_head": 4,
+    "d_model": 256,
+    "d_ff": 1024,
+    "dropout": 0.1,
+    "norm_position": "pre",
+    "activation": "GELU",
+    "tie_weights": true,
+    "lr": 0.0003,
+    "warmup_steps": 200,
+    "schedule": "cosine",
+    "weight_decay": 0.1,
+    "grad_clip": 1.0,
+    "gen": {
+      "n_samples": 20,
+      "max_new_tokens": 500,
+      "temperature": 0.8
+    }
+  },
+  "task2": {
+    "n_train": 100000,
+    "n_val": 20000,
+    "split_seed": 42,
+    "max_vocab": 30000,
+    "max_len": 256,
+    "batch_size": 64,
+    "epochs": 5,
+    "lr": 0.001,
+    "early_stop_patience": 2,
+    "models": [
+      "textcnn",
+      "bilstm",
+      "bilstm_attn"
+    ]
+  },
+  "task3": {
+    "image_size": 256,
+    "photo_subset": 2000,
+    "photo_subset_seed": 42,
+    "batch_size": 1,
+    "epochs": 40,
+    "decay_start_epoch": 25,
+    "lr": 0.0002,
+    "beta1": 0.5,
+    "lambda_cycle": 10.0,
+    "lambda_identity": 0.5,
+    "pool_size": 50,
+    "n_eval": 300,
+    "generator": "resnet9"
+  }
+}
+2026-10-02 17:36:38,079 pip_freeze_begin
+colorama==0.4.6
+contourpy==1.4.0
+cycler==0.12.1
+filelock==3.32.3
+fonttools==4.66.1
+fsspec==2026.7.0
+Jinja2==3.1.6
+kiwisolver==1.5.1
+MarkupSafe==3.0.3
+matplotlib==3.11.2
+mpmath==1.3.0
+networkx==3.6.1
+numpy==2.5.2
+packaging==26.3
+pillow==12.3.0
+pyparsing==3.3.3
+python-dateutil==2.9.0.post0
+PyYAML==6.0.3
+scipy==1.18.1
+setuptools==78.1.0
+six==1.17.0
+sympy==1.14.0
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+tqdm==4.70.1
+typing_extensions==4.16.0
+
+pip_freeze_end
+2026-10-02 17:36:38,079 log_path=C:\Users\ADS-Admin\data266-lab\ayush\reproducibility\raw_logs\ayush\task3_cyclegan_20261003T003637Z.log
+2026-10-02 17:36:38,086 monets=300 photos=6438 epochs=100 smoke=0 all_photos=1 resume=task3_gan\ayush\checkpoints\cyclegan_epoch50.pt
+2026-10-02 17:36:38,087 device=NVIDIA GeForce RTX 5080 Laptop GPU mem_gb=15.9 batch=4 workers=12 amp=bf16
+2026-10-02 17:36:38,466 resumed after epoch=50 from task3_gan\ayush\checkpoints\cyclegan_epoch50.pt
+2026-10-02 17:36:38,531 params_total=28298120
+2026-10-02 17:36:38,532 restored Adam state
+2026-10-02 17:37:59,555 epoch=51 step=1 loss_G=2.1451 loss_D_A=0.1222 loss_D_B=0.1081 cycle=0.0755 idt=0.0607 gnorm=13.204 dnorm=7.227 nan=0
+2026-10-02 17:38:36,369 epoch=51 step=100 loss_G=2.6110 loss_D_A=0.1907 loss_D_B=0.1862 cycle=0.1274 idt=0.1062 gnorm=18.435 dnorm=6.705 nan=0
+2026-10-02 17:39:09,487 epoch=51 step=200 loss_G=2.3737 loss_D_A=0.1238 loss_D_B=0.2389 cycle=0.1072 idt=0.0831 gnorm=24.608 dnorm=5.410 nan=0
+2026-10-02 17:39:43,010 epoch=51 step=300 loss_G=3.6622 loss_D_A=0.1287 loss_D_B=0.1190 cycle=0.1747 idt=0.1615 gnorm=24.519 dnorm=5.329 nan=0
+2026-10-02 17:40:17,059 epoch=51 step=400 loss_G=2.4750 loss_D_A=0.1362 loss_D_B=0.1329 cycle=0.1050 idt=0.0931 gnorm=13.088 dnorm=4.314 nan=0
+2026-10-02 17:40:49,468 epoch=51 step=500 loss_G=2.5439 loss_D_A=0.1312 loss_D_B=0.1762 cycle=0.1290 idt=0.0923 gnorm=30.676 dnorm=5.120 nan=0
+2026-10-02 17:41:21,499 epoch=51 step=600 loss_G=2.4599 loss_D_A=0.1029 loss_D_B=0.1753 cycle=0.1002 idt=0.0692 gnorm=14.735 dnorm=9.055 nan=0
+2026-10-02 17:41:53,974 epoch=51 step=700 loss_G=2.4911 loss_D_A=0.1395 loss_D_B=0.1471 cycle=0.1073 idt=0.0939 gnorm=12.573 dnorm=8.184 nan=0
+2026-10-02 17:42:26,354 epoch=51 step=800 loss_G=2.0681 loss_D_A=0.2093 loss_D_B=0.2149 cycle=0.0926 idt=0.0676 gnorm=12.968 dnorm=6.108 nan=0
+2026-10-02 17:42:58,595 epoch=51 step=900 loss_G=2.1909 loss_D_A=0.1182 loss_D_B=0.2297 cycle=0.1016 idt=0.0854 gnorm=13.747 dnorm=5.750 nan=0
+2026-10-02 17:43:31,308 epoch=51 step=1000 loss_G=2.4453 loss_D_A=0.1354 loss_D_B=0.1566 cycle=0.1108 idt=0.0838 gnorm=14.753 dnorm=6.368 nan=0
+2026-10-02 17:44:03,843 epoch=51 step=1100 loss_G=2.7121 loss_D_A=0.1297 loss_D_B=0.2341 cycle=0.1228 idt=0.0909 gnorm=17.576 dnorm=7.888 nan=0
+2026-10-02 17:44:36,937 epoch=51 step=1200 loss_G=2.1967 loss_D_A=0.2338 loss_D_B=0.1663 cycle=0.0934 idt=0.0709 gnorm=17.576 dnorm=7.919 nan=0
+2026-10-02 17:45:09,013 epoch=51 step=1300 loss_G=2.0193 loss_D_A=0.1049 loss_D_B=0.1807 cycle=0.1060 idt=0.0835 gnorm=12.801 dnorm=5.981 nan=0
+2026-10-02 17:45:41,395 epoch=51 step=1400 loss_G=2.1517 loss_D_A=0.1794 loss_D_B=0.1973 cycle=0.0945 idt=0.0765 gnorm=18.259 dnorm=7.504 nan=0
+2026-10-02 17:46:14,017 epoch=51 step=1500 loss_G=2.4506 loss_D_A=0.1762 loss_D_B=0.1487 cycle=0.0981 idt=0.0727 gnorm=14.297 dnorm=6.024 nan=0
+2026-10-02 17:46:45,995 epoch=51 step=1600 loss_G=2.1928 loss_D_A=0.1666 loss_D_B=0.1824 cycle=0.1026 idt=0.0809 gnorm=18.552 dnorm=7.198 nan=0
+2026-10-02 17:46:53,494 epoch_mean={'g': 2.431440308375388, 'd_a': 0.23813628202639753, 'd_b': 0.20248479428498642, 'cycle': 0.11051807285095594, 'identity': 0.08732150060049496, 'epoch': 51}
+2026-10-02 17:46:57,160 epoch=52 step=1 loss_G=2.6316 loss_D_A=0.1808 loss_D_B=0.1595 cycle=0.1080 idt=0.0910 gnorm=19.191 dnorm=6.973 nan=0
+2026-10-02 17:47:29,289 epoch=52 step=100 loss_G=2.1186 loss_D_A=0.1083 loss_D_B=0.1748 cycle=0.0919 idt=0.0750 gnorm=12.456 dnorm=5.551 nan=0
+2026-10-02 17:48:01,807 epoch=52 step=200 loss_G=3.0865 loss_D_A=0.1020 loss_D_B=0.1729 cycle=0.1501 idt=0.1480 gnorm=22.333 dnorm=4.958 nan=0
+2026-10-02 17:48:34,032 epoch=52 step=300 loss_G=2.4910 loss_D_A=0.1635 loss_D_B=0.2317 cycle=0.1001 idt=0.0660 gnorm=12.892 dnorm=9.030 nan=0
+2026-10-02 17:49:06,459 epoch=52 step=400 loss_G=2.1841 loss_D_A=0.1393 loss_D_B=0.2084 cycle=0.0986 idt=0.0772 gnorm=24.605 dnorm=8.092 nan=0
+2026-10-02 17:49:38,457 epoch=52 step=500 loss_G=2.2618 loss_D_A=0.1873 loss_D_B=0.1846 cycle=0.0949 idt=0.0726 gnorm=11.342 dnorm=7.115 nan=0
+2026-10-02 17:50:10,058 epoch=52 step=600 loss_G=2.4620 loss_D_A=0.1423 loss_D_B=0.1912 cycle=0.1163 idt=0.1043 gnorm=20.398 dnorm=5.668 nan=0
+2026-10-02 17:50:42,931 epoch=52 step=700 loss_G=2.5160 loss_D_A=0.1491 loss_D_B=0.2330 cycle=0.1200 idt=0.1003 gnorm=17.313 dnorm=8.972 nan=0
+2026-10-02 17:51:14,863 epoch=52 step=800 loss_G=2.4255 loss_D_A=0.2410 loss_D_B=0.1944 cycle=0.1025 idt=0.0747 gnorm=12.536 dnorm=11.337 nan=0
+2026-10-02 17:51:47,250 epoch=52 step=900 loss_G=2.4683 loss_D_A=0.1312 loss_D_B=0.2701 cycle=0.1058 idt=0.0854 gnorm=14.278 dnorm=6.288 nan=0
+2026-10-02 17:52:19,571 epoch=52 step=1000 loss_G=1.7455 loss_D_A=0.2132 loss_D_B=0.2208 cycle=0.0843 idt=0.0706 gnorm=14.888 dnorm=11.397 nan=0
+2026-10-02 17:52:52,340 epoch=52 step=1100 loss_G=2.2221 loss_D_A=0.0798 loss_D_B=0.2030 cycle=0.1008 idt=0.0656 gnorm=14.009 dnorm=5.127 nan=0
+2026-10-02 17:53:25,402 epoch=52 step=1200 loss_G=2.0716 loss_D_A=0.1793 loss_D_B=0.1852 cycle=0.0918 idt=0.0718 gnorm=20.434 dnorm=5.813 nan=0
+2026-10-02 17:53:58,121 epoch=52 step=1300 loss_G=2.2483 loss_D_A=0.1944 loss_D_B=0.2309 cycle=0.1023 idt=0.0697 gnorm=14.652 dnorm=9.925 nan=0
+2026-10-02 17:54:30,890 epoch=52 step=1400 loss_G=2.5555 loss_D_A=0.1113 loss_D_B=0.1827 cycle=0.1144 idt=0.0824 gnorm=21.995 dnorm=6.376 nan=0
+2026-10-02 17:55:04,178 epoch=52 step=1500 loss_G=2.3826 loss_D_A=0.1879 loss_D_B=0.2399 cycle=0.1048 idt=0.0879 gnorm=15.574 dnorm=6.981 nan=0
+2026-10-02 17:55:37,838 epoch=52 step=1600 loss_G=2.4810 loss_D_A=0.1963 loss_D_B=0.2276 cycle=0.1150 idt=0.0950 gnorm=14.817 dnorm=7.631 nan=0
+2026-10-02 17:55:40,966 epoch_mean={'g': 2.2997549495341616, 'd_a': 0.15483293237153048, 'd_b': 0.20265836537994952, 'cycle': 0.1042646514703028, 'identity': 0.08208306354025136, 'epoch': 52}
+2026-10-02 17:55:42,079 epoch=53 step=1 loss_G=3.2712 loss_D_A=0.1212 loss_D_B=0.2201 cycle=0.1655 idt=0.1419 gnorm=29.272 dnorm=6.773 nan=0
+2026-10-02 17:56:15,708 epoch=53 step=100 loss_G=2.3862 loss_D_A=0.1826 loss_D_B=0.2169 cycle=0.1145 idt=0.0781 gnorm=21.112 dnorm=5.403 nan=0
+2026-10-02 17:56:48,212 epoch=53 step=200 loss_G=2.4557 loss_D_A=0.2435 loss_D_B=0.2061 cycle=0.1023 idt=0.0739 gnorm=15.100 dnorm=10.377 nan=0
+2026-10-02 17:57:20,426 epoch=53 step=300 loss_G=2.3362 loss_D_A=0.1707 loss_D_B=0.2223 cycle=0.1060 idt=0.0809 gnorm=21.398 dnorm=8.438 nan=0
+2026-10-02 17:57:52,725 epoch=53 step=400 loss_G=2.2508 loss_D_A=0.1339 loss_D_B=0.1425 cycle=0.1083 idt=0.0764 gnorm=17.728 dnorm=5.831 nan=0
+2026-10-02 17:58:25,126 epoch=53 step=500 loss_G=2.3674 loss_D_A=0.1140 loss_D_B=0.1756 cycle=0.1148 idt=0.0955 gnorm=13.435 dnorm=6.321 nan=0
+2026-10-02 17:58:57,751 epoch=53 step=600 loss_G=2.7648 loss_D_A=0.1223 loss_D_B=0.2093 cycle=0.1429 idt=0.1001 gnorm=16.251 dnorm=5.133 nan=0
+2026-10-02 17:59:29,897 epoch=53 step=700 loss_G=1.8934 loss_D_A=0.1482 loss_D_B=0.1960 cycle=0.0893 idt=0.0765 gnorm=19.874 dnorm=5.886 nan=0
+2026-10-02 18:00:01,884 epoch=53 step=800 loss_G=2.2433 loss_D_A=0.2142 loss_D_B=0.2331 cycle=0.1029 idt=0.0724 gnorm=22.551 dnorm=6.270 nan=0
+2026-10-02 18:00:34,138 epoch=53 step=900 loss_G=2.1027 loss_D_A=0.2113 loss_D_B=0.1984 cycle=0.0901 idt=0.0764 gnorm=17.742 dnorm=6.468 nan=0
+2026-10-02 18:01:06,569 epoch=53 step=1000 loss_G=2.4930 loss_D_A=0.1728 loss_D_B=0.1489 cycle=0.1087 idt=0.1030 gnorm=22.670 dnorm=7.711 nan=0
+2026-10-02 18:01:38,638 epoch=53 step=1100 loss_G=2.1182 loss_D_A=0.1459 loss_D_B=0.2723 cycle=0.0945 idt=0.0932 gnorm=13.224 dnorm=7.582 nan=0
+2026-10-02 18:02:10,835 epoch=53 step=1200 loss_G=2.2176 loss_D_A=0.1655 loss_D_B=0.2298 cycle=0.0922 idt=0.0789 gnorm=13.699 dnorm=7.662 nan=0
+2026-10-02 18:02:43,955 epoch=53 step=1300 loss_G=2.0509 loss_D_A=0.1720 loss_D_B=0.2286 cycle=0.0904 idt=0.0768 gnorm=9.009 dnorm=6.082 nan=0
+2026-10-02 18:03:16,280 epoch=53 step=1400 loss_G=2.1227 loss_D_A=0.2553 loss_D_B=0.1948 cycle=0.1034 idt=0.0756 gnorm=20.796 dnorm=10.628 nan=0
+2026-10-02 18:03:48,675 epoch=53 step=1500 loss_G=2.1414 loss_D_A=0.1740 loss_D_B=0.2339 cycle=0.0929 idt=0.0689 gnorm=16.198 dnorm=8.065 nan=0
+2026-10-02 18:04:20,380 epoch=53 step=1600 loss_G=2.0745 loss_D_A=0.1955 loss_D_B=0.2816 cycle=0.0845 idt=0.0715 gnorm=16.932 dnorm=7.483 nan=0
+2026-10-02 18:04:23,469 epoch_mean={'g': 2.3033987104522518, 'd_a': 0.1607376762058424, 'd_b': 0.2055436412740198, 'cycle': 0.10442323862395672, 'identity': 0.08229308513380726, 'epoch': 53}
+2026-10-02 18:04:24,621 epoch=54 step=1 loss_G=2.2740 loss_D_A=0.1193 loss_D_B=0.1754 cycle=0.0991 idt=0.0859 gnorm=15.374 dnorm=6.667 nan=0
+2026-10-02 18:04:57,728 epoch=54 step=100 loss_G=2.1627 loss_D_A=0.1913 loss_D_B=0.2351 cycle=0.0952 idt=0.0702 gnorm=13.340 dnorm=7.703 nan=0
+2026-10-02 18:05:30,027 epoch=54 step=200 loss_G=2.4964 loss_D_A=0.1511 loss_D_B=0.1726 cycle=0.1079 idt=0.0869 gnorm=22.146 dnorm=6.139 nan=0
+2026-10-02 18:06:01,819 epoch=54 step=300 loss_G=2.4382 loss_D_A=0.1296 loss_D_B=0.1487 cycle=0.0978 idt=0.0762 gnorm=13.494 dnorm=5.196 nan=0
+2026-10-02 18:06:34,638 epoch=54 step=400 loss_G=2.4456 loss_D_A=0.1947 loss_D_B=0.1360 cycle=0.1009 idt=0.0779 gnorm=14.852 dnorm=6.155 nan=0
+2026-10-02 18:07:07,086 epoch=54 step=500 loss_G=1.9796 loss_D_A=0.2240 loss_D_B=0.1733 cycle=0.0985 idt=0.0749 gnorm=14.503 dnorm=6.686 nan=0
+2026-10-02 18:07:38,925 epoch=54 step=600 loss_G=2.4042 loss_D_A=0.1603 loss_D_B=0.1734 cycle=0.1238 idt=0.0846 gnorm=18.683 dnorm=4.837 nan=0
+2026-10-02 18:08:11,362 epoch=54 step=700 loss_G=2.6967 loss_D_A=0.2042 loss_D_B=0.2450 cycle=0.1113 idt=0.0958 gnorm=12.468 dnorm=7.904 nan=0
+2026-10-02 18:08:43,643 epoch=54 step=800 loss_G=2.2745 loss_D_A=0.0907 loss_D_B=0.2261 cycle=0.0900 idt=0.0684 gnorm=15.379 dnorm=5.463 nan=0
+2026-10-02 18:09:15,833 epoch=54 step=900 loss_G=2.0140 loss_D_A=0.1559 loss_D_B=0.1602 cycle=0.0993 idt=0.0719 gnorm=11.773 dnorm=5.690 nan=0
+2026-10-02 18:09:48,590 epoch=54 step=1000 loss_G=1.9988 loss_D_A=0.2165 loss_D_B=0.2179 cycle=0.0915 idt=0.0683 gnorm=11.319 dnorm=7.831 nan=0
+2026-10-02 18:10:20,147 epoch=54 step=1100 loss_G=2.3017 loss_D_A=0.2648 loss_D_B=0.1807 cycle=0.1055 idt=0.0785 gnorm=17.336 dnorm=6.787 nan=0
+2026-10-02 18:10:52,116 epoch=54 step=1200 loss_G=2.1061 loss_D_A=0.1861 loss_D_B=0.2257 cycle=0.0931 idt=0.0677 gnorm=13.696 dnorm=6.479 nan=0
+2026-10-02 18:11:24,949 epoch=54 step=1300 loss_G=2.8438 loss_D_A=0.1923 loss_D_B=0.1583 cycle=0.1131 idt=0.0832 gnorm=21.621 dnorm=6.750 nan=0
+2026-10-02 18:11:57,370 epoch=54 step=1400 loss_G=2.2890 loss_D_A=0.1616 loss_D_B=0.1704 cycle=0.1031 idt=0.0733 gnorm=14.988 dnorm=6.078 nan=0
+2026-10-02 18:12:29,563 epoch=54 step=1500 loss_G=1.8438 loss_D_A=0.2139 loss_D_B=0.1986 cycle=0.0800 idt=0.0609 gnorm=12.395 dnorm=6.714 nan=0
+2026-10-02 18:13:03,094 epoch=54 step=1600 loss_G=2.4696 loss_D_A=0.2488 loss_D_B=0.1491 cycle=0.1082 idt=0.0774 gnorm=15.723 dnorm=7.366 nan=0
+2026-10-02 18:13:06,378 epoch_mean={'g': 2.2936772127329195, 'd_a': 0.16355228779478842, 'd_b': 0.2032307879524942, 'cycle': 0.1034579164493158, 'identity': 0.08103261438215742, 'epoch': 54}
+2026-10-02 18:13:07,549 epoch=55 step=1 loss_G=1.9012 loss_D_A=0.2528 loss_D_B=0.1770 cycle=0.1013 idt=0.0694 gnorm=16.071 dnorm=7.423 nan=0
+2026-10-02 18:13:42,071 epoch=55 step=100 loss_G=1.9291 loss_D_A=0.1510 loss_D_B=0.1686 cycle=0.0878 idt=0.0657 gnorm=11.902 dnorm=6.226 nan=0
+2026-10-02 18:14:15,352 epoch=55 step=200 loss_G=2.3061 loss_D_A=0.1153 loss_D_B=0.2931 cycle=0.1079 idt=0.0793 gnorm=17.335 dnorm=6.744 nan=0
+2026-10-02 18:14:48,230 epoch=55 step=300 loss_G=2.1144 loss_D_A=0.1714 loss_D_B=0.2083 cycle=0.1063 idt=0.0747 gnorm=12.085 dnorm=7.268 nan=0
+2026-10-02 18:15:20,721 epoch=55 step=400 loss_G=2.3613 loss_D_A=0.1777 loss_D_B=0.1927 cycle=0.1152 idt=0.0825 gnorm=21.505 dnorm=5.826 nan=0
+2026-10-02 18:15:52,868 epoch=55 step=500 loss_G=2.9207 loss_D_A=0.1359 loss_D_B=0.1657 cycle=0.1413 idt=0.1271 gnorm=12.836 dnorm=7.837 nan=0
+2026-10-02 18:16:24,771 epoch=55 step=600 loss_G=2.1538 loss_D_A=0.1373 loss_D_B=0.2208 cycle=0.1069 idt=0.0783 gnorm=14.775 dnorm=6.524 nan=0
+2026-10-02 18:16:58,236 epoch=55 step=700 loss_G=2.7753 loss_D_A=0.1297 loss_D_B=0.2764 cycle=0.1235 idt=0.1162 gnorm=28.709 dnorm=5.436 nan=0
+2026-10-02 18:17:32,007 epoch=55 step=800 loss_G=1.9094 loss_D_A=0.1504 loss_D_B=0.1867 cycle=0.0971 idt=0.0655 gnorm=16.772 dnorm=5.197 nan=0
+2026-10-02 18:18:06,404 epoch=55 step=900 loss_G=1.6973 loss_D_A=0.2151 loss_D_B=0.1526 cycle=0.0856 idt=0.0631 gnorm=12.782 dnorm=5.907 nan=0
+2026-10-02 18:18:41,791 epoch=55 step=1000 loss_G=2.2018 loss_D_A=0.1011 loss_D_B=0.2042 cycle=0.0977 idt=0.0713 gnorm=11.016 dnorm=4.540 nan=0
+2026-10-02 18:19:16,506 epoch=55 step=1100 loss_G=1.7236 loss_D_A=0.2515 loss_D_B=0.2444 cycle=0.0906 idt=0.0640 gnorm=18.449 dnorm=7.476 nan=0
+2026-10-02 18:19:51,634 epoch=55 step=1200 loss_G=2.6807 loss_D_A=0.1523 loss_D_B=0.2676 cycle=0.0987 idt=0.0691 gnorm=19.729 dnorm=6.291 nan=0
+2026-10-02 18:20:26,262 epoch=55 step=1300 loss_G=2.2444 loss_D_A=0.2090 loss_D_B=0.2461 cycle=0.1089 idt=0.0843 gnorm=14.667 dnorm=9.901 nan=0
+2026-10-02 18:21:00,282 epoch=55 step=1400 loss_G=2.4670 loss_D_A=0.1457 loss_D_B=0.2122 cycle=0.1047 idt=0.0830 gnorm=13.219 dnorm=7.107 nan=0
+2026-10-02 18:21:34,798 epoch=55 step=1500 loss_G=2.1485 loss_D_A=0.1655 loss_D_B=0.1641 cycle=0.0913 idt=0.0861 gnorm=16.044 dnorm=5.124 nan=0
+2026-10-02 18:22:08,672 epoch=55 step=1600 loss_G=2.3847 loss_D_A=0.1917 loss_D_B=0.2235 cycle=0.1024 idt=0.0669 gnorm=14.278 dnorm=6.058 nan=0
+2026-10-02 18:22:12,005 epoch_mean={'g': 2.2887266170904503, 'd_a': 0.16425083705357144, 'd_b': 0.2038712021726999, 'cycle': 0.10257737059030474, 'identity': 0.08050928530485733, 'epoch': 55}
+2026-10-02 18:22:13,239 epoch=56 step=1 loss_G=2.2807 loss_D_A=0.2031 loss_D_B=0.1896 cycle=0.0974 idt=0.0700 gnorm=15.748 dnorm=5.878 nan=0
+2026-10-02 18:22:48,172 epoch=56 step=100 loss_G=1.9060 loss_D_A=0.2239 loss_D_B=0.1487 cycle=0.0943 idt=0.0688 gnorm=10.039 dnorm=7.558 nan=0
+2026-10-02 18:23:22,215 epoch=56 step=200 loss_G=2.7821 loss_D_A=0.1460 loss_D_B=0.2249 cycle=0.1427 idt=0.1247 gnorm=15.278 dnorm=7.127 nan=0
+2026-10-02 18:23:56,028 epoch=56 step=300 loss_G=2.1124 loss_D_A=0.1553 loss_D_B=0.2264 cycle=0.0877 idt=0.0625 gnorm=29.384 dnorm=7.711 nan=0
+2026-10-02 18:24:29,518 epoch=56 step=400 loss_G=2.4309 loss_D_A=0.1312 loss_D_B=0.2016 cycle=0.0957 idt=0.0707 gnorm=18.290 dnorm=5.611 nan=0
+2026-10-02 18:25:01,941 epoch=56 step=500 loss_G=2.3080 loss_D_A=0.1675 loss_D_B=0.1764 cycle=0.1065 idt=0.0776 gnorm=14.550 dnorm=6.090 nan=0
+2026-10-02 18:25:34,381 epoch=56 step=600 loss_G=2.2831 loss_D_A=0.1589 loss_D_B=0.1872 cycle=0.1078 idt=0.0817 gnorm=20.975 dnorm=6.358 nan=0
+2026-10-02 18:26:07,673 epoch=56 step=700 loss_G=2.5672 loss_D_A=0.2331 loss_D_B=0.2160 cycle=0.1364 idt=0.0895 gnorm=17.104 dnorm=6.249 nan=0
+2026-10-02 18:26:39,928 epoch=56 step=800 loss_G=2.0302 loss_D_A=0.1787 loss_D_B=0.1979 cycle=0.0821 idt=0.0666 gnorm=16.177 dnorm=6.152 nan=0
+2026-10-02 18:27:12,371 epoch=56 step=900 loss_G=2.0604 loss_D_A=0.1359 loss_D_B=0.2606 cycle=0.0952 idt=0.0664 gnorm=13.889 dnorm=6.115 nan=0
+2026-10-02 18:27:45,270 epoch=56 step=1000 loss_G=2.4603 loss_D_A=0.1009 loss_D_B=0.1922 cycle=0.1233 idt=0.0871 gnorm=26.739 dnorm=5.878 nan=0
+2026-10-02 18:28:17,600 epoch=56 step=1100 loss_G=2.3576 loss_D_A=0.1365 loss_D_B=0.2916 cycle=0.1057 idt=0.0783 gnorm=14.225 dnorm=5.722 nan=0
+2026-10-02 18:28:50,146 epoch=56 step=1200 loss_G=1.8766 loss_D_A=0.1823 loss_D_B=0.2370 cycle=0.0908 idt=0.0650 gnorm=12.462 dnorm=8.123 nan=0
+2026-10-02 18:29:23,439 epoch=56 step=1300 loss_G=2.0947 loss_D_A=0.1304 loss_D_B=0.2026 cycle=0.1011 idt=0.0716 gnorm=17.835 dnorm=6.352 nan=0
+2026-10-02 18:29:56,289 epoch=56 step=1400 loss_G=2.2012 loss_D_A=0.0847 loss_D_B=0.1818 cycle=0.0867 idt=0.0654 gnorm=13.349 dnorm=5.514 nan=0
+2026-10-02 18:30:28,830 epoch=56 step=1500 loss_G=2.5862 loss_D_A=0.1602 loss_D_B=0.2370 cycle=0.1114 idt=0.0831 gnorm=15.367 dnorm=9.837 nan=0
+2026-10-02 18:31:01,845 epoch=56 step=1600 loss_G=2.0097 loss_D_A=0.0832 loss_D_B=0.1930 cycle=0.0910 idt=0.0699 gnorm=8.384 dnorm=5.408 nan=0
+2026-10-02 18:31:05,002 epoch_mean={'g': 2.28099357652368, 'd_a': 0.16427409486000583, 'd_b': 0.20377365965280472, 'cycle': 0.10140241539996603, 'identity': 0.07961749912048718, 'epoch': 56}
+2026-10-02 18:31:06,160 epoch=57 step=1 loss_G=2.1751 loss_D_A=0.2561 loss_D_B=0.1766 cycle=0.0910 idt=0.0715 gnorm=13.100 dnorm=7.128 nan=0
+2026-10-02 18:31:39,272 epoch=57 step=100 loss_G=2.3148 loss_D_A=0.0930 loss_D_B=0.1207 cycle=0.0959 idt=0.0738 gnorm=11.445 dnorm=3.783 nan=0
+2026-10-02 18:32:11,784 epoch=57 step=200 loss_G=1.9781 loss_D_A=0.2411 loss_D_B=0.2134 cycle=0.0863 idt=0.0647 gnorm=12.449 dnorm=9.652 nan=0
+2026-10-02 18:32:45,337 epoch=57 step=300 loss_G=2.0197 loss_D_A=0.2256 loss_D_B=0.1702 cycle=0.0845 idt=0.0543 gnorm=9.578 dnorm=7.141 nan=0
+2026-10-02 18:33:18,572 epoch=57 step=400 loss_G=2.0547 loss_D_A=0.1969 loss_D_B=0.3047 cycle=0.0931 idt=0.0736 gnorm=11.798 dnorm=6.834 nan=0
+2026-10-02 18:33:52,241 epoch=57 step=500 loss_G=2.2740 loss_D_A=0.1961 loss_D_B=0.1609 cycle=0.1127 idt=0.0787 gnorm=26.732 dnorm=6.061 nan=0
+2026-10-02 18:34:26,134 epoch=57 step=600 loss_G=2.2425 loss_D_A=0.2189 loss_D_B=0.1592 cycle=0.1185 idt=0.0893 gnorm=31.996 dnorm=6.395 nan=0
+2026-10-02 18:34:58,843 epoch=57 step=700 loss_G=1.8301 loss_D_A=0.1637 loss_D_B=0.1876 cycle=0.0927 idt=0.0608 gnorm=19.610 dnorm=8.358 nan=0
+2026-10-02 18:35:31,341 epoch=57 step=800 loss_G=2.3498 loss_D_A=0.1064 loss_D_B=0.1797 cycle=0.0935 idt=0.0556 gnorm=10.435 dnorm=5.859 nan=0
+2026-10-02 18:36:03,579 epoch=57 step=900 loss_G=2.1043 loss_D_A=0.1634 loss_D_B=0.1651 cycle=0.0997 idt=0.0750 gnorm=11.556 dnorm=9.148 nan=0
+2026-10-02 18:36:36,043 epoch=57 step=1000 loss_G=2.0923 loss_D_A=0.1710 loss_D_B=0.1897 cycle=0.0976 idt=0.0852 gnorm=16.054 dnorm=6.162 nan=0
+2026-10-02 18:37:08,269 epoch=57 step=1100 loss_G=2.6466 loss_D_A=0.1732 loss_D_B=0.2598 cycle=0.1087 idt=0.0855 gnorm=16.260 dnorm=7.963 nan=0
+2026-10-02 18:37:40,667 epoch=57 step=1200 loss_G=2.4488 loss_D_A=0.1567 loss_D_B=0.2053 cycle=0.1170 idt=0.0834 gnorm=18.244 dnorm=8.457 nan=0
+2026-10-02 18:38:13,488 epoch=57 step=1300 loss_G=2.2420 loss_D_A=0.1744 loss_D_B=0.2804 cycle=0.1008 idt=0.0753 gnorm=15.012 dnorm=6.384 nan=0
+2026-10-02 18:38:45,958 epoch=57 step=1400 loss_G=2.3052 loss_D_A=0.1269 loss_D_B=0.1988 cycle=0.1173 idt=0.0874 gnorm=29.173 dnorm=5.895 nan=0
+2026-10-02 18:39:18,076 epoch=57 step=1500 loss_G=2.4254 loss_D_A=0.1338 loss_D_B=0.1814 cycle=0.1089 idt=0.0953 gnorm=20.205 dnorm=6.328 nan=0
+2026-10-02 18:39:50,691 epoch=57 step=1600 loss_G=2.1439 loss_D_A=0.2171 loss_D_B=0.1439 cycle=0.1053 idt=0.0800 gnorm=12.093 dnorm=9.740 nan=0
+2026-10-02 18:39:53,805 epoch_mean={'g': 2.273475258394798, 'd_a': 0.16144234793526785, 'd_b': 0.2027616702251553, 'cycle': 0.10084746935352776, 'identity': 0.07838770706461083, 'epoch': 57}
+2026-10-02 18:39:54,964 epoch=58 step=1 loss_G=2.5535 loss_D_A=0.2691 loss_D_B=0.2077 cycle=0.1131 idt=0.0947 gnorm=12.960 dnorm=9.720 nan=0
+2026-10-02 18:40:28,590 epoch=58 step=100 loss_G=2.5244 loss_D_A=0.1654 loss_D_B=0.1725 cycle=0.1260 idt=0.1112 gnorm=12.563 dnorm=6.302 nan=0
+2026-10-02 18:41:00,624 epoch=58 step=200 loss_G=2.0702 loss_D_A=0.2095 loss_D_B=0.2598 cycle=0.0804 idt=0.0675 gnorm=19.695 dnorm=8.455 nan=0
+2026-10-02 18:41:33,123 epoch=58 step=300 loss_G=2.7212 loss_D_A=0.1254 loss_D_B=0.2026 cycle=0.1103 idt=0.0837 gnorm=17.049 dnorm=5.662 nan=0
+2026-10-02 18:42:05,481 epoch=58 step=400 loss_G=2.3911 loss_D_A=0.0971 loss_D_B=0.2028 cycle=0.1113 idt=0.0894 gnorm=17.036 dnorm=7.764 nan=0
+2026-10-02 18:42:37,866 epoch=58 step=500 loss_G=3.0009 loss_D_A=0.1188 loss_D_B=0.2296 cycle=0.1157 idt=0.1070 gnorm=15.210 dnorm=5.349 nan=0
+2026-10-02 18:43:10,087 epoch=58 step=600 loss_G=2.4784 loss_D_A=0.1948 loss_D_B=0.1377 cycle=0.1023 idt=0.0731 gnorm=26.139 dnorm=6.777 nan=0
+2026-10-02 18:43:42,930 epoch=58 step=700 loss_G=2.2182 loss_D_A=0.2113 loss_D_B=0.1474 cycle=0.0914 idt=0.0649 gnorm=12.130 dnorm=8.040 nan=0
+2026-10-02 18:44:14,816 epoch=58 step=800 loss_G=2.0653 loss_D_A=0.2133 loss_D_B=0.1570 cycle=0.0921 idt=0.0703 gnorm=16.146 dnorm=6.581 nan=0
+2026-10-02 18:44:47,336 epoch=58 step=900 loss_G=2.4152 loss_D_A=0.1994 loss_D_B=0.2065 cycle=0.1075 idt=0.0860 gnorm=17.782 dnorm=6.711 nan=0
+2026-10-02 18:45:19,968 epoch=58 step=1000 loss_G=2.2676 loss_D_A=0.1186 loss_D_B=0.1400 cycle=0.0902 idt=0.0783 gnorm=15.797 dnorm=4.796 nan=0
+2026-10-02 18:45:52,232 epoch=58 step=1100 loss_G=2.6943 loss_D_A=0.1137 loss_D_B=0.2444 cycle=0.1054 idt=0.1053 gnorm=12.659 dnorm=8.302 nan=0
+2026-10-02 18:46:24,784 epoch=58 step=1200 loss_G=2.6583 loss_D_A=0.1847 loss_D_B=0.1394 cycle=0.1146 idt=0.0918 gnorm=16.851 dnorm=5.904 nan=0
+2026-10-02 18:46:57,499 epoch=58 step=1300 loss_G=2.0560 loss_D_A=0.2007 loss_D_B=0.1888 cycle=0.0946 idt=0.0742 gnorm=16.022 dnorm=7.546 nan=0
+2026-10-02 18:47:29,460 epoch=58 step=1400 loss_G=2.1572 loss_D_A=0.0918 loss_D_B=0.1723 cycle=0.0927 idt=0.0769 gnorm=15.155 dnorm=4.523 nan=0
+2026-10-02 18:48:01,908 epoch=58 step=1500 loss_G=2.6337 loss_D_A=0.2605 loss_D_B=0.2108 cycle=0.1037 idt=0.1111 gnorm=15.558 dnorm=7.821 nan=0
+2026-10-02 18:48:35,473 epoch=58 step=1600 loss_G=2.4026 loss_D_A=0.0887 loss_D_B=0.2249 cycle=0.1078 idt=0.0680 gnorm=12.785 dnorm=6.982 nan=0
+2026-10-02 18:48:38,591 epoch_mean={'g': 2.2617154139169253, 'd_a': 0.16111393330260093, 'd_b': 0.2018455742308812, 'cycle': 0.09984487213703416, 'identity': 0.0777460749845327, 'epoch': 58}
+2026-10-02 18:48:39,746 epoch=59 step=1 loss_G=2.0601 loss_D_A=0.1589 loss_D_B=0.2123 cycle=0.0997 idt=0.0732 gnorm=12.765 dnorm=6.656 nan=0
+2026-10-02 18:49:12,972 epoch=59 step=100 loss_G=1.9815 loss_D_A=0.1756 loss_D_B=0.1586 cycle=0.0822 idt=0.0659 gnorm=12.306 dnorm=5.550 nan=0
+2026-10-02 18:49:45,111 epoch=59 step=200 loss_G=2.2755 loss_D_A=0.1091 loss_D_B=0.2257 cycle=0.0875 idt=0.0642 gnorm=10.601 dnorm=4.967 nan=0
+2026-10-02 18:50:17,740 epoch=59 step=300 loss_G=1.8686 loss_D_A=0.1322 loss_D_B=0.1691 cycle=0.0919 idt=0.0702 gnorm=11.583 dnorm=5.836 nan=0
+2026-10-02 18:50:49,423 epoch=59 step=400 loss_G=1.8543 loss_D_A=0.1475 loss_D_B=0.2906 cycle=0.0937 idt=0.0754 gnorm=9.970 dnorm=6.302 nan=0
+2026-10-02 18:51:21,593 epoch=59 step=500 loss_G=2.3945 loss_D_A=0.1789 loss_D_B=0.2439 cycle=0.1045 idt=0.0787 gnorm=12.396 dnorm=7.607 nan=0
+2026-10-02 18:51:54,853 epoch=59 step=600 loss_G=1.9924 loss_D_A=0.1561 loss_D_B=0.1880 cycle=0.0849 idt=0.0627 gnorm=15.332 dnorm=5.305 nan=0
+2026-10-02 18:52:27,836 epoch=59 step=700 loss_G=2.3433 loss_D_A=0.1183 loss_D_B=0.2124 cycle=0.1000 idt=0.0959 gnorm=15.587 dnorm=4.867 nan=0
+2026-10-02 18:53:00,770 epoch=59 step=800 loss_G=2.0650 loss_D_A=0.1842 loss_D_B=0.2520 cycle=0.0821 idt=0.0613 gnorm=10.366 dnorm=5.617 nan=0
+2026-10-02 18:53:33,104 epoch=59 step=900 loss_G=2.5657 loss_D_A=0.2640 loss_D_B=0.1718 cycle=0.1033 idt=0.1645 gnorm=14.743 dnorm=7.772 nan=0
+2026-10-02 18:54:05,864 epoch=59 step=1000 loss_G=2.3474 loss_D_A=0.1822 loss_D_B=0.1398 cycle=0.0992 idt=0.0710 gnorm=14.902 dnorm=8.211 nan=0
+2026-10-02 18:54:38,004 epoch=59 step=1100 loss_G=2.1528 loss_D_A=0.2451 loss_D_B=0.2028 cycle=0.1028 idt=0.0805 gnorm=10.917 dnorm=8.145 nan=0
+2026-10-02 18:55:10,593 epoch=59 step=1200 loss_G=2.6052 loss_D_A=0.1128 loss_D_B=0.1399 cycle=0.0940 idt=0.0725 gnorm=15.348 dnorm=5.121 nan=0
+2026-10-02 18:55:43,477 epoch=59 step=1300 loss_G=2.4209 loss_D_A=0.1911 loss_D_B=0.1681 cycle=0.1001 idt=0.0816 gnorm=11.916 dnorm=6.407 nan=0
+2026-10-02 18:56:16,169 epoch=59 step=1400 loss_G=2.4821 loss_D_A=0.0878 loss_D_B=0.2026 cycle=0.1145 idt=0.0888 gnorm=19.511 dnorm=9.923 nan=0
+2026-10-02 18:56:48,261 epoch=59 step=1500 loss_G=2.4771 loss_D_A=0.0798 loss_D_B=0.1430 cycle=0.0992 idt=0.0731 gnorm=22.098 dnorm=5.762 nan=0
+2026-10-02 18:57:21,662 epoch=59 step=1600 loss_G=1.9351 loss_D_A=0.1741 loss_D_B=0.2029 cycle=0.0865 idt=0.0637 gnorm=12.203 dnorm=7.391 nan=0
+2026-10-02 18:57:24,776 epoch_mean={'g': 2.238969696234472, 'd_a': 0.16111262540639557, 'd_b': 0.20295103084967003, 'cycle': 0.09870860413734957, 'identity': 0.07631220373307696, 'epoch': 59}
+2026-10-02 18:57:25,887 epoch=60 step=1 loss_G=2.4750 loss_D_A=0.1833 loss_D_B=0.1561 cycle=0.1218 idt=0.0888 gnorm=24.383 dnorm=6.522 nan=0
+2026-10-02 18:57:59,353 epoch=60 step=100 loss_G=2.3106 loss_D_A=0.1898 loss_D_B=0.2120 cycle=0.0933 idt=0.0616 gnorm=12.180 dnorm=7.211 nan=0
+2026-10-02 18:58:32,303 epoch=60 step=200 loss_G=2.1838 loss_D_A=0.2765 loss_D_B=0.2089 cycle=0.0857 idt=0.0682 gnorm=14.943 dnorm=11.517 nan=0
+2026-10-02 18:59:04,457 epoch=60 step=300 loss_G=1.9605 loss_D_A=0.2237 loss_D_B=0.2164 cycle=0.0899 idt=0.0600 gnorm=16.638 dnorm=7.180 nan=0
+2026-10-02 18:59:37,460 epoch=60 step=400 loss_G=2.0526 loss_D_A=0.1340 loss_D_B=0.2326 cycle=0.0986 idt=0.0829 gnorm=11.856 dnorm=5.926 nan=0
+2026-10-02 19:00:09,599 epoch=60 step=500 loss_G=1.8494 loss_D_A=0.1589 loss_D_B=0.2109 cycle=0.0845 idt=0.0750 gnorm=16.220 dnorm=7.102 nan=0
+2026-10-02 19:00:41,961 epoch=60 step=600 loss_G=2.2772 loss_D_A=0.1838 loss_D_B=0.1928 cycle=0.0998 idt=0.0768 gnorm=13.804 dnorm=5.594 nan=0
+2026-10-02 19:01:14,154 epoch=60 step=700 loss_G=2.3835 loss_D_A=0.1078 loss_D_B=0.2119 cycle=0.0985 idt=0.0928 gnorm=15.034 dnorm=6.676 nan=0
+2026-10-02 19:01:46,338 epoch=60 step=800 loss_G=2.4165 loss_D_A=0.1346 loss_D_B=0.1957 cycle=0.0922 idt=0.0783 gnorm=15.553 dnorm=6.085 nan=0
+2026-10-02 19:02:18,884 epoch=60 step=900 loss_G=2.1121 loss_D_A=0.1009 loss_D_B=0.2271 cycle=0.0903 idt=0.0642 gnorm=15.354 dnorm=6.547 nan=0
+2026-10-02 19:02:51,555 epoch=60 step=1000 loss_G=2.1266 loss_D_A=0.1762 loss_D_B=0.1647 cycle=0.0908 idt=0.0631 gnorm=12.748 dnorm=7.694 nan=0
+2026-10-02 19:03:23,937 epoch=60 step=1100 loss_G=2.1233 loss_D_A=0.0971 loss_D_B=0.1926 cycle=0.0892 idt=0.0669 gnorm=15.353 dnorm=7.579 nan=0
+2026-10-02 19:03:55,829 epoch=60 step=1200 loss_G=2.2405 loss_D_A=0.1397 loss_D_B=0.2074 cycle=0.0986 idt=0.0751 gnorm=16.566 dnorm=6.711 nan=0
+2026-10-02 19:04:28,710 epoch=60 step=1300 loss_G=1.7998 loss_D_A=0.1643 loss_D_B=0.1873 cycle=0.0885 idt=0.0591 gnorm=10.392 dnorm=6.872 nan=0
+2026-10-02 19:05:00,716 epoch=60 step=1400 loss_G=2.2434 loss_D_A=0.1555 loss_D_B=0.2023 cycle=0.0976 idt=0.0739 gnorm=12.996 dnorm=6.989 nan=0
+2026-10-02 19:05:32,903 epoch=60 step=1500 loss_G=1.8595 loss_D_A=0.1107 loss_D_B=0.2147 cycle=0.0838 idt=0.0581 gnorm=11.000 dnorm=6.068 nan=0
+2026-10-02 19:06:05,608 epoch=60 step=1600 loss_G=2.4296 loss_D_A=0.1171 loss_D_B=0.1345 cycle=0.1090 idt=0.0815 gnorm=12.676 dnorm=5.731 nan=0
+2026-10-02 19:06:08,617 epoch_mean={'g': 2.244040997428183, 'd_a': 0.1611014988111413, 'd_b': 0.2012553718519507, 'cycle': 0.09818407141644021, 'identity': 0.0757745967888684, 'epoch': 60}
+2026-10-02 19:06:09,994 epoch=61 step=1 loss_G=2.5930 loss_D_A=0.1032 loss_D_B=0.1807 cycle=0.1020 idt=0.0963 gnorm=20.607 dnorm=6.605 nan=0
+2026-10-02 19:06:42,683 epoch=61 step=100 loss_G=2.4736 loss_D_A=0.1220 loss_D_B=0.1836 cycle=0.1170 idt=0.0809 gnorm=18.871 dnorm=7.884 nan=0
+2026-10-02 19:07:14,946 epoch=61 step=200 loss_G=2.2968 loss_D_A=0.1952 loss_D_B=0.1627 cycle=0.1001 idt=0.0677 gnorm=15.032 dnorm=15.607 nan=0
+2026-10-02 19:07:47,161 epoch=61 step=300 loss_G=2.2314 loss_D_A=0.1610 loss_D_B=0.1895 cycle=0.1016 idt=0.0821 gnorm=19.479 dnorm=6.901 nan=0
+2026-10-02 19:08:20,028 epoch=61 step=400 loss_G=1.6369 loss_D_A=0.1697 loss_D_B=0.1631 cycle=0.0678 idt=0.0467 gnorm=14.761 dnorm=6.999 nan=0
+2026-10-02 19:08:52,346 epoch=61 step=500 loss_G=2.1251 loss_D_A=0.1595 loss_D_B=0.2082 cycle=0.0969 idt=0.0792 gnorm=12.350 dnorm=7.368 nan=0
+2026-10-02 19:09:24,660 epoch=61 step=600 loss_G=2.6564 loss_D_A=0.1771 loss_D_B=0.1862 cycle=0.1011 idt=0.0795 gnorm=17.202 dnorm=7.940 nan=0
+2026-10-02 19:09:57,542 epoch=61 step=700 loss_G=2.1248 loss_D_A=0.1934 loss_D_B=0.2160 cycle=0.1037 idt=0.0795 gnorm=10.766 dnorm=8.537 nan=0
+2026-10-02 19:10:29,491 epoch=61 step=800 loss_G=2.0861 loss_D_A=0.1516 loss_D_B=0.2207 cycle=0.0957 idt=0.0717 gnorm=16.527 dnorm=6.559 nan=0
+2026-10-02 19:11:01,827 epoch=61 step=900 loss_G=2.3348 loss_D_A=0.1135 loss_D_B=0.1844 cycle=0.1091 idt=0.0822 gnorm=14.175 dnorm=5.876 nan=0
+2026-10-02 19:11:35,317 epoch=61 step=1000 loss_G=2.2968 loss_D_A=0.1283 loss_D_B=0.1638 cycle=0.0900 idt=0.0730 gnorm=17.232 dnorm=5.796 nan=0
+2026-10-02 19:12:08,803 epoch=61 step=1100 loss_G=2.3008 loss_D_A=0.2102 loss_D_B=0.1953 cycle=0.1141 idt=0.0975 gnorm=13.037 dnorm=6.892 nan=0
+2026-10-02 19:12:42,510 epoch=61 step=1200 loss_G=2.0498 loss_D_A=0.1323 loss_D_B=0.2333 cycle=0.0864 idt=0.0589 gnorm=13.093 dnorm=8.184 nan=0
+2026-10-02 19:13:15,909 epoch=61 step=1300 loss_G=2.5190 loss_D_A=0.0868 loss_D_B=0.1673 cycle=0.0931 idt=0.0693 gnorm=21.953 dnorm=5.757 nan=0
+2026-10-02 19:13:48,317 epoch=61 step=1400 loss_G=2.1931 loss_D_A=0.1366 loss_D_B=0.2337 cycle=0.1064 idt=0.0796 gnorm=17.386 dnorm=6.751 nan=0
+2026-10-02 19:14:21,215 epoch=61 step=1500 loss_G=2.2554 loss_D_A=0.2444 loss_D_B=0.1588 cycle=0.0909 idt=0.0614 gnorm=14.182 dnorm=8.366 nan=0
+2026-10-02 19:14:54,118 epoch=61 step=1600 loss_G=2.1834 loss_D_A=0.1642 loss_D_B=0.2283 cycle=0.0920 idt=0.0734 gnorm=15.175 dnorm=6.704 nan=0
+2026-10-02 19:14:57,282 epoch_mean={'g': 2.2239920479910715, 'd_a': 0.160480342888684, 'd_b': 0.20098662761427602, 'cycle': 0.09709845122343265, 'identity': 0.07485958123059006, 'epoch': 61}
+2026-10-02 19:14:58,420 epoch=62 step=1 loss_G=2.0577 loss_D_A=0.1590 loss_D_B=0.1409 cycle=0.0876 idt=0.0641 gnorm=15.543 dnorm=5.760 nan=0
+2026-10-02 19:15:31,867 epoch=62 step=100 loss_G=2.3224 loss_D_A=0.1807 loss_D_B=0.1679 cycle=0.1000 idt=0.0921 gnorm=16.132 dnorm=6.623 nan=0
+2026-10-02 19:16:04,237 epoch=62 step=200 loss_G=2.1217 loss_D_A=0.1417 loss_D_B=0.2389 cycle=0.0959 idt=0.0705 gnorm=15.702 dnorm=6.644 nan=0
+2026-10-02 19:16:36,652 epoch=62 step=300 loss_G=2.1931 loss_D_A=0.1901 loss_D_B=0.3114 cycle=0.0957 idt=0.0657 gnorm=10.041 dnorm=7.871 nan=0
+2026-10-02 19:17:09,652 epoch=62 step=400 loss_G=2.1260 loss_D_A=0.1064 loss_D_B=0.1847 cycle=0.0963 idt=0.0795 gnorm=21.917 dnorm=6.920 nan=0
+2026-10-02 19:17:41,861 epoch=62 step=500 loss_G=2.2076 loss_D_A=0.1464 loss_D_B=0.1469 cycle=0.0903 idt=0.0698 gnorm=18.869 dnorm=6.958 nan=0
+2026-10-02 19:18:14,612 epoch=62 step=600 loss_G=2.1127 loss_D_A=0.1291 loss_D_B=0.2075 cycle=0.0981 idt=0.0698 gnorm=11.315 dnorm=5.638 nan=0
+2026-10-02 19:18:47,773 epoch=62 step=700 loss_G=2.2123 loss_D_A=0.0793 loss_D_B=0.1880 cycle=0.0797 idt=0.0669 gnorm=12.997 dnorm=5.752 nan=0
+2026-10-02 19:19:20,751 epoch=62 step=800 loss_G=2.2114 loss_D_A=0.1479 loss_D_B=0.2426 cycle=0.0867 idt=0.0750 gnorm=13.741 dnorm=7.124 nan=0
+2026-10-02 19:19:53,228 epoch=62 step=900 loss_G=2.6151 loss_D_A=0.2260 loss_D_B=0.2301 cycle=0.1124 idt=0.0787 gnorm=35.328 dnorm=8.116 nan=0
+2026-10-02 19:20:25,912 epoch=62 step=1000 loss_G=2.1329 loss_D_A=0.1237 loss_D_B=0.2110 cycle=0.0988 idt=0.0826 gnorm=15.205 dnorm=5.755 nan=0
+2026-10-02 19:20:57,689 epoch=62 step=1100 loss_G=1.7856 loss_D_A=0.1291 loss_D_B=0.2075 cycle=0.0841 idt=0.0584 gnorm=13.276 dnorm=5.309 nan=0
+2026-10-02 19:21:29,772 epoch=62 step=1200 loss_G=1.9302 loss_D_A=0.0920 loss_D_B=0.2759 cycle=0.0799 idt=0.0565 gnorm=8.269 dnorm=6.533 nan=0
+2026-10-02 19:22:02,229 epoch=62 step=1300 loss_G=2.0788 loss_D_A=0.2720 loss_D_B=0.1749 cycle=0.0845 idt=0.0652 gnorm=13.617 dnorm=7.955 nan=0
+2026-10-02 19:22:34,679 epoch=62 step=1400 loss_G=2.6712 loss_D_A=0.1662 loss_D_B=0.1965 cycle=0.1165 idt=0.0810 gnorm=22.083 dnorm=6.763 nan=0
+2026-10-02 19:23:06,850 epoch=62 step=1500 loss_G=2.1388 loss_D_A=0.1900 loss_D_B=0.1829 cycle=0.0928 idt=0.0625 gnorm=13.724 dnorm=8.997 nan=0
+2026-10-02 19:23:39,252 epoch=62 step=1600 loss_G=2.2029 loss_D_A=0.1214 loss_D_B=0.1481 cycle=0.0852 idt=0.0587 gnorm=15.855 dnorm=6.315 nan=0
+2026-10-02 19:23:42,374 epoch_mean={'g': 2.212327281880823, 'd_a': 0.15896965642893537, 'd_b': 0.19953916561529503, 'cycle': 0.0959854505076912, 'identity': 0.07347878876680172, 'epoch': 62}
+2026-10-02 19:23:43,466 epoch=63 step=1 loss_G=2.1152 loss_D_A=0.1566 loss_D_B=0.1833 cycle=0.0943 idt=0.0691 gnorm=16.299 dnorm=5.591 nan=0
+2026-10-02 19:24:15,932 epoch=63 step=100 loss_G=2.0814 loss_D_A=0.1239 loss_D_B=0.1764 cycle=0.0875 idt=0.0678 gnorm=10.465 dnorm=4.754 nan=0
+2026-10-02 19:24:48,269 epoch=63 step=200 loss_G=2.2255 loss_D_A=0.2473 loss_D_B=0.2271 cycle=0.0843 idt=0.0868 gnorm=16.672 dnorm=7.538 nan=0
+2026-10-02 19:25:20,598 epoch=63 step=300 loss_G=1.9726 loss_D_A=0.1612 loss_D_B=0.1794 cycle=0.0976 idt=0.0766 gnorm=17.784 dnorm=5.764 nan=0
+2026-10-02 19:25:53,176 epoch=63 step=400 loss_G=2.1330 loss_D_A=0.1621 loss_D_B=0.1817 cycle=0.0903 idt=0.0624 gnorm=17.437 dnorm=6.879 nan=0
+2026-10-02 19:26:25,395 epoch=63 step=500 loss_G=2.4418 loss_D_A=0.1269 loss_D_B=0.1815 cycle=0.0914 idt=0.0687 gnorm=16.525 dnorm=6.075 nan=0
+2026-10-02 19:26:57,653 epoch=63 step=600 loss_G=2.4791 loss_D_A=0.1866 loss_D_B=0.2552 cycle=0.1369 idt=0.1015 gnorm=13.344 dnorm=7.258 nan=0
+2026-10-02 19:27:30,617 epoch=63 step=700 loss_G=2.3972 loss_D_A=0.1482 loss_D_B=0.2015 cycle=0.0963 idt=0.0736 gnorm=19.557 dnorm=7.587 nan=0
+2026-10-02 19:28:02,929 epoch=63 step=800 loss_G=2.4276 loss_D_A=0.3263 loss_D_B=0.2053 cycle=0.0924 idt=0.0908 gnorm=16.414 dnorm=10.789 nan=0
+2026-10-02 19:28:35,557 epoch=63 step=900 loss_G=2.1721 loss_D_A=0.2053 loss_D_B=0.2475 cycle=0.0883 idt=0.0626 gnorm=11.526 dnorm=8.155 nan=0
+2026-10-02 19:29:08,091 epoch=63 step=1000 loss_G=1.8993 loss_D_A=0.1733 loss_D_B=0.1609 cycle=0.0817 idt=0.0611 gnorm=15.462 dnorm=7.339 nan=0
+2026-10-02 19:29:40,542 epoch=63 step=1100 loss_G=2.3711 loss_D_A=0.1628 loss_D_B=0.2118 cycle=0.1036 idt=0.0864 gnorm=10.368 dnorm=7.336 nan=0
+2026-10-02 19:30:12,806 epoch=63 step=1200 loss_G=1.9540 loss_D_A=0.1866 loss_D_B=0.1992 cycle=0.0783 idt=0.0577 gnorm=13.489 dnorm=8.917 nan=0
+2026-10-02 19:30:45,072 epoch=63 step=1300 loss_G=2.0365 loss_D_A=0.1092 loss_D_B=0.2671 cycle=0.0886 idt=0.0755 gnorm=14.563 dnorm=8.233 nan=0
+2026-10-02 19:31:17,213 epoch=63 step=1400 loss_G=2.2636 loss_D_A=0.1118 loss_D_B=0.2473 cycle=0.0857 idt=0.0570 gnorm=16.226 dnorm=7.444 nan=0
+2026-10-02 19:31:49,258 epoch=63 step=1500 loss_G=2.1308 loss_D_A=0.1577 loss_D_B=0.1524 cycle=0.0795 idt=0.0570 gnorm=13.065 dnorm=8.185 nan=0
+2026-10-02 19:32:21,925 epoch=63 step=1600 loss_G=2.1013 loss_D_A=0.1366 loss_D_B=0.2004 cycle=0.0871 idt=0.0661 gnorm=15.239 dnorm=5.603 nan=0
+2026-10-02 19:32:25,030 epoch_mean={'g': 2.208051788140528, 'd_a': 0.16086937566721662, 'd_b': 0.19904318862820264, 'cycle': 0.0955460542477436, 'identity': 0.07314376831054688, 'epoch': 63}
+2026-10-02 19:32:26,165 epoch=64 step=1 loss_G=2.5563 loss_D_A=0.1819 loss_D_B=0.2311 cycle=0.1095 idt=0.1049 gnorm=11.606 dnorm=7.614 nan=0
+2026-10-02 19:33:00,156 epoch=64 step=100 loss_G=2.7153 loss_D_A=0.1164 loss_D_B=0.1226 cycle=0.0971 idt=0.0668 gnorm=19.491 dnorm=5.328 nan=0
+2026-10-02 19:33:34,149 epoch=64 step=200 loss_G=2.2330 loss_D_A=0.1799 loss_D_B=0.2746 cycle=0.1042 idt=0.0605 gnorm=15.907 dnorm=12.017 nan=0
+2026-10-02 19:34:05,755 epoch=64 step=300 loss_G=2.1346 loss_D_A=0.1484 loss_D_B=0.1887 cycle=0.0883 idt=0.0589 gnorm=16.824 dnorm=6.395 nan=0
+2026-10-02 19:34:39,291 epoch=64 step=400 loss_G=2.4849 loss_D_A=0.1546 loss_D_B=0.2338 cycle=0.1098 idt=0.0780 gnorm=15.086 dnorm=6.478 nan=0
+2026-10-02 19:35:11,509 epoch=64 step=500 loss_G=2.5912 loss_D_A=0.1567 loss_D_B=0.1668 cycle=0.1084 idt=0.0916 gnorm=16.253 dnorm=6.926 nan=0
+2026-10-02 19:35:43,963 epoch=64 step=600 loss_G=2.1692 loss_D_A=0.1452 loss_D_B=0.1802 cycle=0.0837 idt=0.0634 gnorm=11.965 dnorm=8.801 nan=0
+2026-10-02 19:36:16,898 epoch=64 step=700 loss_G=1.8022 loss_D_A=0.1882 loss_D_B=0.2053 cycle=0.0885 idt=0.0713 gnorm=16.698 dnorm=6.839 nan=0
+2026-10-02 19:36:49,346 epoch=64 step=800 loss_G=2.3576 loss_D_A=0.1723 loss_D_B=0.1301 cycle=0.0993 idt=0.0717 gnorm=11.344 dnorm=8.047 nan=0
+2026-10-02 19:37:21,973 epoch=64 step=900 loss_G=2.2936 loss_D_A=0.0811 loss_D_B=0.2038 cycle=0.0858 idt=0.0668 gnorm=15.162 dnorm=6.819 nan=0
+2026-10-02 19:37:54,368 epoch=64 step=1000 loss_G=2.2735 loss_D_A=0.1752 loss_D_B=0.2473 cycle=0.1005 idt=0.0744 gnorm=13.592 dnorm=6.975 nan=0
+2026-10-02 19:38:27,157 epoch=64 step=1100 loss_G=1.9758 loss_D_A=0.2477 loss_D_B=0.2539 cycle=0.0863 idt=0.0690 gnorm=12.074 dnorm=10.115 nan=0
+2026-10-02 19:38:59,293 epoch=64 step=1200 loss_G=2.2608 loss_D_A=0.2387 loss_D_B=0.1301 cycle=0.1037 idt=0.0762 gnorm=19.170 dnorm=8.516 nan=0
+2026-10-02 19:39:31,595 epoch=64 step=1300 loss_G=1.8049 loss_D_A=0.1541 loss_D_B=0.1968 cycle=0.0872 idt=0.0596 gnorm=12.863 dnorm=7.804 nan=0
+2026-10-02 19:40:03,625 epoch=64 step=1400 loss_G=1.9994 loss_D_A=0.1888 loss_D_B=0.2050 cycle=0.0880 idt=0.0662 gnorm=11.601 dnorm=6.770 nan=0
+2026-10-02 19:40:36,146 epoch=64 step=1500 loss_G=2.0955 loss_D_A=0.2001 loss_D_B=0.1799 cycle=0.0929 idt=0.0636 gnorm=16.409 dnorm=7.864 nan=0
+2026-10-02 19:41:08,880 epoch=64 step=1600 loss_G=2.1026 loss_D_A=0.1593 loss_D_B=0.2529 cycle=0.0999 idt=0.0776 gnorm=20.010 dnorm=6.327 nan=0
+2026-10-02 19:41:12,034 epoch_mean={'g': 2.1951804214382764, 'd_a': 0.1593688396193226, 'd_b': 0.19760897618643244, 'cycle': 0.09442632450080066, 'identity': 0.07213238544345643, 'epoch': 64}
+2026-10-02 19:41:13,054 epoch=65 step=1 loss_G=2.0499 loss_D_A=0.1078 loss_D_B=0.1267 cycle=0.0968 idt=0.0734 gnorm=21.357 dnorm=5.150 nan=0
+2026-10-02 19:41:45,403 epoch=65 step=100 loss_G=2.2136 loss_D_A=0.1032 loss_D_B=0.1668 cycle=0.1025 idt=0.0775 gnorm=10.203 dnorm=5.795 nan=0
+2026-10-02 19:42:17,812 epoch=65 step=200 loss_G=1.9181 loss_D_A=0.2581 loss_D_B=0.1911 cycle=0.0881 idt=0.0684 gnorm=11.092 dnorm=9.135 nan=0
+2026-10-02 19:42:49,817 epoch=65 step=300 loss_G=2.1806 loss_D_A=0.2195 loss_D_B=0.2235 cycle=0.0843 idt=0.0687 gnorm=10.746 dnorm=7.698 nan=0
+2026-10-02 19:43:23,348 epoch=65 step=400 loss_G=2.8465 loss_D_A=0.1252 loss_D_B=0.1267 cycle=0.1074 idt=0.0767 gnorm=18.252 dnorm=5.488 nan=0
+2026-10-02 19:43:55,764 epoch=65 step=500 loss_G=2.3420 loss_D_A=0.2533 loss_D_B=0.1605 cycle=0.1071 idt=0.1026 gnorm=16.351 dnorm=6.871 nan=0
+2026-10-02 19:44:28,377 epoch=65 step=600 loss_G=2.2817 loss_D_A=0.1918 loss_D_B=0.1740 cycle=0.0903 idt=0.0625 gnorm=15.451 dnorm=6.769 nan=0
+2026-10-02 19:45:01,507 epoch=65 step=700 loss_G=2.3098 loss_D_A=0.1397 loss_D_B=0.2245 cycle=0.1105 idt=0.0801 gnorm=12.119 dnorm=7.166 nan=0
+2026-10-02 19:45:33,541 epoch=65 step=800 loss_G=2.7310 loss_D_A=0.1223 loss_D_B=0.2258 cycle=0.1017 idt=0.0737 gnorm=21.263 dnorm=6.545 nan=0
+2026-10-02 19:46:05,663 epoch=65 step=900 loss_G=2.1463 loss_D_A=0.1394 loss_D_B=0.1504 cycle=0.0854 idt=0.0599 gnorm=9.638 dnorm=6.360 nan=0
+2026-10-02 19:46:38,450 epoch=65 step=1000 loss_G=2.1469 loss_D_A=0.2114 loss_D_B=0.2402 cycle=0.0942 idt=0.0700 gnorm=15.534 dnorm=7.455 nan=0
+2026-10-02 19:47:10,791 epoch=65 step=1100 loss_G=1.9423 loss_D_A=0.2029 loss_D_B=0.2391 cycle=0.0834 idt=0.0578 gnorm=14.358 dnorm=6.002 nan=0
+2026-10-02 19:47:43,560 epoch=65 step=1200 loss_G=2.0332 loss_D_A=0.1439 loss_D_B=0.2663 cycle=0.0811 idt=0.0555 gnorm=17.431 dnorm=8.013 nan=0
+2026-10-02 19:48:16,538 epoch=65 step=1300 loss_G=2.0402 loss_D_A=0.2139 loss_D_B=0.1739 cycle=0.0807 idt=0.0582 gnorm=11.922 dnorm=8.813 nan=0
+2026-10-02 19:48:49,928 epoch=65 step=1400 loss_G=2.0103 loss_D_A=0.1800 loss_D_B=0.2090 cycle=0.0855 idt=0.0640 gnorm=11.368 dnorm=8.773 nan=0
+2026-10-02 19:49:22,601 epoch=65 step=1500 loss_G=2.4368 loss_D_A=0.2620 loss_D_B=0.2482 cycle=0.1155 idt=0.0895 gnorm=13.098 dnorm=8.493 nan=0
+2026-10-02 19:49:55,445 epoch=65 step=1600 loss_G=2.4047 loss_D_A=0.1300 loss_D_B=0.2050 cycle=0.1123 idt=0.0706 gnorm=16.617 dnorm=6.225 nan=0
+2026-10-02 19:49:58,590 epoch_mean={'g': 2.193937123932453, 'd_a': 0.15793670275196525, 'd_b': 0.19770204532220498, 'cycle': 0.09409458326256794, 'identity': 0.07137142678965692, 'epoch': 65}
+2026-10-02 19:49:59,660 epoch=66 step=1 loss_G=2.1192 loss_D_A=0.1141 loss_D_B=0.2669 cycle=0.0981 idt=0.0627 gnorm=18.034 dnorm=5.872 nan=0
+2026-10-02 19:50:32,681 epoch=66 step=100 loss_G=2.1279 loss_D_A=0.1371 loss_D_B=0.2258 cycle=0.0859 idt=0.0628 gnorm=12.387 dnorm=6.351 nan=0
+2026-10-02 19:51:04,823 epoch=66 step=200 loss_G=1.8749 loss_D_A=0.1528 loss_D_B=0.1826 cycle=0.0856 idt=0.0711 gnorm=17.543 dnorm=6.531 nan=0
+2026-10-02 19:51:37,428 epoch=66 step=300 loss_G=1.9855 loss_D_A=0.1256 loss_D_B=0.2038 cycle=0.0899 idt=0.0556 gnorm=12.946 dnorm=8.691 nan=0
+2026-10-02 19:52:11,971 epoch=66 step=400 loss_G=2.2833 loss_D_A=0.1665 loss_D_B=0.1966 cycle=0.1014 idt=0.0791 gnorm=17.023 dnorm=7.090 nan=0
+2026-10-02 19:52:45,010 epoch=66 step=500 loss_G=1.9300 loss_D_A=0.1464 loss_D_B=0.1766 cycle=0.0827 idt=0.0693 gnorm=14.662 dnorm=6.403 nan=0
+2026-10-02 19:53:17,239 epoch=66 step=600 loss_G=1.9687 loss_D_A=0.2175 loss_D_B=0.2364 cycle=0.0927 idt=0.0745 gnorm=14.084 dnorm=10.335 nan=0
+2026-10-02 19:53:51,441 epoch=66 step=700 loss_G=1.9008 loss_D_A=0.1966 loss_D_B=0.2063 cycle=0.0898 idt=0.0701 gnorm=15.074 dnorm=8.752 nan=0
+2026-10-02 19:54:24,205 epoch=66 step=800 loss_G=2.2635 loss_D_A=0.2496 loss_D_B=0.2182 cycle=0.0782 idt=0.0593 gnorm=13.311 dnorm=7.538 nan=0
+2026-10-02 19:54:56,635 epoch=66 step=900 loss_G=2.1553 loss_D_A=0.1580 loss_D_B=0.2582 cycle=0.0789 idt=0.0553 gnorm=16.927 dnorm=6.771 nan=0
+2026-10-02 19:55:29,307 epoch=66 step=1000 loss_G=2.1076 loss_D_A=0.1697 loss_D_B=0.2270 cycle=0.0867 idt=0.0575 gnorm=14.472 dnorm=7.122 nan=0
+2026-10-02 19:56:01,300 epoch=66 step=1100 loss_G=1.9835 loss_D_A=0.2380 loss_D_B=0.2306 cycle=0.0862 idt=0.0666 gnorm=14.108 dnorm=9.041 nan=0
+2026-10-02 19:56:33,636 epoch=66 step=1200 loss_G=2.0190 loss_D_A=0.1639 loss_D_B=0.3034 cycle=0.0893 idt=0.0653 gnorm=16.038 dnorm=9.901 nan=0
+2026-10-02 19:57:06,893 epoch=66 step=1300 loss_G=1.7475 loss_D_A=0.1831 loss_D_B=0.2324 cycle=0.0870 idt=0.0563 gnorm=15.003 dnorm=9.326 nan=0
+2026-10-02 19:57:39,221 epoch=66 step=1400 loss_G=2.0215 loss_D_A=0.1263 loss_D_B=0.1372 cycle=0.0810 idt=0.0646 gnorm=14.316 dnorm=6.008 nan=0
+2026-10-02 19:58:11,577 epoch=66 step=1500 loss_G=2.1555 loss_D_A=0.1105 loss_D_B=0.1578 cycle=0.0845 idt=0.0759 gnorm=21.635 dnorm=6.161 nan=0
+2026-10-02 19:58:45,069 epoch=66 step=1600 loss_G=2.2101 loss_D_A=0.1471 loss_D_B=0.2172 cycle=0.1030 idt=0.1030 gnorm=14.946 dnorm=6.535 nan=0
+2026-10-02 19:58:48,207 epoch_mean={'g': 2.1793801254367238, 'd_a': 0.15769072349027077, 'd_b': 0.19680424091978843, 'cycle': 0.0929765026021448, 'identity': 0.07045321731093507, 'epoch': 66}
+2026-10-02 19:58:49,338 epoch=67 step=1 loss_G=2.5374 loss_D_A=0.1567 loss_D_B=0.1858 cycle=0.0839 idt=0.0685 gnorm=14.376 dnorm=10.768 nan=0
+2026-10-02 19:59:22,616 epoch=67 step=100 loss_G=2.5319 loss_D_A=0.1587 loss_D_B=0.2672 cycle=0.0932 idt=0.0753 gnorm=11.440 dnorm=12.807 nan=0
+2026-10-02 19:59:55,172 epoch=67 step=200 loss_G=2.0940 loss_D_A=0.1642 loss_D_B=0.1696 cycle=0.0936 idt=0.0744 gnorm=13.570 dnorm=6.692 nan=0
+2026-10-02 20:00:27,445 epoch=67 step=300 loss_G=2.4960 loss_D_A=0.2134 loss_D_B=0.2407 cycle=0.1012 idt=0.0719 gnorm=19.063 dnorm=8.817 nan=0
+2026-10-02 20:00:59,838 epoch=67 step=400 loss_G=1.9291 loss_D_A=0.1852 loss_D_B=0.2356 cycle=0.0925 idt=0.0724 gnorm=9.319 dnorm=7.600 nan=0
+2026-10-02 20:01:32,092 epoch=67 step=500 loss_G=2.0977 loss_D_A=0.1091 loss_D_B=0.1326 cycle=0.1037 idt=0.0623 gnorm=25.310 dnorm=5.710 nan=0
+2026-10-02 20:02:04,596 epoch=67 step=600 loss_G=2.1224 loss_D_A=0.2095 loss_D_B=0.1908 cycle=0.0726 idt=0.0676 gnorm=13.435 dnorm=8.391 nan=0
+2026-10-02 20:02:36,798 epoch=67 step=700 loss_G=2.1219 loss_D_A=0.1905 loss_D_B=0.1203 cycle=0.0844 idt=0.0654 gnorm=15.725 dnorm=6.869 nan=0
+2026-10-02 20:03:09,146 epoch=67 step=800 loss_G=1.9958 loss_D_A=0.1707 loss_D_B=0.2157 cycle=0.0872 idt=0.0616 gnorm=16.873 dnorm=7.281 nan=0
+2026-10-02 20:03:42,040 epoch=67 step=900 loss_G=2.0273 loss_D_A=0.1464 loss_D_B=0.1992 cycle=0.0792 idt=0.0597 gnorm=13.062 dnorm=7.682 nan=0
+2026-10-02 20:04:14,343 epoch=67 step=1000 loss_G=2.1381 loss_D_A=0.2417 loss_D_B=0.1438 cycle=0.0877 idt=0.0589 gnorm=12.769 dnorm=7.303 nan=0
+2026-10-02 20:04:46,236 epoch=67 step=1100 loss_G=2.0300 loss_D_A=0.1721 loss_D_B=0.2308 cycle=0.0848 idt=0.0550 gnorm=11.909 dnorm=8.465 nan=0
+2026-10-02 20:05:18,591 epoch=67 step=1200 loss_G=2.6662 loss_D_A=0.2129 loss_D_B=0.2922 cycle=0.0883 idt=0.0627 gnorm=15.422 dnorm=13.566 nan=0
+2026-10-02 20:05:51,378 epoch=67 step=1300 loss_G=1.6627 loss_D_A=0.0864 loss_D_B=0.2326 cycle=0.0810 idt=0.0593 gnorm=14.860 dnorm=5.496 nan=0
+2026-10-02 20:06:23,906 epoch=67 step=1400 loss_G=1.8248 loss_D_A=0.1675 loss_D_B=0.2360 cycle=0.0820 idt=0.0578 gnorm=10.919 dnorm=7.418 nan=0
+2026-10-02 20:06:56,148 epoch=67 step=1500 loss_G=1.7029 loss_D_A=0.2448 loss_D_B=0.1974 cycle=0.0944 idt=0.0652 gnorm=12.359 dnorm=8.466 nan=0
+2026-10-02 20:07:28,520 epoch=67 step=1600 loss_G=2.3111 loss_D_A=0.2472 loss_D_B=0.1653 cycle=0.1046 idt=0.0965 gnorm=14.613 dnorm=7.186 nan=0
+2026-10-02 20:07:31,688 epoch_mean={'g': 2.168366047166149, 'd_a': 0.1581883874739179, 'd_b': 0.19484963742842584, 'cycle': 0.09232689519846661, 'identity': 0.06957363341906056, 'epoch': 67}
+2026-10-02 20:07:32,827 epoch=68 step=1 loss_G=2.0526 loss_D_A=0.1297 loss_D_B=0.2202 cycle=0.0958 idt=0.0622 gnorm=19.319 dnorm=6.467 nan=0
+2026-10-02 20:08:06,022 epoch=68 step=100 loss_G=2.4566 loss_D_A=0.2035 loss_D_B=0.1435 cycle=0.1121 idt=0.0800 gnorm=15.735 dnorm=7.614 nan=0
+2026-10-02 20:08:39,169 epoch=68 step=200 loss_G=2.0986 loss_D_A=0.1593 loss_D_B=0.1511 cycle=0.0857 idt=0.0573 gnorm=10.038 dnorm=6.271 nan=0
+2026-10-02 20:09:11,237 epoch=68 step=300 loss_G=2.1879 loss_D_A=0.1324 loss_D_B=0.1510 cycle=0.0986 idt=0.0690 gnorm=14.120 dnorm=5.280 nan=0
+2026-10-02 20:09:44,316 epoch=68 step=400 loss_G=1.9912 loss_D_A=0.0839 loss_D_B=0.1799 cycle=0.0780 idt=0.0579 gnorm=12.650 dnorm=5.655 nan=0
+2026-10-02 20:10:16,784 epoch=68 step=500 loss_G=2.1281 loss_D_A=0.1502 loss_D_B=0.1484 cycle=0.0886 idt=0.0621 gnorm=11.854 dnorm=5.918 nan=0
+2026-10-02 20:10:49,035 epoch=68 step=600 loss_G=2.1157 loss_D_A=0.1484 loss_D_B=0.1817 cycle=0.0924 idt=0.0671 gnorm=14.744 dnorm=5.587 nan=0
+2026-10-02 20:11:21,913 epoch=68 step=700 loss_G=1.9310 loss_D_A=0.1529 loss_D_B=0.1882 cycle=0.0881 idt=0.0642 gnorm=11.873 dnorm=8.101 nan=0
+2026-10-02 20:11:58,214 epoch=68 step=800 loss_G=2.1008 loss_D_A=0.1408 loss_D_B=0.1174 cycle=0.0844 idt=0.0609 gnorm=15.346 dnorm=6.334 nan=0
+2026-10-02 20:12:34,156 epoch=68 step=900 loss_G=2.5536 loss_D_A=0.1649 loss_D_B=0.2471 cycle=0.1089 idt=0.0811 gnorm=14.902 dnorm=7.920 nan=0
+2026-10-02 20:13:09,385 epoch=68 step=1000 loss_G=2.4448 loss_D_A=0.1043 loss_D_B=0.2106 cycle=0.0948 idt=0.0648 gnorm=12.416 dnorm=8.690 nan=0
+2026-10-02 20:13:42,854 epoch=68 step=1100 loss_G=2.3099 loss_D_A=0.1191 loss_D_B=0.2491 cycle=0.0843 idt=0.0714 gnorm=10.887 dnorm=7.828 nan=0
+2026-10-02 20:14:16,857 epoch=68 step=1200 loss_G=2.0295 loss_D_A=0.1096 loss_D_B=0.2473 cycle=0.0781 idt=0.0511 gnorm=12.190 dnorm=5.679 nan=0
+2026-10-02 20:14:49,976 epoch=68 step=1300 loss_G=2.2371 loss_D_A=0.1214 loss_D_B=0.1677 cycle=0.0877 idt=0.0812 gnorm=16.311 dnorm=6.441 nan=0
+2026-10-02 20:15:22,041 epoch=68 step=1400 loss_G=2.1791 loss_D_A=0.1488 loss_D_B=0.1839 cycle=0.0802 idt=0.0684 gnorm=16.059 dnorm=9.652 nan=0
+2026-10-02 20:15:54,370 epoch=68 step=1500 loss_G=2.1256 loss_D_A=0.1529 loss_D_B=0.1806 cycle=0.0949 idt=0.0677 gnorm=12.726 dnorm=6.041 nan=0
+2026-10-02 20:16:26,944 epoch=68 step=1600 loss_G=1.9723 loss_D_A=0.1077 loss_D_B=0.1870 cycle=0.0944 idt=0.0560 gnorm=18.207 dnorm=6.819 nan=0
+2026-10-02 20:16:30,083 epoch_mean={'g': 2.161933017517469, 'd_a': 0.15591940554032416, 'd_b': 0.194368274759802, 'cycle': 0.09153743767590256, 'identity': 0.06871981887343508, 'epoch': 68}
+2026-10-02 20:16:31,247 epoch=69 step=1 loss_G=2.2418 loss_D_A=0.0709 loss_D_B=0.1958 cycle=0.0924 idt=0.0747 gnorm=14.950 dnorm=5.607 nan=0
+2026-10-02 20:17:04,817 epoch=69 step=100 loss_G=2.0431 loss_D_A=0.1188 loss_D_B=0.1916 cycle=0.0869 idt=0.0620 gnorm=16.472 dnorm=8.675 nan=0
+2026-10-02 20:17:37,179 epoch=69 step=200 loss_G=2.2337 loss_D_A=0.1417 loss_D_B=0.1884 cycle=0.0798 idt=0.0594 gnorm=16.201 dnorm=6.536 nan=0
+2026-10-02 20:18:09,868 epoch=69 step=300 loss_G=2.5389 loss_D_A=0.0757 loss_D_B=0.2878 cycle=0.0918 idt=0.0680 gnorm=15.479 dnorm=8.454 nan=0
+2026-10-02 20:18:42,917 epoch=69 step=400 loss_G=2.4599 loss_D_A=0.1737 loss_D_B=0.1848 cycle=0.0748 idt=0.0921 gnorm=14.820 dnorm=5.961 nan=0
+2026-10-02 20:19:16,322 epoch=69 step=500 loss_G=2.1597 loss_D_A=0.1514 loss_D_B=0.2234 cycle=0.1040 idt=0.0710 gnorm=16.969 dnorm=9.446 nan=0
+2026-10-02 20:19:48,780 epoch=69 step=600 loss_G=2.1284 loss_D_A=0.1676 loss_D_B=0.1483 cycle=0.0819 idt=0.0553 gnorm=12.177 dnorm=6.386 nan=0
+2026-10-02 20:20:21,525 epoch=69 step=700 loss_G=2.1405 loss_D_A=0.1259 loss_D_B=0.1703 cycle=0.0869 idt=0.0774 gnorm=16.927 dnorm=5.381 nan=0
+2026-10-02 20:20:54,062 epoch=69 step=800 loss_G=2.1076 loss_D_A=0.1501 loss_D_B=0.2403 cycle=0.0933 idt=0.0700 gnorm=12.545 dnorm=8.375 nan=0
+2026-10-02 20:21:26,122 epoch=69 step=900 loss_G=2.0243 loss_D_A=0.1803 loss_D_B=0.2420 cycle=0.0878 idt=0.0606 gnorm=18.038 dnorm=8.544 nan=0
+2026-10-02 20:21:59,324 epoch=69 step=1000 loss_G=2.1218 loss_D_A=0.1038 loss_D_B=0.1634 cycle=0.0873 idt=0.0518 gnorm=16.438 dnorm=5.985 nan=0
+2026-10-02 20:22:31,406 epoch=69 step=1100 loss_G=2.1878 loss_D_A=0.1365 loss_D_B=0.1783 cycle=0.0882 idt=0.0529 gnorm=18.241 dnorm=6.328 nan=0
+2026-10-02 20:23:03,893 epoch=69 step=1200 loss_G=2.1276 loss_D_A=0.2287 loss_D_B=0.1208 cycle=0.0942 idt=0.0709 gnorm=14.337 dnorm=7.192 nan=0
+2026-10-02 20:23:36,362 epoch=69 step=1300 loss_G=2.3025 loss_D_A=0.1713 loss_D_B=0.2666 cycle=0.0957 idt=0.0726 gnorm=15.666 dnorm=10.682 nan=0
+2026-10-02 20:24:08,579 epoch=69 step=1400 loss_G=2.3513 loss_D_A=0.1475 loss_D_B=0.1465 cycle=0.0896 idt=0.0674 gnorm=14.402 dnorm=9.306 nan=0
+2026-10-02 20:24:40,828 epoch=69 step=1500 loss_G=1.9813 loss_D_A=0.2284 loss_D_B=0.2851 cycle=0.0800 idt=0.0569 gnorm=14.372 dnorm=10.281 nan=0
+2026-10-02 20:25:13,225 epoch=69 step=1600 loss_G=2.1170 loss_D_A=0.1437 loss_D_B=0.2237 cycle=0.0949 idt=0.0776 gnorm=9.259 dnorm=7.453 nan=0
+2026-10-02 20:25:16,363 epoch_mean={'g': 2.161580757472826, 'd_a': 0.15317658608004173, 'd_b': 0.19560508964965062, 'cycle': 0.09082570520246991, 'identity': 0.06836028957959288, 'epoch': 69}
+2026-10-02 20:25:17,511 epoch=70 step=1 loss_G=2.3070 loss_D_A=0.1363 loss_D_B=0.1558 cycle=0.0990 idt=0.0729 gnorm=16.442 dnorm=8.200 nan=0
+2026-10-02 20:25:50,087 epoch=70 step=100 loss_G=2.0175 loss_D_A=0.1200 loss_D_B=0.1916 cycle=0.0795 idt=0.0603 gnorm=18.627 dnorm=6.093 nan=0
+2026-10-02 20:26:22,730 epoch=70 step=200 loss_G=2.3157 loss_D_A=0.1012 loss_D_B=0.2235 cycle=0.0910 idt=0.0844 gnorm=15.246 dnorm=6.888 nan=0
+2026-10-02 20:26:54,735 epoch=70 step=300 loss_G=2.4009 loss_D_A=0.1539 loss_D_B=0.2330 cycle=0.0939 idt=0.0566 gnorm=19.081 dnorm=8.753 nan=0
+2026-10-02 20:27:28,944 epoch=70 step=400 loss_G=1.7155 loss_D_A=0.1557 loss_D_B=0.1810 cycle=0.0822 idt=0.0527 gnorm=13.866 dnorm=6.575 nan=0
+2026-10-02 20:28:01,249 epoch=70 step=500 loss_G=2.2844 loss_D_A=0.1437 loss_D_B=0.1454 cycle=0.0900 idt=0.0654 gnorm=22.792 dnorm=10.211 nan=0
+2026-10-02 20:28:34,069 epoch=70 step=600 loss_G=2.0047 loss_D_A=0.1959 loss_D_B=0.2371 cycle=0.0867 idt=0.0534 gnorm=24.533 dnorm=8.838 nan=0
+2026-10-02 20:29:06,399 epoch=70 step=700 loss_G=1.7866 loss_D_A=0.1383 loss_D_B=0.1845 cycle=0.0751 idt=0.0587 gnorm=13.455 dnorm=6.795 nan=0
+2026-10-02 20:29:38,904 epoch=70 step=800 loss_G=2.0655 loss_D_A=0.1873 loss_D_B=0.1462 cycle=0.0899 idt=0.0651 gnorm=13.646 dnorm=8.572 nan=0
+2026-10-02 20:30:11,311 epoch=70 step=900 loss_G=1.8541 loss_D_A=0.1449 loss_D_B=0.1809 cycle=0.0947 idt=0.0643 gnorm=15.120 dnorm=7.964 nan=0
+2026-10-02 20:30:44,167 epoch=70 step=1000 loss_G=2.0330 loss_D_A=0.0994 loss_D_B=0.2139 cycle=0.0810 idt=0.0682 gnorm=13.239 dnorm=7.131 nan=0
+2026-10-02 20:31:16,336 epoch=70 step=1100 loss_G=2.0756 loss_D_A=0.1607 loss_D_B=0.1464 cycle=0.0826 idt=0.0545 gnorm=13.559 dnorm=7.369 nan=0
+2026-10-02 20:31:48,653 epoch=70 step=1200 loss_G=2.8365 loss_D_A=0.1560 loss_D_B=0.1807 cycle=0.0936 idt=0.0818 gnorm=18.620 dnorm=7.459 nan=0
+2026-10-02 20:32:21,478 epoch=70 step=1300 loss_G=2.4647 loss_D_A=0.1988 loss_D_B=0.1649 cycle=0.0886 idt=0.0594 gnorm=13.502 dnorm=8.095 nan=0
+2026-10-02 20:32:53,552 epoch=70 step=1400 loss_G=2.3585 loss_D_A=0.1081 loss_D_B=0.1305 cycle=0.0831 idt=0.0746 gnorm=19.731 dnorm=7.068 nan=0
+2026-10-02 20:33:26,201 epoch=70 step=1500 loss_G=1.7925 loss_D_A=0.1129 loss_D_B=0.2210 cycle=0.0796 idt=0.0658 gnorm=10.952 dnorm=7.304 nan=0
+2026-10-02 20:33:59,586 epoch=70 step=1600 loss_G=2.1317 loss_D_A=0.1374 loss_D_B=0.1408 cycle=0.0862 idt=0.0636 gnorm=14.532 dnorm=5.818 nan=0
+2026-10-02 20:34:02,892 epoch_mean={'g': 2.1568975033967392, 'd_a': 0.15489411916792023, 'd_b': 0.19273404897369953, 'cycle': 0.09007447995014073, 'identity': 0.06789714742151107, 'epoch': 70}
+2026-10-02 20:34:04,493 epoch=71 step=1 loss_G=1.9651 loss_D_A=0.1219 loss_D_B=0.1613 cycle=0.0820 idt=0.0550 gnorm=19.015 dnorm=7.219 nan=0
+2026-10-02 20:34:37,531 epoch=71 step=100 loss_G=1.9888 loss_D_A=0.1917 loss_D_B=0.1733 cycle=0.0901 idt=0.0587 gnorm=14.524 dnorm=9.386 nan=0
+2026-10-02 20:35:10,860 epoch=71 step=200 loss_G=1.7482 loss_D_A=0.1620 loss_D_B=0.2192 cycle=0.0803 idt=0.0571 gnorm=9.902 dnorm=9.081 nan=0
+2026-10-02 20:35:43,777 epoch=71 step=300 loss_G=1.8818 loss_D_A=0.1302 loss_D_B=0.1756 cycle=0.0878 idt=0.0633 gnorm=16.765 dnorm=5.845 nan=0
+2026-10-02 20:36:16,744 epoch=71 step=400 loss_G=2.4380 loss_D_A=0.1434 loss_D_B=0.1443 cycle=0.0960 idt=0.0645 gnorm=19.991 dnorm=7.295 nan=0
+2026-10-02 20:36:49,266 epoch=71 step=500 loss_G=1.9366 loss_D_A=0.1928 loss_D_B=0.1861 cycle=0.0820 idt=0.0586 gnorm=10.486 dnorm=7.778 nan=0
+2026-10-02 20:37:21,434 epoch=71 step=600 loss_G=2.3487 loss_D_A=0.2062 loss_D_B=0.1771 cycle=0.1018 idt=0.0859 gnorm=20.687 dnorm=8.427 nan=0
+2026-10-02 20:37:54,002 epoch=71 step=700 loss_G=2.2144 loss_D_A=0.3042 loss_D_B=0.1557 cycle=0.0889 idt=0.0585 gnorm=19.207 dnorm=14.447 nan=0
+2026-10-02 20:38:27,214 epoch=71 step=800 loss_G=2.2457 loss_D_A=0.1706 loss_D_B=0.1932 cycle=0.0814 idt=0.0637 gnorm=11.076 dnorm=10.164 nan=0
+2026-10-02 20:38:59,608 epoch=71 step=900 loss_G=2.1587 loss_D_A=0.2228 loss_D_B=0.1733 cycle=0.1030 idt=0.0911 gnorm=16.730 dnorm=10.599 nan=0
+2026-10-02 20:39:32,304 epoch=71 step=1000 loss_G=2.4986 loss_D_A=0.1371 loss_D_B=0.2145 cycle=0.0972 idt=0.1483 gnorm=18.142 dnorm=9.107 nan=0
+2026-10-02 20:40:04,487 epoch=71 step=1100 loss_G=1.9153 loss_D_A=0.1886 loss_D_B=0.1694 cycle=0.0853 idt=0.0584 gnorm=13.101 dnorm=7.480 nan=0
+2026-10-02 20:40:36,714 epoch=71 step=1200 loss_G=2.3781 loss_D_A=0.1400 loss_D_B=0.2289 cycle=0.0903 idt=0.0660 gnorm=18.319 dnorm=11.634 nan=0
+2026-10-02 20:41:09,440 epoch=71 step=1300 loss_G=2.0497 loss_D_A=0.2065 loss_D_B=0.1685 cycle=0.0926 idt=0.0779 gnorm=13.302 dnorm=11.846 nan=0
+2026-10-02 20:41:41,807 epoch=71 step=1400 loss_G=2.0469 loss_D_A=0.1418 loss_D_B=0.1690 cycle=0.0880 idt=0.0608 gnorm=12.073 dnorm=6.730 nan=0
+2026-10-02 20:42:14,320 epoch=71 step=1500 loss_G=2.6197 loss_D_A=0.1940 loss_D_B=0.1812 cycle=0.0906 idt=0.0633 gnorm=16.893 dnorm=13.401 nan=0
+2026-10-02 20:42:46,772 epoch=71 step=1600 loss_G=2.0049 loss_D_A=0.2132 loss_D_B=0.1665 cycle=0.0932 idt=0.0697 gnorm=16.506 dnorm=6.342 nan=0
+2026-10-02 20:42:49,914 epoch_mean={'g': 2.148170158433618, 'd_a': 0.15469174592391305, 'd_b': 0.1923083003263296, 'cycle': 0.08952570376188859, 'identity': 0.06642524766625825, 'epoch': 71}
+2026-10-02 20:42:51,050 epoch=72 step=1 loss_G=2.0604 loss_D_A=0.2000 loss_D_B=0.1759 cycle=0.0990 idt=0.0643 gnorm=18.142 dnorm=9.088 nan=0
+2026-10-02 20:43:24,557 epoch=72 step=100 loss_G=2.4913 loss_D_A=0.0804 loss_D_B=0.2075 cycle=0.0924 idt=0.0610 gnorm=12.339 dnorm=7.394 nan=0
+2026-10-02 20:43:56,559 epoch=72 step=200 loss_G=2.1917 loss_D_A=0.1387 loss_D_B=0.2294 cycle=0.0898 idt=0.0605 gnorm=12.414 dnorm=11.421 nan=0
+2026-10-02 20:44:29,011 epoch=72 step=300 loss_G=1.8477 loss_D_A=0.1210 loss_D_B=0.2125 cycle=0.0863 idt=0.0689 gnorm=11.728 dnorm=6.604 nan=0
+2026-10-02 20:45:01,442 epoch=72 step=400 loss_G=2.2431 loss_D_A=0.1862 loss_D_B=0.1618 cycle=0.0827 idt=0.0557 gnorm=15.736 dnorm=7.321 nan=0
+2026-10-02 20:45:33,782 epoch=72 step=500 loss_G=2.3158 loss_D_A=0.1694 loss_D_B=0.2067 cycle=0.1006 idt=0.0678 gnorm=23.166 dnorm=7.733 nan=0
+2026-10-02 20:46:05,935 epoch=72 step=600 loss_G=2.0439 loss_D_A=0.1227 loss_D_B=0.1525 cycle=0.0846 idt=0.0620 gnorm=18.291 dnorm=6.001 nan=0
+2026-10-02 20:46:38,339 epoch=72 step=700 loss_G=1.9443 loss_D_A=0.1518 loss_D_B=0.2381 cycle=0.0927 idt=0.0873 gnorm=14.532 dnorm=7.591 nan=0
+2026-10-02 20:47:10,200 epoch=72 step=800 loss_G=2.3316 loss_D_A=0.1021 loss_D_B=0.2012 cycle=0.0917 idt=0.0690 gnorm=14.256 dnorm=6.966 nan=0
+2026-10-02 20:47:42,341 epoch=72 step=900 loss_G=2.4056 loss_D_A=0.2038 loss_D_B=0.2013 cycle=0.0915 idt=0.0737 gnorm=11.913 dnorm=10.959 nan=0
+2026-10-02 20:48:14,947 epoch=72 step=1000 loss_G=2.2145 loss_D_A=0.1385 loss_D_B=0.1580 cycle=0.0759 idt=0.0545 gnorm=14.435 dnorm=6.860 nan=0
+2026-10-02 20:48:48,018 epoch=72 step=1100 loss_G=1.9085 loss_D_A=0.1106 loss_D_B=0.1945 cycle=0.1002 idt=0.0715 gnorm=24.030 dnorm=7.493 nan=0
+2026-10-02 20:49:20,121 epoch=72 step=1200 loss_G=2.0976 loss_D_A=0.1990 loss_D_B=0.2304 cycle=0.1009 idt=0.0907 gnorm=14.657 dnorm=6.874 nan=0
+2026-10-02 20:49:52,949 epoch=72 step=1300 loss_G=2.5621 loss_D_A=0.1140 loss_D_B=0.1945 cycle=0.1078 idt=0.0963 gnorm=21.770 dnorm=7.299 nan=0
+2026-10-02 20:50:25,474 epoch=72 step=1400 loss_G=2.3321 loss_D_A=0.0812 loss_D_B=0.1989 cycle=0.0892 idt=0.0673 gnorm=13.509 dnorm=6.418 nan=0
+2026-10-02 20:50:57,811 epoch=72 step=1500 loss_G=2.3543 loss_D_A=0.0826 loss_D_B=0.2445 cycle=0.0956 idt=0.0665 gnorm=17.964 dnorm=9.227 nan=0
+2026-10-02 20:51:30,883 epoch=72 step=1600 loss_G=1.8434 loss_D_A=0.2073 loss_D_B=0.1957 cycle=0.0756 idt=0.0552 gnorm=16.398 dnorm=10.190 nan=0
+2026-10-02 20:51:33,996 epoch_mean={'g': 2.137273601271351, 'd_a': 0.15333583665930706, 'd_b': 0.19241985060413433, 'cycle': 0.08883213019519119, 'identity': 0.06557556057568663, 'epoch': 72}
+2026-10-02 20:51:35,163 epoch=73 step=1 loss_G=1.6718 loss_D_A=0.1378 loss_D_B=0.1443 cycle=0.0798 idt=0.0550 gnorm=13.790 dnorm=7.383 nan=0
+2026-10-02 20:52:08,992 epoch=73 step=100 loss_G=1.8166 loss_D_A=0.1146 loss_D_B=0.2103 cycle=0.0810 idt=0.0630 gnorm=13.517 dnorm=10.769 nan=0
+2026-10-02 20:52:40,989 epoch=73 step=200 loss_G=1.8378 loss_D_A=0.1453 loss_D_B=0.1699 cycle=0.0859 idt=0.0507 gnorm=12.187 dnorm=7.860 nan=0
+2026-10-02 20:53:13,893 epoch=73 step=300 loss_G=1.7127 loss_D_A=0.1751 loss_D_B=0.1754 cycle=0.0754 idt=0.0501 gnorm=13.530 dnorm=7.470 nan=0
+2026-10-02 20:53:48,189 epoch=73 step=400 loss_G=2.0196 loss_D_A=0.0874 loss_D_B=0.1582 cycle=0.0850 idt=0.0565 gnorm=16.578 dnorm=8.859 nan=0
+2026-10-02 20:54:21,838 epoch=73 step=500 loss_G=1.6869 loss_D_A=0.1557 loss_D_B=0.1935 cycle=0.0783 idt=0.0526 gnorm=16.696 dnorm=10.110 nan=0
+2026-10-02 20:54:54,601 epoch=73 step=600 loss_G=1.8789 loss_D_A=0.1678 loss_D_B=0.2106 cycle=0.0842 idt=0.0657 gnorm=11.196 dnorm=6.746 nan=0
+2026-10-02 20:55:27,173 epoch=73 step=700 loss_G=1.8946 loss_D_A=0.1555 loss_D_B=0.1633 cycle=0.0822 idt=0.0642 gnorm=11.607 dnorm=7.670 nan=0
+2026-10-02 20:55:59,402 epoch=73 step=800 loss_G=2.2441 loss_D_A=0.1205 loss_D_B=0.1657 cycle=0.0821 idt=0.0605 gnorm=24.959 dnorm=7.363 nan=0
+2026-10-02 20:56:31,685 epoch=73 step=900 loss_G=2.3763 loss_D_A=0.1380 loss_D_B=0.2376 cycle=0.1012 idt=0.0624 gnorm=20.225 dnorm=8.501 nan=0
+2026-10-02 20:57:04,402 epoch=73 step=1000 loss_G=2.0756 loss_D_A=0.1833 loss_D_B=0.1234 cycle=0.0879 idt=0.0588 gnorm=22.132 dnorm=6.687 nan=0
+2026-10-02 20:57:35,917 epoch=73 step=1100 loss_G=2.1220 loss_D_A=0.1570 loss_D_B=0.1954 cycle=0.0775 idt=0.0611 gnorm=16.028 dnorm=7.824 nan=0
+2026-10-02 20:58:08,812 epoch=73 step=1200 loss_G=2.3531 loss_D_A=0.1466 loss_D_B=0.1892 cycle=0.1017 idt=0.0853 gnorm=14.068 dnorm=6.756 nan=0
+2026-10-02 20:58:42,168 epoch=73 step=1300 loss_G=2.2244 loss_D_A=0.2393 loss_D_B=0.2044 cycle=0.0990 idt=0.0709 gnorm=14.192 dnorm=9.189 nan=0
+2026-10-02 20:59:14,640 epoch=73 step=1400 loss_G=2.1198 loss_D_A=0.1589 loss_D_B=0.1677 cycle=0.0872 idt=0.0606 gnorm=19.834 dnorm=9.107 nan=0
+2026-10-02 20:59:47,488 epoch=73 step=1500 loss_G=1.8445 loss_D_A=0.1714 loss_D_B=0.1656 cycle=0.0817 idt=0.0588 gnorm=8.774 dnorm=8.101 nan=0
+2026-10-02 21:00:20,243 epoch=73 step=1600 loss_G=1.9533 loss_D_A=0.1474 loss_D_B=0.2627 cycle=0.0773 idt=0.0535 gnorm=13.039 dnorm=8.972 nan=0
+2026-10-02 21:00:23,341 epoch_mean={'g': 2.1413149626358696, 'd_a': 0.15172785409489034, 'd_b': 0.19064084639460405, 'cycle': 0.08902842835609957, 'identity': 0.06543321313324922, 'epoch': 73}
+2026-10-02 21:00:24,518 epoch=74 step=1 loss_G=2.3039 loss_D_A=0.1198 loss_D_B=0.2171 cycle=0.0880 idt=0.0588 gnorm=13.106 dnorm=9.209 nan=0
+2026-10-02 21:00:58,072 epoch=74 step=100 loss_G=1.6966 loss_D_A=0.1698 loss_D_B=0.1550 cycle=0.0770 idt=0.0542 gnorm=13.009 dnorm=7.380 nan=0
+2026-10-02 21:01:30,724 epoch=74 step=200 loss_G=2.6174 loss_D_A=0.1249 loss_D_B=0.1845 cycle=0.1088 idt=0.0767 gnorm=25.858 dnorm=6.123 nan=0
+2026-10-02 21:02:03,269 epoch=74 step=300 loss_G=1.9752 loss_D_A=0.0996 loss_D_B=0.1363 cycle=0.0805 idt=0.0611 gnorm=15.440 dnorm=5.478 nan=0
+2026-10-02 21:02:35,606 epoch=74 step=400 loss_G=2.5114 loss_D_A=0.1103 loss_D_B=0.2015 cycle=0.0849 idt=0.0609 gnorm=11.795 dnorm=7.076 nan=0
+2026-10-02 21:03:08,100 epoch=74 step=500 loss_G=2.1329 loss_D_A=0.2626 loss_D_B=0.1845 cycle=0.0779 idt=0.0637 gnorm=24.657 dnorm=8.035 nan=0
+2026-10-02 21:03:41,003 epoch=74 step=600 loss_G=2.2290 loss_D_A=0.1781 loss_D_B=0.2321 cycle=0.0966 idt=0.0685 gnorm=25.113 dnorm=8.329 nan=0
+2026-10-02 21:04:13,597 epoch=74 step=700 loss_G=2.0551 loss_D_A=0.1022 loss_D_B=0.3585 cycle=0.0812 idt=0.0610 gnorm=12.667 dnorm=8.535 nan=0
+2026-10-02 21:04:46,063 epoch=74 step=800 loss_G=1.9637 loss_D_A=0.1682 loss_D_B=0.1855 cycle=0.0836 idt=0.0587 gnorm=15.184 dnorm=6.607 nan=0
+2026-10-02 21:05:18,488 epoch=74 step=900 loss_G=2.4321 loss_D_A=0.1388 loss_D_B=0.2142 cycle=0.0951 idt=0.0702 gnorm=13.481 dnorm=9.101 nan=0
+2026-10-02 21:05:50,868 epoch=74 step=1000 loss_G=2.1275 loss_D_A=0.1334 loss_D_B=0.2321 cycle=0.0885 idt=0.0648 gnorm=12.501 dnorm=7.392 nan=0
+2026-10-02 21:06:23,205 epoch=74 step=1100 loss_G=1.8849 loss_D_A=0.0830 loss_D_B=0.1492 cycle=0.0838 idt=0.0616 gnorm=12.997 dnorm=5.789 nan=0
+2026-10-02 21:06:55,375 epoch=74 step=1200 loss_G=2.2473 loss_D_A=0.1473 loss_D_B=0.1321 cycle=0.0845 idt=0.0647 gnorm=16.736 dnorm=7.837 nan=0
+2026-10-02 21:07:28,232 epoch=74 step=1300 loss_G=2.5735 loss_D_A=0.1028 loss_D_B=0.1434 cycle=0.0830 idt=0.0569 gnorm=14.267 dnorm=5.618 nan=0
+2026-10-02 21:08:00,262 epoch=74 step=1400 loss_G=2.1660 loss_D_A=0.1314 loss_D_B=0.1992 cycle=0.0902 idt=0.0631 gnorm=16.480 dnorm=8.131 nan=0
+2026-10-02 21:08:32,607 epoch=74 step=1500 loss_G=2.0725 loss_D_A=0.1335 loss_D_B=0.2001 cycle=0.0932 idt=0.0651 gnorm=10.809 dnorm=8.802 nan=0
+2026-10-02 21:09:05,520 epoch=74 step=1600 loss_G=2.1331 loss_D_A=0.1587 loss_D_B=0.2067 cycle=0.0824 idt=0.0553 gnorm=11.724 dnorm=9.276 nan=0
+2026-10-02 21:09:08,517 epoch_mean={'g': 2.126381290032997, 'd_a': 0.1514818937882133, 'd_b': 0.1910336891316479, 'cycle': 0.08757767766158774, 'identity': 0.06474081003888053, 'epoch': 74}
+2026-10-02 21:09:09,624 epoch=75 step=1 loss_G=2.1328 loss_D_A=0.1951 loss_D_B=0.1597 cycle=0.0943 idt=0.0670 gnorm=12.566 dnorm=6.364 nan=0
+2026-10-02 21:09:43,332 epoch=75 step=100 loss_G=1.8060 loss_D_A=0.2818 loss_D_B=0.2074 cycle=0.0807 idt=0.0562 gnorm=17.378 dnorm=11.621 nan=0
+2026-10-02 21:10:15,577 epoch=75 step=200 loss_G=2.3163 loss_D_A=0.1186 loss_D_B=0.2188 cycle=0.0922 idt=0.0708 gnorm=16.613 dnorm=8.778 nan=0
+2026-10-02 21:10:48,113 epoch=75 step=300 loss_G=1.7534 loss_D_A=0.1727 loss_D_B=0.1801 cycle=0.0813 idt=0.0555 gnorm=11.202 dnorm=7.400 nan=0
+2026-10-02 21:11:20,491 epoch=75 step=400 loss_G=1.9426 loss_D_A=0.0926 loss_D_B=0.2226 cycle=0.0903 idt=0.0656 gnorm=29.661 dnorm=7.188 nan=0
+2026-10-02 21:11:52,762 epoch=75 step=500 loss_G=1.9408 loss_D_A=0.1694 loss_D_B=0.1811 cycle=0.0874 idt=0.0655 gnorm=17.222 dnorm=6.662 nan=0
+2026-10-02 21:12:25,074 epoch=75 step=600 loss_G=2.3762 loss_D_A=0.1580 loss_D_B=0.1791 cycle=0.0955 idt=0.0771 gnorm=12.017 dnorm=6.703 nan=0
+2026-10-02 21:12:57,373 epoch=75 step=700 loss_G=2.2596 loss_D_A=0.1342 loss_D_B=0.2090 cycle=0.0720 idt=0.0625 gnorm=23.537 dnorm=12.026 nan=0
+2026-10-02 21:13:30,466 epoch=75 step=800 loss_G=2.1737 loss_D_A=0.1582 loss_D_B=0.1885 cycle=0.0884 idt=0.0722 gnorm=11.020 dnorm=7.137 nan=0
+2026-10-02 21:14:03,905 epoch=75 step=900 loss_G=2.2847 loss_D_A=0.1313 loss_D_B=0.1293 cycle=0.0938 idt=0.0703 gnorm=15.930 dnorm=6.883 nan=0
+2026-10-02 21:14:36,961 epoch=75 step=1000 loss_G=2.5622 loss_D_A=0.1299 loss_D_B=0.1815 cycle=0.1002 idt=0.0680 gnorm=16.103 dnorm=8.602 nan=0
+2026-10-02 21:15:10,201 epoch=75 step=1100 loss_G=2.2969 loss_D_A=0.0987 loss_D_B=0.1950 cycle=0.0945 idt=0.0580 gnorm=19.361 dnorm=8.266 nan=0
+2026-10-02 21:15:42,564 epoch=75 step=1200 loss_G=2.0943 loss_D_A=0.1730 loss_D_B=0.2546 cycle=0.0802 idt=0.0532 gnorm=21.248 dnorm=11.602 nan=0
+2026-10-02 21:16:15,537 epoch=75 step=1300 loss_G=2.5116 loss_D_A=0.0914 loss_D_B=0.1311 cycle=0.0941 idt=0.0691 gnorm=17.790 dnorm=6.084 nan=0
+2026-10-02 21:16:47,697 epoch=75 step=1400 loss_G=1.9847 loss_D_A=0.1501 loss_D_B=0.1812 cycle=0.0796 idt=0.0675 gnorm=13.398 dnorm=6.951 nan=0
+2026-10-02 21:17:19,863 epoch=75 step=1500 loss_G=2.2385 loss_D_A=0.2297 loss_D_B=0.1455 cycle=0.0768 idt=0.0537 gnorm=21.456 dnorm=9.287 nan=0
+2026-10-02 21:17:52,506 epoch=75 step=1600 loss_G=2.0711 loss_D_A=0.1527 loss_D_B=0.1082 cycle=0.0809 idt=0.0832 gnorm=12.799 dnorm=5.966 nan=0
+2026-10-02 21:17:55,644 epoch_mean={'g': 2.12849727654309, 'd_a': 0.14981872369043575, 'd_b': 0.19022569360199923, 'cycle': 0.08727158256199048, 'identity': 0.06428542996045225, 'epoch': 75}
+2026-10-02 21:17:56,801 epoch=76 step=1 loss_G=2.4808 loss_D_A=0.1593 loss_D_B=0.1678 cycle=0.1092 idt=0.0730 gnorm=21.606 dnorm=7.609 nan=0
+2026-10-02 21:18:30,641 epoch=76 step=100 loss_G=2.1858 loss_D_A=0.2072 loss_D_B=0.1850 cycle=0.0930 idt=0.0584 gnorm=19.344 dnorm=8.688 nan=0
+2026-10-02 21:19:03,850 epoch=76 step=200 loss_G=2.4360 loss_D_A=0.1744 loss_D_B=0.1773 cycle=0.0797 idt=0.0642 gnorm=19.736 dnorm=8.991 nan=0
+2026-10-02 21:19:36,591 epoch=76 step=300 loss_G=2.0887 loss_D_A=0.1579 loss_D_B=0.2085 cycle=0.0762 idt=0.0495 gnorm=16.773 dnorm=8.018 nan=0
+2026-10-02 21:20:09,400 epoch=76 step=400 loss_G=1.7143 loss_D_A=0.1428 loss_D_B=0.1497 cycle=0.0775 idt=0.0585 gnorm=12.307 dnorm=7.308 nan=0
+2026-10-02 21:20:41,446 epoch=76 step=500 loss_G=2.5622 loss_D_A=0.1418 loss_D_B=0.2380 cycle=0.1066 idt=0.0929 gnorm=16.251 dnorm=7.515 nan=0
+2026-10-02 21:21:13,890 epoch=76 step=600 loss_G=1.7403 loss_D_A=0.2048 loss_D_B=0.1979 cycle=0.0786 idt=0.0568 gnorm=12.595 dnorm=7.789 nan=0
+2026-10-02 21:21:46,676 epoch=76 step=700 loss_G=2.5324 loss_D_A=0.1318 loss_D_B=0.1378 cycle=0.0852 idt=0.0797 gnorm=14.398 dnorm=8.699 nan=0
+2026-10-02 21:22:19,333 epoch=76 step=800 loss_G=2.0377 loss_D_A=0.2005 loss_D_B=0.1675 cycle=0.0792 idt=0.0573 gnorm=15.368 dnorm=9.102 nan=0
+2026-10-02 21:22:51,698 epoch=76 step=900 loss_G=2.0924 loss_D_A=0.1571 loss_D_B=0.1877 cycle=0.0959 idt=0.0619 gnorm=26.762 dnorm=7.978 nan=0
+2026-10-02 21:23:24,138 epoch=76 step=1000 loss_G=2.2892 loss_D_A=0.2213 loss_D_B=0.1342 cycle=0.0788 idt=0.0578 gnorm=14.489 dnorm=10.611 nan=0
+2026-10-02 21:23:56,375 epoch=76 step=1100 loss_G=1.9776 loss_D_A=0.1661 loss_D_B=0.1796 cycle=0.0750 idt=0.0490 gnorm=14.279 dnorm=9.340 nan=0
+2026-10-02 21:24:28,405 epoch=76 step=1200 loss_G=2.2124 loss_D_A=0.0831 loss_D_B=0.1841 cycle=0.0887 idt=0.0687 gnorm=13.037 dnorm=5.215 nan=0
+2026-10-02 21:25:01,448 epoch=76 step=1300 loss_G=2.2470 loss_D_A=0.1887 loss_D_B=0.1699 cycle=0.0898 idt=0.0535 gnorm=18.769 dnorm=6.309 nan=0
+2026-10-02 21:25:33,684 epoch=76 step=1400 loss_G=1.9756 loss_D_A=0.1157 loss_D_B=0.1886 cycle=0.0823 idt=0.0548 gnorm=13.071 dnorm=7.666 nan=0
+2026-10-02 21:26:06,120 epoch=76 step=1500 loss_G=2.0156 loss_D_A=0.1440 loss_D_B=0.1379 cycle=0.0808 idt=0.0573 gnorm=17.829 dnorm=9.033 nan=0
+2026-10-02 21:26:39,088 epoch=76 step=1600 loss_G=2.1361 loss_D_A=0.1311 loss_D_B=0.1503 cycle=0.0798 idt=0.0522 gnorm=19.772 dnorm=9.671 nan=0
+2026-10-02 21:26:42,207 epoch_mean={'g': 2.118446568080357, 'd_a': 0.14907655893645672, 'd_b': 0.18875601632254466, 'cycle': 0.08643443421547457, 'identity': 0.06319336032275087, 'epoch': 76}
+2026-10-02 21:26:43,411 epoch=77 step=1 loss_G=2.2213 loss_D_A=0.1241 loss_D_B=0.1826 cycle=0.0864 idt=0.0591 gnorm=19.385 dnorm=10.289 nan=0
+2026-10-02 21:27:16,905 epoch=77 step=100 loss_G=2.0117 loss_D_A=0.1426 loss_D_B=0.1591 cycle=0.0840 idt=0.0574 gnorm=13.331 dnorm=6.175 nan=0
+2026-10-02 21:27:49,689 epoch=77 step=200 loss_G=1.9023 loss_D_A=0.0852 loss_D_B=0.1318 cycle=0.0785 idt=0.0486 gnorm=12.769 dnorm=6.096 nan=0
+2026-10-02 21:28:22,080 epoch=77 step=300 loss_G=2.2026 loss_D_A=0.1249 loss_D_B=0.1488 cycle=0.0872 idt=0.0571 gnorm=23.119 dnorm=6.601 nan=0
+2026-10-02 21:28:54,572 epoch=77 step=400 loss_G=2.1356 loss_D_A=0.1214 loss_D_B=0.1732 cycle=0.0827 idt=0.0614 gnorm=15.531 dnorm=8.316 nan=0
+2026-10-02 21:29:26,929 epoch=77 step=500 loss_G=2.0233 loss_D_A=0.1229 loss_D_B=0.1535 cycle=0.0999 idt=0.0605 gnorm=23.237 dnorm=10.009 nan=0
+2026-10-02 21:29:59,221 epoch=77 step=600 loss_G=2.4277 loss_D_A=0.2011 loss_D_B=0.1771 cycle=0.0900 idt=0.0614 gnorm=15.906 dnorm=10.661 nan=0
+2026-10-02 21:30:32,038 epoch=77 step=700 loss_G=2.6330 loss_D_A=0.1577 loss_D_B=0.1823 cycle=0.1080 idt=0.0659 gnorm=25.403 dnorm=8.317 nan=0
+2026-10-02 21:31:04,254 epoch=77 step=800 loss_G=1.9314 loss_D_A=0.1130 loss_D_B=0.1628 cycle=0.0723 idt=0.0564 gnorm=13.975 dnorm=7.884 nan=0
+2026-10-02 21:31:36,526 epoch=77 step=900 loss_G=2.1648 loss_D_A=0.1188 loss_D_B=0.1671 cycle=0.0800 idt=0.0551 gnorm=10.969 dnorm=6.878 nan=0
+2026-10-02 21:32:08,351 epoch=77 step=1000 loss_G=2.0845 loss_D_A=0.1565 loss_D_B=0.2516 cycle=0.0792 idt=0.0502 gnorm=14.302 dnorm=9.367 nan=0
+2026-10-02 21:32:40,433 epoch=77 step=1100 loss_G=1.9037 loss_D_A=0.1535 loss_D_B=0.1768 cycle=0.0920 idt=0.0692 gnorm=18.378 dnorm=8.868 nan=0
+2026-10-02 21:33:12,914 epoch=77 step=1200 loss_G=1.9985 loss_D_A=0.1511 loss_D_B=0.1393 cycle=0.0878 idt=0.0821 gnorm=14.192 dnorm=10.226 nan=0
+2026-10-02 21:33:46,262 epoch=77 step=1300 loss_G=2.2646 loss_D_A=0.1170 loss_D_B=0.2212 cycle=0.0882 idt=0.0659 gnorm=9.974 dnorm=9.364 nan=0
+2026-10-02 21:34:20,036 epoch=77 step=1400 loss_G=2.1133 loss_D_A=0.1544 loss_D_B=0.1417 cycle=0.0860 idt=0.0598 gnorm=22.093 dnorm=6.618 nan=0
+2026-10-02 21:34:53,286 epoch=77 step=1500 loss_G=2.3179 loss_D_A=0.1438 loss_D_B=0.1741 cycle=0.0940 idt=0.0703 gnorm=19.071 dnorm=6.576 nan=0
+2026-10-02 21:35:26,732 epoch=77 step=1600 loss_G=2.0678 loss_D_A=0.1844 loss_D_B=0.1461 cycle=0.0936 idt=0.0619 gnorm=12.058 dnorm=12.756 nan=0
+2026-10-02 21:35:29,878 epoch_mean={'g': 2.1128005507569876, 'd_a': 0.14799709912412656, 'd_b': 0.18947797502790178, 'cycle': 0.08612850971103456, 'identity': 0.06259018323436287, 'epoch': 77}
+2026-10-02 21:35:30,956 epoch=78 step=1 loss_G=2.2795 loss_D_A=0.1487 loss_D_B=0.1725 cycle=0.0867 idt=0.0699 gnorm=16.800 dnorm=7.045 nan=0
+2026-10-02 21:36:04,137 epoch=78 step=100 loss_G=1.8187 loss_D_A=0.1475 loss_D_B=0.1950 cycle=0.0664 idt=0.0495 gnorm=15.521 dnorm=7.331 nan=0
+2026-10-02 21:36:36,166 epoch=78 step=200 loss_G=2.1955 loss_D_A=0.0887 loss_D_B=0.1881 cycle=0.0837 idt=0.0527 gnorm=13.010 dnorm=8.618 nan=0
+2026-10-02 21:37:08,475 epoch=78 step=300 loss_G=1.7257 loss_D_A=0.1574 loss_D_B=0.1799 cycle=0.0736 idt=0.0510 gnorm=12.530 dnorm=11.560 nan=0
+2026-10-02 21:37:40,792 epoch=78 step=400 loss_G=1.9039 loss_D_A=0.1324 loss_D_B=0.2769 cycle=0.0850 idt=0.0608 gnorm=12.974 dnorm=13.844 nan=0
+2026-10-02 21:38:12,735 epoch=78 step=500 loss_G=2.4858 loss_D_A=0.1306 loss_D_B=0.1351 cycle=0.0865 idt=0.0686 gnorm=15.369 dnorm=7.264 nan=0
+2026-10-02 21:38:45,611 epoch=78 step=600 loss_G=2.1917 loss_D_A=0.1414 loss_D_B=0.1690 cycle=0.0898 idt=0.0617 gnorm=17.836 dnorm=7.965 nan=0
+2026-10-02 21:39:18,293 epoch=78 step=700 loss_G=1.7668 loss_D_A=0.0930 loss_D_B=0.1626 cycle=0.0745 idt=0.0518 gnorm=14.993 dnorm=8.215 nan=0
+2026-10-02 21:39:50,433 epoch=78 step=800 loss_G=2.0479 loss_D_A=0.1650 loss_D_B=0.1722 cycle=0.0826 idt=0.0580 gnorm=15.592 dnorm=8.515 nan=0
+2026-10-02 21:40:22,770 epoch=78 step=900 loss_G=1.9171 loss_D_A=0.2267 loss_D_B=0.1727 cycle=0.0839 idt=0.0574 gnorm=20.743 dnorm=10.765 nan=0
+2026-10-02 21:40:54,889 epoch=78 step=1000 loss_G=2.1070 loss_D_A=0.2713 loss_D_B=0.1641 cycle=0.0897 idt=0.0584 gnorm=14.828 dnorm=10.278 nan=0
+2026-10-02 21:41:27,262 epoch=78 step=1100 loss_G=2.0997 loss_D_A=0.1156 loss_D_B=0.1282 cycle=0.0813 idt=0.0543 gnorm=13.059 dnorm=8.000 nan=0
+2026-10-02 21:41:59,386 epoch=78 step=1200 loss_G=2.2055 loss_D_A=0.2147 loss_D_B=0.2046 cycle=0.0886 idt=0.0633 gnorm=15.322 dnorm=8.729 nan=0
+2026-10-02 21:42:31,462 epoch=78 step=1300 loss_G=2.0338 loss_D_A=0.1910 loss_D_B=0.1414 cycle=0.0837 idt=0.0543 gnorm=14.837 dnorm=7.960 nan=0
+2026-10-02 21:43:03,929 epoch=78 step=1400 loss_G=1.8315 loss_D_A=0.2259 loss_D_B=0.1661 cycle=0.0756 idt=0.0567 gnorm=18.201 dnorm=10.779 nan=0
+2026-10-02 21:43:36,818 epoch=78 step=1500 loss_G=2.0867 loss_D_A=0.1266 loss_D_B=0.1512 cycle=0.0858 idt=0.0576 gnorm=13.367 dnorm=8.175 nan=0
+2026-10-02 21:44:09,389 epoch=78 step=1600 loss_G=2.3291 loss_D_A=0.1420 loss_D_B=0.1611 cycle=0.1021 idt=0.0748 gnorm=21.038 dnorm=7.121 nan=0
+2026-10-02 21:44:12,528 epoch_mean={'g': 2.113149929638975, 'd_a': 0.14745239826463025, 'd_b': 0.18690642362796, 'cycle': 0.0856275949418915, 'identity': 0.06197018830672554, 'epoch': 78}
+2026-10-02 21:44:13,480 epoch=79 step=1 loss_G=1.6315 loss_D_A=0.1521 loss_D_B=0.1825 cycle=0.0766 idt=0.0615 gnorm=12.788 dnorm=8.329 nan=0
+2026-10-02 21:44:45,381 epoch=79 step=100 loss_G=2.0727 loss_D_A=0.1328 loss_D_B=0.1345 cycle=0.0888 idt=0.0599 gnorm=13.228 dnorm=10.495 nan=0
+2026-10-02 21:45:18,003 epoch=79 step=200 loss_G=2.0803 loss_D_A=0.1799 loss_D_B=0.2243 cycle=0.0848 idt=0.0583 gnorm=16.889 dnorm=10.091 nan=0
+2026-10-02 21:45:50,331 epoch=79 step=300 loss_G=1.7899 loss_D_A=0.0928 loss_D_B=0.2003 cycle=0.0807 idt=0.0579 gnorm=19.660 dnorm=7.609 nan=0
+2026-10-02 21:46:22,651 epoch=79 step=400 loss_G=1.7079 loss_D_A=0.1672 loss_D_B=0.1644 cycle=0.0767 idt=0.0557 gnorm=19.221 dnorm=8.871 nan=0
+2026-10-02 21:46:55,060 epoch=79 step=500 loss_G=1.8686 loss_D_A=0.1293 loss_D_B=0.2083 cycle=0.0701 idt=0.0484 gnorm=19.242 dnorm=12.137 nan=0
+2026-10-02 21:47:27,087 epoch=79 step=600 loss_G=1.8177 loss_D_A=0.1487 loss_D_B=0.1765 cycle=0.0737 idt=0.0504 gnorm=12.996 dnorm=6.369 nan=0
+2026-10-02 21:47:59,692 epoch=79 step=700 loss_G=1.9666 loss_D_A=0.1240 loss_D_B=0.2765 cycle=0.0799 idt=0.0677 gnorm=22.102 dnorm=12.721 nan=0
+2026-10-02 21:48:32,584 epoch=79 step=800 loss_G=1.9974 loss_D_A=0.1547 loss_D_B=0.2622 cycle=0.0792 idt=0.0632 gnorm=13.667 dnorm=8.910 nan=0
+2026-10-02 21:49:04,751 epoch=79 step=900 loss_G=2.0028 loss_D_A=0.2187 loss_D_B=0.1246 cycle=0.0816 idt=0.0579 gnorm=12.991 dnorm=8.982 nan=0
+2026-10-02 21:49:37,696 epoch=79 step=1000 loss_G=2.3600 loss_D_A=0.1066 loss_D_B=0.1540 cycle=0.0885 idt=0.1185 gnorm=18.147 dnorm=8.046 nan=0
+2026-10-02 21:50:10,148 epoch=79 step=1100 loss_G=2.1710 loss_D_A=0.1656 loss_D_B=0.1733 cycle=0.0715 idt=0.0689 gnorm=10.465 dnorm=10.011 nan=0
+2026-10-02 21:50:42,704 epoch=79 step=1200 loss_G=2.0565 loss_D_A=0.1112 loss_D_B=0.2479 cycle=0.0911 idt=0.0647 gnorm=19.852 dnorm=10.879 nan=0
+2026-10-02 21:51:15,437 epoch=79 step=1300 loss_G=2.3422 loss_D_A=0.1611 loss_D_B=0.2929 cycle=0.0888 idt=0.0604 gnorm=13.634 dnorm=9.531 nan=0
+2026-10-02 21:51:47,070 epoch=79 step=1400 loss_G=2.5368 loss_D_A=0.1133 loss_D_B=0.1231 cycle=0.1037 idt=0.0778 gnorm=20.951 dnorm=7.738 nan=0
+2026-10-02 21:52:19,493 epoch=79 step=1500 loss_G=2.0052 loss_D_A=0.2010 loss_D_B=0.1555 cycle=0.0731 idt=0.0661 gnorm=16.614 dnorm=9.366 nan=0
+2026-10-02 21:52:51,802 epoch=79 step=1600 loss_G=2.2124 loss_D_A=0.1125 loss_D_B=0.1662 cycle=0.0892 idt=0.0578 gnorm=14.856 dnorm=11.172 nan=0
+2026-10-02 21:52:55,031 epoch_mean={'g': 2.1026054808812114, 'd_a': 0.14825350364542897, 'd_b': 0.18678279900402756, 'cycle': 0.084535368925296, 'identity': 0.06124223981584821, 'epoch': 79}
+2026-10-02 21:52:56,151 epoch=80 step=1 loss_G=2.0010 loss_D_A=0.1794 loss_D_B=0.1425 cycle=0.0785 idt=0.0517 gnorm=14.898 dnorm=8.276 nan=0
+2026-10-02 21:53:30,992 epoch=80 step=100 loss_G=2.3402 loss_D_A=0.1592 loss_D_B=0.2376 cycle=0.0925 idt=0.0720 gnorm=10.396 dnorm=10.462 nan=0
+2026-10-02 21:54:04,277 epoch=80 step=200 loss_G=2.3398 loss_D_A=0.1309 loss_D_B=0.2233 cycle=0.1067 idt=0.0831 gnorm=23.087 dnorm=9.526 nan=0
+2026-10-02 21:54:37,242 epoch=80 step=300 loss_G=2.2905 loss_D_A=0.1727 loss_D_B=0.1572 cycle=0.0887 idt=0.0637 gnorm=18.562 dnorm=9.788 nan=0
+2026-10-02 21:55:10,236 epoch=80 step=400 loss_G=2.0132 loss_D_A=0.1819 loss_D_B=0.2225 cycle=0.0767 idt=0.0493 gnorm=15.275 dnorm=11.263 nan=0
+2026-10-02 21:55:42,235 epoch=80 step=500 loss_G=1.6969 loss_D_A=0.1999 loss_D_B=0.3143 cycle=0.0693 idt=0.0516 gnorm=12.599 dnorm=10.065 nan=0
+2026-10-02 21:56:13,734 epoch=80 step=600 loss_G=2.5389 loss_D_A=0.1582 loss_D_B=0.1747 cycle=0.0874 idt=0.0673 gnorm=16.589 dnorm=8.836 nan=0
+2026-10-02 21:56:46,158 epoch=80 step=700 loss_G=2.1613 loss_D_A=0.1230 loss_D_B=0.1441 cycle=0.0897 idt=0.0550 gnorm=13.068 dnorm=6.399 nan=0
+2026-10-02 21:57:18,272 epoch=80 step=800 loss_G=2.3902 loss_D_A=0.1161 loss_D_B=0.1851 cycle=0.0869 idt=0.0599 gnorm=13.546 dnorm=8.140 nan=0
+2026-10-02 21:57:50,912 epoch=80 step=900 loss_G=1.8935 loss_D_A=0.1634 loss_D_B=0.2296 cycle=0.0814 idt=0.0613 gnorm=13.926 dnorm=8.989 nan=0
+2026-10-02 21:58:24,163 epoch=80 step=1000 loss_G=1.9214 loss_D_A=0.0847 loss_D_B=0.2535 cycle=0.0793 idt=0.0579 gnorm=20.854 dnorm=6.322 nan=0
+2026-10-02 21:58:56,217 epoch=80 step=1100 loss_G=2.2016 loss_D_A=0.1171 loss_D_B=0.2034 cycle=0.0801 idt=0.0519 gnorm=12.068 dnorm=9.638 nan=0
+2026-10-02 21:59:28,528 epoch=80 step=1200 loss_G=1.9166 loss_D_A=0.2075 loss_D_B=0.1961 cycle=0.0871 idt=0.0705 gnorm=9.891 dnorm=8.943 nan=0
+2026-10-02 22:00:01,382 epoch=80 step=1300 loss_G=2.0498 loss_D_A=0.1742 loss_D_B=0.1779 cycle=0.0809 idt=0.0700 gnorm=17.698 dnorm=8.175 nan=0
+2026-10-02 22:00:35,063 epoch=80 step=1400 loss_G=2.0715 loss_D_A=0.0983 loss_D_B=0.1875 cycle=0.0848 idt=0.0526 gnorm=15.814 dnorm=7.831 nan=0
+2026-10-02 22:01:07,035 epoch=80 step=1500 loss_G=2.1015 loss_D_A=0.2144 loss_D_B=0.1492 cycle=0.0884 idt=0.0611 gnorm=17.211 dnorm=8.461 nan=0
+2026-10-02 22:01:39,431 epoch=80 step=1600 loss_G=2.2921 loss_D_A=0.1234 loss_D_B=0.1041 cycle=0.0870 idt=0.0629 gnorm=16.549 dnorm=6.152 nan=0
+2026-10-02 22:01:42,537 epoch_mean={'g': 2.1096353661199534, 'd_a': 0.14479858208887325, 'd_b': 0.18617216311626553, 'cycle': 0.08425274013732531, 'identity': 0.06092925456740101, 'epoch': 80}
+2026-10-02 22:01:44,005 epoch=81 step=1 loss_G=2.1566 loss_D_A=0.0770 loss_D_B=0.1534 cycle=0.0892 idt=0.0637 gnorm=21.357 dnorm=5.587 nan=0
+2026-10-02 22:02:16,970 epoch=81 step=100 loss_G=1.8820 loss_D_A=0.1234 loss_D_B=0.1546 cycle=0.0747 idt=0.0532 gnorm=14.660 dnorm=7.473 nan=0
+2026-10-02 22:02:49,162 epoch=81 step=200 loss_G=2.0777 loss_D_A=0.0831 loss_D_B=0.1698 cycle=0.0862 idt=0.0585 gnorm=13.709 dnorm=6.804 nan=0
+2026-10-02 22:03:21,705 epoch=81 step=300 loss_G=2.5295 loss_D_A=0.1666 loss_D_B=0.1748 cycle=0.1079 idt=0.1080 gnorm=14.389 dnorm=8.142 nan=0
+2026-10-02 22:03:53,839 epoch=81 step=400 loss_G=2.1915 loss_D_A=0.1340 loss_D_B=0.1650 cycle=0.0981 idt=0.0569 gnorm=13.887 dnorm=9.795 nan=0
+2026-10-02 22:04:25,687 epoch=81 step=500 loss_G=1.9846 loss_D_A=0.1067 loss_D_B=0.1603 cycle=0.0852 idt=0.0628 gnorm=18.900 dnorm=9.394 nan=0
+2026-10-02 22:04:58,090 epoch=81 step=600 loss_G=1.8666 loss_D_A=0.1888 loss_D_B=0.1792 cycle=0.0775 idt=0.0511 gnorm=16.264 dnorm=10.064 nan=0
+2026-10-02 22:05:30,563 epoch=81 step=700 loss_G=2.0455 loss_D_A=0.0792 loss_D_B=0.1071 cycle=0.0875 idt=0.0739 gnorm=20.895 dnorm=6.602 nan=0
+2026-10-02 22:06:03,261 epoch=81 step=800 loss_G=2.6026 loss_D_A=0.1549 loss_D_B=0.1837 cycle=0.0963 idt=0.0698 gnorm=14.917 dnorm=11.933 nan=0
+2026-10-02 22:06:35,657 epoch=81 step=900 loss_G=2.1555 loss_D_A=0.1116 loss_D_B=0.1583 cycle=0.0875 idt=0.0782 gnorm=17.616 dnorm=6.334 nan=0
+2026-10-02 22:07:08,191 epoch=81 step=1000 loss_G=2.3196 loss_D_A=0.1704 loss_D_B=0.1842 cycle=0.0784 idt=0.0564 gnorm=17.805 dnorm=11.630 nan=0
+2026-10-02 22:07:40,398 epoch=81 step=1100 loss_G=2.1751 loss_D_A=0.1297 loss_D_B=0.1892 cycle=0.0785 idt=0.0545 gnorm=17.464 dnorm=12.877 nan=0
+2026-10-02 22:08:12,734 epoch=81 step=1200 loss_G=1.9425 loss_D_A=0.0577 loss_D_B=0.1803 cycle=0.0817 idt=0.0585 gnorm=20.456 dnorm=7.703 nan=0
+2026-10-02 22:08:46,047 epoch=81 step=1300 loss_G=1.9830 loss_D_A=0.1594 loss_D_B=0.2159 cycle=0.0761 idt=0.0557 gnorm=15.016 dnorm=11.473 nan=0
+2026-10-02 22:09:18,221 epoch=81 step=1400 loss_G=2.0325 loss_D_A=0.2149 loss_D_B=0.1291 cycle=0.0969 idt=0.0551 gnorm=26.831 dnorm=8.472 nan=0
+2026-10-02 22:09:50,563 epoch=81 step=1500 loss_G=1.7565 loss_D_A=0.2726 loss_D_B=0.2507 cycle=0.0732 idt=0.0518 gnorm=12.394 dnorm=12.664 nan=0
+2026-10-02 22:10:23,020 epoch=81 step=1600 loss_G=2.3688 loss_D_A=0.1525 loss_D_B=0.1946 cycle=0.0863 idt=0.0686 gnorm=15.113 dnorm=13.148 nan=0
+2026-10-02 22:10:26,139 epoch_mean={'g': 2.0956620305221274, 'd_a': 0.14483709868437014, 'd_b': 0.18613728588412268, 'cycle': 0.08387667259074146, 'identity': 0.060076084492369466, 'epoch': 81}
+2026-10-02 22:10:27,289 epoch=82 step=1 loss_G=2.0289 loss_D_A=0.1560 loss_D_B=0.2109 cycle=0.1006 idt=0.0730 gnorm=18.773 dnorm=10.931 nan=0
+2026-10-02 22:11:00,235 epoch=82 step=100 loss_G=1.6318 loss_D_A=0.0972 loss_D_B=0.1773 cycle=0.0775 idt=0.0546 gnorm=12.921 dnorm=6.678 nan=0
+2026-10-02 22:11:32,008 epoch=82 step=200 loss_G=2.1901 loss_D_A=0.1758 loss_D_B=0.2959 cycle=0.0835 idt=0.0584 gnorm=12.694 dnorm=10.782 nan=0
+2026-10-02 22:12:04,450 epoch=82 step=300 loss_G=2.2690 loss_D_A=0.0959 loss_D_B=0.1571 cycle=0.0827 idt=0.0707 gnorm=18.300 dnorm=7.271 nan=0
+2026-10-02 22:12:37,219 epoch=82 step=400 loss_G=2.0101 loss_D_A=0.1580 loss_D_B=0.1768 cycle=0.0739 idt=0.0538 gnorm=13.967 dnorm=8.310 nan=0
+2026-10-02 22:13:09,528 epoch=82 step=500 loss_G=2.1988 loss_D_A=0.0974 loss_D_B=0.2320 cycle=0.0826 idt=0.0525 gnorm=18.050 dnorm=10.406 nan=0
+2026-10-02 22:13:43,497 epoch=82 step=600 loss_G=2.1282 loss_D_A=0.1524 loss_D_B=0.1653 cycle=0.0885 idt=0.0571 gnorm=11.608 dnorm=10.312 nan=0
+2026-10-02 22:14:17,697 epoch=82 step=700 loss_G=1.9037 loss_D_A=0.1643 loss_D_B=0.1345 cycle=0.0886 idt=0.0572 gnorm=19.930 dnorm=10.671 nan=0
+2026-10-02 22:14:50,449 epoch=82 step=800 loss_G=2.3144 loss_D_A=0.0916 loss_D_B=0.1010 cycle=0.0793 idt=0.0565 gnorm=16.159 dnorm=6.797 nan=0
+2026-10-02 22:15:23,557 epoch=82 step=900 loss_G=2.0697 loss_D_A=0.0786 loss_D_B=0.1663 cycle=0.0821 idt=0.0564 gnorm=16.200 dnorm=8.400 nan=0
+2026-10-02 22:15:56,176 epoch=82 step=1000 loss_G=1.8505 loss_D_A=0.1717 loss_D_B=0.1423 cycle=0.0772 idt=0.0575 gnorm=15.632 dnorm=11.039 nan=0
+2026-10-02 22:16:28,897 epoch=82 step=1100 loss_G=1.9212 loss_D_A=0.0913 loss_D_B=0.1627 cycle=0.0846 idt=0.0763 gnorm=16.813 dnorm=6.835 nan=0
+2026-10-02 22:17:01,407 epoch=82 step=1200 loss_G=2.1136 loss_D_A=0.0943 loss_D_B=0.1671 cycle=0.0869 idt=0.0550 gnorm=17.737 dnorm=8.922 nan=0
+2026-10-02 22:17:33,833 epoch=82 step=1300 loss_G=2.1225 loss_D_A=0.1851 loss_D_B=0.1839 cycle=0.0852 idt=0.0576 gnorm=11.414 dnorm=8.235 nan=0
+2026-10-02 22:18:06,322 epoch=82 step=1400 loss_G=2.4002 loss_D_A=0.1438 loss_D_B=0.1509 cycle=0.0951 idt=0.0612 gnorm=24.149 dnorm=7.497 nan=0
+2026-10-02 22:18:39,279 epoch=82 step=1500 loss_G=2.2720 loss_D_A=0.1629 loss_D_B=0.0955 cycle=0.0810 idt=0.0577 gnorm=13.757 dnorm=6.515 nan=0
+2026-10-02 22:19:12,610 epoch=82 step=1600 loss_G=2.1830 loss_D_A=0.1621 loss_D_B=0.1066 cycle=0.0758 idt=0.0541 gnorm=20.843 dnorm=13.945 nan=0
+2026-10-02 22:19:15,778 epoch_mean={'g': 2.098354552843556, 'd_a': 0.14254814763987286, 'd_b': 0.18587991465692935, 'cycle': 0.08308001216153921, 'identity': 0.059437774279102774, 'epoch': 82}
+2026-10-02 22:19:16,993 epoch=83 step=1 loss_G=2.3254 loss_D_A=0.1003 loss_D_B=0.1175 cycle=0.0869 idt=0.0588 gnorm=21.123 dnorm=8.813 nan=0
+2026-10-02 22:19:50,072 epoch=83 step=100 loss_G=1.9400 loss_D_A=0.1394 loss_D_B=0.2260 cycle=0.0691 idt=0.0539 gnorm=16.084 dnorm=10.222 nan=0
+2026-10-02 22:20:22,177 epoch=83 step=200 loss_G=1.9463 loss_D_A=0.1322 loss_D_B=0.2223 cycle=0.0854 idt=0.0593 gnorm=16.214 dnorm=10.168 nan=0
+2026-10-02 22:20:54,504 epoch=83 step=300 loss_G=2.0122 loss_D_A=0.1261 loss_D_B=0.2200 cycle=0.0867 idt=0.0571 gnorm=16.065 dnorm=7.588 nan=0
+2026-10-02 22:21:27,410 epoch=83 step=400 loss_G=1.9517 loss_D_A=0.1418 loss_D_B=0.1988 cycle=0.0776 idt=0.0583 gnorm=18.493 dnorm=9.202 nan=0
+2026-10-02 22:21:59,091 epoch=83 step=500 loss_G=1.9984 loss_D_A=0.1975 loss_D_B=0.2095 cycle=0.0892 idt=0.0640 gnorm=13.095 dnorm=12.269 nan=0
+2026-10-02 22:22:31,265 epoch=83 step=600 loss_G=1.9892 loss_D_A=0.1317 loss_D_B=0.1747 cycle=0.0780 idt=0.0561 gnorm=15.512 dnorm=12.903 nan=0
+2026-10-02 22:23:03,647 epoch=83 step=700 loss_G=2.0976 loss_D_A=0.1641 loss_D_B=0.1625 cycle=0.0810 idt=0.0543 gnorm=15.713 dnorm=9.506 nan=0
+2026-10-02 22:23:36,063 epoch=83 step=800 loss_G=1.9100 loss_D_A=0.1883 loss_D_B=0.1448 cycle=0.0957 idt=0.0607 gnorm=18.239 dnorm=10.131 nan=0
+2026-10-02 22:24:07,860 epoch=83 step=900 loss_G=1.9459 loss_D_A=0.2140 loss_D_B=0.1921 cycle=0.0711 idt=0.0654 gnorm=17.070 dnorm=10.224 nan=0
+2026-10-02 22:24:40,549 epoch=83 step=1000 loss_G=2.1442 loss_D_A=0.2037 loss_D_B=0.2234 cycle=0.0813 idt=0.0592 gnorm=17.929 dnorm=9.912 nan=0
+2026-10-02 22:25:12,553 epoch=83 step=1100 loss_G=2.1034 loss_D_A=0.1179 loss_D_B=0.1710 cycle=0.0739 idt=0.0496 gnorm=18.541 dnorm=8.149 nan=0
+2026-10-02 22:25:45,021 epoch=83 step=1200 loss_G=1.8907 loss_D_A=0.0700 loss_D_B=0.1700 cycle=0.0821 idt=0.0539 gnorm=13.007 dnorm=7.817 nan=0
+2026-10-02 22:26:17,804 epoch=83 step=1300 loss_G=2.1650 loss_D_A=0.0924 loss_D_B=0.2537 cycle=0.0858 idt=0.0574 gnorm=13.222 dnorm=9.987 nan=0
+2026-10-02 22:26:49,969 epoch=83 step=1400 loss_G=2.0275 loss_D_A=0.1326 loss_D_B=0.1718 cycle=0.0814 idt=0.0569 gnorm=17.326 dnorm=8.733 nan=0
+2026-10-02 22:27:22,248 epoch=83 step=1500 loss_G=1.9417 loss_D_A=0.0705 loss_D_B=0.2253 cycle=0.0835 idt=0.0694 gnorm=16.868 dnorm=9.130 nan=0
+2026-10-02 22:27:54,935 epoch=83 step=1600 loss_G=1.9472 loss_D_A=0.1522 loss_D_B=0.1913 cycle=0.0766 idt=0.0481 gnorm=15.634 dnorm=8.684 nan=0
+2026-10-02 22:27:58,047 epoch_mean={'g': 2.0777248216711954, 'd_a': 0.1415751960707007, 'd_b': 0.18565262504245925, 'cycle': 0.08241843466432938, 'identity': 0.05897294038571186, 'epoch': 83}
+2026-10-02 22:27:59,086 epoch=84 step=1 loss_G=2.2420 loss_D_A=0.0904 loss_D_B=0.1607 cycle=0.0926 idt=0.0765 gnorm=14.266 dnorm=7.737 nan=0
+2026-10-02 22:28:30,757 epoch=84 step=100 loss_G=1.9835 loss_D_A=0.2229 loss_D_B=0.1955 cycle=0.0938 idt=0.0786 gnorm=16.329 dnorm=11.832 nan=0
+2026-10-02 22:29:02,971 epoch=84 step=200 loss_G=2.3372 loss_D_A=0.1083 loss_D_B=0.1244 cycle=0.0918 idt=0.1027 gnorm=23.290 dnorm=8.558 nan=0
+2026-10-02 22:29:34,902 epoch=84 step=300 loss_G=2.4005 loss_D_A=0.1569 loss_D_B=0.1608 cycle=0.0886 idt=0.0571 gnorm=16.182 dnorm=10.841 nan=0
+2026-10-02 22:30:07,292 epoch=84 step=400 loss_G=2.2762 loss_D_A=0.1508 loss_D_B=0.1493 cycle=0.0894 idt=0.0654 gnorm=15.650 dnorm=11.715 nan=0
+2026-10-02 22:30:39,468 epoch=84 step=500 loss_G=1.9972 loss_D_A=0.1883 loss_D_B=0.1743 cycle=0.0776 idt=0.0624 gnorm=15.244 dnorm=10.270 nan=0
+2026-10-02 22:31:11,700 epoch=84 step=600 loss_G=2.2295 loss_D_A=0.2100 loss_D_B=0.1761 cycle=0.0835 idt=0.0769 gnorm=20.058 dnorm=13.387 nan=0
+2026-10-02 22:31:44,176 epoch=84 step=700 loss_G=2.2395 loss_D_A=0.1137 loss_D_B=0.2193 cycle=0.0844 idt=0.0626 gnorm=15.555 dnorm=13.046 nan=0
+2026-10-02 22:32:16,703 epoch=84 step=800 loss_G=2.1674 loss_D_A=0.1443 loss_D_B=0.1599 cycle=0.0915 idt=0.0650 gnorm=20.316 dnorm=7.782 nan=0
+2026-10-02 22:32:48,595 epoch=84 step=900 loss_G=2.3909 loss_D_A=0.1576 loss_D_B=0.1439 cycle=0.0833 idt=0.0604 gnorm=14.767 dnorm=9.547 nan=0
+2026-10-02 22:33:21,313 epoch=84 step=1000 loss_G=2.0712 loss_D_A=0.1147 loss_D_B=0.2125 cycle=0.0931 idt=0.0624 gnorm=17.102 dnorm=8.380 nan=0
+2026-10-02 22:33:54,225 epoch=84 step=1100 loss_G=2.2870 loss_D_A=0.2292 loss_D_B=0.1475 cycle=0.0944 idt=0.0776 gnorm=16.065 dnorm=15.406 nan=0
+2026-10-02 22:34:27,894 epoch=84 step=1200 loss_G=2.0471 loss_D_A=0.1075 loss_D_B=0.2216 cycle=0.0851 idt=0.0585 gnorm=13.549 dnorm=7.654 nan=0
+2026-10-02 22:35:00,391 epoch=84 step=1300 loss_G=1.9372 loss_D_A=0.1769 loss_D_B=0.1477 cycle=0.0873 idt=0.0601 gnorm=11.838 dnorm=7.544 nan=0
+2026-10-02 22:35:32,587 epoch=84 step=1400 loss_G=2.1683 loss_D_A=0.2178 loss_D_B=0.1427 cycle=0.0868 idt=0.0584 gnorm=18.493 dnorm=10.307 nan=0
+2026-10-02 22:36:04,581 epoch=84 step=1500 loss_G=2.2081 loss_D_A=0.1630 loss_D_B=0.1629 cycle=0.0720 idt=0.0472 gnorm=16.091 dnorm=10.541 nan=0
+2026-10-02 22:36:36,866 epoch=84 step=1600 loss_G=2.0536 loss_D_A=0.1480 loss_D_B=0.1725 cycle=0.0872 idt=0.0526 gnorm=19.352 dnorm=8.925 nan=0
+2026-10-02 22:36:40,013 epoch_mean={'g': 2.087926715353261, 'd_a': 0.14230578878651495, 'd_b': 0.18371365944050855, 'cycle': 0.08210040738123545, 'identity': 0.058574278458305026, 'epoch': 84}
+2026-10-02 22:36:41,172 epoch=85 step=1 loss_G=1.9265 loss_D_A=0.0704 loss_D_B=0.1508 cycle=0.0778 idt=0.0507 gnorm=13.810 dnorm=10.387 nan=0
+2026-10-02 22:37:14,670 epoch=85 step=100 loss_G=2.3386 loss_D_A=0.1478 loss_D_B=0.2627 cycle=0.0790 idt=0.0530 gnorm=17.164 dnorm=10.305 nan=0
+2026-10-02 22:37:47,096 epoch=85 step=200 loss_G=1.8060 loss_D_A=0.1703 loss_D_B=0.1617 cycle=0.0796 idt=0.0593 gnorm=14.352 dnorm=8.734 nan=0
+2026-10-02 22:38:19,725 epoch=85 step=300 loss_G=1.9906 loss_D_A=0.1840 loss_D_B=0.2347 cycle=0.0817 idt=0.0503 gnorm=15.756 dnorm=12.099 nan=0
+2026-10-02 22:38:52,772 epoch=85 step=400 loss_G=2.1580 loss_D_A=0.0969 loss_D_B=0.1559 cycle=0.0766 idt=0.0537 gnorm=12.256 dnorm=8.876 nan=0
+2026-10-02 22:39:25,034 epoch=85 step=500 loss_G=1.6400 loss_D_A=0.1203 loss_D_B=0.2302 cycle=0.0739 idt=0.0524 gnorm=14.219 dnorm=12.329 nan=0
+2026-10-02 22:39:57,435 epoch=85 step=600 loss_G=2.0895 loss_D_A=0.0896 loss_D_B=0.1568 cycle=0.0858 idt=0.0547 gnorm=11.241 dnorm=9.063 nan=0
+2026-10-02 22:40:30,063 epoch=85 step=700 loss_G=2.0821 loss_D_A=0.2306 loss_D_B=0.1856 cycle=0.0769 idt=0.0497 gnorm=18.902 dnorm=9.263 nan=0
+2026-10-02 22:41:02,403 epoch=85 step=800 loss_G=2.5072 loss_D_A=0.1474 loss_D_B=0.1049 cycle=0.0811 idt=0.0544 gnorm=19.048 dnorm=8.306 nan=0
+2026-10-02 22:41:34,510 epoch=85 step=900 loss_G=1.9176 loss_D_A=0.1461 loss_D_B=0.1569 cycle=0.0810 idt=0.0545 gnorm=12.406 dnorm=8.236 nan=0
+2026-10-02 22:42:07,034 epoch=85 step=1000 loss_G=2.0934 loss_D_A=0.1363 loss_D_B=0.2108 cycle=0.0864 idt=0.0644 gnorm=24.637 dnorm=13.962 nan=0
+2026-10-02 22:42:39,514 epoch=85 step=1100 loss_G=1.9355 loss_D_A=0.1723 loss_D_B=0.1868 cycle=0.0770 idt=0.0536 gnorm=18.739 dnorm=10.519 nan=0
+2026-10-02 22:43:11,695 epoch=85 step=1200 loss_G=2.1710 loss_D_A=0.1309 loss_D_B=0.1861 cycle=0.0913 idt=0.0668 gnorm=12.894 dnorm=9.310 nan=0
+2026-10-02 22:43:44,746 epoch=85 step=1300 loss_G=1.9173 loss_D_A=0.1463 loss_D_B=0.2213 cycle=0.0790 idt=0.0532 gnorm=10.892 dnorm=10.591 nan=0
+2026-10-02 22:44:17,435 epoch=85 step=1400 loss_G=1.9248 loss_D_A=0.1183 loss_D_B=0.1712 cycle=0.0803 idt=0.0608 gnorm=21.803 dnorm=9.341 nan=0
+2026-10-02 22:44:49,395 epoch=85 step=1500 loss_G=2.1818 loss_D_A=0.1636 loss_D_B=0.1580 cycle=0.0941 idt=0.0675 gnorm=19.896 dnorm=11.917 nan=0
+2026-10-02 22:45:22,029 epoch=85 step=1600 loss_G=2.2160 loss_D_A=0.2390 loss_D_B=0.1913 cycle=0.0730 idt=0.0503 gnorm=18.022 dnorm=11.917 nan=0
+2026-10-02 22:45:25,147 epoch_mean={'g': 2.0871964164402175, 'd_a': 0.14303157640540082, 'd_b': 0.18290467824995146, 'cycle': 0.08196245276409647, 'identity': 0.05817473512258589, 'epoch': 85}
+2026-10-02 22:45:26,303 epoch=86 step=1 loss_G=2.0715 loss_D_A=0.0905 loss_D_B=0.1715 cycle=0.0754 idt=0.0605 gnorm=15.860 dnorm=8.089 nan=0
+2026-10-02 22:45:59,083 epoch=86 step=100 loss_G=2.3182 loss_D_A=0.1466 loss_D_B=0.1906 cycle=0.0847 idt=0.0747 gnorm=17.917 dnorm=8.866 nan=0
+2026-10-02 22:46:31,463 epoch=86 step=200 loss_G=2.2047 loss_D_A=0.1232 loss_D_B=0.1630 cycle=0.0735 idt=0.0476 gnorm=22.516 dnorm=8.553 nan=0
+2026-10-02 22:47:03,419 epoch=86 step=300 loss_G=1.8622 loss_D_A=0.1447 loss_D_B=0.2117 cycle=0.0707 idt=0.0484 gnorm=10.590 dnorm=9.946 nan=0
+2026-10-02 22:47:35,589 epoch=86 step=400 loss_G=2.0384 loss_D_A=0.1228 loss_D_B=0.2197 cycle=0.0756 idt=0.0483 gnorm=16.358 dnorm=10.686 nan=0
+2026-10-02 22:48:08,159 epoch=86 step=500 loss_G=2.1932 loss_D_A=0.1034 loss_D_B=0.1602 cycle=0.0883 idt=0.0661 gnorm=14.607 dnorm=12.792 nan=0
+2026-10-02 22:48:41,113 epoch=86 step=600 loss_G=1.9691 loss_D_A=0.1825 loss_D_B=0.1865 cycle=0.0785 idt=0.0507 gnorm=15.008 dnorm=10.506 nan=0
+2026-10-02 22:49:13,438 epoch=86 step=700 loss_G=2.0001 loss_D_A=0.1141 loss_D_B=0.1156 cycle=0.0706 idt=0.0490 gnorm=17.959 dnorm=7.954 nan=0
+2026-10-02 22:49:45,647 epoch=86 step=800 loss_G=2.0953 loss_D_A=0.0965 loss_D_B=0.1648 cycle=0.0728 idt=0.0507 gnorm=14.971 dnorm=8.502 nan=0
+2026-10-02 22:50:17,749 epoch=86 step=900 loss_G=1.9996 loss_D_A=0.0884 loss_D_B=0.1653 cycle=0.0786 idt=0.0571 gnorm=21.474 dnorm=9.117 nan=0
+2026-10-02 22:50:49,600 epoch=86 step=1000 loss_G=1.9496 loss_D_A=0.1985 loss_D_B=0.1847 cycle=0.0783 idt=0.0542 gnorm=14.924 dnorm=10.623 nan=0
+2026-10-02 22:51:21,877 epoch=86 step=1100 loss_G=2.1295 loss_D_A=0.1457 loss_D_B=0.2489 cycle=0.0750 idt=0.0563 gnorm=16.862 dnorm=11.364 nan=0
+2026-10-02 22:51:53,696 epoch=86 step=1200 loss_G=2.2150 loss_D_A=0.1054 loss_D_B=0.1469 cycle=0.0852 idt=0.0674 gnorm=13.685 dnorm=8.117 nan=0
+2026-10-02 22:52:26,334 epoch=86 step=1300 loss_G=2.1403 loss_D_A=0.1452 loss_D_B=0.1663 cycle=0.0793 idt=0.0565 gnorm=15.822 dnorm=8.601 nan=0
+2026-10-02 22:52:58,835 epoch=86 step=1400 loss_G=1.9046 loss_D_A=0.1831 loss_D_B=0.1915 cycle=0.0747 idt=0.0507 gnorm=13.121 dnorm=11.498 nan=0
+2026-10-02 22:53:31,952 epoch=86 step=1500 loss_G=1.9197 loss_D_A=0.2058 loss_D_B=0.1918 cycle=0.0773 idt=0.0436 gnorm=19.631 dnorm=13.203 nan=0
+2026-10-02 22:54:05,254 epoch=86 step=1600 loss_G=2.0723 loss_D_A=0.1908 loss_D_B=0.1474 cycle=0.0918 idt=0.0642 gnorm=17.444 dnorm=10.317 nan=0
+2026-10-02 22:54:08,280 epoch_mean={'g': 2.0836586519798135, 'd_a': 0.14212145124162948, 'd_b': 0.18187960986024845, 'cycle': 0.08117557312390819, 'identity': 0.05771365906140819, 'epoch': 86}
+2026-10-02 22:54:09,481 epoch=87 step=1 loss_G=2.1164 loss_D_A=0.1158 loss_D_B=0.2515 cycle=0.0786 idt=0.0478 gnorm=15.091 dnorm=7.672 nan=0
+2026-10-02 22:54:42,599 epoch=87 step=100 loss_G=1.8299 loss_D_A=0.1567 loss_D_B=0.2420 cycle=0.0798 idt=0.0532 gnorm=11.332 dnorm=12.826 nan=0
+2026-10-02 22:55:16,501 epoch=87 step=200 loss_G=1.9300 loss_D_A=0.1996 loss_D_B=0.2522 cycle=0.0782 idt=0.0538 gnorm=16.150 dnorm=10.940 nan=0
+2026-10-02 22:55:48,703 epoch=87 step=300 loss_G=2.0275 loss_D_A=0.1154 loss_D_B=0.2079 cycle=0.0744 idt=0.0511 gnorm=13.384 dnorm=10.155 nan=0
+2026-10-02 22:56:21,309 epoch=87 step=400 loss_G=2.1009 loss_D_A=0.1591 loss_D_B=0.2182 cycle=0.0973 idt=0.0699 gnorm=18.471 dnorm=11.453 nan=0
+2026-10-02 22:56:53,570 epoch=87 step=500 loss_G=2.0196 loss_D_A=0.1098 loss_D_B=0.1319 cycle=0.0772 idt=0.0603 gnorm=11.603 dnorm=7.834 nan=0
+2026-10-02 22:57:25,645 epoch=87 step=600 loss_G=2.2453 loss_D_A=0.0788 loss_D_B=0.2415 cycle=0.0867 idt=0.0600 gnorm=22.871 dnorm=16.499 nan=0
+2026-10-02 22:57:58,452 epoch=87 step=700 loss_G=2.1303 loss_D_A=0.0964 loss_D_B=0.1892 cycle=0.0801 idt=0.0600 gnorm=16.296 dnorm=8.970 nan=0
+2026-10-02 22:58:31,335 epoch=87 step=800 loss_G=1.8285 loss_D_A=0.1356 loss_D_B=0.1949 cycle=0.0750 idt=0.0539 gnorm=17.404 dnorm=10.626 nan=0
+2026-10-02 22:59:03,313 epoch=87 step=900 loss_G=1.8649 loss_D_A=0.1823 loss_D_B=0.1762 cycle=0.0726 idt=0.0503 gnorm=12.018 dnorm=9.119 nan=0
+2026-10-02 22:59:36,079 epoch=87 step=1000 loss_G=2.3117 loss_D_A=0.1705 loss_D_B=0.2626 cycle=0.0819 idt=0.0588 gnorm=16.395 dnorm=19.178 nan=0
+2026-10-02 23:00:08,463 epoch=87 step=1100 loss_G=1.9408 loss_D_A=0.1173 loss_D_B=0.1777 cycle=0.0774 idt=0.0532 gnorm=13.179 dnorm=8.915 nan=0
+2026-10-02 23:00:40,739 epoch=87 step=1200 loss_G=2.3143 loss_D_A=0.0968 loss_D_B=0.1579 cycle=0.0807 idt=0.0516 gnorm=20.972 dnorm=8.375 nan=0
+2026-10-02 23:01:13,531 epoch=87 step=1300 loss_G=1.9780 loss_D_A=0.1333 loss_D_B=0.2122 cycle=0.0806 idt=0.0563 gnorm=17.209 dnorm=7.738 nan=0
+2026-10-02 23:01:46,038 epoch=87 step=1400 loss_G=2.0021 loss_D_A=0.1596 loss_D_B=0.1637 cycle=0.0909 idt=0.0661 gnorm=14.309 dnorm=9.425 nan=0
+2026-10-02 23:02:17,782 epoch=87 step=1500 loss_G=2.2219 loss_D_A=0.1668 loss_D_B=0.1782 cycle=0.0813 idt=0.0575 gnorm=18.078 dnorm=7.992 nan=0
+2026-10-02 23:02:50,152 epoch=87 step=1600 loss_G=2.0104 loss_D_A=0.0709 loss_D_B=0.1614 cycle=0.0782 idt=0.0566 gnorm=12.798 dnorm=5.329 nan=0
+2026-10-02 23:02:53,257 epoch_mean={'g': 2.0747535847729037, 'd_a': 0.1399451972534938, 'd_b': 0.18274011078828611, 'cycle': 0.080817721349112, 'identity': 0.0568950202894507, 'epoch': 87}
+2026-10-02 23:02:54,419 epoch=88 step=1 loss_G=2.2016 loss_D_A=0.1122 loss_D_B=0.1773 cycle=0.0851 idt=0.0735 gnorm=20.143 dnorm=9.676 nan=0
+2026-10-02 23:03:28,514 epoch=88 step=100 loss_G=1.8813 loss_D_A=0.1058 loss_D_B=0.1819 cycle=0.0801 idt=0.0568 gnorm=10.796 dnorm=6.852 nan=0
+2026-10-02 23:04:00,684 epoch=88 step=200 loss_G=1.8921 loss_D_A=0.1866 loss_D_B=0.1664 cycle=0.0727 idt=0.0490 gnorm=16.476 dnorm=10.639 nan=0
+2026-10-02 23:04:32,720 epoch=88 step=300 loss_G=1.8266 loss_D_A=0.1061 loss_D_B=0.2702 cycle=0.0835 idt=0.0595 gnorm=13.076 dnorm=9.351 nan=0
+2026-10-02 23:05:04,718 epoch=88 step=400 loss_G=2.2707 loss_D_A=0.1519 loss_D_B=0.2993 cycle=0.0908 idt=0.0584 gnorm=18.216 dnorm=12.080 nan=0
+2026-10-02 23:05:36,679 epoch=88 step=500 loss_G=1.8947 loss_D_A=0.1308 loss_D_B=0.1585 cycle=0.0739 idt=0.0524 gnorm=15.442 dnorm=9.117 nan=0
+2026-10-02 23:06:09,070 epoch=88 step=600 loss_G=2.3875 loss_D_A=0.1101 loss_D_B=0.1494 cycle=0.0867 idt=0.0666 gnorm=19.327 dnorm=7.313 nan=0
+2026-10-02 23:06:41,643 epoch=88 step=700 loss_G=2.1102 loss_D_A=0.1065 loss_D_B=0.2068 cycle=0.0738 idt=0.0606 gnorm=17.725 dnorm=8.536 nan=0
+2026-10-02 23:07:13,569 epoch=88 step=800 loss_G=2.0897 loss_D_A=0.1035 loss_D_B=0.1680 cycle=0.0830 idt=0.0542 gnorm=17.806 dnorm=8.751 nan=0
+2026-10-02 23:07:46,053 epoch=88 step=900 loss_G=1.9894 loss_D_A=0.1720 loss_D_B=0.1912 cycle=0.0810 idt=0.0536 gnorm=18.630 dnorm=9.657 nan=0
+2026-10-02 23:08:18,562 epoch=88 step=1000 loss_G=1.8752 loss_D_A=0.1825 loss_D_B=0.1196 cycle=0.0830 idt=0.0665 gnorm=14.479 dnorm=9.693 nan=0
+2026-10-02 23:08:51,038 epoch=88 step=1100 loss_G=2.1763 loss_D_A=0.1604 loss_D_B=0.1848 cycle=0.0795 idt=0.0534 gnorm=14.937 dnorm=10.073 nan=0
+2026-10-02 23:09:24,125 epoch=88 step=1200 loss_G=1.9655 loss_D_A=0.0752 loss_D_B=0.1975 cycle=0.0867 idt=0.0641 gnorm=18.114 dnorm=12.882 nan=0
+2026-10-02 23:09:57,031 epoch=88 step=1300 loss_G=2.2585 loss_D_A=0.1559 loss_D_B=0.2254 cycle=0.0868 idt=0.0610 gnorm=16.379 dnorm=15.505 nan=0
+2026-10-02 23:10:29,989 epoch=88 step=1400 loss_G=2.1285 loss_D_A=0.0726 loss_D_B=0.1477 cycle=0.0757 idt=0.0512 gnorm=17.039 dnorm=8.367 nan=0
+2026-10-02 23:11:02,240 epoch=88 step=1500 loss_G=2.4110 loss_D_A=0.1383 loss_D_B=0.2045 cycle=0.0947 idt=0.0614 gnorm=19.998 dnorm=11.211 nan=0
+2026-10-02 23:11:34,585 epoch=88 step=1600 loss_G=1.8775 loss_D_A=0.0818 loss_D_B=0.1911 cycle=0.0796 idt=0.0547 gnorm=17.069 dnorm=8.150 nan=0
+2026-10-02 23:11:37,720 epoch_mean={'g': 2.071752474767081, 'd_a': 0.13842642647879463, 'd_b': 0.18110920213024068, 'cycle': 0.08021900816733793, 'identity': 0.056569297269264365, 'epoch': 88}
+2026-10-02 23:11:38,897 epoch=89 step=1 loss_G=2.1404 loss_D_A=0.2411 loss_D_B=0.1678 cycle=0.0803 idt=0.0551 gnorm=15.340 dnorm=10.758 nan=0
+2026-10-02 23:12:11,684 epoch=89 step=100 loss_G=1.9411 loss_D_A=0.0721 loss_D_B=0.1950 cycle=0.0731 idt=0.0511 gnorm=18.095 dnorm=10.231 nan=0
+2026-10-02 23:12:43,969 epoch=89 step=200 loss_G=2.2388 loss_D_A=0.0897 loss_D_B=0.1540 cycle=0.0894 idt=0.0556 gnorm=21.964 dnorm=7.849 nan=0
+2026-10-02 23:13:16,275 epoch=89 step=300 loss_G=2.0746 loss_D_A=0.1113 loss_D_B=0.1916 cycle=0.0756 idt=0.0505 gnorm=15.853 dnorm=8.752 nan=0
+2026-10-02 23:13:49,197 epoch=89 step=400 loss_G=1.6907 loss_D_A=0.2626 loss_D_B=0.1468 cycle=0.0703 idt=0.0452 gnorm=14.131 dnorm=10.357 nan=0
+2026-10-02 23:14:21,920 epoch=89 step=500 loss_G=1.9226 loss_D_A=0.1402 loss_D_B=0.1921 cycle=0.0786 idt=0.0526 gnorm=12.691 dnorm=9.507 nan=0
+2026-10-02 23:14:53,855 epoch=89 step=600 loss_G=1.8999 loss_D_A=0.1202 loss_D_B=0.1085 cycle=0.0756 idt=0.0520 gnorm=16.745 dnorm=7.932 nan=0
+2026-10-02 23:15:26,062 epoch=89 step=700 loss_G=2.0270 loss_D_A=0.1479 loss_D_B=0.1154 cycle=0.0753 idt=0.0592 gnorm=23.478 dnorm=8.701 nan=0
+2026-10-02 23:15:58,323 epoch=89 step=800 loss_G=2.0441 loss_D_A=0.1819 loss_D_B=0.1709 cycle=0.0832 idt=0.0563 gnorm=16.082 dnorm=10.978 nan=0
+2026-10-02 23:16:30,415 epoch=89 step=900 loss_G=1.9589 loss_D_A=0.1023 loss_D_B=0.1415 cycle=0.0716 idt=0.0475 gnorm=17.629 dnorm=8.964 nan=0
+2026-10-02 23:17:03,122 epoch=89 step=1000 loss_G=2.1573 loss_D_A=0.1385 loss_D_B=0.1406 cycle=0.0779 idt=0.0537 gnorm=21.514 dnorm=9.027 nan=0
+2026-10-02 23:17:35,458 epoch=89 step=1100 loss_G=2.0923 loss_D_A=0.1652 loss_D_B=0.3073 cycle=0.0883 idt=0.0573 gnorm=15.015 dnorm=9.950 nan=0
+2026-10-02 23:18:08,411 epoch=89 step=1200 loss_G=1.9616 loss_D_A=0.1782 loss_D_B=0.2091 cycle=0.0832 idt=0.0495 gnorm=17.323 dnorm=12.061 nan=0
+2026-10-02 23:18:41,114 epoch=89 step=1300 loss_G=2.2097 loss_D_A=0.1172 loss_D_B=0.1795 cycle=0.0816 idt=0.0575 gnorm=11.940 dnorm=7.298 nan=0
+2026-10-02 23:19:14,012 epoch=89 step=1400 loss_G=2.1994 loss_D_A=0.1709 loss_D_B=0.2178 cycle=0.0864 idt=0.0616 gnorm=13.439 dnorm=11.940 nan=0
+2026-10-02 23:19:46,382 epoch=89 step=1500 loss_G=2.1246 loss_D_A=0.1099 loss_D_B=0.1589 cycle=0.0846 idt=0.0586 gnorm=14.461 dnorm=7.585 nan=0
+2026-10-02 23:20:18,945 epoch=89 step=1600 loss_G=1.9205 loss_D_A=0.1380 loss_D_B=0.1889 cycle=0.0805 idt=0.0509 gnorm=20.954 dnorm=9.735 nan=0
+2026-10-02 23:20:21,966 epoch_mean={'g': 2.073666324970885, 'd_a': 0.13703149831072883, 'd_b': 0.17970175417313664, 'cycle': 0.08008773519385676, 'identity': 0.05616036646114373, 'epoch': 89}
+2026-10-02 23:20:23,185 epoch=90 step=1 loss_G=2.0427 loss_D_A=0.1190 loss_D_B=0.1206 cycle=0.0846 idt=0.0701 gnorm=21.239 dnorm=9.002 nan=0
+2026-10-02 23:20:56,347 epoch=90 step=100 loss_G=2.1351 loss_D_A=0.1249 loss_D_B=0.2077 cycle=0.0735 idt=0.0496 gnorm=16.197 dnorm=10.850 nan=0
+2026-10-02 23:21:28,326 epoch=90 step=200 loss_G=1.9552 loss_D_A=0.0994 loss_D_B=0.1646 cycle=0.0756 idt=0.0446 gnorm=15.113 dnorm=11.099 nan=0
+2026-10-02 23:22:00,700 epoch=90 step=300 loss_G=1.9872 loss_D_A=0.1803 loss_D_B=0.1622 cycle=0.0692 idt=0.0455 gnorm=14.936 dnorm=10.502 nan=0
+2026-10-02 23:22:33,272 epoch=90 step=400 loss_G=2.1811 loss_D_A=0.1200 loss_D_B=0.1567 cycle=0.0814 idt=0.0496 gnorm=15.542 dnorm=7.486 nan=0
+2026-10-02 23:23:05,571 epoch=90 step=500 loss_G=2.0851 loss_D_A=0.1842 loss_D_B=0.1611 cycle=0.0733 idt=0.0543 gnorm=15.601 dnorm=10.363 nan=0
+2026-10-02 23:23:37,874 epoch=90 step=600 loss_G=2.1586 loss_D_A=0.1745 loss_D_B=0.1713 cycle=0.0847 idt=0.0604 gnorm=18.101 dnorm=15.751 nan=0
+2026-10-02 23:24:10,400 epoch=90 step=700 loss_G=2.0524 loss_D_A=0.0857 loss_D_B=0.1490 cycle=0.0799 idt=0.0570 gnorm=16.483 dnorm=6.582 nan=0
+2026-10-02 23:24:42,708 epoch=90 step=800 loss_G=1.9870 loss_D_A=0.1771 loss_D_B=0.2962 cycle=0.0736 idt=0.0561 gnorm=16.931 dnorm=14.067 nan=0
+2026-10-02 23:25:14,720 epoch=90 step=900 loss_G=2.2629 loss_D_A=0.1686 loss_D_B=0.1691 cycle=0.0878 idt=0.0698 gnorm=22.836 dnorm=9.478 nan=0
+2026-10-02 23:25:46,948 epoch=90 step=1000 loss_G=2.1215 loss_D_A=0.1281 loss_D_B=0.1362 cycle=0.0739 idt=0.0454 gnorm=28.436 dnorm=8.261 nan=0
+2026-10-02 23:26:19,133 epoch=90 step=1100 loss_G=1.9906 loss_D_A=0.1020 loss_D_B=0.2050 cycle=0.0732 idt=0.0493 gnorm=15.940 dnorm=8.837 nan=0
+2026-10-02 23:26:51,447 epoch=90 step=1200 loss_G=1.8294 loss_D_A=0.0875 loss_D_B=0.2031 cycle=0.0800 idt=0.0513 gnorm=17.345 dnorm=11.388 nan=0
+2026-10-02 23:27:23,825 epoch=90 step=1300 loss_G=1.8881 loss_D_A=0.1742 loss_D_B=0.2035 cycle=0.0736 idt=0.0506 gnorm=14.731 dnorm=9.827 nan=0
+2026-10-02 23:27:55,977 epoch=90 step=1400 loss_G=1.9108 loss_D_A=0.1227 loss_D_B=0.1899 cycle=0.0789 idt=0.0532 gnorm=13.733 dnorm=13.258 nan=0
+2026-10-02 23:28:28,725 epoch=90 step=1500 loss_G=1.6453 loss_D_A=0.1497 loss_D_B=0.1582 cycle=0.0739 idt=0.0484 gnorm=12.368 dnorm=9.597 nan=0
+2026-10-02 23:29:02,224 epoch=90 step=1600 loss_G=2.0319 loss_D_A=0.1796 loss_D_B=0.1194 cycle=0.0807 idt=0.0537 gnorm=17.200 dnorm=11.663 nan=0
+2026-10-02 23:29:05,243 epoch_mean={'g': 2.0762489081909936, 'd_a': 0.13650308928874708, 'd_b': 0.17988461322665955, 'cycle': 0.07970982901057842, 'identity': 0.05569008300023049, 'epoch': 90}
+2026-10-02 23:29:06,729 epoch=91 step=1 loss_G=2.1441 loss_D_A=0.1552 loss_D_B=0.1979 cycle=0.0880 idt=0.0722 gnorm=15.595 dnorm=9.992 nan=0
+2026-10-02 23:29:40,453 epoch=91 step=100 loss_G=1.9010 loss_D_A=0.1618 loss_D_B=0.2211 cycle=0.0739 idt=0.0504 gnorm=15.810 dnorm=9.650 nan=0
+2026-10-02 23:30:13,114 epoch=91 step=200 loss_G=2.0739 loss_D_A=0.1254 loss_D_B=0.1962 cycle=0.0885 idt=0.0629 gnorm=16.403 dnorm=11.656 nan=0
+2026-10-02 23:30:45,269 epoch=91 step=300 loss_G=1.9243 loss_D_A=0.1001 loss_D_B=0.1599 cycle=0.0723 idt=0.0473 gnorm=14.083 dnorm=9.548 nan=0
+2026-10-02 23:31:17,858 epoch=91 step=400 loss_G=2.1709 loss_D_A=0.1751 loss_D_B=0.2319 cycle=0.0782 idt=0.0609 gnorm=13.905 dnorm=13.817 nan=0
+2026-10-02 23:31:50,005 epoch=91 step=500 loss_G=1.9522 loss_D_A=0.1050 loss_D_B=0.2200 cycle=0.0736 idt=0.0533 gnorm=15.658 dnorm=8.329 nan=0
+2026-10-02 23:32:22,334 epoch=91 step=600 loss_G=1.7746 loss_D_A=0.1490 loss_D_B=0.2375 cycle=0.0858 idt=0.0552 gnorm=17.625 dnorm=11.807 nan=0
+2026-10-02 23:32:55,198 epoch=91 step=700 loss_G=2.5234 loss_D_A=0.0904 loss_D_B=0.2296 cycle=0.0880 idt=0.0648 gnorm=17.705 dnorm=11.324 nan=0
+2026-10-02 23:33:27,756 epoch=91 step=800 loss_G=2.0020 loss_D_A=0.0968 loss_D_B=0.2280 cycle=0.0718 idt=0.0447 gnorm=14.676 dnorm=12.257 nan=0
+2026-10-02 23:34:00,045 epoch=91 step=900 loss_G=2.1383 loss_D_A=0.1434 loss_D_B=0.1804 cycle=0.0727 idt=0.0769 gnorm=20.325 dnorm=10.820 nan=0
+2026-10-02 23:34:32,358 epoch=91 step=1000 loss_G=1.9829 loss_D_A=0.1204 loss_D_B=0.1710 cycle=0.0812 idt=0.0471 gnorm=20.549 dnorm=10.207 nan=0
+2026-10-02 23:35:04,484 epoch=91 step=1100 loss_G=1.9862 loss_D_A=0.0817 loss_D_B=0.1917 cycle=0.0871 idt=0.0688 gnorm=11.457 dnorm=9.279 nan=0
+2026-10-02 23:35:36,544 epoch=91 step=1200 loss_G=2.2020 loss_D_A=0.1242 loss_D_B=0.2057 cycle=0.0814 idt=0.0583 gnorm=15.763 dnorm=14.864 nan=0
+2026-10-02 23:36:09,297 epoch=91 step=1300 loss_G=1.7702 loss_D_A=0.0908 loss_D_B=0.1975 cycle=0.0684 idt=0.0433 gnorm=15.025 dnorm=8.202 nan=0
+2026-10-02 23:36:41,593 epoch=91 step=1400 loss_G=2.1283 loss_D_A=0.1269 loss_D_B=0.1919 cycle=0.0803 idt=0.0605 gnorm=14.563 dnorm=9.063 nan=0
+2026-10-02 23:37:13,883 epoch=91 step=1500 loss_G=2.0912 loss_D_A=0.1048 loss_D_B=0.2013 cycle=0.0712 idt=0.0452 gnorm=17.050 dnorm=9.543 nan=0
+2026-10-02 23:37:46,403 epoch=91 step=1600 loss_G=2.1818 loss_D_A=0.1641 loss_D_B=0.2173 cycle=0.0777 idt=0.0505 gnorm=18.078 dnorm=11.503 nan=0
+2026-10-02 23:37:49,512 epoch_mean={'g': 2.0670032572302017, 'd_a': 0.135518499338849, 'd_b': 0.18148688085330938, 'cycle': 0.07919407720151155, 'identity': 0.05530152409713461, 'epoch': 91}
+2026-10-02 23:37:50,667 epoch=92 step=1 loss_G=1.9618 loss_D_A=0.1650 loss_D_B=0.1541 cycle=0.0779 idt=0.0499 gnorm=16.819 dnorm=11.458 nan=0
+2026-10-02 23:38:24,435 epoch=92 step=100 loss_G=2.7069 loss_D_A=0.1112 loss_D_B=0.1894 cycle=0.0995 idt=0.0903 gnorm=24.329 dnorm=10.778 nan=0
+2026-10-02 23:38:56,865 epoch=92 step=200 loss_G=2.1939 loss_D_A=0.1648 loss_D_B=0.1782 cycle=0.0718 idt=0.0553 gnorm=15.543 dnorm=8.252 nan=0
+2026-10-02 23:39:29,321 epoch=92 step=300 loss_G=1.8940 loss_D_A=0.1189 loss_D_B=0.1263 cycle=0.0727 idt=0.0493 gnorm=17.822 dnorm=7.585 nan=0
+2026-10-02 23:40:02,025 epoch=92 step=400 loss_G=2.0054 loss_D_A=0.0862 loss_D_B=0.1334 cycle=0.0791 idt=0.0538 gnorm=17.484 dnorm=10.565 nan=0
+2026-10-02 23:40:34,117 epoch=92 step=500 loss_G=2.2733 loss_D_A=0.0846 loss_D_B=0.1395 cycle=0.0785 idt=0.0519 gnorm=21.355 dnorm=9.587 nan=0
+2026-10-02 23:41:06,508 epoch=92 step=600 loss_G=2.0060 loss_D_A=0.1541 loss_D_B=0.1816 cycle=0.0804 idt=0.0580 gnorm=17.584 dnorm=8.916 nan=0
+2026-10-02 23:41:39,415 epoch=92 step=700 loss_G=2.2005 loss_D_A=0.2518 loss_D_B=0.1304 cycle=0.0785 idt=0.0553 gnorm=16.204 dnorm=12.382 nan=0
+2026-10-02 23:42:11,263 epoch=92 step=800 loss_G=1.8885 loss_D_A=0.0802 loss_D_B=0.2451 cycle=0.0743 idt=0.0516 gnorm=16.457 dnorm=13.166 nan=0
+2026-10-02 23:42:43,341 epoch=92 step=900 loss_G=2.0561 loss_D_A=0.0889 loss_D_B=0.1689 cycle=0.0772 idt=0.0560 gnorm=25.672 dnorm=8.184 nan=0
+2026-10-02 23:43:14,912 epoch=92 step=1000 loss_G=2.1877 loss_D_A=0.1148 loss_D_B=0.1588 cycle=0.0724 idt=0.0490 gnorm=15.945 dnorm=9.843 nan=0
+2026-10-02 23:43:47,169 epoch=92 step=1100 loss_G=2.2918 loss_D_A=0.0977 loss_D_B=0.1255 cycle=0.0805 idt=0.0480 gnorm=22.878 dnorm=8.588 nan=0
+2026-10-02 23:44:19,473 epoch=92 step=1200 loss_G=1.9448 loss_D_A=0.1851 loss_D_B=0.1891 cycle=0.0837 idt=0.0531 gnorm=23.612 dnorm=12.892 nan=0
+2026-10-02 23:44:52,240 epoch=92 step=1300 loss_G=2.2520 loss_D_A=0.1287 loss_D_B=0.1908 cycle=0.0752 idt=0.0516 gnorm=15.511 dnorm=12.930 nan=0
+2026-10-02 23:45:24,065 epoch=92 step=1400 loss_G=2.0126 loss_D_A=0.0980 loss_D_B=0.1558 cycle=0.0842 idt=0.0577 gnorm=13.516 dnorm=8.740 nan=0
+2026-10-02 23:45:55,828 epoch=92 step=1500 loss_G=2.3980 loss_D_A=0.1026 loss_D_B=0.1824 cycle=0.0837 idt=0.0578 gnorm=16.580 dnorm=8.604 nan=0
+2026-10-02 23:46:27,896 epoch=92 step=1600 loss_G=2.3792 loss_D_A=0.1026 loss_D_B=0.2136 cycle=0.0853 idt=0.0601 gnorm=18.638 dnorm=8.251 nan=0
+2026-10-02 23:46:30,985 epoch_mean={'g': 2.0593179833074533, 'd_a': 0.1362959583353552, 'd_b': 0.17949250973529698, 'cycle': 0.07859289986746652, 'identity': 0.05474902324794983, 'epoch': 92}
+2026-10-02 23:46:31,937 epoch=93 step=1 loss_G=2.1467 loss_D_A=0.1469 loss_D_B=0.1055 cycle=0.0797 idt=0.0511 gnorm=19.082 dnorm=7.962 nan=0
+2026-10-02 23:47:03,973 epoch=93 step=100 loss_G=1.9806 loss_D_A=0.1258 loss_D_B=0.1476 cycle=0.0786 idt=0.0527 gnorm=13.326 dnorm=10.625 nan=0
+2026-10-02 23:47:36,158 epoch=93 step=200 loss_G=1.9144 loss_D_A=0.1325 loss_D_B=0.1198 cycle=0.0885 idt=0.0613 gnorm=16.087 dnorm=8.671 nan=0
+2026-10-02 23:48:08,872 epoch=93 step=300 loss_G=2.1185 loss_D_A=0.1492 loss_D_B=0.1606 cycle=0.0842 idt=0.0573 gnorm=15.394 dnorm=7.937 nan=0
+2026-10-02 23:48:41,906 epoch=93 step=400 loss_G=2.0001 loss_D_A=0.1695 loss_D_B=0.2072 cycle=0.0808 idt=0.0528 gnorm=15.192 dnorm=17.857 nan=0
+2026-10-02 23:49:14,796 epoch=93 step=500 loss_G=2.3401 loss_D_A=0.1374 loss_D_B=0.1217 cycle=0.0737 idt=0.0496 gnorm=15.661 dnorm=8.515 nan=0
+2026-10-02 23:49:47,241 epoch=93 step=600 loss_G=1.8301 loss_D_A=0.1599 loss_D_B=0.2594 cycle=0.0738 idt=0.0488 gnorm=14.484 dnorm=11.751 nan=0
+2026-10-02 23:50:19,964 epoch=93 step=700 loss_G=2.2374 loss_D_A=0.1843 loss_D_B=0.1787 cycle=0.0848 idt=0.0608 gnorm=15.633 dnorm=13.068 nan=0
+2026-10-02 23:50:52,431 epoch=93 step=800 loss_G=1.8825 loss_D_A=0.1382 loss_D_B=0.1926 cycle=0.0822 idt=0.0524 gnorm=13.199 dnorm=13.165 nan=0
+2026-10-02 23:51:24,579 epoch=93 step=900 loss_G=2.0234 loss_D_A=0.1033 loss_D_B=0.1309 cycle=0.0699 idt=0.0459 gnorm=20.061 dnorm=9.836 nan=0
+2026-10-02 23:51:57,226 epoch=93 step=1000 loss_G=1.9509 loss_D_A=0.1029 loss_D_B=0.1926 cycle=0.0770 idt=0.0547 gnorm=20.681 dnorm=9.687 nan=0
+2026-10-02 23:52:29,331 epoch=93 step=1100 loss_G=2.2696 loss_D_A=0.1522 loss_D_B=0.1872 cycle=0.1003 idt=0.0662 gnorm=22.906 dnorm=10.410 nan=0
+2026-10-02 23:53:01,611 epoch=93 step=1200 loss_G=2.1332 loss_D_A=0.1454 loss_D_B=0.2416 cycle=0.0834 idt=0.0579 gnorm=18.318 dnorm=14.650 nan=0
+2026-10-02 23:53:35,023 epoch=93 step=1300 loss_G=2.2502 loss_D_A=0.0854 loss_D_B=0.1512 cycle=0.0767 idt=0.0518 gnorm=13.643 dnorm=10.478 nan=0
+2026-10-02 23:54:07,241 epoch=93 step=1400 loss_G=2.5354 loss_D_A=0.1042 loss_D_B=0.1555 cycle=0.0838 idt=0.0585 gnorm=21.414 dnorm=12.255 nan=0
+2026-10-02 23:54:39,605 epoch=93 step=1500 loss_G=1.5821 loss_D_A=0.1590 loss_D_B=0.1663 cycle=0.0640 idt=0.0501 gnorm=16.243 dnorm=10.599 nan=0
+2026-10-02 23:55:12,405 epoch=93 step=1600 loss_G=2.0476 loss_D_A=0.1497 loss_D_B=0.1751 cycle=0.0805 idt=0.0555 gnorm=17.555 dnorm=12.896 nan=0
+2026-10-02 23:55:15,536 epoch_mean={'g': 2.0632522867333076, 'd_a': 0.13289083160969042, 'd_b': 0.17898625912873642, 'cycle': 0.07838891544697447, 'identity': 0.05432274859884511, 'epoch': 93}
+2026-10-02 23:55:16,556 epoch=94 step=1 loss_G=1.8718 loss_D_A=0.1610 loss_D_B=0.2218 cycle=0.0718 idt=0.0483 gnorm=18.613 dnorm=12.519 nan=0
+2026-10-02 23:55:48,968 epoch=94 step=100 loss_G=2.0126 loss_D_A=0.0993 loss_D_B=0.1259 cycle=0.0748 idt=0.0467 gnorm=18.898 dnorm=11.034 nan=0
+2026-10-02 23:56:21,121 epoch=94 step=200 loss_G=1.9256 loss_D_A=0.1259 loss_D_B=0.2181 cycle=0.0770 idt=0.0514 gnorm=15.059 dnorm=8.291 nan=0
+2026-10-02 23:56:53,400 epoch=94 step=300 loss_G=2.1785 loss_D_A=0.1483 loss_D_B=0.1953 cycle=0.0790 idt=0.0559 gnorm=14.621 dnorm=7.727 nan=0
+2026-10-02 23:57:26,465 epoch=94 step=400 loss_G=2.6266 loss_D_A=0.0840 loss_D_B=0.1881 cycle=0.0850 idt=0.0677 gnorm=21.761 dnorm=11.092 nan=0
+2026-10-02 23:57:59,234 epoch=94 step=500 loss_G=2.2964 loss_D_A=0.1237 loss_D_B=0.1688 cycle=0.0788 idt=0.0579 gnorm=17.946 dnorm=10.826 nan=0
+2026-10-02 23:58:31,595 epoch=94 step=600 loss_G=1.9805 loss_D_A=0.2446 loss_D_B=0.1353 cycle=0.0785 idt=0.0592 gnorm=17.094 dnorm=10.879 nan=0
+2026-10-02 23:59:04,263 epoch=94 step=700 loss_G=2.0187 loss_D_A=0.1444 loss_D_B=0.1653 cycle=0.0692 idt=0.0446 gnorm=19.754 dnorm=11.757 nan=0
+2026-10-02 23:59:36,253 epoch=94 step=800 loss_G=1.9077 loss_D_A=0.1223 loss_D_B=0.1969 cycle=0.0756 idt=0.0485 gnorm=15.543 dnorm=11.310 nan=0
+2026-10-03 00:00:08,198 epoch=94 step=900 loss_G=1.9588 loss_D_A=0.1153 loss_D_B=0.1081 cycle=0.0741 idt=0.0520 gnorm=22.290 dnorm=11.002 nan=0
+2026-10-03 00:00:40,738 epoch=94 step=1000 loss_G=1.8170 loss_D_A=0.1477 loss_D_B=0.1677 cycle=0.0703 idt=0.0483 gnorm=16.673 dnorm=9.714 nan=0
+2026-10-03 00:01:13,017 epoch=94 step=1100 loss_G=2.1071 loss_D_A=0.1696 loss_D_B=0.1533 cycle=0.0799 idt=0.0501 gnorm=16.841 dnorm=9.937 nan=0
+2026-10-03 00:01:45,769 epoch=94 step=1200 loss_G=2.1093 loss_D_A=0.1183 loss_D_B=0.2203 cycle=0.0848 idt=0.0531 gnorm=19.747 dnorm=11.768 nan=0
+2026-10-03 00:02:18,389 epoch=94 step=1300 loss_G=2.2062 loss_D_A=0.0494 loss_D_B=0.1435 cycle=0.0805 idt=0.0531 gnorm=25.949 dnorm=5.087 nan=0
+2026-10-03 00:02:50,864 epoch=94 step=1400 loss_G=2.2158 loss_D_A=0.0895 loss_D_B=0.1393 cycle=0.0877 idt=0.0631 gnorm=15.435 dnorm=9.136 nan=0
+2026-10-03 00:03:23,817 epoch=94 step=1500 loss_G=2.1697 loss_D_A=0.0913 loss_D_B=0.1729 cycle=0.0713 idt=0.0497 gnorm=22.095 dnorm=9.483 nan=0
+2026-10-03 00:03:56,767 epoch=94 step=1600 loss_G=1.9444 loss_D_A=0.1145 loss_D_B=0.2430 cycle=0.0791 idt=0.0605 gnorm=13.007 dnorm=9.180 nan=0
+2026-10-03 00:03:59,911 epoch_mean={'g': 2.0476418441867237, 'd_a': 0.13492316962769313, 'd_b': 0.1785012950067935, 'cycle': 0.07793789028380968, 'identity': 0.0540344664769143, 'epoch': 94}
+2026-10-03 00:04:01,061 epoch=95 step=1 loss_G=1.8420 loss_D_A=0.1877 loss_D_B=0.1419 cycle=0.0822 idt=0.0547 gnorm=15.666 dnorm=13.800 nan=0
+2026-10-03 00:04:34,317 epoch=95 step=100 loss_G=2.2878 loss_D_A=0.1124 loss_D_B=0.1909 cycle=0.0767 idt=0.0542 gnorm=27.481 dnorm=9.676 nan=0
+2026-10-03 00:05:06,744 epoch=95 step=200 loss_G=1.9550 loss_D_A=0.1155 loss_D_B=0.2052 cycle=0.0857 idt=0.0544 gnorm=14.469 dnorm=8.420 nan=0
+2026-10-03 00:05:38,870 epoch=95 step=300 loss_G=2.2100 loss_D_A=0.1308 loss_D_B=0.2507 cycle=0.0805 idt=0.0620 gnorm=17.763 dnorm=11.659 nan=0
+2026-10-03 00:06:11,338 epoch=95 step=400 loss_G=2.3708 loss_D_A=0.1250 loss_D_B=0.2234 cycle=0.0996 idt=0.0618 gnorm=21.428 dnorm=9.948 nan=0
+2026-10-03 00:06:43,703 epoch=95 step=500 loss_G=1.7683 loss_D_A=0.1088 loss_D_B=0.2184 cycle=0.0734 idt=0.0461 gnorm=18.187 dnorm=11.112 nan=0
+2026-10-03 00:07:15,815 epoch=95 step=600 loss_G=2.2164 loss_D_A=0.1230 loss_D_B=0.2051 cycle=0.0859 idt=0.0718 gnorm=17.427 dnorm=16.047 nan=0
+2026-10-03 00:07:48,161 epoch=95 step=700 loss_G=1.9570 loss_D_A=0.1035 loss_D_B=0.1732 cycle=0.0836 idt=0.0543 gnorm=13.285 dnorm=9.101 nan=0
+2026-10-03 00:08:21,313 epoch=95 step=800 loss_G=2.3182 loss_D_A=0.1134 loss_D_B=0.2363 cycle=0.1068 idt=0.0835 gnorm=15.209 dnorm=8.923 nan=0
+2026-10-03 00:08:54,177 epoch=95 step=900 loss_G=2.0317 loss_D_A=0.1548 loss_D_B=0.1749 cycle=0.0709 idt=0.0470 gnorm=17.528 dnorm=13.179 nan=0
+2026-10-03 00:09:27,169 epoch=95 step=1000 loss_G=2.2050 loss_D_A=0.1955 loss_D_B=0.1870 cycle=0.0806 idt=0.0608 gnorm=16.204 dnorm=9.870 nan=0
+2026-10-03 00:09:59,528 epoch=95 step=1100 loss_G=2.0132 loss_D_A=0.1613 loss_D_B=0.1932 cycle=0.0797 idt=0.0557 gnorm=13.420 dnorm=11.004 nan=0
+2026-10-03 00:10:31,815 epoch=95 step=1200 loss_G=2.0911 loss_D_A=0.1265 loss_D_B=0.1922 cycle=0.0848 idt=0.0583 gnorm=15.086 dnorm=12.139 nan=0
+2026-10-03 00:11:04,578 epoch=95 step=1300 loss_G=2.0688 loss_D_A=0.1591 loss_D_B=0.1380 cycle=0.0768 idt=0.0516 gnorm=25.873 dnorm=12.148 nan=0
+2026-10-03 00:11:36,215 epoch=95 step=1400 loss_G=2.1031 loss_D_A=0.0585 loss_D_B=0.1916 cycle=0.0915 idt=0.0608 gnorm=10.866 dnorm=6.377 nan=0
+2026-10-03 00:12:08,707 epoch=95 step=1500 loss_G=2.1526 loss_D_A=0.1545 loss_D_B=0.1947 cycle=0.0936 idt=0.0628 gnorm=12.356 dnorm=9.326 nan=0
+2026-10-03 00:12:41,340 epoch=95 step=1600 loss_G=1.9252 loss_D_A=0.0843 loss_D_B=0.2054 cycle=0.0823 idt=0.0566 gnorm=12.267 dnorm=9.654 nan=0
+2026-10-03 00:12:44,471 epoch_mean={'g': 2.0442751298039594, 'd_a': 0.13266644211289305, 'd_b': 0.17978377253372477, 'cycle': 0.07760209267183861, 'identity': 0.05368059525578659, 'epoch': 95}
+2026-10-03 00:12:45,617 epoch=96 step=1 loss_G=1.9905 loss_D_A=0.1090 loss_D_B=0.1570 cycle=0.0767 idt=0.0491 gnorm=27.321 dnorm=10.087 nan=0
+2026-10-03 00:13:19,549 epoch=96 step=100 loss_G=2.1915 loss_D_A=0.1325 loss_D_B=0.2190 cycle=0.0821 idt=0.0597 gnorm=10.298 dnorm=11.763 nan=0
+2026-10-03 00:13:51,904 epoch=96 step=200 loss_G=2.2010 loss_D_A=0.1175 loss_D_B=0.2046 cycle=0.0860 idt=0.0594 gnorm=19.971 dnorm=11.063 nan=0
+2026-10-03 00:14:24,508 epoch=96 step=300 loss_G=1.9047 loss_D_A=0.0877 loss_D_B=0.1793 cycle=0.0744 idt=0.0481 gnorm=18.915 dnorm=9.488 nan=0
+2026-10-03 00:14:56,698 epoch=96 step=400 loss_G=2.1597 loss_D_A=0.1290 loss_D_B=0.1840 cycle=0.0793 idt=0.0598 gnorm=20.582 dnorm=7.850 nan=0
+2026-10-03 00:15:29,083 epoch=96 step=500 loss_G=2.1037 loss_D_A=0.1470 loss_D_B=0.0956 cycle=0.0778 idt=0.0568 gnorm=16.710 dnorm=10.471 nan=0
+2026-10-03 00:16:01,362 epoch=96 step=600 loss_G=2.2363 loss_D_A=0.0989 loss_D_B=0.1231 cycle=0.0825 idt=0.0508 gnorm=17.754 dnorm=6.596 nan=0
+2026-10-03 00:16:33,858 epoch=96 step=700 loss_G=2.1488 loss_D_A=0.1153 loss_D_B=0.1321 cycle=0.0774 idt=0.0479 gnorm=17.259 dnorm=8.987 nan=0
+2026-10-03 00:17:06,199 epoch=96 step=800 loss_G=2.2894 loss_D_A=0.1339 loss_D_B=0.1359 cycle=0.0902 idt=0.0709 gnorm=19.562 dnorm=10.689 nan=0
+2026-10-03 00:17:38,225 epoch=96 step=900 loss_G=2.1612 loss_D_A=0.1242 loss_D_B=0.1728 cycle=0.0791 idt=0.0501 gnorm=13.602 dnorm=10.820 nan=0
+2026-10-03 00:18:10,523 epoch=96 step=1000 loss_G=2.3918 loss_D_A=0.1531 loss_D_B=0.1531 cycle=0.0936 idt=0.0656 gnorm=24.896 dnorm=13.957 nan=0
+2026-10-03 00:18:43,274 epoch=96 step=1100 loss_G=2.2980 loss_D_A=0.0786 loss_D_B=0.1326 cycle=0.0762 idt=0.0544 gnorm=20.831 dnorm=9.739 nan=0
+2026-10-03 00:19:15,888 epoch=96 step=1200 loss_G=1.7964 loss_D_A=0.1839 loss_D_B=0.2296 cycle=0.0719 idt=0.0435 gnorm=18.538 dnorm=12.109 nan=0
+2026-10-03 00:19:48,167 epoch=96 step=1300 loss_G=2.1607 loss_D_A=0.1185 loss_D_B=0.1304 cycle=0.0757 idt=0.0473 gnorm=17.341 dnorm=10.219 nan=0
+2026-10-03 00:20:20,315 epoch=96 step=1400 loss_G=1.9824 loss_D_A=0.1139 loss_D_B=0.1638 cycle=0.0779 idt=0.0553 gnorm=11.183 dnorm=8.365 nan=0
+2026-10-03 00:20:52,488 epoch=96 step=1500 loss_G=1.9611 loss_D_A=0.1442 loss_D_B=0.2352 cycle=0.0754 idt=0.0475 gnorm=11.870 dnorm=11.524 nan=0
+2026-10-03 00:21:25,323 epoch=96 step=1600 loss_G=1.7629 loss_D_A=0.0913 loss_D_B=0.2007 cycle=0.0747 idt=0.0454 gnorm=15.705 dnorm=10.075 nan=0
+2026-10-03 00:21:28,519 epoch_mean={'g': 2.0518368170128105, 'd_a': 0.13441013312487868, 'd_b': 0.1787064830708948, 'cycle': 0.07724893700262034, 'identity': 0.05351515586331764, 'epoch': 96}
+2026-10-03 00:21:29,676 epoch=97 step=1 loss_G=2.0179 loss_D_A=0.1015 loss_D_B=0.2153 cycle=0.0766 idt=0.0694 gnorm=16.502 dnorm=9.810 nan=0
+2026-10-03 00:22:03,030 epoch=97 step=100 loss_G=1.6391 loss_D_A=0.1951 loss_D_B=0.1131 cycle=0.0659 idt=0.0379 gnorm=22.383 dnorm=11.194 nan=0
+2026-10-03 00:22:35,277 epoch=97 step=200 loss_G=2.1516 loss_D_A=0.0882 loss_D_B=0.1842 cycle=0.0764 idt=0.0574 gnorm=17.613 dnorm=12.033 nan=0
+2026-10-03 00:23:07,150 epoch=97 step=300 loss_G=2.3712 loss_D_A=0.1228 loss_D_B=0.1565 cycle=0.0829 idt=0.0553 gnorm=18.446 dnorm=10.142 nan=0
+2026-10-03 00:23:40,291 epoch=97 step=400 loss_G=1.9763 loss_D_A=0.1643 loss_D_B=0.2484 cycle=0.0701 idt=0.0481 gnorm=17.149 dnorm=12.286 nan=0
+2026-10-03 00:24:13,031 epoch=97 step=500 loss_G=1.9722 loss_D_A=0.2364 loss_D_B=0.2569 cycle=0.0895 idt=0.0619 gnorm=11.117 dnorm=13.056 nan=0
+2026-10-03 00:24:45,346 epoch=97 step=600 loss_G=1.5603 loss_D_A=0.2036 loss_D_B=0.2753 cycle=0.0711 idt=0.0455 gnorm=16.949 dnorm=15.826 nan=0
+2026-10-03 00:25:18,084 epoch=97 step=700 loss_G=2.2898 loss_D_A=0.0646 loss_D_B=0.1728 cycle=0.0870 idt=0.0702 gnorm=18.355 dnorm=8.957 nan=0
+2026-10-03 00:25:50,723 epoch=97 step=800 loss_G=2.1200 loss_D_A=0.1838 loss_D_B=0.1283 cycle=0.0655 idt=0.0552 gnorm=31.044 dnorm=10.952 nan=0
+2026-10-03 00:26:22,622 epoch=97 step=900 loss_G=1.9896 loss_D_A=0.1673 loss_D_B=0.2104 cycle=0.0802 idt=0.0524 gnorm=14.769 dnorm=13.148 nan=0
+2026-10-03 00:26:55,026 epoch=97 step=1000 loss_G=1.8892 loss_D_A=0.1712 loss_D_B=0.1802 cycle=0.0721 idt=0.0475 gnorm=11.709 dnorm=13.562 nan=0
+2026-10-03 00:27:27,363 epoch=97 step=1100 loss_G=1.9676 loss_D_A=0.1995 loss_D_B=0.1930 cycle=0.0624 idt=0.0386 gnorm=16.039 dnorm=16.015 nan=0
+2026-10-03 00:27:59,902 epoch=97 step=1200 loss_G=2.0659 loss_D_A=0.1141 loss_D_B=0.1251 cycle=0.0805 idt=0.0584 gnorm=14.619 dnorm=10.518 nan=0
+2026-10-03 00:28:32,095 epoch=97 step=1300 loss_G=2.0616 loss_D_A=0.1342 loss_D_B=0.1571 cycle=0.0816 idt=0.0620 gnorm=23.499 dnorm=9.279 nan=0
+2026-10-03 00:29:04,865 epoch=97 step=1400 loss_G=2.3156 loss_D_A=0.1596 loss_D_B=0.1671 cycle=0.0839 idt=0.0772 gnorm=14.645 dnorm=12.027 nan=0
+2026-10-03 00:29:37,089 epoch=97 step=1500 loss_G=1.8718 loss_D_A=0.1801 loss_D_B=0.1410 cycle=0.0753 idt=0.0506 gnorm=15.926 dnorm=9.890 nan=0
+2026-10-03 00:30:10,195 epoch=97 step=1600 loss_G=2.0756 loss_D_A=0.1287 loss_D_B=0.1961 cycle=0.0849 idt=0.0536 gnorm=13.200 dnorm=9.465 nan=0
+2026-10-03 00:30:13,341 epoch_mean={'g': 2.0584988232725157, 'd_a': 0.1327376087259802, 'd_b': 0.17754556407099184, 'cycle': 0.07702264726532172, 'identity': 0.0531502243894968, 'epoch': 97}
+2026-10-03 00:30:14,444 epoch=98 step=1 loss_G=1.9394 loss_D_A=0.1315 loss_D_B=0.2479 cycle=0.0792 idt=0.0496 gnorm=20.371 dnorm=16.574 nan=0
+2026-10-03 00:30:47,371 epoch=98 step=100 loss_G=2.1903 loss_D_A=0.1592 loss_D_B=0.1596 cycle=0.0781 idt=0.0542 gnorm=14.727 dnorm=9.317 nan=0
+2026-10-03 00:31:19,761 epoch=98 step=200 loss_G=2.1207 loss_D_A=0.0849 loss_D_B=0.1938 cycle=0.0838 idt=0.0606 gnorm=14.655 dnorm=9.304 nan=0
+2026-10-03 00:31:51,664 epoch=98 step=300 loss_G=2.1674 loss_D_A=0.0925 loss_D_B=0.1708 cycle=0.0790 idt=0.0596 gnorm=21.670 dnorm=13.298 nan=0
+2026-10-03 00:32:24,331 epoch=98 step=400 loss_G=2.1941 loss_D_A=0.1564 loss_D_B=0.1158 cycle=0.0810 idt=0.0599 gnorm=16.146 dnorm=8.950 nan=0
+2026-10-03 00:32:56,508 epoch=98 step=500 loss_G=1.9520 loss_D_A=0.1450 loss_D_B=0.1629 cycle=0.0765 idt=0.0509 gnorm=13.845 dnorm=11.640 nan=0
+2026-10-03 00:33:28,813 epoch=98 step=600 loss_G=1.9392 loss_D_A=0.0814 loss_D_B=0.2742 cycle=0.0688 idt=0.0462 gnorm=20.051 dnorm=15.943 nan=0
+2026-10-03 00:34:01,527 epoch=98 step=700 loss_G=2.1451 loss_D_A=0.1646 loss_D_B=0.2199 cycle=0.0857 idt=0.0639 gnorm=16.061 dnorm=10.690 nan=0
+2026-10-03 00:34:33,233 epoch=98 step=800 loss_G=2.0091 loss_D_A=0.1072 loss_D_B=0.1618 cycle=0.0809 idt=0.0543 gnorm=20.547 dnorm=10.078 nan=0
+2026-10-03 00:35:04,914 epoch=98 step=900 loss_G=2.2992 loss_D_A=0.1726 loss_D_B=0.1557 cycle=0.0907 idt=0.0772 gnorm=17.675 dnorm=11.310 nan=0
+2026-10-03 00:35:37,152 epoch=98 step=1000 loss_G=2.0353 loss_D_A=0.1022 loss_D_B=0.1936 cycle=0.0769 idt=0.0547 gnorm=19.350 dnorm=9.400 nan=0
+2026-10-03 00:36:09,701 epoch=98 step=1100 loss_G=1.8254 loss_D_A=0.1075 loss_D_B=0.1915 cycle=0.0673 idt=0.0450 gnorm=12.868 dnorm=10.414 nan=0
+2026-10-03 00:36:41,736 epoch=98 step=1200 loss_G=1.9092 loss_D_A=0.1139 loss_D_B=0.1338 cycle=0.0747 idt=0.0482 gnorm=14.272 dnorm=11.118 nan=0
+2026-10-03 00:37:14,419 epoch=98 step=1300 loss_G=2.1235 loss_D_A=0.1287 loss_D_B=0.1569 cycle=0.0735 idt=0.0506 gnorm=15.768 dnorm=8.463 nan=0
+2026-10-03 00:37:46,137 epoch=98 step=1400 loss_G=2.0822 loss_D_A=0.1176 loss_D_B=0.1872 cycle=0.0860 idt=0.0531 gnorm=18.570 dnorm=11.180 nan=0
+2026-10-03 00:38:18,511 epoch=98 step=1500 loss_G=2.1446 loss_D_A=0.1180 loss_D_B=0.1584 cycle=0.0837 idt=0.0576 gnorm=12.987 dnorm=8.354 nan=0
+2026-10-03 00:38:50,470 epoch=98 step=1600 loss_G=2.2637 loss_D_A=0.1161 loss_D_B=0.1638 cycle=0.0809 idt=0.0547 gnorm=15.824 dnorm=8.995 nan=0
+2026-10-03 00:38:53,356 epoch_mean={'g': 2.0440456982725155, 'd_a': 0.13221197661405765, 'd_b': 0.17672689686650817, 'cycle': 0.07661228535338219, 'identity': 0.05288042814835258, 'epoch': 98}
+2026-10-03 00:38:54,543 epoch=99 step=1 loss_G=1.9184 loss_D_A=0.1830 loss_D_B=0.1794 cycle=0.0745 idt=0.0471 gnorm=14.027 dnorm=10.010 nan=0
+2026-10-03 00:39:27,697 epoch=99 step=100 loss_G=1.8075 loss_D_A=0.1203 loss_D_B=0.2274 cycle=0.0725 idt=0.0486 gnorm=14.702 dnorm=10.240 nan=0
+2026-10-03 00:39:59,845 epoch=99 step=200 loss_G=1.9342 loss_D_A=0.1378 loss_D_B=0.1738 cycle=0.0679 idt=0.0456 gnorm=15.205 dnorm=10.642 nan=0
+2026-10-03 00:40:31,431 epoch=99 step=300 loss_G=1.9125 loss_D_A=0.0710 loss_D_B=0.1938 cycle=0.0714 idt=0.0460 gnorm=19.318 dnorm=11.971 nan=0
+2026-10-03 00:41:03,452 epoch=99 step=400 loss_G=2.0721 loss_D_A=0.1287 loss_D_B=0.2228 cycle=0.0741 idt=0.0467 gnorm=14.722 dnorm=13.383 nan=0
+2026-10-03 00:41:35,596 epoch=99 step=500 loss_G=1.8900 loss_D_A=0.1864 loss_D_B=0.1432 cycle=0.0800 idt=0.0492 gnorm=16.137 dnorm=10.949 nan=0
+2026-10-03 00:42:07,520 epoch=99 step=600 loss_G=2.0040 loss_D_A=0.1316 loss_D_B=0.1265 cycle=0.0746 idt=0.0505 gnorm=17.341 dnorm=10.426 nan=0
+2026-10-03 00:42:39,816 epoch=99 step=700 loss_G=1.9618 loss_D_A=0.0793 loss_D_B=0.1966 cycle=0.0854 idt=0.0542 gnorm=21.533 dnorm=8.137 nan=0
+2026-10-03 00:43:12,055 epoch=99 step=800 loss_G=2.2301 loss_D_A=0.1351 loss_D_B=0.1252 cycle=0.0698 idt=0.0478 gnorm=22.368 dnorm=10.311 nan=0
+2026-10-03 00:43:43,754 epoch=99 step=900 loss_G=1.9379 loss_D_A=0.1592 loss_D_B=0.1964 cycle=0.0736 idt=0.0476 gnorm=14.279 dnorm=13.142 nan=0
+2026-10-03 00:44:16,474 epoch=99 step=1000 loss_G=2.1851 loss_D_A=0.0902 loss_D_B=0.1521 cycle=0.0767 idt=0.0691 gnorm=12.680 dnorm=8.167 nan=0
+2026-10-03 00:44:48,894 epoch=99 step=1100 loss_G=1.7457 loss_D_A=0.1277 loss_D_B=0.1792 cycle=0.0707 idt=0.0469 gnorm=15.862 dnorm=10.237 nan=0
+2026-10-03 00:45:21,372 epoch=99 step=1200 loss_G=2.0152 loss_D_A=0.1627 loss_D_B=0.1448 cycle=0.0780 idt=0.0577 gnorm=14.598 dnorm=12.783 nan=0
+2026-10-03 00:45:53,461 epoch=99 step=1300 loss_G=1.9399 loss_D_A=0.1735 loss_D_B=0.2048 cycle=0.0701 idt=0.0473 gnorm=20.068 dnorm=9.784 nan=0
+2026-10-03 00:46:25,604 epoch=99 step=1400 loss_G=2.0697 loss_D_A=0.1203 loss_D_B=0.1537 cycle=0.0688 idt=0.0459 gnorm=16.576 dnorm=10.678 nan=0
+2026-10-03 00:46:57,600 epoch=99 step=1500 loss_G=2.1447 loss_D_A=0.0830 loss_D_B=0.2015 cycle=0.0743 idt=0.0506 gnorm=12.999 dnorm=10.319 nan=0
+2026-10-03 00:47:30,215 epoch=99 step=1600 loss_G=1.7858 loss_D_A=0.1425 loss_D_B=0.1723 cycle=0.0682 idt=0.0491 gnorm=14.332 dnorm=12.403 nan=0
+2026-10-03 00:47:33,327 epoch_mean={'g': 2.044916870875388, 'd_a': 0.13015583109411394, 'd_b': 0.1767991344380823, 'cycle': 0.07642973431889315, 'identity': 0.05245629067746749, 'epoch': 99}
+2026-10-03 00:47:34,490 epoch=100 step=1 loss_G=1.9014 loss_D_A=0.1974 loss_D_B=0.2758 cycle=0.0750 idt=0.0480 gnorm=15.755 dnorm=14.398 nan=0
+2026-10-03 00:48:07,506 epoch=100 step=100 loss_G=1.8581 loss_D_A=0.0927 loss_D_B=0.1523 cycle=0.0847 idt=0.0559 gnorm=11.380 dnorm=11.301 nan=0
+2026-10-03 00:48:40,363 epoch=100 step=200 loss_G=2.0674 loss_D_A=0.1639 loss_D_B=0.2369 cycle=0.0744 idt=0.0510 gnorm=14.706 dnorm=13.070 nan=0
+2026-10-03 00:49:13,376 epoch=100 step=300 loss_G=1.9642 loss_D_A=0.1426 loss_D_B=0.1879 cycle=0.0753 idt=0.0505 gnorm=15.878 dnorm=10.793 nan=0
+2026-10-03 00:49:46,889 epoch=100 step=400 loss_G=1.9021 loss_D_A=0.0854 loss_D_B=0.1712 cycle=0.0857 idt=0.0712 gnorm=15.059 dnorm=8.700 nan=0
+2026-10-03 00:50:19,581 epoch=100 step=500 loss_G=2.1747 loss_D_A=0.1427 loss_D_B=0.1612 cycle=0.0785 idt=0.0499 gnorm=14.153 dnorm=11.312 nan=0
+2026-10-03 00:50:51,312 epoch=100 step=600 loss_G=2.2180 loss_D_A=0.1060 loss_D_B=0.1400 cycle=0.0795 idt=0.0511 gnorm=15.454 dnorm=9.677 nan=0
+2026-10-03 00:51:23,870 epoch=100 step=700 loss_G=2.2795 loss_D_A=0.1528 loss_D_B=0.1722 cycle=0.0799 idt=0.0510 gnorm=21.645 dnorm=9.779 nan=0
+2026-10-03 00:51:56,221 epoch=100 step=800 loss_G=2.1346 loss_D_A=0.1275 loss_D_B=0.1736 cycle=0.0870 idt=0.0586 gnorm=17.864 dnorm=11.001 nan=0
+2026-10-03 00:52:28,500 epoch=100 step=900 loss_G=2.0879 loss_D_A=0.1182 loss_D_B=0.1504 cycle=0.0738 idt=0.0467 gnorm=16.591 dnorm=10.550 nan=0
+2026-10-03 00:53:00,389 epoch=100 step=1000 loss_G=1.9665 loss_D_A=0.1740 loss_D_B=0.2117 cycle=0.0717 idt=0.0461 gnorm=12.035 dnorm=11.732 nan=0
+2026-10-03 00:53:32,619 epoch=100 step=1100 loss_G=1.8583 loss_D_A=0.1069 loss_D_B=0.2366 cycle=0.0732 idt=0.0534 gnorm=11.932 dnorm=16.776 nan=0
+2026-10-03 00:54:04,899 epoch=100 step=1200 loss_G=1.8371 loss_D_A=0.1540 loss_D_B=0.2746 cycle=0.0765 idt=0.0516 gnorm=10.412 dnorm=14.207 nan=0
+2026-10-03 00:54:37,679 epoch=100 step=1300 loss_G=1.6486 loss_D_A=0.1310 loss_D_B=0.1012 cycle=0.0633 idt=0.0374 gnorm=13.736 dnorm=9.015 nan=0
+2026-10-03 00:55:09,833 epoch=100 step=1400 loss_G=2.2607 loss_D_A=0.0980 loss_D_B=0.2123 cycle=0.0775 idt=0.0511 gnorm=13.113 dnorm=11.124 nan=0
+2026-10-03 00:55:42,455 epoch=100 step=1500 loss_G=2.2320 loss_D_A=0.1447 loss_D_B=0.1559 cycle=0.0744 idt=0.0519 gnorm=12.392 dnorm=10.599 nan=0
+2026-10-03 00:56:15,309 epoch=100 step=1600 loss_G=1.9533 loss_D_A=0.0809 loss_D_B=0.2270 cycle=0.0718 idt=0.0672 gnorm=13.667 dnorm=12.225 nan=0
+2026-10-03 00:56:18,458 epoch_mean={'g': 2.0429563155085404, 'd_a': 0.1304285558854571, 'd_b': 0.17560917635141693, 'cycle': 0.07614531428177164, 'identity': 0.052266043905886066, 'epoch': 100}
+2026-10-03 00:56:19,984 done metrics={'final_cycle_loss': 0.07614531428177164, 'final_identity_loss': 0.052266043905886066, 'grad_norm_g_max': 369.9871520996094, 'grad_norm_d_max': 734.5420532226562, 'nan_count': 0, 'param_count_total': 28298120, 'train_seconds': 26381.406142234802, 'images_per_sec': 24.411132466855154, 'peak_mem_gb': 9.88407296, 'epochs': 100, 'smoke': 0, 'photos': 6438, 'resumed_from': 50, 'batch_size': 4}

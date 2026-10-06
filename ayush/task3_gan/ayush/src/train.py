@@ -115,6 +115,7 @@ def main() -> None:
     ap.add_argument("--decay-start", type=int, default=0)
     ap.add_argument("--batch-size", type=int, default=0)
     ap.add_argument("--lr", type=float, default=0.0, help="override task3.lr; 0 keeps config")
+    ap.add_argument("--workers", type=int, default=-1, help="DataLoader workers; -1 auto (cap 4 on Windows)")
     ap.add_argument("--reset-optim", action="store_true", help="do not restore Adam state on resume")
     args = ap.parse_args()
     cfg, cfg_hash = load_config(args.config)
@@ -148,7 +149,14 @@ def main() -> None:
     )
     gb = torch.cuda.get_device_properties(device).total_memory / 1024**3
     batch = 1 if args.smoke else choose_batch(gb, args.batch_size)
-    workers = 0 if args.smoke else min(12, max(2, (os.cpu_count() or 4) - 2))
+    if args.smoke:
+        workers = 0
+    elif args.workers >= 0:
+        workers = args.workers
+    else:
+        # Windows spawn + many workers can hang on first iter; keep it modest.
+        cap = 4 if os.name == "nt" else 12
+        workers = min(cap, max(2, (os.cpu_count() or 4) - 2))
     loader_kw = dict(
         batch_size=batch, shuffle=True, num_workers=workers,
         persistent_workers=workers > 0, pin_memory=True,
