@@ -14,7 +14,7 @@
 
 ## Extra metrics (computed Oct 6 on RTX 5080; same defs as Sneha notebook)
 
-Source: `full_metrics_report.csv` from `compute_extra_metrics.py` (Inception features; polynomial KID 100×100; density/coverage k=5; LPIPS AlexNet; EMA generators for cycle/LPIPS).
+Source: `full_metrics_report.csv` (brief path: `task3_gan/ayush/`) from `compute_extra_metrics.py` (Inception features; polynomial KID 100×100; density/coverage k=5; LPIPS AlexNet; EMA generators for cycle/LPIPS). Kaggle CSV: `submission.csv` in the same folder.
 
 | Metric | A2B (Monet→photo) | B2A (photo→Monet) |
 |---|---|---|

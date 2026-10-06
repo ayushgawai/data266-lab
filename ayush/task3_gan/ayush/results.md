@@ -21,14 +21,16 @@ Unpaired CycleGAN, Monet and photos. Generator is ResNet-9 for 256. Discriminato
 
 Local FID is `(FID_A2B + FID_B2A) / 2` from `evaluate_local.py` (same procedure as `team/Part3_Evaluation_Script.ipynb`).
 
-Report package for Sneha: `epoch100_report_metrics.md` (cycle L1, train time, peak mem, log paths; KID/LPIPS/etc. not run). Human audit: `sneha/task3_gan/audit/ratings_ayush.csv` + `agreement.csv`.
+Report package for Sneha: `epoch100_report_metrics.md` + `full_metrics_report.csv` (KID/density/coverage/LPIPS/content cosine/cycle L1). Human audit: `sneha/task3_gan/audit/ratings_ayush.csv` + `agreement.csv`.
 
-Submission artifacts:
+Submission artifacts (brief layout):
 
-- `outputs/submission.csv` (= epoch-100 lock; also under `outputs/submission_epoch100/`)
+- `submission.csv` and `full_metrics_report.csv` at `task3_gan/ayush/`
+- `outputs/submission.csv` (= same epoch-100 lock; also under `outputs/submission_epoch100/`)
 - `outputs/pred_A2B/` (300 Monet → photo)
 - `outputs/pred_B2A/` (300 photo → Monet)
 - `outputs/fid_directions.txt`
+- `run.ipynb` (prints epoch-100 report + CSVs + FID directions)
 - `logs_from_gpu/` (raw train logs)
 
 ```

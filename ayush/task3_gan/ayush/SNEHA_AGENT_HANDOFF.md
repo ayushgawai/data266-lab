@@ -8,13 +8,14 @@ Ayush side is locked. Read this first.
 - Human audit + agreement committed.
 - Raw logs for **Tasks 1, 2, and 3** under `ayush/reproducibility/raw_logs/ayush/` (now tracked in git).
 - Metrics note: `ayush/task3_gan/ayush/epoch100_report_metrics.md`.
+- Brief layout: `task3_gan/ayush/submission.csv` + `full_metrics_report.csv` (epoch-100). `run.ipynb` prints those + `outputs/fid_directions.txt`.
 - Checkpoint zip on Drive (anyone-with-link): https://drive.google.com/drive/folders/1Ks5qQSWtfKzqk8HL5nCBkAjM9iBW3Jha?usp=sharing
 - Metrics vs log clarifications: `ayush/REPORT_METRICS_CLARIFICATION.md` (Task 1 val CE; Task 2 CSV vs `tested` lines; Task 3 manifest note).
 
 ## Do not
 
 - Do not use epoch-40 or epoch-200 Task 3 weights.
-- Do not invent KID / density / coverage / LPIPS / content cosine for Ayush.
+- Do not invent KID / density / coverage / LPIPS / content cosine for Ayush — use `full_metrics_report.csv`.
 - Do not retrain.
 
 ## Still team-side

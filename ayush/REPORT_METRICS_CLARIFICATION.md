@@ -30,7 +30,7 @@ Original auto-written epoch-100 manifest was overwritten on disk when phase-2 fi
 
 ## Task 3 — KID / density / LPIPS / content cosine / cycle L1
 
-Previously marked “not computed” in the report. **Now computed** (Oct 6) with the same definitions as Sneha’s notebook; see `task3_gan/ayush/full_metrics_report.csv` and `epoch100_report_metrics.md`.
+Previously marked “not computed” in the report. **Now computed** (Oct 6) with the same definitions as Sneha’s notebook; see `task3_gan/ayush/full_metrics_report.csv` and `epoch100_report_metrics.md`. Brief layout also has `task3_gan/ayush/submission.csv` (epoch-100 FID/MiFID). `run.ipynb` prints the epoch-100 report + CSVs (not the old 40-epoch `train_metrics.csv`).
 
 | | A2B | B2A |
 |---|---|---|
