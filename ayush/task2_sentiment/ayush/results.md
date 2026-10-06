@@ -20,6 +20,8 @@ Adam 1e-3, batch 64, up to 5 epochs, early stop when val loss stalls for 2 epoch
 | BiLSTM max-pool | 0.937 | 0.937 | 0.985 | 0.874 | 0.047 | 0.008 | 0.935 to 0.939 | 4,104,449 | 94 |
 | BiLSTM + attention | 0.943 | 0.943 | 0.986 | 0.887 | 0.043 | 0.006 | 0.941 to 0.946 | 4,137,473 | 95 |
 
+These accuracies are from `metrics_report.csv` (full official test suite). The short `tested model=... acc=` lines in the raw train log differ slightly; use the CSV for the report — see `ayush/REPORT_METRICS_CLARIFICATION.md`.
+
 Macro-F1 and MCC 95% intervals are in `metrics_report.csv`. For the attention model, macro-F1 is 0.941 to 0.946 and MCC is 0.882 to 0.891.
 
 McNemar on the same 38,000 rows: TextCNN vs max-pool BiLSTM p = 0.062, so that step is not a clear win. TextCNN vs attention p about 2e-13, and max-pool vs attention p about 4e-9. Attention is the model that moves the number.

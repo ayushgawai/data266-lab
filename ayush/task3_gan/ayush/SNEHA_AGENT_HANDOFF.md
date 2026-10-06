@@ -8,7 +8,8 @@ Ayush side is locked. Read this first.
 - Human audit + agreement committed.
 - Raw logs for **Tasks 1, 2, and 3** under `ayush/reproducibility/raw_logs/ayush/` (now tracked in git).
 - Metrics note: `ayush/task3_gan/ayush/epoch100_report_metrics.md`.
-- Checkpoint zip for Drive (Ayush uploads manually): contains Task1 `chargpt_best.pt`, Task2 three `.pt`, Task3 `cyclegan_epoch100.pt`, plus the raw logs. **Paste the anyone-with-link Drive URL into the report when Ayush sends it.**
+- Checkpoint zip on Drive (anyone-with-link): https://drive.google.com/drive/folders/1Ks5qQSWtfKzqk8HL5nCBkAjM9iBW3Jha?usp=sharing
+- Metrics vs log clarifications: `ayush/REPORT_METRICS_CLARIFICATION.md` (Task 1 val CE; Task 2 CSV vs `tested` lines; Task 3 manifest note).
 
 ## Do not
 
@@ -18,5 +19,4 @@ Ayush side is locked. Read this first.
 
 ## Still team-side
 
-- Add Drive link to final report once Ayush shares it.
-- Canvas / Report.pdf packaging.
+- Canvas / Report.pdf packaging (Drive link is in `ayush/README.md`).

@@ -26,6 +26,6 @@ Hardware: NVIDIA RTX PRO 6000 Blackwell Server Edition, torch 2.11.0+cu128. Peak
 | grad norm max / median | 7.18 / 0.595 |
 | grad spikes / NaNs | 0 / 0 |
 
-Epoch 1 val loss was 2.14. The saved checkpoint is epoch 29 at 0.753. Epoch 30 val was 0.758, a small bounce. Each val pass draws a fresh 2,000 windows, so the 0.751 in `val_ce` of the CSV is one more draw of the best weights, not a better epoch. The negative gap is the epoch train average (dropout on) against the val pass at the end of that epoch.
+Epoch 1 val loss was 2.14. The saved checkpoint is epoch 29 at 0.753. Epoch 30 val was 0.758, a small bounce (this is CSV `val_ce` / `val_ce_epoch30`, and it matches the log line `epoch=30 ... val_loss=0.7584`). Each val pass draws a fresh 2,000 windows, so the **0.7514** in the log’s final `done metrics` `val_ce` is one more draw on the best weights — not a better epoch and not a second training run. Prefer best val **0.753** plus epoch-30 val **0.758** in the report. The negative gap is the epoch train average (dropout on) against the val pass at the end of that epoch.
 
 Distinct-1 looks tiny because this is a character model and the vocab is only 108 symbols. Over 20 samples of 500 new characters, a few dozen unique letters are a small fraction of the token count. The repeated 4-gram rate is high for the same reason: English repeats chunks like " the" and " and", and the samples also loop phrases. The readable failure cases are in `failure_analysis.md`.

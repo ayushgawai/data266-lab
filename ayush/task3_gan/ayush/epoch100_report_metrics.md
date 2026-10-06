@@ -46,4 +46,4 @@ KID, density, coverage, LPIPS, content cosine.
 
 ## Checkpoints zip (for Drive)
 
-Ayush uploads `~/Documents/ayush_lab1_checkpoints.zip` (tasks 1–3 weights + logs). Paste the anyone-with-link URL into the report when ready.
+Ayush uploads `~/Documents/ayush_lab1_checkpoints.zip` (tasks 1–3 weights + logs). Drive (anyone with the link): https://drive.google.com/drive/folders/1Ks5qQSWtfKzqk8HL5nCBkAjM9iBW3Jha?usp=sharing

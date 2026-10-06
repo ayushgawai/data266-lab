@@ -16,5 +16,5 @@
   },
   "created_utc": "2026-10-03T07:56:19.984000+00:00",
   "smoke": 0,
-  "notes": "Submitted Kaggle run. duration_sec approximates wall time epochs 1-100 across resumed segments. Final segment 50-100 was 26381s. Local FID 85.70 / MiFID 0.410; board ~-43.05."
+  "notes": "Updated by hand on Oct 6 from the raw log to point to the submitted epoch-100 checkpoint (auto-written epoch-100 manifest was overwritten when phase-2 finished at epoch 200; no untouched copy found). duration_sec approximates wall time epochs 1-100 across resumed segments; final segment 50-100 was 26381s. Local FID 85.70 / MiFID 0.410; board ~-43.05."
 }

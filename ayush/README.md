@@ -6,7 +6,7 @@ Ayush folders are ready under each task. Sneha adds her own `sneha/` member dire
 
 - Task 1 / 2: trained; checkpoints on disk (gitignored `*.pt`). Raw logs in `reproducibility/raw_logs/ayush/`.
 - Task 3: **epoch-100** CycleGAN submitted (FID 85.70 / MiFID 0.410). Manifest → `task3_gan/ayush/checkpoints/cyclegan_epoch100.pt`.
-- Checkpoints Drive zip (anyone-with-link): PASTE_AFTER_UPLOAD
+- Checkpoints Drive zip (anyone-with-link): [ayush_lab1_checkpoints](https://drive.google.com/drive/folders/1Ks5qQSWtfKzqk8HL5nCBkAjM9iBW3Jha?usp=sharing)
 
 ## Run (lab GPU or local) — only if retraining
 
