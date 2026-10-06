@@ -1,7 +1,7 @@
 # Task 2 — Yelp Polarity sentiment classification (Sneha)
 
 **Run evidence:** notebook `src/task2_sentiment_sneha.ipynb` (saved with outputs) ·
-checkpoints `checkpoints/*_best.pt` · manifest `reproducibility/manifests/sneha_task2.json` ·
+checkpoints `checkpoints/*_best.pt` ([Google Drive](https://drive.google.com/drive/folders/1O6CWrI-I-WKmtVCej4znQIg0UbCRvxUB?usp=sharing), folder `task2_sentiment/`) · manifest `reproducibility/manifests/sneha_task2.json` ·
 raw logs listed in `logs.md` · settings `config_used.yaml` (sha256 in its first line).
 
 ## 1. Data and preprocessing (brief 2.1)

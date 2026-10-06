@@ -1,6 +1,6 @@
 # Task 1 — Character-level GPT on TinyStories (Sneha)
 
-**Run evidence:** checkpoint `checkpoints/gpt_best.pt` · manifest
+**Run evidence:** checkpoint `checkpoints/gpt_best.pt` ([Google Drive](https://drive.google.com/drive/folders/1O6CWrI-I-WKmtVCej4znQIg0UbCRvxUB?usp=sharing), folder `task1_llm/`) · manifest
 `reproducibility/manifests/sneha_task1.json` · raw logs listed in `logs.md` ·
 config `config_used.yaml` (sha256 in its first line).
 

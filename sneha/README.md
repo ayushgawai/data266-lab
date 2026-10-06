@@ -43,6 +43,18 @@ The datasets are too large for GitHub. Zipped copies, readable by anyone with th
 The notebooks also download the TinyStories and Yelp files from their original sources if
 they are missing, and record each file's SHA-256 in the logs and manifests.
 
+## Checkpoints (Google Drive)
+
+Trained weights are git-ignored (`*.pt`; each Task 3 generator file is 435 MB, over GitHub's limit). All seven are in one shared
+folder, readable by anyone with the link: **[DATA266_Lab1_Team21_Sneha_checkpoints](https://drive.google.com/drive/folders/1O6CWrI-I-WKmtVCej4znQIg0UbCRvxUB?usp=sharing)**. Put each file in the
+matching `checkpoints/` folder; its SHA-256 is in the task's manifest, so a download can be checked with `shasum -a 256`.
+
+| Drive subfolder | Files | Put in |
+|---|---|---|
+| `task1_llm/` | `gpt_best.pt` | `task1_llm/sneha/checkpoints/` |
+| `task2_sentiment/` | `meanpool_best.pt`, `bigru_best.pt`, `charcnn_best.pt`, `meanpool_ablation_best.pt` | `task2_sentiment/sneha/checkpoints/` |
+| `task3_gan/` | `generators_best.pt` (the submission), `generators_final.pt` (epoch 120) | `task3_gan/sneha/checkpoints/` |
+
 ## Setup
 
 ### On the SJSU GPU lab machine (Docker)
@@ -241,7 +253,7 @@ scores zero for Task 3.
 | Every Task 3 metric, both directions | `task3_gan/sneha/metrics_report.csv` |
 | Generated images (300 per direction) | `task3_gan/sneha/outputs/pred_A2B/`, `pred_B2A/` |
 | Loss curves, per-iteration losses, sample grids | `task3_gan/sneha/outputs/` |
-| Generators (each the best of its direction by validation FID; final) | `task3_gan/sneha/checkpoints/` (~435 MB each, git-ignored: share via a drive link) |
+| Generators (each the best of its direction by validation FID; final) | `task3_gan/sneha/checkpoints/` (~435 MB each, git-ignored; on Google Drive, see [Checkpoints](#checkpoints-google-drive)) |
 | Human audit (team) | `task3_gan/audit/` |
 | Write-ups | `task3_gan/sneha/results.md`, `failure_analysis.md` |
 | Manifest | `reproducibility/manifests/sneha_task3.json` |

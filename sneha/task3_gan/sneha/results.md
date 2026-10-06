@@ -1,7 +1,7 @@
 # Task 3 — CycleGAN, Monet ↔ Photo (Sneha)
 
 **Run evidence:** notebook `src/task3_gan_sneha.ipynb` (saved with outputs) · generators
-`checkpoints/generators_best.pt` (link: ______, sha256 in the manifest) · manifest
+`checkpoints/generators_best.pt` ([Google Drive](https://drive.google.com/drive/folders/1O6CWrI-I-WKmtVCej4znQIg0UbCRvxUB?usp=sharing), folder `task3_gan/`; sha256 in the manifest) · manifest
 `reproducibility/manifests/sneha_task3.json` · raw logs listed in `logs.md`.
 
 ## 0. How the run went (hardware disclosure)
