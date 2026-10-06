@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DATA 266 Lab 1 · Task 3 human audit</title>
+<style>
+  body { font: 15px/1.45 -apple-system, "Helvetica Neue", Arial, sans-serif; max-width: 1100px; margin: 24px auto; padding: 0 16px; color: #222; }
+  h1 { font-size: 22px; margin-bottom: 4px; }
+  table.rubric { border-collapse: collapse; margin: 8px 0 16px; font-size: 13.5px; }
+  table.rubric th, table.rubric td { border: 1px solid #ccc; padding: 5px 8px; vertical-align: top; text-align: left; }
+  table.rubric th { background: #f3f3f3; }
+  .sample { border-top: 2px solid #ddd; padding: 14px 0; display: flex; gap: 20px; align-items: flex-start; }
+  .sample img { width: 640px; height: 320px; image-rendering: auto; border: 1px solid #bbb; }
+  .sample h2 { font-size: 16px; margin: 0 0 6px; }
+  .cap { font-size: 12px; color: #666; display: flex; justify-content: space-around; width: 640px; }
+  .axis { margin: 6px 0 10px; }
+  .axis b { display: inline-block; width: 78px; }
+  .axis label { margin-right: 8px; cursor: pointer; }
+  .done h2::after { content: " ✓"; color: #2a8a2a; }
+  #bar { position: sticky; top: 0; background: #fffbe6; border: 1px solid #e6d27a; padding: 8px 12px; margin: 12px 0; z-index: 1; }
+  button { font-size: 14px; padding: 4px 12px; }
+</style>
+</head>
+<body>
+<h1>Task 3 human audit: 30 blinded samples</h1>
+<p>Each image shows the <b>input on the left</b> and a CycleGAN <b>translation on the right</b>. A painting input should become a
+<b>photo</b>; a photo input should become a <b>Monet painting</b>. Samples are shuffled and come from both members and both directions.</p>
+<ul>
+  <li>Rate on your own and don't discuss ratings until <b>both</b> sheets are committed. Don't open <code>audit_key.json</code>.</li>
+  <li>Judge each sample by itself against the rubric, not against the previous one. One sitting, about 15 minutes.</li>
+  <li>Your answers are saved in this browser as you go. At the end, press <b>Download CSV</b> and save the file as
+      <code>ratings_&lt;yourname&gt;.csv</code> in <code>sneha/task3_gan/audit/</code>, then commit it.</li>
+</ul>
+
+<table class="rubric">
+  <tr><th></th><th>Style: does the right side look like the target domain?</th><th>Content: is the input's scene kept?</th><th>Artifacts: is the image free of generation artifacts?</th></tr>
+  <tr><th>5</th><td>Convincing: could pass for a real photo / a real Monet</td><td>Every object, the layout and edges are kept</td><td>None visible</td></tr>
+  <tr><th>4</th><td>Mostly there, with minor giveaways</td><td>Only small details lost</td><td>Faint; seen only on a close look</td></tr>
+  <tr><th>3</th><td>Partly: some target traits, but clearly not the real thing</td><td>Noticeable loss or smearing of some objects</td><td>Clearly visible in a small area</td></tr>
+  <tr><th>2</th><td>Slight change towards the target</td><td>Major parts lost or distorted</td><td>Prominent or spread over the image</td></tr>
+  <tr><th>1</th><td>No change, or the wrong style</td><td>Scene unrecognisable</td><td>Artifacts dominate the image</td></tr>
+</table>
+<p style="font-size:13px;color:#555">Artifacts are things neither domain has: repeated dot or checkerboard patterns, colour blotches, smeared streaks,
+broken edges. An unchanged copy of the input scores low on style but can still score 5 on content and artifacts.</p>
+
+<div id="bar">
+  Rater: <input id="rater" placeholder="your first name" size="12">
+  &nbsp; <span id="count">0 / 90 answered</span> &nbsp;
+  <button id="dl" disabled>Download CSV</button>
+  <button id="clear" style="float:right">Clear my answers</button>
+</div>
+
+<div id="samples"></div>
+
+<script>
+const AXES = ["style", "content", "artifacts"], N = 30;
+const ids = Array.from({length: N}, (_, i) => "audit_" + String(i + 1).padStart(2, "0"));
+const store = "data266_audit_v1";
+let saved = JSON.parse(localStorage.getItem(store) || "{}");
+const root = document.getElementById("samples");
+
+for (const id of ids) {
+  const div = document.createElement("div");
+  div.className = "sample"; div.id = id;
+  let html = `<div><img src="${id}.jpg" alt="${id}"><div class="cap"><span>input</span><span>translation</span></div></div><div><h2>${id}</h2>`;
+  for (const a of AXES) {
+    html += `<div class="axis"><b>${a}</b>`;
+    for (let v = 1; v <= 5; v++) html += `<label><input type="radio" name="${id}_${a}" value="${v}">${v}</label>`;
+    html += "</div>";
+  }
+  div.innerHTML = html + "</div>";
+  root.appendChild(div);
+}
+
+function refresh() {
+  let n = 0;
+  for (const id of ids) {
+    const k = AXES.filter(a => saved.r && saved.r[id + "_" + a]).length;
+    n += k;
+    document.getElementById(id).classList.toggle("done", k === AXES.length);
+  }
+  document.getElementById("count").textContent = `${n} / ${N * AXES.length} answered`;
+  document.getElementById("dl").disabled = n !== N * AXES.length || !document.getElementById("rater").value.trim();
+}
+
+saved.r = saved.r || {};
+document.getElementById("rater").value = saved.rater || "";
+for (const [name, v] of Object.entries(saved.r)) {
+  const el = document.querySelector(`input[name="${name}"][value="${v}"]`);
+  if (el) el.checked = true;
+}
+root.addEventListener("change", e => {
+  saved.r[e.target.name] = Number(e.target.value);
+  localStorage.setItem(store, JSON.stringify(saved)); refresh();
+});
+document.getElementById("rater").addEventListener("input", e => {
+  saved.rater = e.target.value; localStorage.setItem(store, JSON.stringify(saved)); refresh();
+});
+document.getElementById("clear").onclick = () => {
+  if (!confirm("Clear all your answers?")) return;
+  saved = {r: {}, rater: saved.rater}; localStorage.setItem(store, JSON.stringify(saved));
+  document.querySelectorAll("input[type=radio]").forEach(el => el.checked = false); refresh();
+};
+document.getElementById("dl").onclick = () => {
+  const rows = ["sample," + AXES.join(",")].concat(ids.map(id => [id].concat(AXES.map(a => saved.r[id + "_" + a])).join(",")));
+  const name = document.getElementById("rater").value.trim().toLowerCase().replace(/[^a-z0-9]+/g, "_");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([rows.join("\n") + "\n"], {type: "text/csv"}));
+  a.download = `ratings_${name}.csv`; a.click();
+};
+refresh();
+</script>
+</body>
+</html>
