@@ -97,8 +97,14 @@ and every other metric below is the same to the precision shown:
 
 Submission FID (mean of both directions) **115.137**, MiFID 0.428. The provided script's FIDs are within 1.1 points of the validation FIDs the
 generators were chosen on (106.79 and 123.09), so the validation set is a reliable stand-in for the submission.
-Final cycle / identity loss (epoch 120 mean) 0.352 / 0.112 · max gradient norm G 1,143.5 / D 165.45 · NaN count 0 ·
-human audit score and kappa per axis: ______ (team, `task3_gan/audit/agreement.csv`).
+Final cycle / identity loss (epoch 120 mean, weighted ×10 / ×5) 0.352 / 0.112 · max gradient norm G 1,143.5 / D 165.45 · NaN count 0.
+
+**Human audit** (team, blinded, 30 samples, two raters; `task3_gan/audit/agreement.csv`, `scores.csv`). My model's mean score over both
+raters (7 samples per direction): style 3.54 · content 4.79 · artifacts 4.25 (mean 4.19; Ayush's ResNet-9: 3.66 · 4.03 · 3.56, mean 3.75).
+Inter-rater agreement, quadratic-weighted Cohen's kappa: style −0.19 · content 0.60 · artifacts 0.68 (exact agreement 0.20 · 0.70 · 0.50,
+within one point 0.47 · 1.00 · 1.00). The raters agree on content and artifacts but not on style, and the style disagreement is almost
+entirely on my outputs (4.93 from one rater, 2.14 from the other): they are mostly near-copies of the input (failure mode 1), which the
+rubric scores low on style. The audit ranks my model above Ayush's only through content and artifacts, the side effect of copying the input.
 
 
 ## 5. Kaggle (brief 3.2.5)

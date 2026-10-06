@@ -30,17 +30,17 @@ about a minute on a laptop CPU, prints `SMOKE TEST PASSED`, and exits non-zero i
 fails. `python smoke_test.py --task 2`, `--task 3` or `--task all` smoke-test the other
 notebooks. Smoke outputs go to `task*/sneha/_smoke/` (git-ignored) and never touch a real run.
 
-## Datasets (Google Drive)
+## Datasets
 
-The datasets are too large for GitHub. Zipped copies, readable by anyone with the link:
+The datasets are not in git (too large). Where each one comes from:
 
-| Dataset | Used by | Drive link | Where to unzip |
+| Dataset | Used by | Source | Where it goes |
 |---|---|---|---|
-| TinyStories V2 (`TinyStoriesV2-GPT4-train.txt`, `-valid.txt`) | Task 1 | _add link_ | `task1_llm/data/` |
-| Yelp Polarity (`yelp_review_polarity_csv`: `train.csv`, `test.csv`, `readme.txt`) | Task 2 | _add link_ | `task2_sentiment/data/raw/` |
-| Monet / photo (`dataset.zip` from the course, `monet_jpg/` + `photo_jpg/`) | Task 3 | _add link_ | `task3_gan/data/dataset.zip` (the notebook extracts it) |
+| TinyStories V2 (`TinyStoriesV2-GPT4-train.txt`, `-valid.txt`) | Task 1 | [huggingface.co/datasets/roneneldan/TinyStories](https://huggingface.co/datasets/roneneldan/TinyStories) | `task1_llm/data/` |
+| Yelp Polarity (`yelp_review_polarity_csv`: `train.csv`, `test.csv`, `readme.txt`) | Task 2 | [fast.ai mirror, `yelp_review_polarity_csv.tgz`](https://s3.amazonaws.com/fast-ai-nlp/yelp_review_polarity_csv.tgz) | `task2_sentiment/data/raw/` |
+| Monet / photo (`monet_jpg/` + `photo_jpg/`) | Task 3 | the course's `Part3/dataset.zip` (Kaggle class competition data) | `task3_gan/data/dataset.zip` (the notebook extracts it) |
 
-The notebooks also download the TinyStories and Yelp files from their original sources if
+The Task 1 and Task 2 notebooks download their files from these sources if
 they are missing, and record each file's SHA-256 in the logs and manifests.
 
 ## Checkpoints (Google Drive)
