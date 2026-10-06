@@ -7,13 +7,13 @@
     "D_B": 2766529
   },
   "param_count_total": 114371976,
-  "epochs_run": 70,
-  "iterations": 140000,
+  "epochs_run": 120,
+  "iterations": 240000,
   "schedule": {
-    "epochs": 70,
-    "decay_start_epoch": 70
+    "epochs": 120,
+    "decay_start_epoch": 71
   },
-  "auto_schedule": false,
+  "auto_schedule": true,
   "stopped_at_deadline": false,
   "train_photos": 6138,
   "best_epoch_a2b": 30,
@@ -63,18 +63,48 @@
       "val_fid_a2b": 120.01369176219046,
       "val_fid_b2a": 124.03783787219797,
       "val_fid_mean": 122.02576481719422
+    },
+    {
+      "epoch": 80,
+      "val_fid_a2b": 121.25592543368626,
+      "val_fid_b2a": 123.26904991152205,
+      "val_fid_mean": 122.26248767260415
+    },
+    {
+      "epoch": 90,
+      "val_fid_a2b": 115.3418522706917,
+      "val_fid_b2a": 124.24254548103471,
+      "val_fid_mean": 119.7921988758632
+    },
+    {
+      "epoch": 100,
+      "val_fid_a2b": 115.44477989965185,
+      "val_fid_b2a": 124.41779337555462,
+      "val_fid_mean": 119.93128663760324
+    },
+    {
+      "epoch": 110,
+      "val_fid_a2b": 112.85932079157402,
+      "val_fid_b2a": 124.02868311083623,
+      "val_fid_mean": 118.44400195120512
+    },
+    {
+      "epoch": 120,
+      "val_fid_a2b": 108.88830972191062,
+      "val_fid_b2a": 123.83735985582445,
+      "val_fid_mean": 116.36283478886753
     }
   ],
   "nan_count": 0,
-  "grad_norm_g_max": 277.97247314453125,
+  "grad_norm_g_max": 1143.5477294921875,
   "grad_norm_d_max": 165.4467315673828,
-  "final_cycle_loss": 0.37378028470277785,
-  "final_identity_loss": 0.15361655678600072,
-  "train_seconds": 8215.777490608001,
-  "images_per_sec": 35.35635281014528,
-  "peak_mem_gb": 2.88128,
+  "final_cycle_loss": 0.35243658992648125,
+  "final_identity_loss": 0.1121392871234566,
+  "train_seconds": 32599.62460925201,
+  "images_per_sec": 15.009055333088343,
+  "peak_mem_gb": 12.696198656,
   "device_name": "Tesla T4",
   "cpu_name": "x86_64",
-  "train_log": "reproducibility/raw_logs/sneha/task3_train_main_20261005T200623Z.log",
-  "config_sha256": "64c1f62b841a719283d1923f5a4207c1fd8338b3e54c6244b50fe512565bc6e5"
+  "train_log": "reproducibility/raw_logs/sneha/task3_train_main_20261006T022031Z.log",
+  "config_sha256": "31712f3f87ed719f7e5f2c36dd41e44d1f438538704cb3d42d558d97988d11da"
 }

@@ -2,11 +2,11 @@
   "member": "sneha",
   "task": "task3",
   "run_name": "main",
-  "config_sha256": "64c1f62b841a719283d1923f5a4207c1fd8338b3e54c6244b50fe512565bc6e5",
+  "config_sha256": "31712f3f87ed719f7e5f2c36dd41e44d1f438538704cb3d42d558d97988d11da",
   "notebook": "task3_gan/sneha/src/task3_gan_sneha.ipynb",
   "git_sha": "unknown",
   "seed": 42,
-  "timestamp_utc": "2026-10-05T20:08:39Z",
+  "timestamp_utc": "2026-10-06T05:07:15Z",
   "python": "3.13.15",
   "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
   "torch": "2.11.0+cu130",
@@ -781,22 +781,22 @@
     },
     "generators_final.pt": {
       "path": "task3_gan/sneha/checkpoints/generators_final.pt",
-      "sha256": "4cfc8d6520d20a71031926db1ad93900cae11f509c58dea4349d067cd598f962",
+      "sha256": "bc2fff422ad630b61ba1ec130bbd99c3986b8f25f01d8cd8d0eb56cdd9fd092b",
       "bytes": 435406113,
       "storage": "too large for GitHub: upload to Git LFS or a shared drive and put the link here"
     }
   },
   "submission": {
     "csv": "task3_gan/sneha/submission.csv",
-    "sha256": "681e3e529793bbb094897b1d15579eb60072609b3b676e0711a1950b580ef70a",
+    "sha256": "9e3297fc70f8308fd68b525d238e465359de3f3d8a47ed3351939ac3cbb0899f",
     "generators": "task3_gan/sneha/checkpoints/generators_best.pt",
     "best_epochs": {
       "A2B": 30,
       "B2A": 50
     },
     "schedule": {
-      "epochs": 70,
-      "decay_start_epoch": 70
+      "epochs": 120,
+      "decay_start_epoch": 71
     },
     "pred_A2B": "task3_gan/sneha/outputs/pred_A2B",
     "pred_B2A": "task3_gan/sneha/outputs/pred_B2A"
@@ -808,9 +808,9 @@
     }
   },
   "raw_logs": [
-    "reproducibility/raw_logs/sneha/task3_train_main_20261005T200623Z.log",
-    "reproducibility/raw_logs/sneha/task3_submission_main_20261005T200655Z.log",
-    "reproducibility/raw_logs/sneha/task3_metrics_main_20261005T200803Z.log"
+    "reproducibility/raw_logs/sneha/task3_train_main_20261006T022031Z.log",
+    "reproducibility/raw_logs/sneha/task3_submission_main_20261006T050526Z.log",
+    "reproducibility/raw_logs/sneha/task3_metrics_main_20261006T050637Z.log"
   ],
   "evidence": {
     "loss_curves": "task3_gan/sneha/outputs/loss_curves.png",
@@ -822,7 +822,12 @@
       "task3_gan/sneha/outputs/samples_epoch_040.png",
       "task3_gan/sneha/outputs/samples_epoch_050.png",
       "task3_gan/sneha/outputs/samples_epoch_060.png",
-      "task3_gan/sneha/outputs/samples_epoch_070.png"
+      "task3_gan/sneha/outputs/samples_epoch_070.png",
+      "task3_gan/sneha/outputs/samples_epoch_080.png",
+      "task3_gan/sneha/outputs/samples_epoch_090.png",
+      "task3_gan/sneha/outputs/samples_epoch_100.png",
+      "task3_gan/sneha/outputs/samples_epoch_110.png",
+      "task3_gan/sneha/outputs/samples_epoch_120.png"
     ]
   },
   "config": {
@@ -844,10 +849,10 @@
     "unet_dropout": 0.0,
     "ngf": 64,
     "ndf": 64,
-    "epochs": 70,
-    "decay_start_epoch": 70,
-    "train_until": null,
-    "max_epochs": 400,
+    "epochs": "auto",
+    "decay_start_epoch": "auto",
+    "train_until": "2026-10-06T08:00:00-07:00",
+    "max_epochs": 120,
     "iters_per_epoch": 2000,
     "batch_size": 1,
     "load_size": 286,

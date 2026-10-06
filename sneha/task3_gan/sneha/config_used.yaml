@@ -1,4 +1,4 @@
-# settings of the most recent run; sha256 64c1f62b841a719283d1923f5a4207c1fd8338b3e54c6244b50fe512565bc6e5
+# settings of the most recent run; sha256 31712f3f87ed719f7e5f2c36dd41e44d1f438538704cb3d42d558d97988d11da
 member: sneha
 run_name: main
 seed: 42
@@ -17,10 +17,10 @@ generator: unet256
 unet_dropout: 0.0
 ngf: 64
 ndf: 64
-epochs: 70
-decay_start_epoch: 70
-train_until: null
-max_epochs: 400
+epochs: auto
+decay_start_epoch: auto
+train_until: '2026-10-06T08:00:00-07:00'
+max_epochs: 120
 iters_per_epoch: 2000
 batch_size: 1
 load_size: 286
