@@ -12,9 +12,9 @@ next to the shared data, the evaluation code in `common/`, and `reproducibility/
 
 | Task | Folder | Status |
 |---|---|---|
-| 1. Character-level GPT on TinyStories | `task1_llm/` | Sneha: one notebook, tested; awaiting the real training run |
-| 2. Yelp Polarity sentiment | `task2_sentiment/` | Sneha: one notebook, tested; awaiting the real training run |
-| 3. CycleGAN Monet ↔ Photo | `task3_gan/` | Sneha: one notebook, tested; awaiting the real training run |
+| 1. Character-level GPT on TinyStories | `task1_llm/` | Trained (30 epochs, RTX 4090): val CE 0.802, bpc 1.158 · `task1_llm/sneha/results.md` |
+| 2. Yelp Polarity sentiment | `task2_sentiment/` | Three models trained (RTX 4090); best BiGRU, test accuracy 0.9382 · `task2_sentiment/sneha/results.md` |
+| 3. CycleGAN Monet ↔ Photo | `task3_gan/` | Trained 120 epochs (RTX 4090, then Colab T4); Kaggle −57.78 · `task3_gan/sneha/results.md` |
 
 ## Smoke test (one command)
 
@@ -32,7 +32,9 @@ notebooks. Smoke outputs go to `task*/sneha/_smoke/` (git-ignored) and never tou
 
 ## Datasets
 
-The datasets are not in git (too large). Where each one comes from:
+The datasets are not in git (too large). Zipped copies of the exact files used here, readable by anyone with the link:
+**[DATA266_Lab1_Team21_datasets](https://drive.google.com/drive/folders/1nr_CEwNylk7HZYPPP_ufqi1lwnONS_f9?usp=sharing)** (`task1_tinystories_v2.zip`, `task2_yelp_review_polarity_csv.zip`,
+`task3_monet_photo_dataset.zip`). Where each one comes from:
 
 | Dataset | Used by | Source | Where it goes |
 |---|---|---|---|
@@ -250,7 +252,8 @@ scores zero for Task 3.
 | Output | Where |
 |---|---|
 | Kaggle file (written by the provided script) | `task3_gan/sneha/submission.csv` |
-| Every Task 3 metric, both directions | `task3_gan/sneha/metrics_report.csv` |
+| Every Task 3 metric, both directions | `task3_gan/sneha/metrics_report.csv` (also as `full_metrics_report.csv`, the brief's Task 3 name; identical) |
+| Re-score the outputs with the provided script, outside the notebook | `python task3_gan/sneha/evaluate_local.py` (writes to `outputs/evaluate_local/`) |
 | Generated images (300 per direction) | `task3_gan/sneha/outputs/pred_A2B/`, `pred_B2A/` |
 | Loss curves, per-iteration losses, sample grids | `task3_gan/sneha/outputs/` |
 | Generators (each the best of its direction by validation FID; final) | `task3_gan/sneha/checkpoints/` (~435 MB each, git-ignored; on Google Drive, see [Checkpoints](#checkpoints-google-drive)) |
