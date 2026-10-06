@@ -1,0 +1,114 @@
+2026-10-01 16:43:26,384 config_sha256=d7edee1d922850af02ee6fe9689313dd9bd166b6f41772f29e38171b4b1c6bdd
+2026-10-01 16:43:26,439 git_sha=unknown
+2026-10-01 16:43:26,439 python=3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+2026-10-01 16:43:26,471 platform=Windows-11-10.0.26100-SP0
+2026-10-01 16:43:26,471 device=cuda gpu=NVIDIA GeForce RTX 5080 Laptop GPU
+2026-10-01 16:43:26,471 cwd=C:\Users\ADS-Admin\data266-lab\ayush repo=C:\Users\ADS-Admin\data266-lab\ayush
+2026-10-01 16:43:26,471 config={
+  "seed": 42,
+  "member": "ayush",
+  "device": "cuda",
+  "paths": {
+    "task1_data": "task1_llm/data",
+    "task2_splits": "task2_sentiment/data/splits",
+    "task3_data": "task3_gan/data",
+    "logs": "reproducibility/raw_logs/ayush",
+    "manifests": "reproducibility/manifests"
+  },
+  "task1": {
+    "hf_dataset": "roneneldan/TinyStories",
+    "train_stories": 100000,
+    "val_stories": 10000,
+    "train_sequences": 100000,
+    "val_sequences": 10000,
+    "split_seed": 42,
+    "block_size": 256,
+    "batch_size": 64,
+    "samples_per_epoch": 20000,
+    "epochs": 30,
+    "n_layer": 4,
+    "n_head": 4,
+    "d_model": 256,
+    "d_ff": 1024,
+    "dropout": 0.1,
+    "norm_position": "pre",
+    "activation": "GELU",
+    "tie_weights": true,
+    "lr": 0.0003,
+    "warmup_steps": 200,
+    "schedule": "cosine",
+    "weight_decay": 0.1,
+    "grad_clip": 1.0,
+    "gen": {
+      "n_samples": 20,
+      "max_new_tokens": 500,
+      "temperature": 0.8
+    }
+  },
+  "task2": {
+    "n_train": 100000,
+    "n_val": 20000,
+    "split_seed": 42,
+    "max_vocab": 30000,
+    "max_len": 256,
+    "batch_size": 64,
+    "epochs": 5,
+    "lr": 0.001,
+    "early_stop_patience": 2,
+    "models": [
+      "textcnn",
+      "bilstm",
+      "bilstm_attn"
+    ]
+  },
+  "task3": {
+    "image_size": 256,
+    "photo_subset": 2000,
+    "photo_subset_seed": 42,
+    "batch_size": 1,
+    "epochs": 40,
+    "decay_start_epoch": 25,
+    "lr": 0.0002,
+    "beta1": 0.5,
+    "lambda_cycle": 10.0,
+    "lambda_identity": 0.5,
+    "pool_size": 50,
+    "n_eval": 300,
+    "generator": "resnet9"
+  }
+}
+2026-10-01 16:43:26,901 pip_freeze_begin
+contourpy==1.4.0
+cycler==0.12.1
+filelock==3.32.3
+fonttools==4.66.1
+fsspec==2026.7.0
+Jinja2==3.1.6
+kiwisolver==1.5.1
+MarkupSafe==3.0.3
+matplotlib==3.11.2
+mpmath==1.3.0
+networkx==3.6.1
+numpy==2.5.2
+packaging==26.3
+pillow==12.3.0
+pyparsing==3.3.3
+python-dateutil==2.9.0.post0
+PyYAML==6.0.3
+setuptools==78.1.0
+six==1.17.0
+sympy==1.14.0
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+typing_extensions==4.16.0
+
+pip_freeze_end
+2026-10-01 16:43:26,901 log_path=C:\Users\ADS-Admin\data266-lab\ayush\reproducibility\raw_logs\ayush\task3_cyclegan_20261001T234326Z.log
+2026-10-01 16:43:26,961 monets=20 photos=20 epochs=2 smoke=1 all_photos=0 resume=none
+2026-10-01 16:43:26,962 device=NVIDIA GeForce RTX 5080 Laptop GPU mem_gb=15.9 batch=1 workers=0 amp=bf16
+2026-10-01 16:43:27,272 params_total=28298120
+2026-10-01 16:43:32,288 epoch=1 step=1 loss_G=25.7630 loss_D_A=1.6717 loss_D_B=2.9437 cycle=1.2671 idt=1.2263 gnorm=156.776 dnorm=84.585 nan=0
+2026-10-01 16:43:34,700 epoch_mean={'g': 19.174215698242186, 'd_a': 2.551380729675293, 'd_b': 2.4950325012207033, 'cycle': 0.9872602462768555, 'identity': 1.0000821113586427, 'epoch': 1}
+2026-10-01 16:43:37,284 epoch=2 step=1 loss_G=13.5442 loss_D_A=0.8605 loss_D_B=2.7275 cycle=0.7000 idt=0.6840 gnorm=69.155 dnorm=102.363 nan=0
+2026-10-01 16:43:39,598 epoch_mean={'g': 13.732766723632812, 'd_a': 0.9845239639282226, 'd_b': 0.9157790184020996, 'cycle': 0.7822947978973389, 'identity': 0.7819838047027587, 'epoch': 2}
+2026-10-01 16:43:41,469 done metrics={'final_cycle_loss': 0.7822947978973389, 'final_identity_loss': 0.7819838047027587, 'grad_norm_g_max': 273.9473876953125, 'grad_norm_d_max': 284.72686767578125, 'nan_count': 0, 'param_count_total': 28298120, 'train_seconds': 14.151986360549927, 'images_per_sec': 5.652916697475626, 'peak_mem_gb': 9.465829376, 'epochs': 2, 'smoke': 1, 'photos': 20, 'resumed_from': 0, 'batch_size': 1}
