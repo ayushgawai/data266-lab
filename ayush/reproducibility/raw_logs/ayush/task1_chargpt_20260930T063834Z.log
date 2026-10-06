@@ -1,0 +1,1165 @@
+2026-09-30 06:38:34,162 config_sha256=c57d284fd184ab1dd42b2dabda0fafc1e811cee8b4d8c2c349dc7e48d30ada44
+2026-09-30 06:38:34,192 git_sha=unknown
+2026-09-30 06:38:34,192 python=3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]
+2026-09-30 06:38:34,193 platform=Linux-6.6.122+-x86_64-with-glibc2.39
+2026-09-30 06:38:34,193 device=cuda gpu=NVIDIA RTX PRO 6000 Blackwell Server Edition
+2026-09-30 06:38:34,193 cwd=/content/lab1/repo repo=/content/lab1/repo
+2026-09-30 06:38:34,193 config={
+  "seed": 42,
+  "member": "ayush",
+  "device": "cuda",
+  "paths": {
+    "task1_data": "task1_llm/data",
+    "task2_splits": "task2_sentiment/data/splits",
+    "task3_data": "task3_gan/data",
+    "logs": "reproducibility/raw_logs/ayush",
+    "manifests": "reproducibility/manifests"
+  },
+  "task1": {
+    "hf_dataset": "roneneldan/TinyStories",
+    "train_stories": 100000,
+    "val_stories": 10000,
+    "split_seed": 42,
+    "block_size": 256,
+    "batch_size": 64,
+    "samples_per_epoch": 20000,
+    "epochs": 30,
+    "n_layer": 4,
+    "n_head": 4,
+    "d_model": 256,
+    "d_ff": 1024,
+    "dropout": 0.1,
+    "norm_position": "pre",
+    "activation": "GELU",
+    "tie_weights": true,
+    "lr": 0.0003,
+    "warmup_steps": 200,
+    "schedule": "cosine",
+    "weight_decay": 0.1,
+    "grad_clip": 1.0,
+    "gen": {
+      "n_samples": 20,
+      "max_new_tokens": 500,
+      "temperature": 0.8
+    }
+  },
+  "task2": {
+    "n_train": 100000,
+    "n_val": 20000,
+    "split_seed": 42,
+    "max_vocab": 30000,
+    "max_len": 256,
+    "batch_size": 64,
+    "epochs": 5,
+    "lr": 0.001,
+    "early_stop_patience": 2,
+    "models": [
+      "textcnn",
+      "bilstm",
+      "bilstm_attn"
+    ]
+  },
+  "task3": {
+    "image_size": 256,
+    "photo_subset": 2000,
+    "photo_subset_seed": 42,
+    "batch_size": 1,
+    "epochs": 40,
+    "decay_start_epoch": 25,
+    "lr": 0.0002,
+    "beta1": 0.5,
+    "lambda_cycle": 10.0,
+    "lambda_identity": 0.5,
+    "pool_size": 50,
+    "n_eval": 300,
+    "generator": "resnet9"
+  }
+}
+2026-09-30 06:38:34,731 pip_freeze_begin
+absl-py==1.4.0
+accelerate==1.14.0
+access==1.1.10.post3
+affine==3.0.1
+aiofiles==25.1.0
+aiohappyeyeballs==2.7.1
+aiohttp==3.14.3
+aiosignal==1.4.0
+aiosqlite==0.22.1
+alabaster==1.0.0
+albucore==0.0.24
+albumentations==2.0.8
+ale-py==0.12.1
+altair==5.5.0
+annotated-doc==0.0.5
+annotated-types==0.8.0
+antlr4-python3-runtime==4.9.3
+anyio==4.14.2
+anywidget==0.9.21
+apsw==3.53.4.0
+argon2-cffi==25.1.0
+argon2-cffi-bindings==26.1.0
+array_record==0.8.3
+arrow==1.4.0
+arviz==0.22.0
+astropy==7.2.2
+astropy-iers-data==0.2026.8.31.0.57.9
+astunparse==1.6.3
+atpublic==5.1
+attrs==26.1.0
+audioop-lts==0.2.2
+audioread==3.1.0
+Authlib==1.8.0
+autograd==1.9.1
+babel==2.18.0
+backcall==0.2.0
+beartype==0.22.9
+beautifulsoup4==4.13.5
+betterproto==2.0.0b7
+bigframes==2.48.0
+bigquery-magics==0.14.0
+bleach==6.4.0
+blinker==1.9.0
+blis==1.3.3
+blobfile==3.3.0
+blosc2==4.12.0
+bokeh==3.8.2
+Bottleneck==1.4.2
+bqplot==0.12.47
+branca==0.8.2
+brotli==1.2.0
+CacheControl==0.14.4
+cachetools==6.2.6
+catalogue==2.0.10
+certifi==2026.7.22
+cffi==2.1.1
+chardet==5.2.0
+charset-normalizer==3.4.9
+clarabel==0.11.1
+click==8.5.0
+cligj==0.7.2
+cloudpathlib==0.25.0
+cloudpickle==3.1.2
+cmake==3.31.10
+cmdstanpy==1.3.0
+colorcet==3.2.1
+colorlover==0.3.0
+community==1.0.0b1
+confection==1.3.3
+cons==0.4.7
+contourpy==1.3.3
+cramjam==2.12.1
+cryptography==50.0.1
+cucim-cu12 @ https://pypi.nvidia.com/cucim-cu12/cucim_cu12-26.2.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+cuda-bindings==12.9.7
+cuda-core==0.3.2
+cuda-pathfinder==1.8.0
+cuda-python==12.9.7
+cuda-toolkit==12.8.1
+cudf-cu12==26.2.1
+cudf-polars-cu12==26.2.1
+cufflinks==0.17.3
+cuml-cu12==26.2.0
+cupy-cuda12x==14.0.1
+curl_cffi==0.16.2
+cuvs-cu12 @ https://pypi.nvidia.com/cuvs-cu12/cuvs_cu12-26.2.0-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl
+cvxopt==1.3.2
+cvxpy==1.6.7
+cycler==0.12.1
+cyipopt==1.5.0
+cymem==2.0.13
+Cython==3.0.12
+dask==2026.1.1
+dask-cuda==26.2.0
+dask-cudf-cu12==26.2.1
+dataproc-spark-connect==1.1.0
+datasets==4.8.5
+db-dtypes==1.7.1
+dbus-python==1.3.2
+debugpy==1.8.15
+decorator==4.4.2
+defusedxml==0.7.1
+deprecation==2.1.0
+diffusers==0.40.0
+dill==0.4.1
+distributed==2026.1.1
+distributed-ucxx-cu12==0.48.0
+distro==1.9.0
+dlib==19.24.6
+dm-tree==0.1.10
+docstring_parser==0.18.0
+docutils==0.21.2
+dopamine_rl==4.1.2
+duckdb==1.3.2
+earthengine-api==1.7.39
+easydict==1.13
+editdistance==0.8.1
+eerepr==0.1.2
+einops==0.8.2
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85
+entrypoints==0.4
+esda==2.9.0
+et_xmlfile==2.0.0
+etils==1.14.0
+etuples==0.3.10
+Farama-Notifications==0.0.6
+fastai==2.8.8
+fastapi==0.141.1
+fastcore==2.2.19
+fastdownload==0.0.7
+fastjsonschema==2.22.2
+fastprogress==1.1.6
+fasttransform==0.0.2
+filelock==3.32.5
+firebase-admin==6.9.0
+Flask==3.1.3
+flatbuffers==25.12.19
+flax==0.11.2
+folium==0.20.0
+fonttools==4.64.0
+formulaic==1.2.2
+fqdn==1.5.1
+frozendict==2.4.7
+frozenlist==1.8.0
+fsspec==2025.12.0
+future==1.0.0
+gast==0.7.0
+gcsfs==2025.12.0
+GDAL==3.8.4
+gdown==5.2.2
+geemap==0.38.4
+geocoder==1.38.1
+geographiclib==2.1
+geopandas==1.1.4
+geopy==2.4.1
+giddy==2.3.9
+gin-config==0.5.0
+glob2==0.7
+google==3.0.0
+google-adk==2.7.1
+google-ai-generativelanguage==0.6.15
+google-api-core==2.30.3
+google-api-python-client==2.200.0
+google-auth==2.49.0
+google-auth-httplib2==0.4.2
+google-auth-oauthlib==1.4.1
+google-cloud-bigquery==3.44.0
+google-cloud-bigquery-connection==1.22.0
+google-cloud-bigquery-storage==2.39.0
+google-cloud-core==2.7.0
+google-cloud-dataproc==5.28.0
+google-cloud-datastore==2.25.0
+google-cloud-firestore==2.27.0
+google-cloud-functions==1.24.0
+google-cloud-language==2.21.0
+google-cloud-monitoring==2.31.0
+google-cloud-resource-manager==1.18.0
+google-cloud-spanner==3.68.0
+google-cloud-storage==3.13.1
+google-cloud-storage-control==1.12.0
+google-cloud-translate==3.27.0
+google-colab @ file:///colabtools/dist/google_colab-1.0.0.tar.gz
+google-crc32c==1.8.0
+google-genai==2.12.1
+google-generativeai==0.8.6
+google-pasta==0.2.0
+google-resumable-media==2.10.2
+googleapis-common-protos==1.75.0
+googledrivedownloader==1.1.0
+gradio==6.26.0
+gradio_client==2.6.1
+grain==0.2.18
+graphviz==0.21
+greenlet==3.5.5
+groovy==0.1.2
+grpc-google-iam-v1==0.14.4
+grpc-interceptor==0.15.4
+grpcio==1.83.1
+grpcio-status==1.71.2
+grpclib==0.4.9
+gspread==6.2.1
+gspread-dataframe==4.0.0
+gym==0.25.2
+gym-notices==0.1.0
+gymnasium==1.3.0
+h11==0.16.0
+h2==4.4.1
+h5netcdf==1.8.1
+h5py==3.16.0
+hdbscan==0.8.44
+hf-gradio==0.4.1
+hf-xet==1.6.0
+highspy==1.15.1
+holidays==0.103
+holoviews==1.23.2
+hpack==4.2.0
+html5lib==1.1
+httpcore==1.0.9
+httpcore2==2.12.0
+httpimport==1.4.1
+httplib2==0.32.0
+httptools==0.8.0
+httpx==0.28.1
+httpx2==2.12.0
+huggingface_hub==1.29.0
+humanize==4.16.0
+hyperframe==6.1.0
+hyperopt==0.3.0
+ibis-framework==9.5.0
+idna==3.19
+ImageIO==2.37.4
+imageio-ffmpeg==0.6.0
+imagesize==2.0.1
+imbalanced-learn==0.14.2
+immutabledict==4.3.1
+importlib_metadata==9.0.1
+imutils==0.5.4
+inequality==1.1.2
+inflect==7.5.0
+iniconfig==2.3.0
+intel-cmplr-lib-ur==2025.3.3
+intel-openmp==2025.3.3
+interface_meta==2.0.1
+ipyevents==2.0.4
+ipyfilechooser==0.6.0
+ipykernel==6.17.1
+ipyleaflet==0.20.0
+ipyparallel==8.8.0
+ipython==7.34.0
+ipython-genutils==0.2.0
+ipython-sql==0.5.0
+ipywidgets==7.7.1
+isoduration==20.11.0
+itsdangerous==2.2.0
+jaraco.classes==3.4.0
+jaraco.context==6.1.2
+jaraco.functools==4.6.0
+jax==0.11.1
+jax-cuda12-pjrt==0.11.1
+jax-cuda12-plugin==0.11.1
+jaxlib==0.11.1
+jeepney==0.9.0
+jieba==0.42.1
+Jinja2==3.1.6
+jiter==0.16.0
+joblib==1.6.0
+joserfc==1.7.5
+jsonpatch==1.33
+jsonpickle==4.1.2
+jsonpointer==3.1.1
+jsonschema==4.26.0
+jsonschema-specifications==2025.9.1
+jupyter-console==6.6.3
+jupyter-events==0.12.1
+jupyter-leaflet==0.20.0
+jupyter_client==7.4.9
+jupyter_core==5.9.1
+jupyter_kernel_gateway @ git+https://github.com/googlecolab/kernel_gateway@b134e9945df25c2dcb98ade9129399be10788671
+jupyter_server==2.20.0
+jupyter_server_terminals==0.5.4
+jupyterlab_pygments==0.3.0
+jupyterlab_widgets==3.0.17
+jupytext==1.19.5
+kaggle==2.0.2
+kagglehub==1.0.2
+kagglesdk==0.1.37
+keras==3.13.2
+keras-hub==0.26.0
+keras-nlp==0.26.0
+keyring==25.7.0
+keyrings.google-artifactregistry-auth==1.1.2
+kiwisolver==1.5.1
+langchain==1.3.18
+langchain-core==1.6.1
+langchain-protocol==0.0.19
+langgraph==1.2.11
+langgraph-checkpoint==4.2.0
+langgraph-prebuilt==1.1.0
+langgraph-sdk==0.4.4
+langsmith==0.12.1
+lark==1.3.1
+launchpadlib==1.11.0
+lazr.restfulclient==0.14.6
+lazr.uri==1.0.6
+lazy-loader==0.5
+libclang==18.1.1
+libcudf-cu12==26.2.1
+libcugraph-cu12==26.2.0
+libcuml-cu12==26.2.0
+libcuvs-cu12==26.2.0
+libkvikio-cu12==26.2.0
+libpysal==4.14.1
+libraft-cu12==26.2.0
+librmm-cu12==26.2.0
+librosa==0.11.0
+libucx-cu12==1.19.0
+libucxx-cu12==0.48.0
+lightgbm==4.6.0
+linkify-it-py==2.2.0
+llvmlite==0.44.0
+locket==1.0.0
+logical-unification==0.4.7
+lxml==6.1.2
+Mako==1.3.2.dev0
+mapclassify==2.10.0
+Markdown==3.10.3
+markdown-it-py==4.2.0
+MarkupSafe==3.0.3
+matplotlib==3.10.0
+matplotlib-inline==0.2.2
+matplotlib-venn==1.1.2
+mdit-py-plugins==0.6.1
+mdurl==0.1.2
+mgwr==2.2.1
+miniKanren==1.0.5
+missingno==0.5.2
+mistune==3.3.4
+mizani==0.13.5
+mkl==2025.3.1
+ml_dtypes==0.6.0
+mlxtend==0.23.4
+mmh3==5.3.0
+momepy==0.11.0
+more-itertools==10.8.0
+moviepy==1.0.3
+mpmath==1.3.0
+msgpack==1.2.2
+multidict==6.7.1
+multipledispatch==1.0.0
+multiprocess==0.70.19
+multitasking==0.0.13
+murmurhash==1.0.15
+music21==9.9.2
+namex==0.1.0
+narwhals==2.25.0
+natsort==8.4.0
+nbclassic==1.3.3
+nbclient==0.10.4
+nbconvert==7.17.1
+nbformat==5.11.1
+ndindex==1.10.1
+nest-asyncio==1.6.0
+networkx==3.6.1
+nh3==0.3.7
+nibabel==5.4.2
+nltk==3.9.1
+notebook==6.5.7
+notebook_shim==0.2.4
+numba==0.61.2
+numba-cuda==0.22.2
+numexpr==2.14.2
+numpy==2.1.3
+nvidia-cublas-cu12==12.8.4.1
+nvidia-cuda-cccl-cu12==12.9.27
+nvidia-cuda-cupti-cu12==12.8.90
+nvidia-cuda-nvcc-cu12==12.8.93
+nvidia-cuda-nvrtc-cu12==12.8.93
+nvidia-cuda-runtime-cu12==12.8.90
+nvidia-cudnn-cu12==9.19.0.56
+nvidia-cufft-cu12==11.3.3.83
+nvidia-cufile-cu12==1.13.1.3
+nvidia-curand-cu12==10.3.9.90
+nvidia-cusolver-cu12==11.7.3.90
+nvidia-cusparse-cu12==12.5.8.93
+nvidia-cusparselt-cu12==0.7.1
+nvidia-libnvcomp-cu12==5.1.0.21
+nvidia-ml-py==13.610.43
+nvidia-nccl-cu12==2.28.9
+nvidia-nccl-cu13==2.31.2
+nvidia-nvimgcodec-cu12==0.7.0.11
+nvidia-nvjitlink-cu12==12.8.93
+nvidia-nvshmem-cu12==3.4.5
+nvidia-nvtx-cu12==12.8.90
+nvtx==0.2.16
+nx-cugraph-cu12 @ https://pypi.nvidia.com/nx-cugraph-cu12/nx_cugraph_cu12-26.2.0-py3-none-any.whl
+oauth2client==4.1.3
+oauthlib==3.3.1
+omegaconf==2.3.1
+onemkl-license==2025.3.1
+openai==2.54.0
+opencv-contrib-python==4.14.0.94
+opencv-python==5.0.0.93
+opencv-python-headless==5.0.0.93
+openpyxl==3.1.5
+opentelemetry-api==1.42.1
+opentelemetry-resourcedetector-gcp==1.14.0
+opentelemetry-sdk==1.42.1
+opentelemetry-semantic-conventions==0.63b1
+opt_einsum==3.4.0
+optax==0.2.8
+optree==0.20.0
+orbax-checkpoint==0.12.4
+orjson==3.12.0
+ormsgpack==1.12.2
+osqp==1.1.3
+packaging==26.3
+pandas==2.2.3
+pandas-datareader==0.11.1
+pandas-gbq==0.30.0
+pandas-stubs==2.2.3.250527
+pandocfilters==1.5.1
+panel==1.9.4
+panel-material-ui==0.14.2
+param==2.4.1
+parso==0.8.7
+parsy==2.2
+partd==1.4.2
+patsy==1.0.3
+peewee==4.4.0
+peft==0.20.0
+pexpect==4.9.0
+pickleshare==0.7.5
+pillow==11.3.0
+platformdirs==4.11.7
+plotly==5.24.1
+plotnine==0.14.5
+pluggy==1.6.0
+plum-dispatch==2.9.0
+pointpats==2.5.5
+polars==1.35.2
+polars-runtime-32==1.35.2
+pooch==1.9.0
+portpicker==1.5.2
+preshed==3.0.13
+prettytable==3.18.0
+proglog==0.1.12
+progressbar2==4.5.0
+prometheus_client==0.26.0
+promise==2.3
+prompt_toolkit==3.0.53
+propcache==0.5.2
+prophet==1.4.0
+proto-plus==1.28.2
+protobuf==5.29.6
+psutil==5.9.5
+psycopg2==2.9.12
+psygnal==0.15.1
+ptyprocess==0.7.0
+PuLP==3.3.2
+py-cpuinfo==9.0.0
+py4j==0.10.9.9
+pyarrow==23.0.1
+pyasn1==0.6.4
+pyasn1_modules==0.4.2
+pycairo==1.29.1
+pycocotools==2.0.11
+pycparser==3.0
+pycryptodomex==3.23.0
+pydantic==2.13.5
+pydantic_core==2.46.5
+pydata-google-auth==1.9.1
+pydot==4.0.1
+pydotplus==2.0.2
+PyDrive2==1.21.1
+pydub==0.25.1
+pyerfa==2.0.1.5
+pygame==2.6.1
+pygit2==1.20.0
+Pygments==2.21.0
+PyGObject==3.48.2
+pyiceberg==0.12.0
+PyJWT==2.13.0
+pylibcudf-cu12==26.2.1
+pylibcugraph-cu12==26.2.0
+pylibraft-cu12==26.2.0
+pymc==5.28.5
+pynndescent==0.6.0
+pyogrio==0.13.0
+pyomo==6.10.1
+PyOpenGL==3.1.10
+pyOpenSSL==26.4.0
+pyparsing==3.3.2
+pyperclip==1.11.0
+pyproj==3.7.2
+pyroaring==1.1.0
+pysal==25.7
+pyshp==3.1.6
+PySocks==1.7.1
+pyspark==4.0.4
+pytensor==2.38.3
+pytest==8.4.2
+python-apt==0.0.0
+python-box==7.4.1
+python-dateutil==2.9.0.post0
+python-dotenv==1.2.3
+python-fasthtml==0.14.12
+python-json-logger==4.2.0
+python-louvain==0.16
+python-multipart==0.0.32
+python-slugify==8.0.4
+python-snappy==0.7.3
+python-utils==4.0.1
+pytz==2025.2
+pyviz_comms==3.0.6
+PyWavelets==1.9.0
+PyYAML==6.0.3
+pyzmq==26.2.1
+quantecon==0.11.4
+raft-dask-cu12==26.2.0
+rapids-dask-dependency==26.2.0
+rapids-logger==0.2.3
+rasterio==1.5.1
+rasterstats==0.21.0
+ratelim==0.1.6
+referencing==0.37.0
+regex==2025.11.3
+requests==2.32.4
+requests-oauthlib==2.0.0
+requests-toolbelt==1.0.0
+requirements-parser==0.9.0
+rfc3339-validator==0.1.4
+rfc3986-validator==0.1.1
+rfc3987-syntax==1.1.0
+rich==13.9.4
+rmm-cu12==26.2.0
+roman-numerals==4.1.0
+roman-numerals-py==4.1.0
+rpds-py==2026.6.3
+rpy2==3.5.17
+rsa==4.9.1
+rtree==1.4.1
+safehttpx==0.1.7
+safetensors==0.8.0
+scikit-image==0.25.2
+scikit-learn==1.6.1
+scipy==1.16.3
+scooby==0.11.2
+scs==3.2.11
+seaborn==0.13.2
+SecretStorage==3.5.0
+segregation==2.5.4
+semantic-version==2.10.0
+Send2Trash==2.1.0
+sentence-transformers==5.7.0
+sentencepiece==0.2.2
+sentry-sdk==2.68.1
+setuptools==80.10.2
+shap==0.52.0
+shapely==2.1.2
+shellingham==1.5.4
+simple-parsing==0.1.9
+simplejson==4.1.2
+simsimd==6.5.16
+six==1.17.0
+sklearn-compat==0.1.6
+sklearn-pandas==2.2.0
+slicer==0.0.8
+smart_open==8.0.1
+sniffio==1.3.1
+snowballstemmer==3.1.1
+sortedcontainers==2.4.0
+soundfile==0.14.0
+soupsieve==2.9.2
+soxr==1.1.0
+spacy==3.8.16
+spacy-legacy==3.0.12
+spacy-loggers==1.0.5
+spaghetti==1.7.6
+spanner-graph-notebook==1.1.10
+spglm==1.1.0
+Sphinx==8.2.3
+sphinxcontrib-applehelp==2.0.0
+sphinxcontrib-devhelp==2.0.0
+sphinxcontrib-htmlhelp==2.1.0
+sphinxcontrib-jsmath==1.0.1
+sphinxcontrib-qthelp==2.0.0
+sphinxcontrib-serializinghtml==2.0.0
+spint==1.1.0
+splot==1.1.7
+spopt==0.7.0
+spreg==1.9.0
+SQLAlchemy==2.0.52
+sqlglot==25.20.2
+sqlparse==0.6.0
+srsly==2.5.3
+standard-aifc==3.13.0
+standard-chunk==3.13.0
+standard-sunau==3.13.0
+stanio==0.5.1
+starlette==1.6.0
+statsmodels==0.15.0
+strictyaml==1.7.3
+stringzilla==5.1.2
+stumpy==1.14.1
+sympy==1.14.0
+tables==3.10.2
+tabulate==0.9.0
+tbb==2022.3.1
+tblib==3.2.2
+tcmlib==1.5.0
+tenacity==9.1.4
+tensorboard==2.20.0
+tensorboard-data-server==0.7.2
+tensorflow==2.20.0
+tensorflow-datasets==4.9.10
+tensorflow-hub==0.16.1
+tensorflow-metadata==1.21.0
+tensorflow-probability==0.25.0
+tensorflow-text==2.20.1
+tensorstore==0.1.85
+termcolor==3.3.0
+terminado==0.18.1
+text-unidecode==1.3
+textblob==0.19.0
+tf-slim==1.1.0
+tf_keras==2.20.1
+thinc==8.3.13
+threadpoolctl==3.6.0
+tifffile==2026.8.23
+tiktoken==0.14.0
+timm==1.0.29
+tinycss2==1.5.1
+tobler==0.14.0
+tokenizers==0.23.1
+toml==0.10.2
+tomlkit==0.14.0
+toolz==0.12.1
+torch==2.11.0+cu128
+torchao==0.10.0
+torchaudio==2.11.0+cu128
+torchcodec==0.11.0+cu128
+torchdata==0.11.0
+torchsummary==1.5.1
+torchtune==0.6.1
+torchvision==0.26.0+cu128
+tornado==6.5.7
+tqdm==4.67.3
+traitlets==5.7.1
+traittypes==0.2.3
+transformers==5.16.1
+treelite==4.7.1
+treescope==0.1.10
+triton==3.6.0
+truststore==0.10.4
+tsfresh==0.21.2
+tweepy==4.17.0
+typeguard==4.6.0
+typer==0.27.2
+types-pytz==2026.3.1.20260727
+types-setuptools==84.0.0.20260812
+typing-inspection==0.4.4
+typing_extensions==4.16.0
+tzdata==2026.3
+tzlocal==5.4.4
+ucxx-cu12==0.48.0
+umap-learn==0.5.12
+umf==1.0.3
+uri-template==1.3.0
+uritemplate==4.2.0
+urllib3==2.5.0
+uuid_utils==0.17.0
+uvicorn==0.52.4
+uvloop==0.22.1
+vega-datasets==0.9.0
+wadllib==1.3.6
+wandb==0.28.1
+wasabi==1.1.3
+watchdog==6.0.0
+watchfiles==1.2.0
+wcwidth==0.8.3
+weasel==1.0.0
+webcolors==25.10.0
+webencodings==0.6.1
+websocket-client==1.9.2
+websockets==15.0.1
+Werkzeug==3.1.8
+wheel==0.48.0
+widgetsnbextension==3.6.10
+wordcloud==1.9.6
+wrapt==2.4.0
+xarray==2025.12.0
+xarray-einstats==0.11.0
+xgboost==3.4.1
+xlrd==2.0.2
+xxhash==4.0.1
+xyzservices==2026.3.0
+yarl==1.24.5
+ydf==0.15.0
+ydf_tf==2.20.0
+yellowbrick==1.5
+yfinance==0.2.66
+zict==3.0.0
+zipp==4.1.0
+zstandard==0.25.0
+
+pip_freeze_end
+2026-09-30 06:38:34,731 log_path=/content/lab1/repo/reproducibility/raw_logs/ayush/task1_chargpt_20260930T063834Z.log
+2026-09-30 06:38:34,731 loading TinyStories stories train=100000 val=10000
+2026-09-30 06:38:50,776 vocab_size=108
+2026-09-30 06:38:56,084 train_chars=89600955 val_chars=8958340
+2026-09-30 06:38:56,155 samples_per_epoch=20000 val_samples=2000
+2026-09-30 06:38:56,354 params=3248640 device=cuda
+2026-09-30 06:38:59,739 step=1 epoch=1 loss=4.7253 lr=0.000003 grad_norm=7.1772 mem_gb=1.887
+2026-09-30 06:39:00,524 step=50 epoch=1 loss=3.1657 lr=0.000077 grad_norm=1.5392 mem_gb=1.913
+2026-09-30 06:39:01,324 step=100 epoch=1 loss=2.5137 lr=0.000151 grad_norm=0.6408 mem_gb=1.913
+2026-09-30 06:39:02,124 step=150 epoch=1 loss=2.3642 lr=0.000226 grad_norm=0.4106 mem_gb=1.913
+2026-09-30 06:39:02,924 step=200 epoch=1 loss=2.2979 lr=0.000300 grad_norm=0.5244 mem_gb=1.913
+2026-09-30 06:39:03,724 step=250 epoch=1 loss=2.2541 lr=0.000300 grad_norm=0.4775 mem_gb=1.913
+2026-09-30 06:39:04,523 step=300 epoch=1 loss=2.2065 lr=0.000300 grad_norm=0.5883 mem_gb=1.913
+2026-09-30 06:39:04,921 epoch=1 train_loss=2.6226 val_loss=2.1393
+2026-09-30 06:39:04,932 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=2.1393
+2026-09-30 06:39:05,528 step=350 epoch=2 loss=2.1234 lr=0.000300 grad_norm=0.5522 mem_gb=1.913
+2026-09-30 06:39:06,307 step=400 epoch=2 loss=2.0306 lr=0.000300 grad_norm=0.6598 mem_gb=1.913
+2026-09-30 06:39:07,086 step=450 epoch=2 loss=1.9734 lr=0.000300 grad_norm=0.8659 mem_gb=1.913
+2026-09-30 06:39:07,864 step=500 epoch=2 loss=1.8716 lr=0.000299 grad_norm=1.1635 mem_gb=1.913
+2026-09-30 06:39:08,633 step=550 epoch=2 loss=1.7978 lr=0.000299 grad_norm=0.8908 mem_gb=1.913
+2026-09-30 06:39:09,403 step=600 epoch=2 loss=1.7574 lr=0.000299 grad_norm=0.8985 mem_gb=1.913
+2026-09-30 06:39:09,918 epoch=2 train_loss=1.9461 val_loss=1.5903
+2026-09-30 06:39:09,928 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=1.5903
+2026-09-30 06:39:10,329 step=650 epoch=3 loss=1.6717 lr=0.000298 grad_norm=0.9269 mem_gb=1.913
+2026-09-30 06:39:11,099 step=700 epoch=3 loss=1.6489 lr=0.000298 grad_norm=0.9311 mem_gb=1.913
+2026-09-30 06:39:11,868 step=750 epoch=3 loss=1.6041 lr=0.000298 grad_norm=0.9268 mem_gb=1.913
+2026-09-30 06:39:12,638 step=800 epoch=3 loss=1.5467 lr=0.000297 grad_norm=0.9818 mem_gb=1.913
+2026-09-30 06:39:13,408 step=850 epoch=3 loss=1.4897 lr=0.000297 grad_norm=0.9124 mem_gb=1.913
+2026-09-30 06:39:14,178 step=900 epoch=3 loss=1.4671 lr=0.000296 grad_norm=1.0297 mem_gb=1.913
+2026-09-30 06:39:14,877 epoch=3 train_loss=1.5628 val_loss=1.3175
+2026-09-30 06:39:14,887 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=1.3175
+2026-09-30 06:39:15,103 step=950 epoch=4 loss=1.4439 lr=0.000296 grad_norm=0.8792 mem_gb=1.913
+2026-09-30 06:39:15,871 step=1000 epoch=4 loss=1.3936 lr=0.000295 grad_norm=0.8210 mem_gb=1.913
+2026-09-30 06:39:16,640 step=1050 epoch=4 loss=1.3586 lr=0.000294 grad_norm=0.9172 mem_gb=1.913
+2026-09-30 06:39:17,408 step=1100 epoch=4 loss=1.3354 lr=0.000294 grad_norm=0.8636 mem_gb=1.913
+2026-09-30 06:39:18,176 step=1150 epoch=4 loss=1.3345 lr=0.000293 grad_norm=0.8882 mem_gb=1.913
+2026-09-30 06:39:18,944 step=1200 epoch=4 loss=1.2919 lr=0.000292 grad_norm=0.7840 mem_gb=1.913
+2026-09-30 06:39:19,826 epoch=4 train_loss=1.3509 val_loss=1.1694
+2026-09-30 06:39:19,836 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=1.1694
+2026-09-30 06:39:19,868 step=1250 epoch=5 loss=1.2987 lr=0.000291 grad_norm=0.7838 mem_gb=1.913
+2026-09-30 06:39:20,636 step=1300 epoch=5 loss=1.2992 lr=0.000291 grad_norm=0.8008 mem_gb=1.913
+2026-09-30 06:39:21,404 step=1350 epoch=5 loss=1.1901 lr=0.000290 grad_norm=0.7434 mem_gb=1.913
+2026-09-30 06:39:22,173 step=1400 epoch=5 loss=1.1947 lr=0.000289 grad_norm=0.7536 mem_gb=1.913
+2026-09-30 06:39:22,941 step=1450 epoch=5 loss=1.2197 lr=0.000288 grad_norm=0.7215 mem_gb=1.913
+2026-09-30 06:39:23,710 step=1500 epoch=5 loss=1.1873 lr=0.000287 grad_norm=0.7464 mem_gb=1.913
+2026-09-30 06:39:24,478 step=1550 epoch=5 loss=1.2080 lr=0.000286 grad_norm=0.7822 mem_gb=1.913
+2026-09-30 06:39:24,777 epoch=5 train_loss=1.2217 val_loss=1.0864
+2026-09-30 06:39:24,787 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=1.0864
+2026-09-30 06:39:25,402 step=1600 epoch=6 loss=1.1479 lr=0.000285 grad_norm=0.7030 mem_gb=1.913
+2026-09-30 06:39:26,171 step=1650 epoch=6 loss=1.1312 lr=0.000284 grad_norm=0.7172 mem_gb=1.913
+2026-09-30 06:39:26,939 step=1700 epoch=6 loss=1.1361 lr=0.000283 grad_norm=0.7645 mem_gb=1.913
+2026-09-30 06:39:27,708 step=1750 epoch=6 loss=1.1680 lr=0.000281 grad_norm=0.7761 mem_gb=1.913
+2026-09-30 06:39:28,476 step=1800 epoch=6 loss=1.1132 lr=0.000280 grad_norm=0.7610 mem_gb=1.913
+2026-09-30 06:39:29,245 step=1850 epoch=6 loss=1.1269 lr=0.000279 grad_norm=0.6700 mem_gb=1.913
+2026-09-30 06:39:29,728 epoch=6 train_loss=1.1353 val_loss=1.0161
+2026-09-30 06:39:29,739 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=1.0161
+2026-09-30 06:39:30,170 step=1900 epoch=7 loss=1.1047 lr=0.000278 grad_norm=0.6652 mem_gb=1.913
+2026-09-30 06:39:30,939 step=1950 epoch=7 loss=1.1009 lr=0.000276 grad_norm=0.7152 mem_gb=1.913
+2026-09-30 06:39:31,707 step=2000 epoch=7 loss=1.0910 lr=0.000275 grad_norm=0.7158 mem_gb=1.913
+2026-09-30 06:39:32,476 step=2050 epoch=7 loss=1.0781 lr=0.000274 grad_norm=0.6960 mem_gb=1.913
+2026-09-30 06:39:33,244 step=2100 epoch=7 loss=1.0501 lr=0.000272 grad_norm=0.6887 mem_gb=1.913
+2026-09-30 06:39:34,013 step=2150 epoch=7 loss=1.0397 lr=0.000271 grad_norm=0.7136 mem_gb=1.913
+2026-09-30 06:39:34,681 epoch=7 train_loss=1.0782 val_loss=0.9780
+2026-09-30 06:39:34,692 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.9780
+2026-09-30 06:39:34,938 step=2200 epoch=8 loss=1.0519 lr=0.000269 grad_norm=0.7321 mem_gb=1.913
+2026-09-30 06:39:35,707 step=2250 epoch=8 loss=1.0309 lr=0.000268 grad_norm=0.6637 mem_gb=1.913
+2026-09-30 06:39:36,476 step=2300 epoch=8 loss=1.0601 lr=0.000266 grad_norm=0.6716 mem_gb=1.913
+2026-09-30 06:39:37,246 step=2350 epoch=8 loss=1.0321 lr=0.000265 grad_norm=0.7121 mem_gb=1.913
+2026-09-30 06:39:38,014 step=2400 epoch=8 loss=1.0361 lr=0.000263 grad_norm=0.6873 mem_gb=1.913
+2026-09-30 06:39:38,783 step=2450 epoch=8 loss=0.9926 lr=0.000262 grad_norm=0.6682 mem_gb=1.913
+2026-09-30 06:39:39,635 epoch=8 train_loss=1.0361 val_loss=0.9340
+2026-09-30 06:39:39,646 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.9340
+2026-09-30 06:39:39,708 step=2500 epoch=9 loss=0.9970 lr=0.000260 grad_norm=0.6256 mem_gb=1.913
+2026-09-30 06:39:40,477 step=2550 epoch=9 loss=0.9679 lr=0.000258 grad_norm=0.6485 mem_gb=1.913
+2026-09-30 06:39:41,245 step=2600 epoch=9 loss=0.9999 lr=0.000257 grad_norm=0.6761 mem_gb=1.913
+2026-09-30 06:39:42,013 step=2650 epoch=9 loss=1.0264 lr=0.000255 grad_norm=0.6289 mem_gb=1.913
+2026-09-30 06:39:42,782 step=2700 epoch=9 loss=0.9947 lr=0.000253 grad_norm=0.6293 mem_gb=1.913
+2026-09-30 06:39:43,550 step=2750 epoch=9 loss=1.0066 lr=0.000252 grad_norm=0.6764 mem_gb=1.913
+2026-09-30 06:39:44,319 step=2800 epoch=9 loss=0.9868 lr=0.000250 grad_norm=0.6034 mem_gb=1.913
+2026-09-30 06:39:44,587 epoch=9 train_loss=1.0022 val_loss=0.9129
+2026-09-30 06:39:44,598 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.9129
+2026-09-30 06:39:45,244 step=2850 epoch=10 loss=0.9762 lr=0.000248 grad_norm=0.6344 mem_gb=1.913
+2026-09-30 06:39:46,013 step=2900 epoch=10 loss=0.9950 lr=0.000246 grad_norm=0.6292 mem_gb=1.913
+2026-09-30 06:39:46,782 step=2950 epoch=10 loss=0.9835 lr=0.000244 grad_norm=0.6637 mem_gb=1.913
+2026-09-30 06:39:47,550 step=3000 epoch=10 loss=0.9613 lr=0.000242 grad_norm=0.6249 mem_gb=1.913
+2026-09-30 06:39:48,319 step=3050 epoch=10 loss=0.9585 lr=0.000240 grad_norm=0.6319 mem_gb=1.913
+2026-09-30 06:39:49,087 step=3100 epoch=10 loss=0.9780 lr=0.000239 grad_norm=0.6406 mem_gb=1.913
+2026-09-30 06:39:49,539 epoch=10 train_loss=0.9756 val_loss=0.8846
+2026-09-30 06:39:49,550 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.8846
+2026-09-30 06:39:50,012 step=3150 epoch=11 loss=0.9842 lr=0.000237 grad_norm=0.6130 mem_gb=1.913
+2026-09-30 06:39:50,781 step=3200 epoch=11 loss=0.9498 lr=0.000235 grad_norm=0.6259 mem_gb=1.913
+2026-09-30 06:39:51,549 step=3250 epoch=11 loss=0.9182 lr=0.000233 grad_norm=0.5832 mem_gb=1.913
+2026-09-30 06:39:52,318 step=3300 epoch=11 loss=0.9849 lr=0.000231 grad_norm=0.6637 mem_gb=1.913
+2026-09-30 06:39:53,086 step=3350 epoch=11 loss=0.9157 lr=0.000229 grad_norm=0.5866 mem_gb=1.913
+2026-09-30 06:39:53,855 step=3400 epoch=11 loss=0.9512 lr=0.000227 grad_norm=0.6172 mem_gb=1.913
+2026-09-30 06:39:54,491 epoch=11 train_loss=0.9545 val_loss=0.8762
+2026-09-30 06:39:54,502 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.8762
+2026-09-30 06:39:54,780 step=3450 epoch=12 loss=0.9629 lr=0.000224 grad_norm=0.6334 mem_gb=1.913
+2026-09-30 06:39:55,548 step=3500 epoch=12 loss=0.9445 lr=0.000222 grad_norm=0.6173 mem_gb=1.913
+2026-09-30 06:39:56,317 step=3550 epoch=12 loss=0.9450 lr=0.000220 grad_norm=0.5995 mem_gb=1.913
+2026-09-30 06:39:57,085 step=3600 epoch=12 loss=0.9154 lr=0.000218 grad_norm=0.5776 mem_gb=1.913
+2026-09-30 06:39:57,854 step=3650 epoch=12 loss=0.9621 lr=0.000216 grad_norm=0.6427 mem_gb=1.913
+2026-09-30 06:39:58,622 step=3700 epoch=12 loss=0.9280 lr=0.000214 grad_norm=0.6465 mem_gb=1.913
+2026-09-30 06:39:59,443 epoch=12 train_loss=0.9348 val_loss=0.8632
+2026-09-30 06:39:59,454 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.8632
+2026-09-30 06:39:59,547 step=3750 epoch=13 loss=0.9309 lr=0.000212 grad_norm=0.6046 mem_gb=1.913
+2026-09-30 06:40:00,315 step=3800 epoch=13 loss=0.9214 lr=0.000210 grad_norm=0.6020 mem_gb=1.913
+2026-09-30 06:40:01,083 step=3850 epoch=13 loss=0.9250 lr=0.000207 grad_norm=0.6231 mem_gb=1.913
+2026-09-30 06:40:01,852 step=3900 epoch=13 loss=0.9136 lr=0.000205 grad_norm=0.6330 mem_gb=1.913
+2026-09-30 06:40:02,620 step=3950 epoch=13 loss=0.9053 lr=0.000203 grad_norm=0.6207 mem_gb=1.913
+2026-09-30 06:40:03,388 step=4000 epoch=13 loss=0.9239 lr=0.000201 grad_norm=0.6103 mem_gb=1.913
+2026-09-30 06:40:04,157 step=4050 epoch=13 loss=0.8624 lr=0.000198 grad_norm=0.5882 mem_gb=1.913
+2026-09-30 06:40:04,393 epoch=13 train_loss=0.9176 val_loss=0.8433
+2026-09-30 06:40:04,404 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.8433
+2026-09-30 06:40:05,080 step=4100 epoch=14 loss=0.9194 lr=0.000196 grad_norm=0.5799 mem_gb=1.913
+2026-09-30 06:40:05,847 step=4150 epoch=14 loss=0.8717 lr=0.000194 grad_norm=0.5961 mem_gb=1.913
+2026-09-30 06:40:06,614 step=4200 epoch=14 loss=0.9133 lr=0.000192 grad_norm=0.6259 mem_gb=1.913
+2026-09-30 06:40:07,380 step=4250 epoch=14 loss=0.9269 lr=0.000189 grad_norm=0.5758 mem_gb=1.913
+2026-09-30 06:40:08,148 step=4300 epoch=14 loss=0.8727 lr=0.000187 grad_norm=0.5774 mem_gb=1.913
+2026-09-30 06:40:08,915 step=4350 epoch=14 loss=0.8734 lr=0.000185 grad_norm=0.5547 mem_gb=1.913
+2026-09-30 06:40:09,336 epoch=14 train_loss=0.9035 val_loss=0.8374
+2026-09-30 06:40:09,348 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.8374
+2026-09-30 06:40:09,840 step=4400 epoch=15 loss=0.8944 lr=0.000183 grad_norm=0.5905 mem_gb=1.913
+2026-09-30 06:40:10,607 step=4450 epoch=15 loss=0.8953 lr=0.000180 grad_norm=0.6255 mem_gb=1.913
+2026-09-30 06:40:11,374 step=4500 epoch=15 loss=0.9004 lr=0.000178 grad_norm=0.5806 mem_gb=1.913
+2026-09-30 06:40:12,141 step=4550 epoch=15 loss=0.9190 lr=0.000176 grad_norm=0.6057 mem_gb=1.913
+2026-09-30 06:40:12,908 step=4600 epoch=15 loss=0.8762 lr=0.000173 grad_norm=0.6064 mem_gb=1.913
+2026-09-30 06:40:13,676 step=4650 epoch=15 loss=0.8544 lr=0.000171 grad_norm=0.5539 mem_gb=1.913
+2026-09-30 06:40:14,280 epoch=15 train_loss=0.8915 val_loss=0.8212
+2026-09-30 06:40:14,292 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.8212
+2026-09-30 06:40:14,600 step=4700 epoch=16 loss=0.9010 lr=0.000169 grad_norm=0.6032 mem_gb=1.913
+2026-09-30 06:40:15,367 step=4750 epoch=16 loss=0.8866 lr=0.000166 grad_norm=0.5774 mem_gb=1.913
+2026-09-30 06:40:16,134 step=4800 epoch=16 loss=0.9002 lr=0.000164 grad_norm=0.5956 mem_gb=1.913
+2026-09-30 06:40:16,901 step=4850 epoch=16 loss=0.8493 lr=0.000162 grad_norm=0.5670 mem_gb=1.913
+2026-09-30 06:40:17,669 step=4900 epoch=16 loss=0.8932 lr=0.000159 grad_norm=0.5665 mem_gb=1.913
+2026-09-30 06:40:18,436 step=4950 epoch=16 loss=0.8761 lr=0.000157 grad_norm=0.5898 mem_gb=1.913
+2026-09-30 06:40:19,225 epoch=16 train_loss=0.8777 val_loss=0.8099
+2026-09-30 06:40:19,237 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.8099
+2026-09-30 06:40:19,361 step=5000 epoch=17 loss=0.8430 lr=0.000155 grad_norm=0.5717 mem_gb=1.913
+2026-09-30 06:40:20,128 step=5050 epoch=17 loss=0.8859 lr=0.000153 grad_norm=0.5728 mem_gb=1.913
+2026-09-30 06:40:20,895 step=5100 epoch=17 loss=0.8628 lr=0.000150 grad_norm=0.5843 mem_gb=1.913
+2026-09-30 06:40:21,663 step=5150 epoch=17 loss=0.8357 lr=0.000148 grad_norm=0.5685 mem_gb=1.913
+2026-09-30 06:40:22,430 step=5200 epoch=17 loss=0.8660 lr=0.000146 grad_norm=0.5789 mem_gb=1.913
+2026-09-30 06:40:23,197 step=5250 epoch=17 loss=0.8784 lr=0.000143 grad_norm=0.5816 mem_gb=1.913
+2026-09-30 06:40:23,965 step=5300 epoch=17 loss=0.8785 lr=0.000141 grad_norm=0.5906 mem_gb=1.913
+2026-09-30 06:40:24,171 epoch=17 train_loss=0.8685 val_loss=0.8047
+2026-09-30 06:40:24,182 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.8047
+2026-09-30 06:40:24,889 step=5350 epoch=18 loss=0.8577 lr=0.000139 grad_norm=0.5596 mem_gb=1.913
+2026-09-30 06:40:25,656 step=5400 epoch=18 loss=0.8565 lr=0.000137 grad_norm=0.5895 mem_gb=1.913
+2026-09-30 06:40:26,424 step=5450 epoch=18 loss=0.8445 lr=0.000134 grad_norm=0.5950 mem_gb=1.913
+2026-09-30 06:40:27,191 step=5500 epoch=18 loss=0.8479 lr=0.000132 grad_norm=0.5726 mem_gb=1.913
+2026-09-30 06:40:27,958 step=5550 epoch=18 loss=0.8526 lr=0.000130 grad_norm=0.5669 mem_gb=1.913
+2026-09-30 06:40:28,725 step=5600 epoch=18 loss=0.8156 lr=0.000128 grad_norm=0.5521 mem_gb=1.913
+2026-09-30 06:40:29,115 epoch=18 train_loss=0.8603 val_loss=0.7954
+2026-09-30 06:40:29,128 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.7954
+2026-09-30 06:40:29,651 step=5650 epoch=19 loss=0.8653 lr=0.000125 grad_norm=0.5901 mem_gb=1.913
+2026-09-30 06:40:30,418 step=5700 epoch=19 loss=0.8639 lr=0.000123 grad_norm=0.5926 mem_gb=1.913
+2026-09-30 06:40:31,185 step=5750 epoch=19 loss=0.8504 lr=0.000121 grad_norm=0.5656 mem_gb=1.913
+2026-09-30 06:40:31,953 step=5800 epoch=19 loss=0.8459 lr=0.000119 grad_norm=0.5773 mem_gb=1.913
+2026-09-30 06:40:32,720 step=5850 epoch=19 loss=0.8368 lr=0.000117 grad_norm=0.5838 mem_gb=1.913
+2026-09-30 06:40:33,488 step=5900 epoch=19 loss=0.8470 lr=0.000114 grad_norm=0.5680 mem_gb=1.913
+2026-09-30 06:40:34,062 epoch=19 train_loss=0.8526 val_loss=0.7900
+2026-09-30 06:40:34,073 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.7900
+2026-09-30 06:40:34,412 step=5950 epoch=20 loss=0.8414 lr=0.000112 grad_norm=0.5954 mem_gb=1.913
+2026-09-30 06:40:35,179 step=6000 epoch=20 loss=0.8621 lr=0.000110 grad_norm=0.5809 mem_gb=1.913
+2026-09-30 06:40:35,946 step=6050 epoch=20 loss=0.8469 lr=0.000108 grad_norm=0.5669 mem_gb=1.913
+2026-09-30 06:40:36,713 step=6100 epoch=20 loss=0.8477 lr=0.000106 grad_norm=0.5996 mem_gb=1.913
+2026-09-30 06:40:37,481 step=6150 epoch=20 loss=0.8376 lr=0.000104 grad_norm=0.5789 mem_gb=1.913
+2026-09-30 06:40:38,248 step=6200 epoch=20 loss=0.8467 lr=0.000102 grad_norm=0.5726 mem_gb=1.913
+2026-09-30 06:40:39,006 epoch=20 train_loss=0.8442 val_loss=0.7815
+2026-09-30 06:40:39,018 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.7815
+2026-09-30 06:40:39,172 step=6250 epoch=21 loss=0.8286 lr=0.000100 grad_norm=0.5628 mem_gb=1.913
+2026-09-30 06:40:39,940 step=6300 epoch=21 loss=0.8506 lr=0.000098 grad_norm=0.5665 mem_gb=1.913
+2026-09-30 06:40:40,707 step=6350 epoch=21 loss=0.8530 lr=0.000096 grad_norm=0.5971 mem_gb=1.913
+2026-09-30 06:40:41,474 step=6400 epoch=21 loss=0.8174 lr=0.000094 grad_norm=0.5520 mem_gb=1.913
+2026-09-30 06:40:42,242 step=6450 epoch=21 loss=0.8262 lr=0.000092 grad_norm=0.5403 mem_gb=1.913
+2026-09-30 06:40:43,009 step=6500 epoch=21 loss=0.8339 lr=0.000090 grad_norm=0.5589 mem_gb=1.913
+2026-09-30 06:40:43,776 step=6550 epoch=21 loss=0.8193 lr=0.000088 grad_norm=0.5709 mem_gb=1.913
+2026-09-30 06:40:43,951 epoch=21 train_loss=0.8382 val_loss=0.7804
+2026-09-30 06:40:43,963 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.7804
+2026-09-30 06:40:44,700 step=6600 epoch=22 loss=0.8107 lr=0.000086 grad_norm=0.5501 mem_gb=1.913
+2026-09-30 06:40:45,466 step=6650 epoch=22 loss=0.8193 lr=0.000084 grad_norm=0.5722 mem_gb=1.913
+2026-09-30 06:40:46,232 step=6700 epoch=22 loss=0.8292 lr=0.000082 grad_norm=0.5957 mem_gb=1.913
+2026-09-30 06:40:46,999 step=6750 epoch=22 loss=0.8692 lr=0.000081 grad_norm=0.5815 mem_gb=1.913
+2026-09-30 06:40:47,765 step=6800 epoch=22 loss=0.8467 lr=0.000079 grad_norm=0.5798 mem_gb=1.913
+2026-09-30 06:40:48,531 step=6850 epoch=22 loss=0.8305 lr=0.000077 grad_norm=0.6255 mem_gb=1.913
+2026-09-30 06:40:48,890 epoch=22 train_loss=0.8334 val_loss=0.7735
+2026-09-30 06:40:48,901 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.7735
+2026-09-30 06:40:49,454 step=6900 epoch=23 loss=0.8539 lr=0.000075 grad_norm=0.5949 mem_gb=1.913
+2026-09-30 06:40:50,221 step=6950 epoch=23 loss=0.8354 lr=0.000074 grad_norm=0.5988 mem_gb=1.913
+2026-09-30 06:40:50,988 step=7000 epoch=23 loss=0.8103 lr=0.000072 grad_norm=0.5585 mem_gb=1.913
+2026-09-30 06:40:51,754 step=7050 epoch=23 loss=0.8383 lr=0.000070 grad_norm=0.5886 mem_gb=1.913
+2026-09-30 06:40:52,520 step=7100 epoch=23 loss=0.8346 lr=0.000069 grad_norm=0.5756 mem_gb=1.913
+2026-09-30 06:40:53,286 step=7150 epoch=23 loss=0.8235 lr=0.000067 grad_norm=0.5666 mem_gb=1.913
+2026-09-30 06:40:53,829 epoch=23 train_loss=0.8280 val_loss=0.7699
+2026-09-30 06:40:53,841 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.7699
+2026-09-30 06:40:54,209 step=7200 epoch=24 loss=0.8563 lr=0.000065 grad_norm=0.5943 mem_gb=1.913
+2026-09-30 06:40:54,975 step=7250 epoch=24 loss=0.8261 lr=0.000064 grad_norm=0.5927 mem_gb=1.913
+2026-09-30 06:40:55,742 step=7300 epoch=24 loss=0.8233 lr=0.000062 grad_norm=0.5960 mem_gb=1.913
+2026-09-30 06:40:56,508 step=7350 epoch=24 loss=0.8267 lr=0.000061 grad_norm=0.5686 mem_gb=1.913
+2026-09-30 06:40:57,274 step=7400 epoch=24 loss=0.8464 lr=0.000059 grad_norm=0.6155 mem_gb=1.913
+2026-09-30 06:40:58,040 step=7450 epoch=24 loss=0.8285 lr=0.000058 grad_norm=0.6064 mem_gb=1.913
+2026-09-30 06:40:58,766 epoch=24 train_loss=0.8231 val_loss=0.7662
+2026-09-30 06:40:58,778 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.7662
+2026-09-30 06:40:58,962 step=7500 epoch=25 loss=0.8039 lr=0.000057 grad_norm=0.5567 mem_gb=1.913
+2026-09-30 06:40:59,729 step=7550 epoch=25 loss=0.8522 lr=0.000055 grad_norm=0.5925 mem_gb=1.913
+2026-09-30 06:41:00,495 step=7600 epoch=25 loss=0.8454 lr=0.000054 grad_norm=0.6069 mem_gb=1.913
+2026-09-30 06:41:01,261 step=7650 epoch=25 loss=0.7935 lr=0.000053 grad_norm=0.5516 mem_gb=1.913
+2026-09-30 06:41:02,027 step=7700 epoch=25 loss=0.8068 lr=0.000051 grad_norm=0.5739 mem_gb=1.913
+2026-09-30 06:41:02,794 step=7750 epoch=25 loss=0.8141 lr=0.000050 grad_norm=0.5980 mem_gb=1.913
+2026-09-30 06:41:03,560 step=7800 epoch=25 loss=0.8059 lr=0.000049 grad_norm=0.5743 mem_gb=1.913
+2026-09-30 06:41:03,704 epoch=25 train_loss=0.8204 val_loss=0.7646
+2026-09-30 06:41:03,716 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.7646
+2026-09-30 06:41:04,483 step=7850 epoch=26 loss=0.8046 lr=0.000048 grad_norm=0.5777 mem_gb=1.913
+2026-09-30 06:41:05,249 step=7900 epoch=26 loss=0.8374 lr=0.000047 grad_norm=0.6051 mem_gb=1.913
+2026-09-30 06:41:06,015 step=7950 epoch=26 loss=0.8165 lr=0.000045 grad_norm=0.5925 mem_gb=1.913
+2026-09-30 06:41:06,781 step=8000 epoch=26 loss=0.8409 lr=0.000044 grad_norm=0.5943 mem_gb=1.913
+2026-09-30 06:41:07,547 step=8050 epoch=26 loss=0.8191 lr=0.000043 grad_norm=0.5816 mem_gb=1.913
+2026-09-30 06:41:08,313 step=8100 epoch=26 loss=0.8495 lr=0.000042 grad_norm=0.5848 mem_gb=1.913
+2026-09-30 06:41:08,642 epoch=26 train_loss=0.8163 val_loss=0.7567
+2026-09-30 06:41:08,653 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.7567
+2026-09-30 06:41:09,236 step=8150 epoch=27 loss=0.8110 lr=0.000041 grad_norm=0.5756 mem_gb=1.913
+2026-09-30 06:41:10,002 step=8200 epoch=27 loss=0.8430 lr=0.000041 grad_norm=0.6118 mem_gb=1.913
+2026-09-30 06:41:10,769 step=8250 epoch=27 loss=0.7966 lr=0.000040 grad_norm=0.5807 mem_gb=1.913
+2026-09-30 06:41:11,535 step=8300 epoch=27 loss=0.8061 lr=0.000039 grad_norm=0.5957 mem_gb=1.913
+2026-09-30 06:41:12,301 step=8350 epoch=27 loss=0.8006 lr=0.000038 grad_norm=0.5764 mem_gb=1.913
+2026-09-30 06:41:13,068 step=8400 epoch=27 loss=0.8132 lr=0.000037 grad_norm=0.5804 mem_gb=1.913
+2026-09-30 06:41:13,580 epoch=27 train_loss=0.8140 val_loss=0.7585
+2026-09-30 06:41:13,979 step=8450 epoch=28 loss=0.8217 lr=0.000037 grad_norm=0.5870 mem_gb=1.913
+2026-09-30 06:41:14,746 step=8500 epoch=28 loss=0.7987 lr=0.000036 grad_norm=0.5781 mem_gb=1.913
+2026-09-30 06:41:15,512 step=8550 epoch=28 loss=0.8220 lr=0.000035 grad_norm=0.5668 mem_gb=1.913
+2026-09-30 06:41:16,279 step=8600 epoch=28 loss=0.7942 lr=0.000035 grad_norm=0.5720 mem_gb=1.913
+2026-09-30 06:41:17,045 step=8650 epoch=28 loss=0.8120 lr=0.000034 grad_norm=0.5724 mem_gb=1.913
+2026-09-30 06:41:17,811 step=8700 epoch=28 loss=0.8247 lr=0.000033 grad_norm=0.5746 mem_gb=1.913
+2026-09-30 06:41:18,508 epoch=28 train_loss=0.8123 val_loss=0.7550
+2026-09-30 06:41:18,520 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.7550
+2026-09-30 06:41:18,735 step=8750 epoch=29 loss=0.8170 lr=0.000033 grad_norm=0.5769 mem_gb=1.913
+2026-09-30 06:41:19,502 step=8800 epoch=29 loss=0.8001 lr=0.000032 grad_norm=0.5667 mem_gb=1.913
+2026-09-30 06:41:20,268 step=8850 epoch=29 loss=0.7839 lr=0.000032 grad_norm=0.5727 mem_gb=1.913
+2026-09-30 06:41:21,035 step=8900 epoch=29 loss=0.7868 lr=0.000032 grad_norm=0.5641 mem_gb=1.913
+2026-09-30 06:41:21,801 step=8950 epoch=29 loss=0.8194 lr=0.000031 grad_norm=0.5905 mem_gb=1.913
+2026-09-30 06:41:22,568 step=9000 epoch=29 loss=0.8011 lr=0.000031 grad_norm=0.5629 mem_gb=1.913
+2026-09-30 06:41:23,449 epoch=29 train_loss=0.8090 val_loss=0.7526
+2026-09-30 06:41:23,460 saved_best /content/lab1/repo/task1_llm/ayush/checkpoints/chargpt_best.pt val=0.7526
+2026-09-30 06:41:23,492 step=9050 epoch=30 loss=0.8185 lr=0.000031 grad_norm=0.5962 mem_gb=1.913
+2026-09-30 06:41:24,259 step=9100 epoch=30 loss=0.8055 lr=0.000031 grad_norm=0.5848 mem_gb=1.913
+2026-09-30 06:41:25,026 step=9150 epoch=30 loss=0.8180 lr=0.000030 grad_norm=0.5810 mem_gb=1.913
+2026-09-30 06:41:25,793 step=9200 epoch=30 loss=0.8317 lr=0.000030 grad_norm=0.6121 mem_gb=1.913
+2026-09-30 06:41:26,560 step=9250 epoch=30 loss=0.8509 lr=0.000030 grad_norm=0.6187 mem_gb=1.913
+2026-09-30 06:41:27,327 step=9300 epoch=30 loss=0.8267 lr=0.000030 grad_norm=0.6025 mem_gb=1.913
+2026-09-30 06:41:28,094 step=9350 epoch=30 loss=0.7869 lr=0.000030 grad_norm=0.5654 mem_gb=1.913
+2026-09-30 06:41:28,392 epoch=30 train_loss=0.8099 val_loss=0.7584
+2026-09-30 06:41:29,278 SAMPLE 0
+Once upon a time, there was a princess named Daisy. Daisy loved to explore the colors and ran over to do it. He would stay in his way until he finally wanted to help her.
+
+One day, Daisy saw a little girl named Lily who wanted to go to the tree, so she ran outside and took a walk in the sky. 
+
+She was three years old and saw a big tree. She said, "Hello, little girl is so sad. But I don't mean to 
+
+2026-09-30 06:41:29,638 SAMPLE 1
+One day, a little girl named Lily went to the fridge. She was happy and wanted to play. She wanted to find her friends to play with Spot and Lily. They put their toy car in the nearby house.
+
+The girl and the sun were having so much fun. They got an important day, and they were on the floor to go see their cars. They could show their friends and both them to play.
+
+But their mom said no. She said 
+
+2026-09-30 06:41:29,996 SAMPLE 2
+There was a girl named Lily. She loved to play outside in the park with her family friends. One day, she went to her room and saw a big tree and wanted to go to the park. She saw her mom and dad. They started to cry.
+
+"Stop, Lily, stop!" Lily said. She stopped out from the tree. "I'm so kind. I'm sorry, Lily. I'll help you. I am here to fix the window. We don't help you."
+
+Lily and Tom felt sad an
+
+2026-09-30 06:41:30,355 SAMPLE 3
+The little bird became good friends and decided to return all the ground. They worked very hard and had a picnic of their world. They were having a lot of fun.
+
+The bird and Tom said they loved the playground and watched their picnic soak. They all looked up and looked around at all the rest. Suddenly, the little girl came to her veil. The little girl was so happy because she had seen before the p
+
+2026-09-30 06:41:30,713 SAMPLE 4
+A girl named Lucy. She played with her toy car and had a good named Rax. Max loved to play outside with her toy car and take a nap. One day, Lucy found a big car on her brother walk. She put on her toys and said, "That is x and nice. Do you want to catch up?"
+
+Lucy was grateful for her dog and promised her doll. She said, "Yes, you can help me fly up from each other. She is a great dragon and star
+
+2026-09-30 06:41:31,071 SAMPLE 5
+Once upon a time, there lived a little girl named Lily. She loved to display in the sunshine. One day, she was finding a big cup of beakst carrots in her house. She was grateful for her dad work in the backyard.
+
+One day, her dad told her that it was a yellow boy that he had never inside the big boy to her mom. He hoped his dad would make her sour feel better.
+
+She smiled and said, "Lily, I found 
+
+2026-09-30 06:41:31,429 SAMPLE 6
+One day, the dog went on an adventure. He saw a big smile and said, "Let's go to the park together, Lily." He looked up at the car and saw that the small saw a dark jam of kids. The dog was not sight. The dog was not even sad because he wanted to remember himself. So he followed the park to a big house in the water. The dog was hungry and then clapping his head to him. 
+
+The dog was so proud of hi
+
+2026-09-30 06:41:31,789 SAMPLE 7
+There was a very very shy and dirty. They would all their family and have fun. They would never play together in their backyard and dream about their friends.
+Once upon a time, there was a nice little boy named Timmy. Timmy loved to play with his toys and eat pieces. One day, Timmy's mom took him to the moon and saw him as he walking back. Timmy started to cry, but he wanted to be his friend, he w
+
+2026-09-30 06:41:32,146 SAMPLE 8
+The little girl smiled and said, "Hello, why don't you start to do it?" 
+
+The little girl was so excited. She helped her mom, and they couldn't believe her. The little girl left the little girl asked her mom, "I want to be careful with you."
+
+The little girl said, "I'm sorry, the little girl and we want to enjoy the little girl and the little girl wore able to find our own shop." She was so happy 
+
+2026-09-30 06:41:32,505 SAMPLE 9
+A girl named Lily was playing with her toys and put on her new toy car and her toys. One day, she wanted to hop the blocks with her friends very playing in the park. She saw a big box of car on the blocks, Ben, and a big snake. The box was sad and the box wanted to go work up. 
+
+Ben was so excited. He was so happy, he hugged his mom and said, "I'm glad you like you. We will be his friends and lead
+
+2026-09-30 06:41:32,865 SAMPLE 10
+Once upon a time, there was a little boy named Sam. He loved to play in the park and wanted to catch it. One day, he was playing with his toys in the park. He wanted to play with it, so he couldn't stop right anymore. He asked, â€œYou can play with your toys and pretend it's not organized.â€
+
+Sam was so excited to go outside and play with his toys in his backyard. He was so excited that he didnâ€™
+
+2026-09-30 06:41:33,224 SAMPLE 11
+One day, Bob found a big boat in a big, rope and a rope. It was big and discovery. Bob had a book to the top of the boat. So, he went on a big boat of children.
+
+Bob had a big boat that the boat was going to the beach to explore the boat. He wanted to wish he could be the pool. Bob was so excited to see what it was well. He promised his boat to do with the boat and he took it home to the boat in t
+
+2026-09-30 06:41:33,582 SAMPLE 12
+There was a little boy named Tina. He loved to eat some friends. One day, he found a big, ship with a ball and a smile on a bench. He was flying around in the garden and he saw a great scary and it was silly. One day, a little boy called Tina went for a walk in the park, where he saw a big, heavy rocket. 
+
+Tina wanted to go to the store. He saw a lot of lotion and the sky waved goodbye to the shop
+
+2026-09-30 06:41:33,940 SAMPLE 13
+The little girl named Mia. She loved to play with her toys and flowers and have fun. One day, Mia's mom asked her to go for a walk. Mia helped her mom it but was too late. She smiled and said: "Let's use the park together, Mia."
+
+Mia said, "Of course, Mia. I will be my toys, Mia. We will get up the park to sing this new park."
+
+Mia said to Anna, "Okay, Mia. Let's go up the store in the garden and 
+
+2026-09-30 06:41:34,297 SAMPLE 14
+A girl named Sue. Sue was very kind and saw the tree had wanted to be a great friend. She saw a big field with many people and it talked to Tim's house. She was very happy with her birthday.
+
+"Kids, please!" Sue said. "You're welcome, Sue. Here you great you to make me feel better."
+
+Sam and Amy hugged each other. They learned a lesson.
+Once upon a time, there was a little girl named Lily. She lik
+
+2026-09-30 06:41:34,655 SAMPLE 15
+Once upon a time there was a little girl named Lily. She loved to play in the park with her friends. One day, she was playing outside in the park. She had a big red box with a big ship. Everywhere she went outside with her name was Dad.
+
+"Where is it?" she asked.
+
+"It was a beautiful girl in the park. Pob asked.
+
+"Can I have the bathroom some?" Lily asked.
+
+"No, it's taken it!" Dad said, said.
+
+Ma
+
+2026-09-30 06:41:35,011 SAMPLE 16
+One day, the two ball decided to a beautiful box of different creature and always got very bright and it was bigger than a little box. After a while, they walked up to the box and saw them all of the dependable. They had a fireman that had lots of fun and people. The box was so happy, to have a grown friend and thanked the box.
+Once upon a time, there was a family who lived in a little girl named 
+
+2026-09-30 06:41:35,368 SAMPLE 17
+There was a little boy named Bob. The boy loved to play on the ground. One day, the boy saw a bigger in the ground. He was very scared of the boy. The boy explored the world. He wondered why he could find a big box.
+
+"Oh no, Bob," the boy said. It was a big boy and the boy was asked.
+
+The boy said, "Why did you finish me?" asked the mom. He did not not want to wait to see the boy with a book. He w
+
+2026-09-30 06:41:35,726 SAMPLE 18
+The little girl noticed a kiss it up into the cross. The kitten was so interesting! The kitten said sorry to her brother, "Over try!" The zittle girl said "Thank you, you're so smart, Mommy. You did a surprise to tell you about playing in the bark. Why did you disappear what I do?"
+
+From that day on, Alittle girl loved to play outside together.
+She liked to go and look at the green grass. It was a
+
+2026-09-30 06:41:36,084 SAMPLE 19
+A girl named Lily. She was very brave, but she loved to play with her toys. One day, she was walking in the park when she saw dogs in her room.
+
+The family smiled and asked, "What is there?" Lily and Ben asked. They said, "I want to be friends and I want their journey too!"
+
+They went to their parents and said, "We are sorry. We have met a lot of fun." 
+
+The family smiled and asked her mom, "Why d
+
+2026-09-30 06:41:38,931 done metrics={'train_ce': 0.8098889851035216, 'val_ce': 0.7513776874542236, 'perplexity': 2.119918590956155, 'bits_per_char': 1.084008863524826, 'generalization_gap': -0.058511297649297966, 'top1_acc': 0.76346484375, 'distinct_1': 0.005575117370892019, 'distinct_2': 0.047236377891023126, 'distinct_3': 0.16437549096622153, 'rep_4gram': 0.8233963006690279, 'grad_norm_max': 7.17718505859375, 'grad_norm_median': 0.5947554111480713, 'grad_spikes': 0, 'grad_nans': 0, 'param_count': 3248640, 'tokens_per_sec': 844936.3097821577, 'gen_tokens_per_sec': 1354.773130957496, 'peak_mem_gb': 1.91343104, 'train_time_sec': 181.49798774719238, 'epochs': 30, 'train_stories': 100000, 'val_stories': 10000, 'vocab_size': 108, 'smoke': 0}

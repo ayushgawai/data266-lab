@@ -7,7 +7,8 @@ Unpaired CycleGAN, Monet and photos. Generator is ResNet-9 for 256. Discriminato
 - Data: all 300 Monets, 6,438 train photos (`photo_train.txt`). FID reference photos and val holdout stay out of training.
 - Batch 4, ~1,610 steps/epoch, 12 loader workers.
 - 100 epochs. LR constant through epoch 40, then linear decay.
-- Checkpoints every 10 epochs. Weights on disk (gitignored): `checkpoints/from_gpu/cyclegan_epoch100.pt`.
+- Checkpoints every 10 epochs. Weights on disk (gitignored): `checkpoints/cyclegan_epoch100.pt`.
+- Raw logs: `reproducibility/raw_logs/ayush/task3_cyclegan_*.log` (and Tasks 1–2 logs in the same folder).
 
 ### Scores
 

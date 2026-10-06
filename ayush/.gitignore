@@ -10,5 +10,4 @@ task1_llm/data/*
 !task1_llm/data/.gitkeep
 task2_sentiment/ayush/data_processed/*
 !task2_sentiment/ayush/data_processed/.gitkeep
-reproducibility/raw_logs/**/*.log
 .venv/

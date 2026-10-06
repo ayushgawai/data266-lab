@@ -2,25 +2,26 @@
 
 Ayush folders are ready under each task. Sneha adds her own `sneha/` member directories. Do not overwrite each other's trees.
 
-## Run (lab GPU or local)
+## Submitted (Ayush)
+
+- Task 1 / 2: trained; checkpoints on disk (gitignored `*.pt`). Raw logs in `reproducibility/raw_logs/ayush/`.
+- Task 3: **epoch-100** CycleGAN submitted (FID 85.70 / MiFID 0.410). Manifest → `task3_gan/ayush/checkpoints/cyclegan_epoch100.pt`.
+- Checkpoints Drive zip (anyone-with-link): PASTE_AFTER_UPLOAD
+
+## Run (lab GPU or local) — only if retraining
 
 ```bash
 cd ayush
 python -m pip install -r requirements.txt
 # Point task3_gan/data/{monet_jpg,photo_jpg} at the unzipped Kaggle images first.
 
-# Task 1: 100,000 train sequences and 10,000 fixed val sequences, 30 epochs
 python task1_llm/ayush/src/train.py --config configs/ayush/base.yaml
-
-# Task 2 is already trained. Do not rerun unless the machine has no checkpoints.
-
-# Task 3: one smoke step, then the full run from scratch
-python task3_gan/ayush/src/train.py --config configs/ayush/base.yaml --smoke
-python task3_gan/ayush/src/train.py --config configs/ayush/base.yaml --all-photos --epochs 80 --decay-start 40
+# Task 2: already trained.
+python task3_gan/ayush/src/train.py --config configs/ayush/base.yaml --all-photos --epochs 100 --decay-start 40
 python task3_gan/ayush/src/inference.py
 ```
 
-Then score with `team/Part3_Evaluation_Script.ipynb` against the full `photo_jpg` folder. Upload the script's positive FID and MiFID. Do not negate them.
+Score with `team/Part3_Evaluation_Script.ipynb`. Upload the script's positive FID and MiFID.
 
 Dataset zip (Google Drive, read access): PASTE_LINK
 

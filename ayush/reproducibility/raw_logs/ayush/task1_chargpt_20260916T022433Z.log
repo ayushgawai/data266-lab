@@ -1,0 +1,311 @@
+2026-09-15 19:24:33,281 config_sha256=9934cdb60a55d550ba4f4f6f463dfe6e71888102e4a60dfc5ca1310d4b0674bf
+2026-09-15 19:24:33,299 git_sha=71475d7a9865843e94b696ed54e2e011d6fcfec8
+2026-09-15 19:24:33,299 python=3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 17:06:34) [Clang 19.1.7 ]
+2026-09-15 19:24:33,315 platform=macOS-26.6.2-arm64-arm-64bit
+2026-09-15 19:24:33,315 device=cpu gpu=cpu
+2026-09-15 19:24:33,316 cwd=/Users/ayushgawai/Documents/GitHub/Assignments/data266-9689/Lab1/repo repo=/Users/ayushgawai/Documents/GitHub/Assignments/data266-9689/Lab1/repo
+2026-09-15 19:24:33,316 config={
+  "seed": 42,
+  "member": "ayush",
+  "device": "cuda",
+  "paths": {
+    "task1_data": "task1_llm/data",
+    "task2_splits": "task2_sentiment/data/splits",
+    "task3_data": "task3_gan/data",
+    "logs": "reproducibility/raw_logs/ayush",
+    "manifests": "reproducibility/manifests"
+  },
+  "task1": {
+    "hf_dataset": "roneneldan/TinyStories",
+    "train_stories": 100000,
+    "val_stories": 10000,
+    "split_seed": 42,
+    "block_size": 256,
+    "batch_size": 64,
+    "epochs": 30,
+    "n_layer": 4,
+    "n_head": 4,
+    "d_model": 256,
+    "d_ff": 1024,
+    "dropout": 0.1,
+    "norm_position": "pre",
+    "activation": "GELU",
+    "tie_weights": true,
+    "lr": 0.0003,
+    "warmup_steps": 200,
+    "schedule": "cosine",
+    "weight_decay": 0.1,
+    "grad_clip": 1.0,
+    "gen": {
+      "n_samples": 20,
+      "max_new_tokens": 500,
+      "temperature": 0.8
+    }
+  },
+  "task2": {
+    "n_train": 100000,
+    "n_val": 20000,
+    "split_seed": 42,
+    "max_vocab": 30000,
+    "max_len": 256,
+    "batch_size": 64,
+    "epochs": 5,
+    "lr": 0.001,
+    "early_stop_patience": 2,
+    "models": [
+      "textcnn",
+      "bilstm",
+      "bilstm_attn"
+    ]
+  },
+  "task3": {
+    "image_size": 256,
+    "photo_subset": 2000,
+    "photo_subset_seed": 42,
+    "batch_size": 1,
+    "epochs": 40,
+    "decay_start_epoch": 25,
+    "lr": 0.0002,
+    "beta1": 0.5,
+    "lambda_cycle": 10.0,
+    "lambda_identity": 0.5,
+    "pool_size": 50,
+    "n_eval": 300,
+    "generator": "resnet9"
+  }
+}
+2026-09-15 19:24:33,513 pip_freeze_begin
+aiohappyeyeballs==2.7.1
+aiohttp==3.14.3
+aiosignal==1.4.0
+annotated-types==0.8.0
+anyio==4.15.1
+appnope==1.0.0
+appscript==1.4.0
+argon2-cffi==25.1.0
+argon2-cffi-bindings==26.1.0
+arrow==1.4.0
+asttokens==3.0.2
+async-lru==2.3.0
+async-timeout==5.0.1
+attrs==26.1.0
+babel==2.18.0
+beautifulsoup4==4.15.0
+bleach==6.4.0
+brotli==1.2.0
+certifi==2026.7.22
+cffi==2.1.1
+charset-normalizer==3.5.1
+click==8.5.0
+comm==0.2.3
+contourpy==1.3.2
+cryptography==50.0.1
+cssselect2==0.10.1
+cycler==0.12.1
+datasets==5.0.1
+debugpy==1.8.21
+decorator==5.3.1
+defusedxml==0.7.1
+dill==0.4.1
+distro==1.9.0
+docx2pdf==0.1.8
+exceptiongroup==1.3.1
+executing==2.2.1
+fastjsonschema==2.22.2
+filelock==3.32.5
+fonttools==4.64.0
+fqdn==1.5.1
+frozenlist==1.8.0
+fsspec==2026.6.0
+greenlet==3.5.5
+h11==0.16.0
+hf-xet==1.6.0
+httpcore==1.0.9
+httpcore2==2.13.0
+httpx==0.28.1
+httpx2==2.13.0
+huggingface_hub==1.31.0
+idna==3.19
+ipykernel==7.3.0
+ipython==8.39.0
+ipywidgets==8.1.9
+isoduration==20.11.0
+jedi==0.20.0
+Jinja2==3.1.6
+jiter==0.17.0
+json5==0.15.0
+jsonpatch==1.33
+jsonpointer==3.1.1
+jsonschema==4.26.0
+jsonschema-specifications==2025.9.1
+jupyter==1.1.1
+jupyter-console==6.6.3
+jupyter-events==0.12.1
+jupyter-lsp==2.3.1
+jupyter_builder==1.2.3
+jupyter_client==8.10.0
+jupyter_core==5.9.1
+jupyter_server==2.21.0
+jupyter_server_terminals==0.5.4
+jupyterlab==4.6.3
+jupyterlab_pygments==0.3.0
+jupyterlab_server==2.28.0
+jupyterlab_widgets==3.0.17
+kaggle==1.7.4.5
+kiwisolver==1.5.1
+langchain==1.4.0
+langchain-core==1.6.3
+langchain-openai==1.6.2
+langchain-protocol==0.0.19
+langgraph==1.2.11
+langgraph-checkpoint==4.2.0
+langgraph-prebuilt==1.1.0
+langgraph-sdk==0.4.4
+langsmith==0.12.4
+lark==1.3.1
+lxml==6.1.3
+MarkupSafe==3.0.3
+matplotlib==3.10.9
+matplotlib-inline==0.2.2
+mistune==3.3.4
+mpmath==1.3.0
+multidict==6.8.0
+multiprocess==0.70.19
+nbclient==0.11.0
+nbconvert==7.17.1
+nbformat==5.11.1
+nest-asyncio2==1.7.2
+networkx==3.4.2
+notebook==7.6.2
+notebook_shim==0.2.4
+numpy @ file:///Users/runner/miniforge3/conda-bld/numpy_1747544633931/work/dist/numpy-2.2.6-cp310-cp310-macosx_11_0_arm64.whl#sha256=50a17562ef677de6531058e998e32487919c216e19ca4e1bdd86b0e1262251c1
+openai==3.14.0
+orjson==3.12.0
+ormsgpack==1.12.2
+overrides==7.7.0
+packaging==26.3
+pandas==2.3.3
+pandocfilters==1.5.1
+parso==0.8.7
+pdfminer.six==20260107
+pdfplumber==0.11.10
+pexpect==4.9.0
+pillow==12.3.0
+platformdirs==4.11.7
+playwright==1.62.0
+prometheus_client==0.26.0
+prompt_toolkit==3.0.53
+propcache==0.5.4
+protobuf==7.36.1
+psutil==7.2.2
+ptyprocess==0.7.0
+pure_eval==0.2.3
+pyarrow==25.0.1
+pybullet @ file:///Users/runner/miniforge3/conda-bld/bullet_1761060387420/work
+pycparser==3.0
+pydantic==2.13.5
+pydantic_core==2.46.5
+pydyf==0.12.1
+pyee==13.0.1
+Pygments==2.21.0
+pyparsing==3.3.2
+pypdf==6.18.0
+pypdfium2==5.13.0
+pyphen==0.18.1
+python-dateutil==2.9.0.post0
+python-docx==1.2.0
+python-dotenv==1.2.3
+python-json-logger==4.2.0
+python-slugify==9.0.0
+pytz==2026.3.post1
+PyYAML==6.0.3
+pyzmq==27.2.0
+referencing==0.37.0
+regex==2026.9.10
+reportlab==5.0.1
+requests==2.34.2
+requests-toolbelt==1.0.0
+rfc3339-validator==0.1.4
+rfc3986-validator==0.1.1
+rfc3987-syntax==1.1.0
+rpds-py==0.30.0
+Send2Trash==2.1.0
+six==1.17.0
+sniffio==1.3.1
+soupsieve==2.9.2
+stack-data==0.6.3
+sympy==1.14.0
+tenacity==9.1.4
+terminado==0.18.1
+text-unidecode==1.3
+tiktoken==0.14.0
+tinycss2==1.5.1
+tinyhtml5==2.1.0
+tomli==2.4.1
+torch==2.14.0
+tornado==6.5.8
+tqdm==4.70.0
+traitlets==5.16.1
+truststore==0.10.4
+typing-inspection==0.4.4
+typing_extensions==4.16.0
+tzdata==2026.3
+uri-template==1.3.0
+urllib3==2.7.0
+uuid_utils==0.17.1
+wcwidth==0.8.3
+weasyprint==70.0
+webcolors==25.10.0
+webencodings==0.6.1
+websocket-client==1.9.2
+websockets==16.1.1
+widgetsnbextension==4.0.16
+xxhash==4.0.1
+yarl==1.25.1
+zopfli==0.4.3
+zstandard==0.25.0
+
+pip_freeze_end
+2026-09-15 19:24:33,514 log_path=/Users/ayushgawai/Documents/GitHub/Assignments/data266-9689/Lab1/repo/reproducibility/raw_logs/ayush/task1_chargpt_20260916T022433Z.log
+2026-09-15 19:24:33,514 loading TinyStories stories train=2000 val=200
+2026-09-15 19:25:08,647 vocab_size=79
+2026-09-15 19:25:08,741 train_chars=1777134 val_chars=179303
+2026-09-15 19:25:08,783 params=3241216 device=cpu
+2026-09-15 19:25:09,917 step=1 epoch=1 loss=4.4806 lr=0.000003 grad_norm=7.6338 mem_gb=0.000
+2026-09-15 19:25:25,682 step=50 epoch=1 loss=3.0055 lr=0.000077 grad_norm=1.6938 mem_gb=0.000
+2026-09-15 19:25:41,996 step=100 epoch=1 loss=2.5304 lr=0.000151 grad_norm=0.6815 mem_gb=0.000
+2026-09-15 19:25:58,614 step=150 epoch=1 loss=2.4952 lr=0.000226 grad_norm=0.6355 mem_gb=0.000
+2026-09-15 19:26:15,874 step=200 epoch=1 loss=2.3519 lr=0.000300 grad_norm=0.7430 mem_gb=0.000
+2026-09-15 19:26:34,298 step=250 epoch=1 loss=2.3302 lr=0.000300 grad_norm=0.6615 mem_gb=0.000
+2026-09-15 19:26:51,391 step=300 epoch=1 loss=2.3046 lr=0.000300 grad_norm=0.6549 mem_gb=0.000
+2026-09-15 19:27:07,905 step=350 epoch=1 loss=2.2395 lr=0.000300 grad_norm=0.6333 mem_gb=0.000
+2026-09-15 19:27:24,444 step=400 epoch=1 loss=2.2279 lr=0.000300 grad_norm=0.6437 mem_gb=0.000
+2026-09-15 19:27:41,029 step=450 epoch=1 loss=2.1525 lr=0.000300 grad_norm=0.6940 mem_gb=0.000
+2026-09-15 19:27:58,049 step=500 epoch=1 loss=2.1500 lr=0.000300 grad_norm=0.9631 mem_gb=0.000
+2026-09-15 19:28:14,339 step=550 epoch=1 loss=2.0772 lr=0.000300 grad_norm=1.6991 mem_gb=0.000
+2026-09-15 19:28:30,564 step=600 epoch=1 loss=2.0214 lr=0.000300 grad_norm=1.0770 mem_gb=0.000
+2026-09-15 19:28:46,981 step=650 epoch=1 loss=1.9820 lr=0.000300 grad_norm=1.0750 mem_gb=0.000
+2026-09-15 19:29:03,489 step=700 epoch=1 loss=1.9817 lr=0.000300 grad_norm=1.0885 mem_gb=0.000
+2026-09-15 19:29:20,278 step=750 epoch=1 loss=1.8306 lr=0.000300 grad_norm=1.2266 mem_gb=0.000
+2026-09-15 19:29:36,545 step=800 epoch=1 loss=1.7212 lr=0.000300 grad_norm=1.2180 mem_gb=0.000
+2026-09-15 19:29:52,852 step=850 epoch=1 loss=1.8049 lr=0.000300 grad_norm=1.0816 mem_gb=0.000
+2026-09-15 19:30:09,857 step=900 epoch=1 loss=1.6977 lr=0.000300 grad_norm=1.1961 mem_gb=0.000
+2026-09-15 19:30:26,540 step=950 epoch=1 loss=1.7327 lr=0.000300 grad_norm=1.0394 mem_gb=0.000
+2026-09-15 19:30:42,805 step=1000 epoch=1 loss=1.6195 lr=0.000300 grad_norm=1.1880 mem_gb=0.000
+2026-09-15 19:30:59,109 step=1050 epoch=1 loss=1.6209 lr=0.000300 grad_norm=0.9874 mem_gb=0.000
+2026-09-15 19:31:15,980 step=1100 epoch=1 loss=1.5342 lr=0.000300 grad_norm=1.0923 mem_gb=0.000
+2026-09-15 19:31:32,458 step=1150 epoch=1 loss=1.4777 lr=0.000300 grad_norm=0.9627 mem_gb=0.000
+2026-09-15 19:31:48,549 step=1200 epoch=1 loss=1.4697 lr=0.000300 grad_norm=1.2025 mem_gb=0.000
+2026-09-15 19:32:04,959 step=1250 epoch=1 loss=1.4572 lr=0.000300 grad_norm=1.0532 mem_gb=0.000
+2026-09-15 19:32:21,365 step=1300 epoch=1 loss=1.4795 lr=0.000300 grad_norm=1.0948 mem_gb=0.000
+2026-09-15 19:32:37,704 step=1350 epoch=1 loss=1.3692 lr=0.000300 grad_norm=0.9863 mem_gb=0.000
+2026-09-15 19:32:54,068 step=1400 epoch=1 loss=1.4071 lr=0.000300 grad_norm=1.0115 mem_gb=0.000
+2026-09-15 19:33:10,459 step=1450 epoch=1 loss=1.3763 lr=0.000300 grad_norm=1.0426 mem_gb=0.000
+2026-09-15 19:33:26,912 step=1500 epoch=1 loss=1.3364 lr=0.000300 grad_norm=1.1393 mem_gb=0.000
+2026-09-15 19:33:43,391 step=1550 epoch=1 loss=1.3902 lr=0.000300 grad_norm=1.0365 mem_gb=0.000
+2026-09-15 19:33:59,761 step=1600 epoch=1 loss=1.3385 lr=0.000300 grad_norm=1.0545 mem_gb=0.000
+2026-09-15 19:34:16,300 step=1650 epoch=1 loss=1.3807 lr=0.000300 grad_norm=1.1448 mem_gb=0.000
+2026-09-15 19:34:32,710 step=1700 epoch=1 loss=1.3037 lr=0.000300 grad_norm=0.9624 mem_gb=0.000
+2026-09-15 19:34:49,139 step=1750 epoch=1 loss=1.2822 lr=0.000300 grad_norm=0.9891 mem_gb=0.000
+2026-09-15 19:35:05,639 step=1800 epoch=1 loss=1.3073 lr=0.000300 grad_norm=1.0696 mem_gb=0.000
+2026-09-15 19:35:22,092 step=1850 epoch=1 loss=1.3293 lr=0.000300 grad_norm=1.0261 mem_gb=0.000

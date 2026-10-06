@@ -1,20 +1,22 @@
-# Handoff for Sneha’s agent (Task 3)
+# Handoff for Sneha’s agent (Task 3 + reproducibility)
 
-Ayush side is locked for the report. Read this first.
+Ayush side is locked. Read this first.
 
 ## Done
 
-- Kaggle CSV submitted from **epoch 100** only (`ayush/task3_gan/ayush/outputs/submission.csv`). Board ≈ **−43.05**, Team 21, ~top 5.
-- Human audit: `sneha/task3_gan/audit/ratings_ayush.csv` committed. Sneha’s `ratings_sneha.csv` already present. `agreement.py` outputs: `agreement.csv`, `scores.csv`.
-- Epoch-100 cost / cycle metrics + raw logs: see `ayush/task3_gan/ayush/epoch100_report_metrics.md` and `ayush/task3_gan/ayush/logs_from_gpu/`.
+- Kaggle from **epoch 100** only. Board ≈ **−43.05**. Manifest: `reproducibility/manifests/ayush_task3.json` → `cyclegan_epoch100.pt`.
+- Human audit + agreement committed.
+- Raw logs for **Tasks 1, 2, and 3** under `ayush/reproducibility/raw_logs/ayush/` (now tracked in git).
+- Metrics note: `ayush/task3_gan/ayush/epoch100_report_metrics.md`.
+- Checkpoint zip for Drive (Ayush uploads manually): contains Task1 `chargpt_best.pt`, Task2 three `.pt`, Task3 `cyclegan_epoch100.pt`, plus the raw logs. **Paste the anyone-with-link Drive URL into the report when Ayush sends it.**
 
 ## Do not
 
-- Do not use epoch 200 weights or `outputs/submission_epoch200/` (if present). Local FID got worse.
-- Do not invent KID, density, coverage, LPIPS, or content cosine for Ayush — they were **not** computed. Leave blank or compute yourself with the same pipeline as `sneha/metrics_report.csv`.
-- Do not retrain Ayush Task 3 for the report.
+- Do not use epoch-40 or epoch-200 Task 3 weights.
+- Do not invent KID / density / coverage / LPIPS / content cosine for Ayush.
+- Do not retrain.
 
-## Still team-side (not Ayush solo)
+## Still team-side
 
-- Paste audit agreement + Ayush metrics into the combined Report.pdf.
-- Canvas zip / final report packaging if not done.
+- Add Drive link to final report once Ayush shares it.
+- Canvas / Report.pdf packaging.
