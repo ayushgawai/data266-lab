@@ -208,11 +208,11 @@ Table: Evidence (paths relative to each member's task folder unless shown in ful
 | **FID A2B / B2A** (provided script) | **84.98 / 86.42** | 107.90 / 122.38 |
 | MiFID A2B / B2A | 0.414 / 0.407 | 0.426 / 0.431 |
 | **Submission FID / MiFID** | **85.70 / 0.410** | 115.14 / 0.428 |
-| KID A2B / B2A (mean ± std) | not computed | 0.0197 ± 0.0021 / 0.0282 ± 0.0025 |
-| Density / coverage A2B; B2A | not computed | 0.877 / 0.780; 0.283 / 0.420 |
-| Cycle-reconstruction L1 A / B (held-out) | not computed | 0.0401 / 0.0286 |
-| LPIPS A2B / B2A | not computed | 0.132 / 0.111 |
-| Content cosine A2B / B2A | not computed | 0.895 / 0.938 |
+| KID A2B / B2A (mean ± std) | 0.0158 ± 0.0022 / 0.0056 ± 0.0014 | 0.0197 ± 0.0021 / 0.0282 ± 0.0025 |
+| Density / coverage A2B; B2A | 1.140 / 0.920; 0.529 / 0.770 | 0.877 / 0.780; 0.283 / 0.420 |
+| Cycle-reconstruction L1 A / B (submission inputs) | 0.0471 / 0.0726 | 0.0401 / 0.0286 |
+| LPIPS A2B / B2A | 0.340 / 0.353 | 0.132 / 0.111 |
+| Content cosine A2B / B2A | 0.791 / 0.778 | 0.895 / 0.938 |
 | Final cycle / identity loss, weighted; raw L1 | 0.761 / 0.261; 0.0761 / 0.0523 (epoch 100) | 0.352 / 0.112; 0.0352 / 0.0224 (epoch 120) |
 | Grad norm max G / D; NaNs | 370.0 / 734.5 (epochs 51–100); 0 | 1,143.5 / 165.45; 0 |
 | Parameters (all four networks) | 28,298,120 | 114,371,976 |
@@ -223,7 +223,8 @@ Table: Evidence (paths relative to each member's task folder unless shown in ful
 
 Table: Task 3 comparison
 
-These five metrics were not computed for Ayush's submitted epoch-100 run. Final losses are the last-epoch means with both directions summed, shown weighted
+Ayush's KID, density / coverage, cycle L1, LPIPS and content cosine were computed on his submitted epoch-100 generators after
+training (`compute_extra_metrics.py`), with the same definitions as Sneha's notebook. Final losses are the last-epoch means with both directions summed, shown weighted
 (×10 cycle, ×5 identity) and as raw L1. Neither of us trained on `ref_photos_300`.
 
 **Kaggle:** Team PairProgramming_Team_21 was **ranked 4th** on the leaderboard (as of 6 October 2026, 4:28 pm) with −43.0548 (Ayush's submission); the board's score equals
@@ -263,8 +264,10 @@ Next time we would run a short calibration round on images outside the set, with
   contrast and colour. Sneha's U-Net stays close to the painting (median per-pixel change 5.2 / 255 for photo → Monet; content cosine
   0.938). A ResNet-9 must rebuild every pixel through a 64×64 bottleneck of residual blocks, while a U-Net's skip connections let it pass
   the input straight through; with the identity loss and a saturated discriminator (Sneha's discriminator losses at 0.02 or less from
-  epoch 30), copying becomes the cheapest solution for the U-Net. The ResNet-9's stronger changes have their own cost: fine structure is
-  lost in places (the buildings in the last row).
+  epoch 30), copying becomes the cheapest solution for the U-Net. The metrics agree: the ResNet-9 changes its inputs far more (LPIPS
+  0.340 / 0.353 vs 0.132 / 0.111; content cosine 0.791 / 0.778 vs 0.895 / 0.938) and lands closer to the target domains (KID 0.0158 /
+  0.0056 vs 0.0197 / 0.0282; coverage 0.920 / 0.770 vs 0.780 / 0.420). Its stronger changes have their own cost: fine structure is lost
+  in places (the buildings in the last row).
 - **Training length and schedule:** Sneha's lab run was ended at epoch 73 and continued on Colab with the learning-rate decay to epoch
   120; the decay improved her Monet → photo validation FID from 120.0 to 108.9 but never beat epoch 30, so the gap is not explained by the
   schedule. Ayush's score improved from FID 98.24 (40 epochs, 2,000 photos) to 85.70 (100 epochs, 6,438 photos, EMA, DiffAugment).
@@ -273,9 +276,8 @@ Next time we would run a short calibration round on images outside the set, with
 - **What the human audit adds:** We preferred the U-Net on content and artifacts, the opposite of FID, and could not agree on style
   (κ −0.19). FID and human judgement measure different things here: domain match versus faithfulness and cleanliness.
 - **Limitations:** FID on 300 images is noisy (Sneha's validation FID moved by up to 13 points between checks); the two runs differ in
-  batch size, epochs, photo lists and hardware, so we compare two complete recipes, not one variable. KID, density/coverage, LPIPS, content
-  cosine and held-out cycle L1 were not computed for Ayush's submitted run; the audit has 14–16 samples per model and an unreliable style
-  axis.
+  batch size, epochs, photo lists and hardware, so we compare two complete recipes, not one variable; the audit has 14–16 samples per
+  model and an unreliable style axis.
 - **Next:** Rebalance the discriminator (lower D learning rate or an R1 penalty) for the U-Net; resize-then-convolution upsampling to test
   the texture artifact; a lower identity weight; the ResNet-9 with per-direction validation checkpoint selection.
 
@@ -293,8 +295,8 @@ over-saturation* (`pred_A2B/252d9a4abc.jpg`). Her first four translations per di
 
 | | **Ayush** (`ayush/task3_gan/ayush/`) | **Sneha** (`sneha/task3_gan/sneha/`) |
 |:-----------------|:---------------------------------------|:---------------------------------------|
-| Kaggle file and outputs | `outputs/submission.csv`, `outputs/pred_A2B/`, `outputs/pred_B2A/` | `submission.csv`, `outputs/pred_A2B/`, `outputs/pred_B2A/` |
-| Metrics | `outputs/fid_directions.txt`, `epoch100_report_metrics.md` | `metrics_report.csv` (= `full_metrics_report.csv`) |
+| Kaggle file and outputs | `submission.csv`, `outputs/pred_A2B/`, `outputs/pred_B2A/` | `submission.csv`, `outputs/pred_A2B/`, `outputs/pred_B2A/` |
+| Metrics | `full_metrics_report.csv` (from `compute_extra_metrics.py`), `outputs/fid_directions.txt`, `epoch100_report_metrics.md` | `metrics_report.csv` (= `full_metrics_report.csv`) |
 | Curves and samples | `outputs/loss_curves.png`, `outputs/samples/` | `outputs/loss_curves.png`, `outputs/samples_epoch_010.png` … `120.png`, `outputs/train_iters.csv` |
 | Raw logs and manifest | `task3_cyclegan_*.log`, `ayush_task3.json` | `task3_*.log`, `sneha_task3.json` |
 | Generators | `cyclegan_epoch100.pt` ([Google Drive](https://drive.google.com/drive/folders/1Ks5qQSWtfKzqk8HL5nCBkAjM9iBW3Jha?usp=sharing)) | `generators_best.pt`, `generators_final.pt` ([Google Drive](https://drive.google.com/drive/folders/1O6CWrI-I-WKmtVCej4znQIg0UbCRvxUB?usp=sharing)) |
